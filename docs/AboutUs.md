@@ -5,55 +5,59 @@ title: About Us
 
 We are a team based in the [School of Computing, National University of Singapore](http://www.comp.nus.edu.sg).
 
-You can reach us at the email `seer[at]comp.nus.edu.sg`
+You can reach us at the email `syamfarh@comp.nus.edu.sg`
 
 ## Project team
 
-### John Doe
+### Lim Zhe Rui
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/zherui.png" width="200px">
 
-[[homepage](http://www.comp.nus.edu.sg/~damithch)]
 [[github](https://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
 
 * Role: Project Advisor
 
-### Jane Doe
+### Bhanuka Bandara Ekanayake 
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/bhanuka.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/bhnuka)]
 
 * Role: Team Lead
 * Responsibilities: UI
 
-### Johnny Doe
+### Daphne Shaine Wilhelmina
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/daphne.png" width="200px">
 
-[[github](http://github.com/johndoe)] [[portfolio](team/johndoe.md)]
+[[github](http://github.com/Daphne789)] 
 
 * Role: Developer
 * Responsibilities: Data
 
-### Jean Doe
+### Glenn Ng Jun Jie
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/glenn.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/glenngnng)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
 
-### James Doe
+### Lim Zhen Wy
 
-<img src="images/johndoe.png" width="200px">
+<img src="images/wy.png" width="200px">
 
-[[github](http://github.com/johndoe)]
-[[portfolio](team/johndoe.md)]
+[[github](http://github.com/limzhenwy)]
+
+* Role: Developer
+* Responsibilities: UI
+
+### Muhammad Syam Farhan bin Agus Rizal
+
+<img src="images/syam.png" width="200px">
+
+[[github](http://github.com/syamfarh)]
 
 * Role: Developer
 * Responsibilities: UI
