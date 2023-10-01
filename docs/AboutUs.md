@@ -46,7 +46,7 @@ You can reach us at the email `syamfarh@comp.nus.edu.sg`
 
 ### Lim Zhen Wy
 
-<img src="images/wy.png" width="200px">
+<img src="images/limzhenwy.png" width="200px">
 
 [[github](http://github.com/limzhenwy)]
 
