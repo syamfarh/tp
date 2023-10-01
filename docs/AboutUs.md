@@ -55,7 +55,7 @@ You can reach us at the email `syamfarh@comp.nus.edu.sg`
 
 ### Muhammad Syam Farhan bin Agus Rizal
 
-<img src="images/syam.png" width="200px">
+<img src="images/syamfarh.png" width="200px">
 
 [[github](http://github.com/syamfarh)]
 
