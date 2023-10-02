@@ -96,6 +96,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String occupation} into a {@code Occupation}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code occupation} is invalid.
+     */
+    public static Name parseOccupation(String occupation) throws ParseException {
+        requireNonNull(occupation);
+        String trimmedOccupation = occupation.trim();
+        if (!Name.isValidName(trimmedOccupation)) {
+            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        }
+        return new Name(trimmedOccupation);
+    }
+
+    /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
