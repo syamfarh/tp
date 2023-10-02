@@ -15,7 +15,7 @@ Given below are my contributions to the project.
   * Highlights: To be added
   * Credits: To be added
 
-* **Code contributed**: To be added
+* **Code contributed**: [RepoSense link] (https://nus-cs2103-ay2324s1.github.io/tp-dashboard/#/widget/?search=bhnuka&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&chartGroupIndex=0&chartIndex=0" frameBorder="0" width="800px" height="142px")
 
 * **Project management**:
   * To be added
