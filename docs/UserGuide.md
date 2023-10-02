@@ -94,9 +94,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01`
 * `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567 t/Criminal`
 
+![edit format](images/addformat.png)
+
 Precise expected outputs on success:
 * Successful addition message. ‘John Doe has been added to your client list’
 * The new entry is displayed in the address book GUI.
+
+![edit format](images/addresult.png)
 
 Precise expected outputs on failure:
 * If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
