@@ -94,9 +94,13 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01`
 * `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567 t/Criminal`
 
+![edit format](images/addformat.png)
+
 Precise expected outputs on success:
 * Successful addition message. ‘John Doe has been added to your client list’
 * The new entry is displayed in the address book GUI.
+
+![edit format](images/addresult.png)
 
 Precise expected outputs on failure:
 * If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
@@ -111,7 +115,7 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing person in the address book.
+Edits an existing client's parameter in FAPro.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 
@@ -125,6 +129,21 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`
 Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+
+![edit format](images/editformat.png)
+
+* Precise expected outputs on success:
+* Successful addition message. ‘Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], Occupation:[OCCUPATION], Address:[ADDRESS]…’
+* The new entry is displayed in the address book GUI.
+
+![edit format](images/editresult.png)
+
+Precise expected outputs on failure:
+* If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
+* If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
+* If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+
+
 
 ### Locating persons by name: `find`
 
