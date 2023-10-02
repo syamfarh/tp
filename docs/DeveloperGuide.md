@@ -262,22 +262,26 @@ _{Explain here how the data archiving feature will be implemented}_
 * can type fast
 * prefers typing to mouse interactions
 * is reasonably comfortable using CLI apps
+* financial advisors
+* has a need for sorting clients by schedule
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**:
+FApro seeks to improve the quality of life of financial advisors (FAs). It allows FAs to keep track of large numbers of contacts. It allows FAs to have a one-stop platform to manage their contacts and conduct financial analytics while providing a big-picture view of their clientele as a whole.
+
 
 
 ### User stories
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
-| -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| Priority | As a …​                                    | I want to …​                                                                 | So that I can…​                                                        |
+| -------- |--------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | user                                       | add a new person                                                             | add entries that I need                                                |
+| `* * *`  | user                                       | delete a person                                                              | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a person by name                                                        | locate details of persons without having to go through the entire list |
+| `* * *`  | financial advisor                          | edit contact details of clients                                              | client details are up to date                                          |
+| `* *`    | impatient financial advisor                | be able to use and understand the functionalities easily through a help page | I do not have to waste too much time learning how to operate the app   |
 
 *{More to be added}*
 
