@@ -27,7 +27,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
    * `list` : Lists all contacts.
 
-   * `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
 
    * `delete 3` : Deletes the 3rd contact shown in the current list.
 
@@ -74,17 +74,34 @@ Format: `help`
 
 ### Adding a person: `add`
 
-Adds a person to the address book.
+Adds a new entry to their address book for financial advisors, including personal details such as name, address, occupation, phone number and email.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​`
+
+Acceptable values for each parameter:
+* Name: Valid string name.
+* Address: Valid string address. Contains postal code. (8 College Ave West, Singapore 138608).
+* Phone number: Valid string and phone number format (+65 8123 4567).
+* Email address: Valid string and email address format (johnd@example.com).
+* Occupation: Valid string occupation.
+* Tag: Valid string.
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
 Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01`
+* `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567 t/Criminal`
+
+Precise expected outputs on success:
+* Successful addition message. ‘John Doe has been added to your client list’
+* The new entry is displayed in the address book GUI.
+
+Precise expected outputs on failure:
+* If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
+* If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
+* If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
 
 ### Listing all persons : `list`
 
