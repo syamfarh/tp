@@ -19,7 +19,7 @@ You can reach us at the email `syamfarh@comp.nus.edu.sg`
 
 ### Bhanuka Bandara Ekanayake 
 
-<img src="images/bhanuka.png" width="200px">
+<img src="images/bhnuka.png" width="200px">
 
 [[github](http://github.com/bhnuka)]
 
@@ -28,7 +28,7 @@ You can reach us at the email `syamfarh@comp.nus.edu.sg`
 
 ### Daphne Shaine Wilhelmina
 
-<img src="images/daphne.png" width="200px">
+<img src="images/daphne789.png" width="200px">
 
 [[github](http://github.com/Daphne789)] 
 
@@ -37,7 +37,7 @@ You can reach us at the email `syamfarh@comp.nus.edu.sg`
 
 ### Glenn Ng Jun Jie
 
-<img src="images/glenn.png" width="200px">
+<img src="images/glenngnng.png" width="200px">
 
 [[github](http://github.com/glenngnng)]
 
