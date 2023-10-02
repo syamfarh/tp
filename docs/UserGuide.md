@@ -165,17 +165,31 @@ Examples:
 
 ### Deleting a person : `delete`
 
-Deletes the specified person from the address book.
+Deletes a contact from the address book at the specified index.
 
 Format: `delete INDEX`
-
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
-* The index **must be a positive integer** 1, 2, 3, …​
+
+Acceptable parameters for INDEX:
+* The index **must be a positive integer** 1, 2, 3, …​ (less than the size of the address book)
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+
+![edit format](images/deleteformat.png)
+
+Precise expected outputs on success:
+* Message shown to user: "Contact x: name deleted".
+* Size of address book is reduced by 1.
+* GUI reflects that deleted contact is now no longer there.
+
+![edit format](images/deleteresult.png)
+
+Precise expected outputs on failure:
+* Error message shown to the user: "Sorry, that value is not accepted! Please specify the number of the contact you 
+  would like to delete! It should be a positive integer and within the address book!"
 
 ### Clearing all entries : `clear`
 
