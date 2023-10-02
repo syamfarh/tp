@@ -11,7 +11,7 @@ Given below are my contributions to the project.
 
 * **New Feature**: To be added soon
 
-* **Code contributed**: To be added soon
+* **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=syamfarh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
     * To be added soon
