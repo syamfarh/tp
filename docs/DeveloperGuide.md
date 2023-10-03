@@ -316,9 +316,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The app should be responsive, with a maximum response time of 2 seconds for common user actions like searching for contacts or adding new ones.
+5. The user interface should be intuitive enough for users who are not IT-savvy.
+6. There should be user authentication and authorization mechanisms to ensure only authorized users can access and 
+    modify data.
+7. The app should not be required to handle the direct contacting of persons.
+8. Should have regular backups of user data and a reliable mechanism for data recovery.
+9. Should have easy-to-read and detailed User & Developer Guides.
+10. Codebase should be structured using singular coding standard and style.
+11. Testing should be implemented for easier maintenance.
+12. The app should be designed to handle unexpected input and edge cases gracefully, without crashing the system.
 
 *{More to be added}*
 
