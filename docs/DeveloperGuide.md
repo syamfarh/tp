@@ -350,7 +350,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Financial Advisor requests to list persons
 2.  FAPro shows a list of persons
-3.  Financial Advisor requests to find a specific persons in the list by name
+3.  Financial Advisor requests to find a specific person in the list by name
 4.  FAPro displays the list of matching persons
 
     Use case ends.
