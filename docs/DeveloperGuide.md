@@ -287,16 +287,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `FAPro` and the **Actor** is the `Financial Advisor`, unless specified otherwise)
 
+**Use case: Add a person**
+
+**MSS**
+
+1.  Financial Advisor requests to list persons
+2.  FAPro shows a list of persons
+3.  Financial Advisor requests to add a new person
+4.  FAPro adds the person to the address book based on the specified parameter (name, address, phone number, email address, occupation, and tag)
+
+    Use case ends.
+
+**Extensions**
+
+* 3a. The parameter is provided in an invalid format.
+
+    * 3a1. FAPro shows an error message: "Invalid command format!"
+  
+        Use case resumes at step 2.
+
+* 3b. The parameter is specified multiple times.
+
+    * 3b1. FAPro shows an error message: "The parameter can only be specified once!"
+  
+        Use case resumes at step 2.
+
+* 3c. The person's name is the same as the existing name in the address book.
+
+    * 3c1. FAPro shows an error message: "This person already exists in the address book"
+
+        Use case resumes at step 2.
+
+    
 **Use case: Delete a person**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  Financial Advisor requests to list persons
+2.  FAPro shows a list of persons
+3.  Financial Advisor requests to delete a specific person in the list
+4.  FAPro deletes the person
 
     Use case ends.
 
@@ -304,21 +336,104 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 2a. The list is empty.
 
-  Use case ends.
+    Use case ends.
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. FAPro shows an error message:  “Sorry, that value is not accepted! Please specify the index of the person you would like to delete! It should be non-negative and within the address book!”
 
-      Use case resumes at step 2.
+        Use case resumes at step 2.
 
-*{More to be added}*
+**Use case: Find persons**
+
+**MSS**
+
+1.  Financial Advisor requests to list persons
+2.  FAPro shows a list of persons
+3.  Financial Advisor requests to find a specific person in the list by name
+4.  FAPro displays the list of matching persons
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given name is invalid.
+
+    * 3a1. FAPro shows an error message: "Illegal Input!"
+
+        Use case resumes at step 2.
+  
+* 3b. There are no results found.
+
+    * 3b1. FAPro shows an error message: "0 persons listed!"
+
+        Use case resumes at step 2.
+
+**Use case: Edit a person**
+
+**MSS**
+
+1.  Financial Advisor requests to list persons
+2.  FAPro shows a list of persons
+3.  Financial Advisor requests to edit specified parameter of a specific person in the list
+4.  FAPro edits the specified parameter (name, address, phone number, email address, occupation, and tag) of a person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. FAPro shows an error message: "Invalid command format!"
+
+        Use case resumes at step 2.
+
+* 3b. The parameter is provided in an invalid format.
+
+    * 3b1. FAPro shows an error message: "Invalid command format!"
+
+        Use case resumes at step 2.
+
+* 3c. The parameter is specified multiple times.
+
+    * 3c1. FAPro shows an error message: "The parameter can only be specified once."
+
+        Use case resumes at step 2.
+
+    
+**Use case: Display available commands**
+
+**MSS**
+
+1.  Financial Advisor requests to display the list of available commands using help command
+2.  FAPro shows a help window listing all acceptable commands with their respective details
+
+    Use case ends.
+
 
 ### Non-Functional Requirements
 
-1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
+2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+4. The app should be responsive, with a maximum response time of 2 seconds for common user actions like searching for contacts or adding new ones.
+5. The user interface should be intuitive enough for users who are not IT-savvy.
+6. There should be user authentication and authorization mechanisms to ensure only authorized users can access and 
+    modify data.
+7. The app should not be required to handle the direct contacting of persons.
+8. Should have regular backups of user data and a reliable mechanism for data recovery.
+9. Should have easy-to-read and detailed User & Developer Guides.
+10. Codebase should be structured using singular coding standard and style.
+11. Testing should be implemented for easier maintenance.
+12. The app should be designed to handle unexpected input and edge cases gracefully, without crashing the system.
 
 *{More to be added}*
 
