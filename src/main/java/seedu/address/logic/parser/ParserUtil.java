@@ -12,6 +12,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
+import seedu.address.model.person.Occupation;
 import seedu.address.model.person.Phone;
 import seedu.address.model.tag.Tag;
 
@@ -101,13 +102,13 @@ public class ParserUtil {
      *
      * @throws ParseException if the given {@code occupation} is invalid.
      */
-    public static Name parseOccupation(String occupation) throws ParseException {
+    public static Occupation parseOccupation(String occupation) throws ParseException {
         requireNonNull(occupation);
         String trimmedOccupation = occupation.trim();
-        if (!Name.isValidName(trimmedOccupation)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+        if (!Occupation.isValidOccupation(trimmedOccupation)) {
+            throw new ParseException(Occupation.MESSAGE_CONSTRAINTS);
         }
-        return new Name(trimmedOccupation);
+        return new Occupation(trimmedOccupation);
     }
 
     /**

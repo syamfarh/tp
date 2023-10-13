@@ -5,7 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Person's occupation in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidName(String)}
+ * Guarantees: immutable; is valid as declared in {@link #isValidOccupation(String)}
  */
 public class Occupation {
 
@@ -27,14 +27,14 @@ public class Occupation {
      */
     public Occupation(String occupation) {
         requireNonNull(occupation);
-        checkArgument(isValidName(occupation), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidOccupation(occupation), MESSAGE_CONSTRAINTS);
         fullOccupation = occupation;
     }
 
     /**
      * Returns true if a given string is a valid name.
      */
-    public static boolean isValidName(String test) {
+    public static boolean isValidOccupation(String test) {
         return test.matches(VALIDATION_REGEX);
     }
 
