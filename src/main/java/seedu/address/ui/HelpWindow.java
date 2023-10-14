@@ -24,7 +24,7 @@ public class HelpWindow extends UiPart<Stage> {
             + "Adds a contact to the address book." + DOUBLE_NEWLINE
             + "Format: add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]..." + DOUBLE_NEWLINE
             + "Example: add n/John Doe, p/+65 98765432, e/johnd@example.com, o/Software Engineer, "
-            + "ad/John Street, Block 123, 138123, t/New Client";
+            + "a/John Street, Block 123, 138123, t/New Client";
 
     public static final String DELETE_COMMAND_GUIDE =
             "2. DELETE" + SINGLE_NEWLINE
