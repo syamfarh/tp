@@ -28,15 +28,11 @@ public class UndoCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        //String expectedMessage = String.format(MESSAGE_UNDO_SUCCESS, Messages.format(personToDelete));
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_UNDO_SUCCESS);
         expectedModel.undo();
 
         model.deletePerson(personToDelete);
         assertCommandSuccess(undoCommand, model, expectedCommandResult, expectedModel);
-
-        //CommandResult expectedCommandResult = new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, "ALICE"));
-
     }
 
     @Test
@@ -48,16 +44,12 @@ public class UndoCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        //String expectedMessage = String.format(MESSAGE_UNDO_SUCCESS, Messages.format(personToDelete));
         CommandResult expectedCommandResult = new CommandResult(MESSAGE_UNDO_SUCCESS);
         expectedModel.undo();
 
         model.deletePerson(personToDelete);
         model.undo();
         assertCommandFailure(undoCommand, model, MESSAGE_DUPLICATE_PERSON);
-
-        //CommandResult expectedCommandResult = new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, "ALICE"));
-
     }
 
 }
