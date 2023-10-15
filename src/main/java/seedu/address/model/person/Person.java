@@ -24,18 +24,23 @@ public class Person {
 
     // Data fields
     private final Address address;
+
+    private final AppointmentDate apptDate;
+
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Occupation occupation, Address address, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Occupation occupation, Address address,
+                  AppointmentDate apptDate, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, occupation, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.occupation = occupation;
         this.address = address;
+        this.apptDate = apptDate;
         this.tags.addAll(tags);
     }
 
@@ -57,6 +62,10 @@ public class Person {
 
     public Address getAddress() {
         return address;
+    }
+
+    public AppointmentDate getApptDate() {
+        return apptDate;
     }
 
     /**
@@ -100,6 +109,7 @@ public class Person {
                 && phone.equals(otherPerson.phone)
                 && email.equals(otherPerson.email)
                 && occupation.equals(otherPerson.occupation)
+                && apptDate.equals(otherPerson.apptDate)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags);
     }
@@ -107,7 +117,7 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, occupation, address, tags);
+        return Objects.hash(name, phone, email, occupation, address, apptDate, tags);
     }
 
     @Override
@@ -118,6 +128,7 @@ public class Person {
                 .add("email", email)
                 .add("occupation", occupation)
                 .add("address", address)
+                .add("appointmentDate", apptDate)
                 .add("tags", tags)
                 .toString();
     }

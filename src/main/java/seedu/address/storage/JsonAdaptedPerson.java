@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.parser.DateParser;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Occupation;
@@ -30,6 +32,8 @@ class JsonAdaptedPerson {
     private final String email;
     private final String occupation;
     private final String address;
+
+    private final String appointmentDate;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -38,12 +42,18 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("occupation") String occupation,
-            @JsonProperty("address") String address, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+            @JsonProperty("address") String address, @JsonProperty("appointmentDate") String appointmentDate,
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.occupation = occupation;
         this.address = address;
+        if (appointmentDate != null) {
+            this.appointmentDate = appointmentDate;
+        } else {
+            this.appointmentDate = "";
+        }
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -58,6 +68,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().value;
         occupation = source.getOccupation().fullOccupation;
         address = source.getAddress().value;
+        appointmentDate = source.getApptDate().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -115,8 +126,20 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
+        final AppointmentDate modelAppointmentDate;
+
+        if (appointmentDate.equals("")) {
+            modelAppointmentDate = new AppointmentDate("");
+        } else if (!AppointmentDate.isValidAppointmentDate(appointmentDate)) {
+            throw new IllegalValueException(AppointmentDate.MESSAGE_CONSTRAINTS);
+        } else {
+            modelAppointmentDate = new AppointmentDate(DateParser.convertDate(appointmentDate).toString());
+        }
+
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelOccupation, modelAddress, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelOccupation, modelAddress,
+                modelAppointmentDate, modelTags);
     }
 
 }
