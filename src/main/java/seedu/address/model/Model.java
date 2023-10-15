@@ -91,5 +91,8 @@ public interface Model {
      */
     void storeDeletedPerson(Person deletedPerson);
 
+    /**
+     * Returns the deleted person.
+     */
     Person getDeletedPerson();
 }
