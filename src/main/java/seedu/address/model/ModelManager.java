@@ -43,7 +43,7 @@ public class ModelManager implements Model {
 
     @Override
     public void storeDeletedPerson(Person deletedPerson) {
-        this.deletedPerson=deletedPerson;
+        this.deletedPerson = deletedPerson;
     }
 
     @Override
