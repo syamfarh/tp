@@ -95,4 +95,6 @@ public interface Model {
      * Returns the deleted person.
      */
     Person getDeletedPerson();
+
+    void undo();
 }

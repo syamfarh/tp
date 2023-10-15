@@ -167,6 +167,11 @@ public class AddCommandTest {
         public Person getDeletedPerson() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void undo() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
