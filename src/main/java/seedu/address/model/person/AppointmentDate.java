@@ -2,18 +2,24 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.parser.DateParser;
 
 /**
  * Represents a Person's appointment Date in the address book.
- * Guarantees: immutable; is valid as declared in {@link #isValidAppointmentDate(String)}}
+ * Guarantees: immutable; is valid as declared in {@link #isValidFormat(String)}}
  */
 public class AppointmentDate {
 
-    public static final String MESSAGE_CONSTRAINTS =
+    public static final String MESSAGE_CONSTRAINTS_FORMAT =
             "Appointment Date should follow the format of [MM/dd/yyyy] or [dd-MM-yyyy] or [yyyy-MM-dd]";
+
+    public static final String MESSAGE_CONSTRAINTS_CURRENTDATE =
+            "Appointment Date should be after the current date";
+
+
     /**
      * Constructs a {@code AppointmentDate}.
      *
@@ -32,9 +38,9 @@ public class AppointmentDate {
     }
 
     /**
-     * Returns true if a given string is a valid date.
+     * Returns true if a given string is a valid format date.
      */
-    public static boolean isValidAppointmentDate(String test) {
+    public static boolean isValidFormat(String test) {
         try {
             DateParser.convertDate(test);
             return true;
@@ -43,14 +49,21 @@ public class AppointmentDate {
         }
     }
 
+    /**
+     * Returns true if a given string is a valid date compare to current date.
+     */
+    public static boolean isValidCurrentDate(String test) {
+        try {
+            return DateParser.isValidCurrentDate(test);
+        } catch (DateTimeParseException e) {
+            return false;
+        }
+    }
+
+
     @Override
     public String toString() {
-        if (value != null) {
-            return value.toString();
-        } else {
-            return "";
-        }
-
+        return value;
     }
 
     @Override

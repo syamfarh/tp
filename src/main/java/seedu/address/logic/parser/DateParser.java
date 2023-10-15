@@ -21,4 +21,9 @@ public class DateParser {
         return LocalDate.parse(date, dateTimeFormatter);
     }
 
+    public static boolean isValidCurrentDate(String date) {
+        LocalDate inputDate = convertDate(date);
+        return inputDate.isAfter(LocalDate.now());
+    }
+
 }

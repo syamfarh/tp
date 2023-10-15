@@ -49,11 +49,7 @@ class JsonAdaptedPerson {
         this.email = email;
         this.occupation = occupation;
         this.address = address;
-        if (appointmentDate != null) {
-            this.appointmentDate = appointmentDate;
-        } else {
-            this.appointmentDate = "";
-        }
+        this.appointmentDate = appointmentDate;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -130,8 +126,10 @@ class JsonAdaptedPerson {
 
         if (appointmentDate.equals("")) {
             modelAppointmentDate = new AppointmentDate("");
-        } else if (!AppointmentDate.isValidAppointmentDate(appointmentDate)) {
-            throw new IllegalValueException(AppointmentDate.MESSAGE_CONSTRAINTS);
+        } else if (!AppointmentDate.isValidFormat(appointmentDate)) {
+            throw new IllegalValueException(AppointmentDate.MESSAGE_CONSTRAINTS_FORMAT);
+        } else if (!AppointmentDate.isValidCurrentDate(appointmentDate)) {
+            modelAppointmentDate = new AppointmentDate("");
         } else {
             modelAppointmentDate = new AppointmentDate(DateParser.convertDate(appointmentDate).toString());
         }
