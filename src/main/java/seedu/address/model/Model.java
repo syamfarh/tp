@@ -84,4 +84,12 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+    /**
+     * Updates and stores the most recently deleted person.
+     * @param deletedPerson
+     */
+    void storeDeletedPerson(Person deletedPerson);
+
+    Person getDeletedPerson();
 }

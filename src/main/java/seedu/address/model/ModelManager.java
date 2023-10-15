@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Person deletedPerson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -38,6 +39,16 @@ public class ModelManager implements Model {
 
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
+    }
+
+    @Override
+    public void storeDeletedPerson(Person deletedPerson) {
+        this.deletedPerson=deletedPerson;
+    }
+
+    @Override
+    public Person getDeletedPerson() {
+        return this.deletedPerson;
     }
 
     //=========== UserPrefs ==================================================================================
