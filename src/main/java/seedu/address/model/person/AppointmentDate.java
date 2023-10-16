@@ -2,6 +2,7 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.parser.DateParser;
@@ -10,7 +11,7 @@ import seedu.address.logic.parser.DateParser;
  * Represents a Person's appointment Date in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidFormat(String)}}
  */
-public class AppointmentDate {
+public class AppointmentDate implements Comparable<AppointmentDate> {
 
     public static final String MESSAGE_CONSTRAINTS_FORMAT =
             "Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd]";
@@ -19,21 +20,35 @@ public class AppointmentDate {
             "Appointment Date should be after the current date";
 
 
-    /**
-     * Constructs a {@code AppointmentDate}.
-     *
-     * @param date A valid date.
-     */
+
     public final String value;
+
+    public final LocalDate valueInLocalDate;
 
     /**
      * Constructs an {@code AppointmentDate}.
      *
-     * @param date A valid appointment Date.
+     * @param date A valid appointment Date in String type.
      */
     public AppointmentDate(String date) {
         requireNonNull(date);
         value = date;
+        if (date.equals("")) {
+            valueInLocalDate = LocalDate.now();
+        } else {
+            valueInLocalDate = DateParser.convertDate(date);
+        }
+    }
+
+    /**
+     * Constructs an {@code AppointmentDate}.
+     *
+     * @param date A valid appointment Date in LocalDate type.
+     */
+    public AppointmentDate(LocalDate date) {
+        requireNonNull(date);
+        valueInLocalDate = date;
+        value = date.toString();
     }
 
     /**
@@ -75,5 +90,21 @@ public class AppointmentDate {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+    @Override
+    public int compareTo(AppointmentDate o) {
+        if (this == o) {
+            return 0;
+        }
+
+        if (valueInLocalDate.isEqual(o.valueInLocalDate)) {
+            return 0;
+        } else if (valueInLocalDate.isAfter(o.valueInLocalDate)) {
+            return 1;
+        } else if (valueInLocalDate.isBefore(o.valueInLocalDate)) {
+            return -1;
+        }
+
+        return 0;
     }
 }
