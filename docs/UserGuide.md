@@ -158,9 +158,21 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+### Locating persons by address: `find_add`
+
+Finds persons whose address contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `tokyo` will match `Tokyo`
+* The order of the keywords does not matter. e.g. `Little Tokyo` will match `Tokyo Little`
+* Only the address is searched.
+* Only full words will be matched e.g. `Toky` will not match `Tokyo`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Little Geylang` will return `Little Tokyo`, `Tokyo`
+
 Examples:
-* `find Jackson` returns `jackson` and `Jackson Doe`
-* `find Jane` returns `Jane Yeoh`, `Jane Li`<br>
+* `find_add geylang` returns all users whose addresses contain `geylang`
 
 ### Deleting a person : `delete`
 
