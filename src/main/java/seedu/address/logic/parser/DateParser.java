@@ -20,7 +20,9 @@ public class DateParser {
 
         return LocalDate.parse(date, dateTimeFormatter);
     }
-
+    /**
+     * Returns true if a given string is a more than current date.
+     */
     public static boolean isValidCurrentDate(String date) {
         LocalDate inputDate = convertDate(date);
         return inputDate.isAfter(LocalDate.now());

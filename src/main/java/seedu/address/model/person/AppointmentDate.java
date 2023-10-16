@@ -2,7 +2,6 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import seedu.address.logic.parser.DateParser;
