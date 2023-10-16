@@ -18,6 +18,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Occupation;
 import seedu.address.model.person.Phone;
+import seedu.address.testutil.PersonBuilder;
 
 public class JsonAdaptedPersonTest {
     private static final String INVALID_NAME = "R@chel";
@@ -26,7 +27,9 @@ public class JsonAdaptedPersonTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
 
-    private static final String INVALID_APPOINTMENTDATE = "2010/20/20";
+    private static final String INVALID_APPOINTMENTDATE_FORMAT = "20/12/2000";
+
+    private static final String INVALID_APPOINTMENTDATE_CURRENTDATE = "2000-11-20";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = BENSON.getName().toString();
@@ -35,7 +38,9 @@ public class JsonAdaptedPersonTest {
     private static final String VALID_OCCUPATION = BENSON.getOccupation().toString();
     private static final String VALID_ADDRESS = BENSON.getAddress().toString();
 
-    private static final String VALID_APPOINTMENTDATE = "2023-10-10";
+    private static final String VALID_APPOINTMENTDATE = BENSON.getAddress().toString();
+
+    private static final String VALID_APPOINTMENTDATE_EMPTY = "";
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -132,12 +137,24 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidAppointmentDate_throwsIllegalValueException() {
+    public void toModelType_invalidAppointmentDateFormat_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_NAME, VALID_PHONE, VALID_EMAIL, VALID_OCCUPATION,
-                        VALID_ADDRESS, INVALID_APPOINTMENTDATE, VALID_TAGS);
+                        VALID_ADDRESS, INVALID_APPOINTMENTDATE_FORMAT, VALID_TAGS);
         String expectedMessage = AppointmentDate.MESSAGE_CONSTRAINTS_FORMAT;
         assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
+    public void toModelType_invalidAppointmentDateCurrentDate() throws IllegalValueException {
+        JsonAdaptedPerson person =
+                new JsonAdaptedPerson(new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+                        .withAppointmentDate("").withEmail("hans@example.com").withOccupation("Chef")
+                        .withAppointmentDate("20-11-2000").withAddress("chicago ave").build());
+        String expectedMessage = AppointmentDate.MESSAGE_CONSTRAINTS_FORMAT;
+        assertEquals(new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
+                .withAppointmentDate("").withEmail("hans@example.com").withOccupation("Chef")
+                .withAppointmentDate("").withAddress("chicago ave").build(), person.toModelType());
     }
 
     @Test

@@ -27,4 +27,10 @@ class AppointmentDateTest {
         AppointmentDate differentApptDate = new AppointmentDate("2020-12-04");
         assertFalse(apptDate.equals(differentApptDate));
     }
+
+    @Test
+    public void isValidCurrentDate() {
+        assertTrue(AppointmentDate.isValidCurrentDate("2050-11-20"));
+        assertFalse(AppointmentDate.isValidCurrentDate("2000-11-20"));
+    }
 }
