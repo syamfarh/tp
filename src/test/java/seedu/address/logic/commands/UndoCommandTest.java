@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.logic.commands.UndoCommand.MESSAGE_DUPLICATE_PERSON;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_FAILURE;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -44,12 +44,11 @@ public class UndoCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_UNDO_SUCCESS);
         expectedModel.undo();
 
         model.deletePerson(personToDelete);
         model.undo();
-        assertCommandFailure(undoCommand, model, MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(undoCommand, model, MESSAGE_UNDO_FAILURE);
     }
 
 }

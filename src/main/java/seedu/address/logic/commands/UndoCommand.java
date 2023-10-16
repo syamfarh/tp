@@ -19,9 +19,9 @@ public class UndoCommand extends Command {
             + ": Undoes the deletion of a person done in the most recent command.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
+    public static final String MESSAGE_UNDO_FAILURE = "Cannot undo! You have already undone previously!";
 
-    public static final String MESSAGE_UNDO_SUCCESS = "Undo Successful!";
+    public static final String MESSAGE_UNDO_SUCCESS = "Undo Successful! Contact added back: %1$s";
 
     /**
      * Constructor for UndoCommand is empty.
@@ -35,12 +35,13 @@ public class UndoCommand extends Command {
 
         //catch multiple undo statements done in a row.
         if (model.hasPerson(deletedPerson)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_UNDO_FAILURE);
         }
 
         model.addPerson(deletedPerson);
         return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(deletedPerson)));
-
     }
+
+
 
 }
