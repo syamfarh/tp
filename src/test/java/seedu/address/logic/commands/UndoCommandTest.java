@@ -9,7 +9,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
-
+import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -28,11 +28,12 @@ public class UndoCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        CommandResult expectedCommandResult = new CommandResult(MESSAGE_UNDO_SUCCESS);
+        //CommandResult expectedCommandResult = new CommandResult(MESSAGE_UNDO_SUCCESS);
+        String expectedResult = String.format(MESSAGE_UNDO_SUCCESS, Messages.format(personToDelete));
         expectedModel.undo();
 
         model.deletePerson(personToDelete);
-        assertCommandSuccess(undoCommand, model, expectedCommandResult, expectedModel);
+        assertCommandSuccess(undoCommand, model, expectedResult, expectedModel);
     }
 
     @Test
