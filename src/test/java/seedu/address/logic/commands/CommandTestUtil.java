@@ -11,7 +11,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -40,9 +39,9 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
 
-    public static final LocalDate VALID_APPOINTMENTDATE_AMY = LocalDate.parse("2020-11-20");
+    public static final String VALID_APPOINTMENTDATE_AMY = "2023-11-20";
 
-    public static final LocalDate VALID_APPOINTMENTDATE_BOB = LocalDate.parse("2023-11-21");
+    public static final String VALID_APPOINTMENTDATE_BOB = "2023-11-21";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 

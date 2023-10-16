@@ -23,22 +23,22 @@ public class SampleDataUtil {
         return new Person[] {
             new Person(new Name("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
                 new Occupation("Software Engineer"), new Address("Blk 30 Geylang Street 29, #06-40"),
-                    new AppointmentDate(null), getTagSet("friends")),
+                    new AppointmentDate(""), getTagSet("friends")),
             new Person(new Name("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
                 new Occupation("Violinist"), new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
-                    new AppointmentDate(null), getTagSet("colleagues", "friends")),
+                    new AppointmentDate(""), getTagSet("colleagues", "friends")),
             new Person(new Name("Charlotte Oliveiro"), new Phone("93210283"), new Email("charlotte@example.com"),
                 new Occupation("Gardener"), new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
-                    new AppointmentDate(null), getTagSet("neighbours")),
+                    new AppointmentDate(""), getTagSet("neighbours")),
             new Person(new Name("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
                 new Occupation("Prison Warden"), new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
-                    new AppointmentDate(null), getTagSet("family")),
+                    new AppointmentDate(""), getTagSet("family")),
             new Person(new Name("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
                 new Occupation("University Lecturer"), new Address("Blk 47 Tampines Street 20, #17-35"),
-                    new AppointmentDate(null), getTagSet("classmates")),
+                    new AppointmentDate(""), getTagSet("classmates")),
             new Person(new Name("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
                 new Occupation("Fish Monger"), new Address("Blk 45 Aljunied Street 85, #11-31"),
-                    new AppointmentDate(null), getTagSet("colleagues"))
+                    new AppointmentDate(""), getTagSet("colleagues"))
         };
     }
 
