@@ -190,6 +190,31 @@ Precise expected outputs on failure:
 * Error message shown to the user: "Sorry, that value is not accepted! Please specify the number of the contact you 
   would like to delete! It should be a positive integer and within FAPro!"
 
+### Undoing a delete : `undo`
+
+Undoes a single delete done previously. 
+
+Format: `undo`
+
+First, delete a contact. This assumes there are contacts to delete.
+
+![edit format](images/undo-UG/one_contact_GUI.png)
+
+![edit format](images/undo-UG/after_delete_1.png)
+
+Then, undo the delete.
+
+![edit format](images/undo-UG/undo_successful.png)
+Precise expected output on success:
+* Message shown to user: "Undo Successful!"
+* Size of address book increased by 1.
+* GUI reflects that most recently deleted contact is added.
+
+![edit format](images/undo-UG/undo_fail.png)
+Precise expected outputs on failure:
+* Error message shown to the user: "The person already exists in the address book"
+
+
 ### Clearing all entries : `clear`
 
 Clears all entries from the address book.
