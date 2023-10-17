@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -141,7 +142,13 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        Comparator<Person> comparator = new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                return o1.getApptDate().compareTo(o2.getApptDate());
+            }
+        };
+        return filteredPersons.sorted(comparator);
     }
 
     @Override

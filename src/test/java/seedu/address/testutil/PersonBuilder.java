@@ -24,7 +24,7 @@ public class PersonBuilder {
     public static final String DEFAULT_OCCUPATION = "Barber";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
-    public static final String DEFAULT_APPOINTMENTDATE = "2022-12-04";
+    public static final String DEFAULT_APPOINTMENTDATE = "";
 
     private Name name;
     private Phone phone;
@@ -44,7 +44,7 @@ public class PersonBuilder {
         email = new Email(DEFAULT_EMAIL);
         occupation = new Occupation(DEFAULT_OCCUPATION);
         address = new Address(DEFAULT_ADDRESS);
-        appointmentDate = new AppointmentDate("");
+        appointmentDate = new AppointmentDate(DEFAULT_APPOINTMENTDATE);
         tags = new HashSet<>();
     }
 

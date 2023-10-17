@@ -14,7 +14,7 @@
     "email" : "johnd@example.com",
     "occupation" : "Musician",
     "address" : "311, Clementi Ave 2, #02-25",
-    "appointmentDate" : "2023-11-20",
+    "appointmentDate" : "",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
