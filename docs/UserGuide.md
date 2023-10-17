@@ -158,9 +158,21 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
 
+### Locating persons by address: `find_add`
+
+Finds persons whose address contain any of the given keywords.
+
+Format: `find KEYWORD [MORE_KEYWORDS]`
+
+* The search is case-insensitive. e.g `tokyo` will match `Tokyo`
+* The order of the keywords does not matter. e.g. `Little Tokyo` will match `Tokyo Little`
+* Only the address is searched.
+* Only full words will be matched e.g. `Toky` will not match `Tokyo`
+* Persons matching at least one keyword will be returned (i.e. `OR` search).
+  e.g. `Little Geylang` will return `Little Tokyo`, `Tokyo`
+
 Examples:
-* `find Jackson` returns `jackson` and `Jackson Doe`
-* `find Jane` returns `Jane Yeoh`, `Jane Li`<br>
+* `find_add geylang` returns all users whose addresses contain `geylang`
 
 ### Deleting a person : `delete`
 
@@ -189,6 +201,31 @@ Precise expected outputs on success:
 Precise expected outputs on failure:
 * Error message shown to the user: "Sorry, that value is not accepted! Please specify the number of the contact you 
   would like to delete! It should be a positive integer and within FAPro!"
+
+### Undoing a delete : `undo`
+
+Undoes a single delete done previously. 
+
+Format: `undo`
+
+First, delete a contact. This assumes there are contacts to delete.
+
+![edit format](images/undo-UG/one_contact_GUI.png)
+
+![edit format](images/undo-UG/after_delete_1.png)
+
+Then, undo the delete.
+
+![edit format](images/undo-UG/undo_successful.png)
+Precise expected output on success:
+* Message shown to user: "Undo Successful!"
+* Size of address book increased by 1.
+* GUI reflects that most recently deleted contact is added.
+
+![edit format](images/undo-UG/undo_fail.png)
+Precise expected outputs on failure:
+* Error message shown to the user: "The person already exists in the address book"
+
 
 ### Clearing all entries : `clear`
 

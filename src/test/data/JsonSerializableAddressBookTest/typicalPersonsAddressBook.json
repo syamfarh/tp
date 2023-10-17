@@ -6,6 +6,7 @@
     "email" : "alice@example.com",
     "occupation" : "Barber",
     "address" : "123, Jurong West Ave 6, #08-111",
+    "appointmentDate" : "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -13,6 +14,7 @@
     "email" : "johnd@example.com",
     "occupation" : "Musician",
     "address" : "311, Clementi Ave 2, #02-25",
+    "appointmentDate" : "2023-11-20",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -20,6 +22,7 @@
     "email" : "heinz@example.com",
     "occupation" : "Sheep Farmer",
     "address" : "wall street",
+    "appointmentDate" : "",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -27,6 +30,7 @@
     "email" : "cornelia@example.com",
     "occupation" : "Lecturer",
     "address" : "10th street",
+    "appointmentDate" : "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -34,6 +38,7 @@
     "email" : "werner@example.com",
     "occupation" : "Seamstress",
     "address" : "michegan ave",
+    "appointmentDate" : "",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -41,6 +46,7 @@
     "email" : "lydia@example.com",
     "occupation" : "Princess",
     "address" : "little tokyo",
+    "appointmentDate" : "",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -48,6 +54,7 @@
     "email" : "anna@example.com",
     "address" : "4th street",
     "occupation" : "Zoologist",
+    "appointmentDate" : "",
     "tags" : [ ]
   } ]
 }

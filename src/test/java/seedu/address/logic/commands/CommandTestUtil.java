@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_OCCUPATION;
@@ -37,6 +38,10 @@ public class CommandTestUtil {
     public static final String VALID_OCCUPATION_BOB = "Software Engineer";
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
+
+    public static final String VALID_APPOINTMENTDATE_AMY = "2023-11-20";
+
+    public static final String VALID_APPOINTMENTDATE_BOB = "2023-11-21";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -50,6 +55,10 @@ public class CommandTestUtil {
     public static final String OCCUPATION_DESC_BOB = " " + PREFIX_OCCUPATION + VALID_OCCUPATION_BOB;
     public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+
+    public static final String APPOINTMENT_DESC_AMY = " " + PREFIX_APPOINTMENTDATE + VALID_APPOINTMENTDATE_AMY;
+
+    public static final String APPOINTMENT_DESC_BOB = " " + PREFIX_APPOINTMENTDATE + VALID_APPOINTMENTDATE_BOB;
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
