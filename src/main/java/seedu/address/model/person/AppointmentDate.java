@@ -13,7 +13,7 @@ import seedu.address.logic.parser.DateParser;
 public class AppointmentDate {
 
     public static final String MESSAGE_CONSTRAINTS_FORMAT =
-            "Appointment Date should follow the format of [MM/dd/yyyy] or [dd-MM-yyyy] or [yyyy-MM-dd]";
+            "Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd]";
 
     public static final String MESSAGE_CONSTRAINTS_CURRENTDATE =
             "Appointment Date should be after the current date";
