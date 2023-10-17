@@ -34,7 +34,7 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
         requireNonNull(date);
         value = date;
         if (date.equals("")) {
-            valueInLocalDate = LocalDate.now();
+            valueInLocalDate = LocalDate.now().plusYears(50);
         } else {
             valueInLocalDate = DateParser.convertDate(date);
         }
