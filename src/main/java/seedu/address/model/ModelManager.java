@@ -22,6 +22,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private Person deletedPerson;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -36,8 +37,21 @@ public class ModelManager implements Model {
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
     }
 
+    /**
+     * Default constructor for ModelManager
+     */
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
+    }
+
+    @Override
+    public void storeDeletedPerson(Person deletedPerson) {
+        this.deletedPerson = deletedPerson;
+    }
+
+    @Override
+    public Person getDeletedPerson() {
+        return this.deletedPerson;
     }
 
     //=========== UserPrefs ==================================================================================
@@ -96,6 +110,7 @@ public class ModelManager implements Model {
     @Override
     public void deletePerson(Person target) {
         addressBook.removePerson(target);
+        storeDeletedPerson(target);
     }
 
     @Override
@@ -110,6 +125,13 @@ public class ModelManager implements Model {
 
         addressBook.setPerson(target, editedPerson);
     }
+
+    @Override
+    public void undo() {
+        addressBook.addPerson(getDeletedPerson());
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
 
     //=========== Filtered Person List Accessors =============================================================
 

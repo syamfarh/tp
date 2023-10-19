@@ -21,40 +21,50 @@ public class HelpWindow extends UiPart<Stage> {
 
     public static final String ADD_COMMAND_GUIDE =
             "1. ADD" + SINGLE_NEWLINE
-            + "Adds a contact to the address book." + DOUBLE_NEWLINE
-            + "Format: add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]..." + DOUBLE_NEWLINE
+            + "Adds a contact to the address book." + SINGLE_NEWLINE
+            + "Format: add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS t/TAG" + SINGLE_NEWLINE
             + "Example: add n/John Doe, p/+65 98765432, e/johnd@example.com, o/Software Engineer, "
             + "a/John Street, Block 123, 138123, t/New Client";
 
     public static final String DELETE_COMMAND_GUIDE =
             "2. DELETE" + SINGLE_NEWLINE
-            + "Deletes a contact from the address book." + DOUBLE_NEWLINE
+            + "Deletes a contact from the address book." + SINGLE_NEWLINE
             + "Format: delete INDEX" + SINGLE_NEWLINE
             + "⚫Deletes the contact at the specified INDEX, must be a positive integer" + SINGLE_NEWLINE
-            + "⚫The index refers to the index number shown in the displayed person list." + DOUBLE_NEWLINE
+            + "⚫The index refers to the index number shown in the displayed person list." + SINGLE_NEWLINE
             + "Example: delete 3 - deletes the 3rd contact in the address book.";
+    public static final String UNDO_COMMAND_GUIDE =
+            "3. UNDO" + SINGLE_NEWLINE
+            + "Undoes a single delete done previously." + SINGLE_NEWLINE
+            + "Format: undo" + SINGLE_NEWLINE
+            + "Example: undo - the contact has been deleted and undo it.";
 
-    public static final String FIND_COMMAND_GUIDE =
-            "3. FIND" + SINGLE_NEWLINE
-            + "Finds a contact from the address book." + DOUBLE_NEWLINE
-            + "Format: find NAME" + DOUBLE_NEWLINE
-            + "Example: find Jackson - attempts to find a contact name containing “Jackson”.";
+    public static final String FIND_NAME_COMMAND_GUIDE =
+            "4. FIND by NAME" + SINGLE_NEWLINE
+            + "Finds contacts whose names contain any of the given keywords." + SINGLE_NEWLINE
+            + "Format: find NAME" + SINGLE_NEWLINE
+            + "Example: find Jackson - attempts to find a contact name containing 'Jackson'.";
+    public static final String FIND_ADDRESS_COMMAND_GUIDE =
+            "5. FIND by ADDRESS" + SINGLE_NEWLINE
+            + "Finds contacts whose address contain any of the given keywords." + SINGLE_NEWLINE
+            + "Format: find_add ADDRESS" + SINGLE_NEWLINE
+            + "Example: find_add geylang - returns all contacts whose addresses contain 'geylang'.";
 
     public static final String EDIT_COMMAND_GUIDE =
-            "4. EDIT" + SINGLE_NEWLINE
-            + "Edits an existing person in the address book." + DOUBLE_NEWLINE
-            + "Format: edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…"
-            + SINGLE_NEWLINE
-            + "⚫Edits the person at the specified INDEX. "
-            + "The index refers to the index number shown in the displayed person list. "
-            + "The index must be a positive integer 1, 2, 3, …" + SINGLE_NEWLINE
-            + "⚫At least one of the optional fields must be provided." + DOUBLE_NEWLINE
+            "6. EDIT" + SINGLE_NEWLINE
+            + "Edits an existing person in the address book." + SINGLE_NEWLINE
+            + "Format: edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] "
+            + "[a/ADDRESS] [t/TAG] [appt/APPOINTMENTDATE]" + SINGLE_NEWLINE
+            + "⚫Edits the person at the specified INDEX. " + SINGLE_NEWLINE
+            + "⚫At least one of the optional fields must be provided." + SINGLE_NEWLINE
             + "Example: edit 1 n/John Doe - Edits the name of the 1st person to be John Doe.";
 
     public static final String HELP_MESSAGE =
             ADD_COMMAND_GUIDE + DOUBLE_NEWLINE
             + DELETE_COMMAND_GUIDE + DOUBLE_NEWLINE
-            + FIND_COMMAND_GUIDE + DOUBLE_NEWLINE
+            + UNDO_COMMAND_GUIDE + DOUBLE_NEWLINE
+            + FIND_NAME_COMMAND_GUIDE + DOUBLE_NEWLINE
+            + FIND_ADDRESS_COMMAND_GUIDE + DOUBLE_NEWLINE
             + EDIT_COMMAND_GUIDE + DOUBLE_NEWLINE
             + "For more details, please visit our website: " + USERGUIDE_URL;
 
