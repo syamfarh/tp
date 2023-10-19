@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.commons.util.ComparatorUtil.APPTCOMPARATOR;
 
 import java.nio.file.Path;
 import java.util.Comparator;
@@ -25,6 +26,8 @@ public class ModelManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private Person deletedPerson;
 
+    private Comparator<Person> sortComparator;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -36,6 +39,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        sortComparator = APPTCOMPARATOR;
     }
 
     /**
@@ -142,19 +146,19 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        Comparator<Person> comparator = new Comparator<Person>() {
-            @Override
-            public int compare(Person o1, Person o2) {
-                return o1.getApptDate().compareTo(o2.getApptDate());
-            }
-        };
-        return filteredPersons.sorted(comparator);
+        return filteredPersons.sorted(sortComparator);
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortComparator(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        sortComparator = comparator;
     }
 
     @Override
