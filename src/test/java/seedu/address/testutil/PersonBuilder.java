@@ -31,7 +31,6 @@ public class PersonBuilder {
     private Email email;
     private Occupation occupation;
     private Address address;
-
     private AppointmentDate appointmentDate;
     private Set<Tag> tags;
 
