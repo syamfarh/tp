@@ -63,14 +63,14 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
 </div>
 
-### Displaying the list of available commands : `help`
+### Viewing help: `help`
 
-Shows a help window that lists all the acceptable commands with their respective details.
+Shows a help window that lists all the main commands with their respective details and displays the link for more detailed 
+user guide.
 
 ![help window](images/helpWindow.png)
 
 Format: `help`
-
 
 ### Adding a person: `add`
 
@@ -142,8 +142,6 @@ Precise expected outputs on failure:
 * If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
 * If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 * If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
-
-
 
 ### Locating persons by name: `find`
 
