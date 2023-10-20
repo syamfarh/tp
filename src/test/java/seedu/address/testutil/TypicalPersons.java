@@ -63,15 +63,15 @@ public class TypicalPersons {
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
             .withEmail(VALID_EMAIL_AMY).withOccupation("Barber").withAddress(VALID_ADDRESS_AMY)
-            .withAppointmentDate(" ")
+            .withAppointmentDate("")
             .withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withOccupation("Software Engineer").withAddress(VALID_ADDRESS_BOB)
-            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withAppointmentDate(" ")
+            .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withAppointmentDate("")
             .build();
 
     public static final Person JOHN = new PersonBuilder().withName(VALID_NAME_JOHN).withPhone(VALID_PHONE_JOHN)
-            .withEmail(VALID_EMAIL_JOHN).withOccupation("Software Engineer").withAddress(VALID_ADDRESS_JOHN)
+            .withEmail(VALID_EMAIL_JOHN).withOccupation("Chef").withAddress(VALID_ADDRESS_JOHN)
             .withAppointmentDate(VALID_APPOINTMENTDATE_JOHN)
             .build();
 

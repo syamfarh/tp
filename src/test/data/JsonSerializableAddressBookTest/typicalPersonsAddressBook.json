@@ -56,5 +56,13 @@
     "occupation" : "Zoologist",
     "appointmentDate" : "",
     "tags" : [ ]
+  }, {
+    "name" : "John Doe",
+    "phone" : "33333333",
+    "email" : "john@example.com",
+    "occupation" : "Chef",
+    "address" : "Block 222, John Street 2",
+    "appointmentDate" :  "2023-12-12",
+    "tags" : [ ]
   } ]
 }
