@@ -18,8 +18,8 @@ public class SortCommand extends Command {
     public static final String COMMAND_WORD = "sort";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": sort all persons by name or appointment date.\n "
-            + "Parameters: KEYWORD [PARAMETER name/ or appt/]\n"
-            + "Example: " + COMMAND_WORD + " name/";
+            + "Parameters: KEYWORD [PARAMETER n/ or appt/]\n"
+            + "Example: " + COMMAND_WORD + " n/";
 
     private final Comparator<Person> sortComparator;
 

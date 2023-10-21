@@ -24,7 +24,7 @@ class SortCommandParserTest {
     }
 
     @Test
-    public void parse_validPrefix_returnsFindCommand() {
+    public void parse_validPrefix_returnsSortCommand() {
         SortCommand expectedSortCommandAppt = new SortCommand(APPTCOMPARATOR);
         SortCommand expectedSortCommandName = new SortCommand(NAMECOMPARATOR);
 
@@ -35,7 +35,7 @@ class SortCommandParserTest {
     }
 
     @Test
-    public void parse_invalidPrefix_returnsFindCommand() {
+    public void parse_invalidPrefix_returnsSortCommand() {
         SortCommand expectedSortCommandAppt = new SortCommand(APPTCOMPARATOR);
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, SortCommand.MESSAGE_USAGE);
 
