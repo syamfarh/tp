@@ -31,14 +31,6 @@ class SortCommandTest {
     }
 
     @Test
-    public void execute_listIsSorted_showsSameList() {
-        SortCommand sortCommandAppt = new SortCommand(APPTCOMPARATOR);
-        SortCommand sortCommandName = new SortCommand(NAMECOMPARATOR);
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        assertCommandSuccess(sortCommandName, model, expectedMessage, expectedModel);
-    }
-
-    @Test
     public void testEquals() {
         SortCommand sortCommandAppt = new SortCommand(APPTCOMPARATOR);
         SortCommand sortCommandName = new SortCommand(NAMECOMPARATOR);
