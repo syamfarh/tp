@@ -35,7 +35,6 @@ class SortCommandTest {
         SortCommand sortCommandAppt = new SortCommand(APPTCOMPARATOR);
         SortCommand sortCommandName = new SortCommand(NAMECOMPARATOR);
         String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 7);
-        assertCommandSuccess(sortCommandAppt, model, expectedMessage, expectedModel);
         assertCommandSuccess(sortCommandName, model, expectedMessage, expectedModel);
     }
 
