@@ -21,6 +21,7 @@ public class SortCommand extends Command {
             + "Parameters: KEYWORD [PARAMETER n/ or appt/]\n"
             + "Example: " + COMMAND_WORD + " n/";
 
+
     private final Comparator<Person> sortComparator;
 
     public SortCommand(Comparator<Person> sortComparator) {
