@@ -1,5 +1,6 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -56,5 +57,20 @@ public class NameTest {
 
         // different values -> returns false
         assertFalse(name.equals(new Name("Other Valid Name")));
+    }
+
+    @Test
+    void compareTo() {
+        Name name = new Name("John Doe");
+        Name lowerName = new Name("Betsy Low");
+        Name higherName = new Name("Ripper Lan");
+        Name duplicateName = new Name("JOHN DOE");
+        Name copiedName = name;
+
+        assertEquals(0, name.compareTo(duplicateName));
+        assertEquals(1, name.compareTo(lowerName));
+        assertEquals(-1, name.compareTo(higherName));
+        assertEquals(0, name.compareTo(duplicateName));
+        assertEquals(0, name.compareTo(copiedName));
     }
 }

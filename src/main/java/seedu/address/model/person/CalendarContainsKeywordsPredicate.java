@@ -5,21 +5,20 @@ import java.util.function.Predicate;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.commons.util.ToStringBuilder;
-
 /**
- * Tests that a {@code Person}'s {@code Address} matches any of the keywords given.
+ * Tests that a {@code Person}'s {@code AppointmentDate} matches any of the keywords given.
  */
-public class AddressContainsKeywordsPredicate implements Predicate<Person> {
+public class CalendarContainsKeywordsPredicate implements Predicate<Person> {
     private final List<String> keywords;
 
-    public AddressContainsKeywordsPredicate(List<String> keywords) {
+    public CalendarContainsKeywordsPredicate(List<String> keywords) {
         this.keywords = keywords;
     }
 
     @Override
     public boolean test(Person person) {
         return keywords.stream()
-                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getAddress().value, keyword));
+                .anyMatch(keyword -> StringUtil.containsWordIgnoreCase(person.getApptDate().value, keyword));
     }
 
     @Override
@@ -29,11 +28,12 @@ public class AddressContainsKeywordsPredicate implements Predicate<Person> {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof AddressContainsKeywordsPredicate)) {
+        if (!(other instanceof CalendarContainsKeywordsPredicate)) {
             return false;
         }
 
-        AddressContainsKeywordsPredicate otherNameContainsKeywordsPredicate = (AddressContainsKeywordsPredicate) other;
+        CalendarContainsKeywordsPredicate otherNameContainsKeywordsPredicate =
+                (CalendarContainsKeywordsPredicate) other;
         return keywords.equals(otherNameContainsKeywordsPredicate.keywords);
     }
 

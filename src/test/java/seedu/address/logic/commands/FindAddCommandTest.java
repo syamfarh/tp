@@ -18,6 +18,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+
 public class FindAddCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());

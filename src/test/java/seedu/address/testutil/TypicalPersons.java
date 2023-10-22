@@ -2,12 +2,17 @@ package seedu.address.testutil;
 
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_JOHN;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_APPOINTMENTDATE_JOHN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_JOHN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_JOHN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_JOHN;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 
@@ -30,7 +35,7 @@ public class TypicalPersons {
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withOccupation("Musician")
-            .withAppointmentDate("2023-11-20").withTags("owesMoney", "friends").build();
+            .withAppointmentDate("").withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withAppointmentDate("")
             .withEmail("heinz@example.com").withOccupation("Sheep Farmer").withAddress("wall street").build();
@@ -57,12 +62,20 @@ public class TypicalPersons {
 
     // Manually added - Person's details found in {@code CommandTestUtil}
     public static final Person AMY = new PersonBuilder().withName(VALID_NAME_AMY).withPhone(VALID_PHONE_AMY)
-            .withEmail(VALID_EMAIL_AMY).withOccupation("Barber").withAddress(VALID_ADDRESS_AMY).withAppointmentDate("")
+            .withEmail(VALID_EMAIL_AMY).withOccupation("Barber").withAddress(VALID_ADDRESS_AMY)
+            .withAppointmentDate("")
             .withTags(VALID_TAG_FRIEND).build();
     public static final Person BOB = new PersonBuilder().withName(VALID_NAME_BOB).withPhone(VALID_PHONE_BOB)
             .withEmail(VALID_EMAIL_BOB).withOccupation("Software Engineer").withAddress(VALID_ADDRESS_BOB)
             .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND).withAppointmentDate("")
             .build();
+
+    public static final Person JOHN = new PersonBuilder().withName(VALID_NAME_JOHN).withPhone(VALID_PHONE_JOHN)
+            .withEmail(VALID_EMAIL_JOHN).withOccupation("Chef").withAddress(VALID_ADDRESS_JOHN)
+            .withAppointmentDate(VALID_APPOINTMENTDATE_JOHN)
+            .build();
+
+
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 
@@ -80,6 +93,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JOHN));
     }
 }
