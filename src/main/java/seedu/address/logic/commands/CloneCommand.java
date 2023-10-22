@@ -14,7 +14,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.exceptions.DuplicatePersonException;
 
 /**
- * CLones a person identified using it's displayed index from the address book.
+ * Clones a person identified using it's displayed index from the address book.
  */
 public class CloneCommand extends Command {
 
@@ -47,7 +47,7 @@ public class CloneCommand extends Command {
 
         Person personToClone = lastShownList.get(targetIndex.getZeroBased());
 
-        Person clonedPerson = clonedPerson(personToClone);
+        Person clonedPerson = clonePerson(personToClone);
         try {
             model.addPerson(clonedPerson);
             return new CommandResult(String.format(MESSAGE_CLONE_PERSON_SUCCESS, Messages.format(personToClone)));
@@ -79,21 +79,22 @@ public class CloneCommand extends Command {
                 .toString();
     }
 
-    private Person clonedPerson(Person personToClone) {
-        int intValue;
-        String intValueS = personToClone.getName().toString().replaceAll("[^0-9]", "");
-        String bareName = personToClone.getName().toString().replaceAll("[0-9]", "");
-        if (intValueS.isEmpty()) {
-            intValue = 0;
+    private Person clonePerson(Person personToClone) {
+        int numericSuffix;
+        String numericSuffixStr = personToClone.getName().toString().replaceAll("[^0-9]", "");
+        String nameWithoutNumbers = personToClone.getName().toString().replaceAll("[0-9]", "");
+        if (numericSuffixStr.isEmpty()) {
+            numericSuffix = 0;
         } else {
-            intValue = Integer.parseInt(intValueS);
+            numericSuffix = Integer.parseInt(numericSuffixStr);
         }
-        intValue++;
-        String intValueSNew = String.valueOf(intValue);
-        Name cloneName = new Name(bareName + " " + intValueSNew);
-        Person clonedPerson = new Person(cloneName, personToClone.getPhone(), personToClone.getEmail(),
+        numericSuffix++;
+        String updatedNumericSuffixStr = String.valueOf(numericSuffix);
+        Name clonedName = new Name(nameWithoutNumbers + " " + updatedNumericSuffixStr);
+        Person clonedPerson = new Person(clonedName, personToClone.getPhone(), personToClone.getEmail(),
                 personToClone.getOccupation(), personToClone.getAddress(), personToClone.getApptDate(),
                 personToClone.getTags());
         return clonedPerson;
     }
+
 }

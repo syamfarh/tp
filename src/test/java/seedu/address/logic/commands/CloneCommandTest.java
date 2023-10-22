@@ -29,7 +29,7 @@ public class CloneCommandTest {
         CloneCommand cloneCommand = new CloneCommand(INDEX_FIRST_PERSON);
 
         // Creating the expected cloned person
-        Person expectedClonedPerson = createClonedPerson(personToClone);
+        Person expectedClonedPerson = clonePerson(personToClone);
 
         StringBuilder builder = new StringBuilder();
         builder.append(personToClone.getName())
@@ -108,21 +108,22 @@ public class CloneCommandTest {
     /**
      * Creates a cloned person based on the given person.
      */
-    private Person createClonedPerson(Person personToClone) {
-        int intValue;
-        String intValueS = personToClone.getName().toString().replaceAll("[^0-9]", "");
-        String bareName = personToClone.getName().toString().replaceAll("[0-9]", "");
-        if (intValueS.isEmpty()) {
-            intValue = 0;
+    private Person clonePerson(Person personToClone) {
+        int numericSuffix;
+        String numericSuffixStr = personToClone.getName().toString().replaceAll("[^0-9]", "");
+        String nameWithoutNumbers = personToClone.getName().toString().replaceAll("[0-9]", "");
+        if (numericSuffixStr.isEmpty()) {
+            numericSuffix = 0;
         } else {
-            intValue = Integer.parseInt(intValueS);
+            numericSuffix = Integer.parseInt(numericSuffixStr);
         }
-        intValue++;
-        String intValueSNew = String.valueOf(intValue);
-        Name cloneName = new Name(bareName + " " + intValueSNew);
-        return new Person(cloneName, personToClone.getPhone(), personToClone.getEmail(),
+        numericSuffix++;
+        String updatedNumericSuffixStr = String.valueOf(numericSuffix);
+        Name clonedName = new Name(nameWithoutNumbers + " " + updatedNumericSuffixStr);
+        Person clonedPerson = new Person(clonedName, personToClone.getPhone(), personToClone.getEmail(),
                 personToClone.getOccupation(), personToClone.getAddress(), personToClone.getApptDate(),
                 personToClone.getTags());
+        return clonedPerson;
     }
 
     /**
