@@ -236,9 +236,9 @@ _{more aspects and alternatives to be added}_
 
 ### Clone feature
 
-#### Proposed Implementation
+#### Implementation
 
-Details
+The clone feature creates a copy of a person in the addressbook while only adding a number at the end of the name and maintaining all other variables. 
 
 Given below is an example usage scenario and how the clone mechanism behaves at each step.
 
@@ -402,9 +402,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 2.
 
-* 4a. The given person has already been cloned.
+* 3b. The given person has already been cloned.
 
-    * 4a1. FAPro shows an error message:  “A clone of this person already exists. To clone again, please edit the previous clone first or alternatively, clone the previous clone."
+    * 3b1. FAPro shows an error message:  “A clone of this person already exists. To clone again, please edit the previous clone first or alternatively, clone the previous clone."
 
         Use case resumes at step 2.
 
