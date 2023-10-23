@@ -14,7 +14,7 @@
     "email" : "johnd@example.com",
     "occupation" : "Musician",
     "address" : "311, Clementi Ave 2, #02-25",
-    "appointmentDate" : "2023-11-20",
+    "appointmentDate" : "",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -55,6 +55,14 @@
     "address" : "4th street",
     "occupation" : "Zoologist",
     "appointmentDate" : "",
+    "tags" : [ ]
+  }, {
+    "name" : "John Doe",
+    "phone" : "33333333",
+    "email" : "john@example.com",
+    "occupation" : "Chef",
+    "address" : "Block 222, John Street 2",
+    "appointmentDate" :  "2023-12-12",
     "tags" : [ ]
   } ]
 }
