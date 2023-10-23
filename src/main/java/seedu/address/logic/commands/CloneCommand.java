@@ -38,7 +38,7 @@ public class CloneCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+        assert model != null : "Assertion Error: model is null.";
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
@@ -79,6 +79,12 @@ public class CloneCommand extends Command {
                 .toString();
     }
 
+    /**
+     * Creates a cloned Person object with an incremented numeric suffix in the name.
+     *
+     * @param personToClone The original Person object to be cloned.
+     * @return A new Person object with the name having an incremented numeric suffix.
+     */
     private Person clonePerson(Person personToClone) {
         int numericSuffix;
         String numericSuffixStr = personToClone.getName().toString().replaceAll("[^0-9]", "");
@@ -96,5 +102,4 @@ public class CloneCommand extends Command {
                 personToClone.getTags());
         return clonedPerson;
     }
-
 }
