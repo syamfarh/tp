@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -26,6 +27,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final ArrayList<Person> deletedPersons;
+    private final ArrayList<Pair<Person, Person>> editedPersons;
     private ArrayList<String> previousUndoableCommands;
     private Comparator<Person> sortComparator;
 
@@ -41,6 +43,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         deletedPersons = new ArrayList<>();
+        editedPersons = new ArrayList<>();
         previousUndoableCommands = new ArrayList<>();
         sortComparator = APPTCOMPARATOR;
     }
@@ -80,7 +83,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPreviousUndoableCommand(String command) {
+    public void storePreviousUndoableCommand(String command) {
         this.previousUndoableCommands.add(command);
     }
 
@@ -95,6 +98,26 @@ public class ModelManager implements Model {
         int lastIndex = this.getPreviousUndoableCommandsSize() - 1;
         this.previousUndoableCommands.remove(lastIndex);
     }
+
+    @Override
+    public void storeEditedPersonsPair(Person editedPerson, Person originalPerson) {
+        Pair<Person, Person> toStore = new Pair<>(editedPerson, originalPerson);
+        editedPersons.add(toStore);
+    }
+
+    @Override
+    public Pair<Person, Person> getEditedPersonsPair() {
+        int lastIndex = editedPersons.size() - 1;
+        return editedPersons.get(lastIndex);
+    };
+
+    @Override
+    public void removeEditedPersonsPair() {
+        int lastIndex = editedPersons.size() - 1;
+        editedPersons.remove(lastIndex);
+    }
+
+
 
     //=========== UserPrefs ==================================================================================
 

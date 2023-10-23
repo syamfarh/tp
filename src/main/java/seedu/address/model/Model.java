@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.Person;
 
@@ -114,11 +115,17 @@ public interface Model {
 
     void undoDelete();
 
-    void setPreviousUndoableCommand(String s);
+    void storePreviousUndoableCommand(String s);
 
     String getPreviousUndoableCommand();
 
     void removePreviousUndoableCommand();
 
     int getAddressBookSize();
+
+    void storeEditedPersonsPair(Person editedPerson, Person originalPerson);
+
+    Pair<Person, Person> getEditedPersonsPair();
+
+    void removeEditedPersonsPair();
 }

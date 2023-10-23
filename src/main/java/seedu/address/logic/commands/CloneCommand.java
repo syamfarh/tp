@@ -48,6 +48,7 @@ public class CloneCommand extends Command {
         Person clonedPerson = clonePerson(personToClone);
         try {
             model.addPerson(clonedPerson);
+            model.storePreviousUndoableCommand(COMMAND_WORD);
             return new CommandResult(String.format(MESSAGE_CLONE_PERSON_SUCCESS, Messages.format(personToClone)));
         } catch (DuplicatePersonException e) {
             System.out.println("");

@@ -5,6 +5,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.List;
 
+import javafx.util.Pair;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -28,6 +29,7 @@ public class UndoCommand extends Command {
 
     public static final String MESSAGE_UNDO_ADD_FAILURE = "Cannot undo! There's nothing to undo!";
     public static final String MESSAGE_UNDO_ADD_SUCCESS = "Undo Successful! Deleted Person: %1$s";
+    public static final String MESSAGE_UNDO_EDIT_SUCCESS = "Undo Successful! Reverted back to: %1$s";
     /**
      * Constructor for UndoCommand is empty.
      */
@@ -43,7 +45,10 @@ public class UndoCommand extends Command {
             case "clear":
                 return executeUndoClear(model);
             case "add":
+            case "clone":
                 return executeUndoAdd(model);
+            case "edit":
+                return executeUndoEdit(model);
             default:
                 return null;
         }
@@ -83,5 +88,14 @@ public class UndoCommand extends Command {
         return new CommandResult(String.format(MESSAGE_UNDO_ADD_SUCCESS, Messages.format(personToDelete)));
     }
 
+    public CommandResult executeUndoEdit(Model model) {
+        Pair<Person, Person> pairToRestore = model.getEditedPersonsPair();
+        Person editedPerson = pairToRestore.getKey();
+        Person originalPerson = pairToRestore.getValue();
+        model.setPerson(editedPerson, originalPerson);
+        model.removeEditedPersonsPair();
+        model.removePreviousUndoableCommand();
 
+        return new CommandResult(String.format(MESSAGE_UNDO_EDIT_SUCCESS, Messages.format(originalPerson)));
+    }
 }

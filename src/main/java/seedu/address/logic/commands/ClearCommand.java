@@ -27,7 +27,7 @@ public class ClearCommand extends Command {
             model.deletePerson(personToDelete);
         }
         //model.setAddressBook(new AddressBook());
-        model.setPreviousUndoableCommand(COMMAND_WORD);
+        model.storePreviousUndoableCommand(COMMAND_WORD);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }
