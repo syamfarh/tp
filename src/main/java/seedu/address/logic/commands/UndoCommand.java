@@ -40,17 +40,17 @@ public class UndoCommand extends Command {
         requireNonNull(model);
 
         switch(model.getPreviousUndoableCommand()) {
-            case "delete":
-                return executeUndoDelete(model);
-            case "clear":
-                return executeUndoClear(model);
-            case "add":
-            case "clone":
-                return executeUndoAdd(model);
-            case "edit":
-                return executeUndoEdit(model);
-            default:
-                return null;
+        case "delete":
+            return executeUndoDelete(model);
+        case "clear":
+            return executeUndoClear(model);
+        case "add":
+        case "clone":
+            return executeUndoAdd(model);
+        case "edit":
+            return executeUndoEdit(model);
+        default:
+            return null;
         }
 
     }
