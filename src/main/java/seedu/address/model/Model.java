@@ -108,5 +108,11 @@ public interface Model {
      */
     void removeDeletedPerson();
 
+    int getDeletedPersonsSize();
+
     void undo();
+
+    void setPreviousCommand(String s);
+
+    int getSize();
 }

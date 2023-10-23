@@ -26,7 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final ArrayList<Person> deletedPersons;
-
+    private String previousCommand;
     private Comparator<Person> sortComparator;
 
     /**
@@ -68,6 +68,15 @@ public class ModelManager implements Model {
         this.deletedPersons.remove(lastIndex);
     }
 
+    @Override
+    public int getDeletedPersonsSize() {
+        return this.deletedPersons.size();
+    }
+
+    @Override
+    public void setPreviousCommand(String command) {
+        previousCommand = command;
+    }
     //=========== UserPrefs ==================================================================================
 
     @Override
@@ -186,6 +195,11 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    @Override
+    public int getSize() {
+        return addressBook.getSize();
     }
 
 }
