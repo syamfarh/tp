@@ -55,6 +55,11 @@ public class UndoCommand extends Command {
 
     }
 
+    /**
+     * Undoes a delete command.
+     * @return returns CommandResult of the message when the undo is a success.
+     * @throws CommandException
+     */
     public CommandResult executeUndoDelete(Model model) throws CommandException {
         //catch duplicate person undo
         if (model.getDeletedPersonsSize() == 0) {
@@ -66,6 +71,11 @@ public class UndoCommand extends Command {
         return new CommandResult(String.format(MESSAGE_UNDO_DELETE_SUCCESS, Messages.format(deletedPerson)));
     }
 
+    /**
+     * Undoes a clear command.
+     * @return returns CommandResult of the message when the undo is a success.
+     * @throws CommandException
+     */
     public CommandResult executeUndoClear(Model model) throws CommandException {
 
         if (model.getDeletedPersonsSize() == 0) {
@@ -79,6 +89,10 @@ public class UndoCommand extends Command {
         return new CommandResult(String.format(MESSAGE_UNDO_CLEAR_SUCCESS));
     }
 
+    /**
+     * Undoes an add command.
+     * @return returns CommandResult of the message when the undo is a success.
+     */
     public CommandResult executeUndoAdd(Model model) {
         List<Person> lastShownList = model.getFilteredPersonList();
         int lastIndex = model.getAddressBookSize() - 1;
@@ -88,6 +102,10 @@ public class UndoCommand extends Command {
         return new CommandResult(String.format(MESSAGE_UNDO_ADD_SUCCESS, Messages.format(personToDelete)));
     }
 
+    /**
+     * Undoes an edit command.
+     * @return returns CommandResult of the message when the undo is a success.
+     */
     public CommandResult executeUndoEdit(Model model) {
         Pair<Person, Person> pairToRestore = model.getEditedPersonsPair();
         Person editedPerson = pairToRestore.getKey();
