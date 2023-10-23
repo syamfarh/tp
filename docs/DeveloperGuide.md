@@ -242,65 +242,29 @@ Details
 
 Given below is an example usage scenario and how the clone mechanism behaves at each step.
 
-Step 1. 
+Step 1. The user executes "list" to see what Persons are available in the address book
 
-image1
+![Clone0](images/Clone0.png)
 
-Step 2. 
+Step 2. The user executes "clone 1" to clone the person at index 1 of the addressbook, John
 
-image 2
-
-Step 3.
-
-image 3
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** 
-
-</div>
-
-Step 4. 
-
-image 4
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
-
-</div>
-
-The following sequence diagram shows how the clone operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:**
-</div>
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** 
-
-</div>
-
-Step 5. 
-
-image 5
-
-Step 6. 
-
-image 6
+![Clone1](images/Clone1.png)
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
-image 7
+![CloneActivityDiagram](images/CloneActivityDiagram.png)
 
 #### Design considerations:
 
 **Aspect: How clone executes:**
 
-* **Alternative 1 (current choice):**
-  * Pros: 
-  * Cons: 
+* **Alternative 1 (current choice):** Copies the person at the index provided and returns a person with a number next to their name
+  * Pros: Fast, prevents excessive copying of a person while ensuring that there are no struct duplicates
+  * Cons: Can be restrictive and time consuming, as you have to keep copying the clone if you wish to make a clone of a person
 
-* **Alternative 2:** I
-  itself.
-  * Pros: 
-  * Cons: 
+* **Alternative 2:** Copies the person exactly as is while allowing for duplicates
+  * Pros: Fast, allows for as many copies of a person as the user desires
+  * Cons: Will be difficult to keep track of contacts, defeating the purpose of FAPro as a comprehensive yet focused contact organiserr
 
 _{more aspects and alternatives to be added}_
 
