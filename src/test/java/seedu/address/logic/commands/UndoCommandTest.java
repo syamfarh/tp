@@ -3,8 +3,8 @@ package seedu.address.logic.commands;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
-import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_FAILURE;
-import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_SUCCESS;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_DELETE_FAILURE;
+import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_DELETE_SUCCESS;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
@@ -30,8 +30,8 @@ public class UndoCommandTest {
         expectedModel.deletePerson(personToDelete);
 
         //CommandResult expectedCommandResult = new CommandResult(MESSAGE_UNDO_SUCCESS);
-        String expectedResult = String.format(MESSAGE_UNDO_SUCCESS, Messages.format(personToDelete));
-        expectedModel.undo();
+        String expectedResult = String.format(MESSAGE_UNDO_DELETE_SUCCESS, Messages.format(personToDelete));
+        expectedModel.undoDelete();
 
         model.deletePerson(personToDelete);
         assertCommandSuccess(undoCommand, model, expectedResult, expectedModel);
@@ -46,11 +46,11 @@ public class UndoCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        expectedModel.undo();
+        expectedModel.undoDelete();
 
         model.deletePerson(personToDelete);
-        model.undo();
-        assertCommandFailure(undoCommand, model, MESSAGE_UNDO_FAILURE);
+        model.undoDelete();
+        assertCommandFailure(undoCommand, model, MESSAGE_UNDO_DELETE_FAILURE);
     }
 
 }

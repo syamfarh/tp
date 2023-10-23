@@ -57,6 +57,7 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
+        model.setPreviousUndoableCommand(COMMAND_WORD);
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 

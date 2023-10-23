@@ -110,9 +110,15 @@ public interface Model {
 
     int getDeletedPersonsSize();
 
-    void undo();
+    int getPreviousUndoableCommandsSize();
 
-    void setPreviousCommand(String s);
+    void undoDelete();
 
-    int getSize();
+    void setPreviousUndoableCommand(String s);
+
+    String getPreviousUndoableCommand();
+
+    void removePreviousUndoableCommand();
+
+    int getAddressBookSize();
 }

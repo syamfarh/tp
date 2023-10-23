@@ -21,12 +21,13 @@ public class ClearCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        while (model.getSize() > 0) {
-            int targetIndex = model.getSize() - 1;
+        while (model.getAddressBookSize() > 0) {
+            int targetIndex = model.getAddressBookSize() - 1;
             Person personToDelete = lastShownList.get(targetIndex);
             model.deletePerson(personToDelete);
         }
         //model.setAddressBook(new AddressBook());
+        model.setPreviousUndoableCommand(COMMAND_WORD);
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

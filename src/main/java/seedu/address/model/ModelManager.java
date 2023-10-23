@@ -26,7 +26,7 @@ public class ModelManager implements Model {
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final ArrayList<Person> deletedPersons;
-    private String previousCommand;
+    private ArrayList<String> previousUndoableCommands;
     private Comparator<Person> sortComparator;
 
     /**
@@ -41,6 +41,7 @@ public class ModelManager implements Model {
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
         deletedPersons = new ArrayList<>();
+        previousUndoableCommands = new ArrayList<>();
         sortComparator = APPTCOMPARATOR;
     }
 
@@ -64,7 +65,7 @@ public class ModelManager implements Model {
 
     @Override
     public void removeDeletedPerson() {
-        int lastIndex = deletedPersons.size() - 1;
+        int lastIndex = this.deletedPersons.size() - 1;
         this.deletedPersons.remove(lastIndex);
     }
 
@@ -74,9 +75,27 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void setPreviousCommand(String command) {
-        previousCommand = command;
+    public int getPreviousUndoableCommandsSize() {
+        return this.previousUndoableCommands.size();
     }
+
+    @Override
+    public void setPreviousUndoableCommand(String command) {
+        this.previousUndoableCommands.add(command);
+    }
+
+    @Override
+    public String getPreviousUndoableCommand() {
+        int lastIndex = this.getPreviousUndoableCommandsSize() - 1;
+        return this.previousUndoableCommands.get(lastIndex);
+    }
+
+    @Override
+    public void removePreviousUndoableCommand() {
+        int lastIndex = this.getPreviousUndoableCommandsSize() - 1;
+        this.previousUndoableCommands.remove(lastIndex);
+    }
+
     //=========== UserPrefs ==================================================================================
 
     @Override
@@ -150,11 +169,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void undo() {
+    public void undoDelete() {
         addressBook.addPerson(getDeletedPerson());
-        removeDeletedPerson();
+        this.removeDeletedPerson();
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
+
+
+
 
 
     //=========== Filtered Person List Accessors =============================================================
@@ -198,7 +220,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public int getSize() {
+    public int getAddressBookSize() {
         return addressBook.getSize();
     }
 

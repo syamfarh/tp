@@ -178,7 +178,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void undo() {
+        public void undoDelete() {
             throw new AssertionError("This method should not be called.");
         }
     }

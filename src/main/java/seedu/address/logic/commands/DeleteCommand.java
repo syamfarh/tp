@@ -43,6 +43,7 @@ public class DeleteCommand extends Command {
         Person personToDelete = lastShownList.get(targetIndex.getZeroBased());
         //model.storeDeletedPerson(personToDelete);
         model.deletePerson(personToDelete);
+        model.setPreviousUndoableCommand(COMMAND_WORD);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 
