@@ -103,5 +103,10 @@ public interface Model {
      */
     Person getDeletedPerson();
 
+    /**
+     * Removes the most recently deleted person from the deleted person arraylist.
+     */
+    void removeDeletedPerson();
+
     void undo();
 }

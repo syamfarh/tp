@@ -37,8 +37,7 @@ public class UndoCommand extends Command {
         if (model.hasPerson(deletedPerson)) {
             throw new CommandException(MESSAGE_UNDO_FAILURE);
         }
-
-        model.addPerson(deletedPerson);
+        model.undo();
         return new CommandResult(String.format(MESSAGE_UNDO_SUCCESS, Messages.format(deletedPerson)));
     }
 

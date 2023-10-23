@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.ComparatorUtil.APPTCOMPARATOR;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -24,7 +25,7 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private Person deletedPerson;
+    private final ArrayList<Person> deletedPersons;
 
     private Comparator<Person> sortComparator;
 
@@ -39,6 +40,7 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        deletedPersons = new ArrayList<>();
         sortComparator = APPTCOMPARATOR;
     }
 
@@ -51,12 +53,19 @@ public class ModelManager implements Model {
 
     @Override
     public void storeDeletedPerson(Person deletedPerson) {
-        this.deletedPerson = deletedPerson;
+        this.deletedPersons.add(deletedPerson);
     }
 
     @Override
     public Person getDeletedPerson() {
-        return this.deletedPerson;
+        int lastIndex = deletedPersons.size() - 1;
+        return this.deletedPersons.get(lastIndex);
+    }
+
+    @Override
+    public void removeDeletedPerson() {
+        int lastIndex = deletedPersons.size() - 1;
+        this.deletedPersons.remove(lastIndex);
     }
 
     //=========== UserPrefs ==================================================================================
@@ -134,6 +143,7 @@ public class ModelManager implements Model {
     @Override
     public void undo() {
         addressBook.addPerson(getDeletedPerson());
+        removeDeletedPerson();
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
