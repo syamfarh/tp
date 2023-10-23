@@ -10,15 +10,18 @@ import java.time.format.DateTimeFormatterBuilder;
  */
 public class DateTimeParser {
 
-    public static final DateTimeFormatterBuilder DATETIMEFORMATTERBUILDER = new DateTimeFormatterBuilder()
+    public static final DateTimeFormatterBuilder STRINGTODATETIME = new DateTimeFormatterBuilder()
             .append(DateTimeFormatter.ofPattern("[MM/dd/yyyy HH:mm]" + "[dd-MM-yyyy HH:mm]" + "[yyyy-MM-dd HH:mm]"));
+
+    public static final DateTimeFormatterBuilder DATETIMETOSTRING = new DateTimeFormatterBuilder()
+            .append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
     /**
      * Parses the given {@code String} of arguments
      * and returns a LocalDate object.
      */
     public static LocalDateTime convertDate(String date) {
-        DateTimeFormatter dateTimeFormatter = DATETIMEFORMATTERBUILDER.toFormatter();
+        DateTimeFormatter dateTimeFormatter = STRINGTODATETIME.toFormatter();
         return LocalDateTime.parse(date, dateTimeFormatter);
     }
     /**

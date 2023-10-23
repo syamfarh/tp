@@ -12,13 +12,13 @@ class DateTimeParserTest {
 
     @Test
     void convertDate_validValue() {
-        assertEquals(LocalDateTime.parse("2020-11-20 23:00", DateTimeParser.DATETIMEFORMATTERBUILDER.toFormatter()),
+        assertEquals(LocalDateTime.parse("2020-11-20 23:00", DateTimeParser.STRINGTODATETIME.toFormatter()),
                 DateTimeParser.convertDate("2020-11-20 23:00"));
 
-        assertEquals(LocalDateTime.parse("2000-11-20 23:00", DateTimeParser.DATETIMEFORMATTERBUILDER.toFormatter()),
+        assertEquals(LocalDateTime.parse("2000-11-20 23:00", DateTimeParser.STRINGTODATETIME.toFormatter()),
                 DateTimeParser.convertDate("11/20/2000 23:00"));
 
-        assertEquals(LocalDateTime.parse("2000-11-20 23:00", DateTimeParser.DATETIMEFORMATTERBUILDER.toFormatter()),
+        assertEquals(LocalDateTime.parse("2000-11-20 23:00", DateTimeParser.STRINGTODATETIME.toFormatter()),
                 DateTimeParser.convertDate("20-11-2000 23:00"));
     }
 

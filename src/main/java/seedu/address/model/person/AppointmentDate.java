@@ -1,11 +1,12 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.DateTimeParser.DATETIMETOSTRING;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 
-import seedu.address.logic.parser.DateParser;
+import seedu.address.logic.parser.DateTimeParser;
 
 /**
  * Represents a Person's appointment Date in the address book.
@@ -14,7 +15,7 @@ import seedu.address.logic.parser.DateParser;
 public class AppointmentDate implements Comparable<AppointmentDate> {
 
     public static final String MESSAGE_CONSTRAINTS_FORMAT =
-            "Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd]";
+            "Appointment Date should follow the format of [mm/dd/yyyy HH:mm] or [dd-mm-yyyy HH:mm] or [yyyy-mm-dd HH:mm]";
 
     public static final String MESSAGE_CONSTRAINTS_CURRENTDATE =
             "Appointment Date should be after the current date";
@@ -23,7 +24,7 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
 
     public final String value;
 
-    public final LocalDate valueInLocalDate;
+    public final LocalDateTime valueInLocalDateTime;
 
     /**
      * Constructs an {@code AppointmentDate}.
@@ -34,9 +35,9 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
         requireNonNull(date);
         value = date;
         if (date.equals("")) {
-            valueInLocalDate = LocalDate.now().plusYears(50);
+            valueInLocalDateTime = LocalDateTime.now().plusYears(50);
         } else {
-            valueInLocalDate = DateParser.convertDate(date);
+            valueInLocalDateTime = DateTimeParser.convertDate(date);
         }
     }
 
@@ -45,10 +46,10 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
      *
      * @param date A valid appointment Date in LocalDate type.
      */
-    public AppointmentDate(LocalDate date) {
+    public AppointmentDate(LocalDateTime date) {
         requireNonNull(date);
-        valueInLocalDate = date;
-        value = date.toString();
+        valueInLocalDateTime = date;
+        value = date.format(DATETIMETOSTRING.toFormatter());
     }
 
     /**
@@ -56,7 +57,7 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
      */
     public static boolean isValidFormat(String test) {
         try {
-            DateParser.convertDate(test);
+            DateTimeParser.convertDate(test);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -68,7 +69,7 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
      */
     public static boolean isValidCurrentDate(String test) {
         try {
-            return DateParser.isValidCurrentDate(test);
+            return DateTimeParser.isValidCurrentDateTime(test);
         } catch (DateTimeParseException e) {
             return false;
         }
@@ -97,11 +98,11 @@ public class AppointmentDate implements Comparable<AppointmentDate> {
             return 0;
         }
 
-        if (valueInLocalDate.isEqual(o.valueInLocalDate)) {
+        if (valueInLocalDateTime.isEqual(o.valueInLocalDateTime)) {
             return 0;
-        } else if (valueInLocalDate.isAfter(o.valueInLocalDate)) {
+        } else if (valueInLocalDateTime.isAfter(o.valueInLocalDateTime)) {
             return 1;
-        } else if (valueInLocalDate.isBefore(o.valueInLocalDate)) {
+        } else if (valueInLocalDateTime.isBefore(o.valueInLocalDateTime)) {
             return -1;
         }
 
