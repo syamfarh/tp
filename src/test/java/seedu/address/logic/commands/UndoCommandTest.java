@@ -34,6 +34,7 @@ public class UndoCommandTest {
         expectedModel.undoDelete();
 
         model.deletePerson(personToDelete);
+        model.storePreviousUndoableCommand("delete");
         assertCommandSuccess(undoCommand, model, expectedResult, expectedModel);
     }
 
@@ -49,6 +50,7 @@ public class UndoCommandTest {
         expectedModel.undoDelete();
 
         model.deletePerson(personToDelete);
+        model.storePreviousUndoableCommand("delete");
         model.undoDelete();
         assertCommandFailure(undoCommand, model, MESSAGE_UNDO_DELETE_FAILURE);
     }

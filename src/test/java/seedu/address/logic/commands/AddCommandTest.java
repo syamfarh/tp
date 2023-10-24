@@ -13,6 +13,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
+import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
@@ -178,9 +179,60 @@ public class AddCommandTest {
         }
 
         @Override
+        public void removeDeletedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getDeletedPersonsSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getPreviousUndoableCommandsSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void undoDelete() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void storePreviousUndoableCommand(String s) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getPreviousUndoableCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removePreviousUndoableCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getAddressBookSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void storeEditedPersonsPair(Person editedPerson, Person originalPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Pair<Person, Person> getEditedPersonsPair() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeEditedPersonsPair() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
