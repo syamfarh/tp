@@ -259,6 +259,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<String> previousUndoableCommands = new ArrayList<>();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -270,6 +271,11 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public void storePreviousUndoableCommand(String command) {
+            previousUndoableCommands.add(command);
         }
 
         @Override
