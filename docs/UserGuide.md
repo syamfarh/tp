@@ -182,29 +182,6 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find_add geylang` returns all users whose addresses contain `geylang`
 
-### Cloning a person : `clone`
-
-Clones a contact from FAPro at the specified index.
-
-Format: `clone INDEX`
-* Clones the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-
-Acceptable parameters for INDEX:
-* The index **must be a positive integer** 1, 2, 3, …​ (less than the size of the contact list in FAPro)
-
-Examples:
-* `list` followed by `clone 2` clones the 2nd person in the address book.
-* `find Betsy` followed by `clone 1` clones the 1st person in the results of the `find` command.
-
-![edit format](images/cloneformat.png)
-
-Precise expected outputs on success:
-* Message shown to user: "Cloned Person: X", where X are the details of the cloned person, with the difference being that the name has a 1 added to it (i.e John becomes John 1). If the name already has a one (i.e the contact is a cloned contact), then a 1 is added to the number (John 1 becomes John 2).
-* Size of address book is reduced by 1.
-
-![edit format](images/cloneresult.png)
-
 ### Deleting a person : `delete`
 
 Deletes a contact from FAPro at the specified index.
