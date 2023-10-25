@@ -44,11 +44,6 @@ public class DeleteCommand extends Command {
         model.deletePerson(personToDelete);
         model.storePreviousUndoableCommand(COMMAND_WORD);
 
-        if (model.getDeletedPersonsSize() != model.getNumberOfPreviousDeleteCommands()) {
-            throw new AssertionError("Assertion Error: The number of deleted persons is not equal to"
-                    + "the number of delete commands.");
-        }
-
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.format(personToDelete)));
     }
 

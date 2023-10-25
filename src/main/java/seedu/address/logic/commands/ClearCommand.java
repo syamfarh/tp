@@ -31,12 +31,6 @@ public class ClearCommand extends Command {
             Person personToDelete = lastShownList.get(targetIndex);
             model.deletePerson(personToDelete);
         }
-        //model.setAddressBook(new AddressBook());
-
-        if (model.getDeletedPersonsSize() <= model.getNumberOfPreviousDeleteCommands()) {
-            throw new AssertionError("Assertion Error: Previous clear command "
-                    + "did not store deleted persons.");
-        }
 
         model.storePreviousUndoableCommand(COMMAND_WORD);
         return new CommandResult(MESSAGE_SUCCESS);
