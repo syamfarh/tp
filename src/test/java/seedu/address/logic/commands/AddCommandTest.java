@@ -195,6 +195,12 @@ public class AddCommandTest {
         }
 
         @Override
+        public int getNumberOfPreviousDeleteCommands() {
+            throw new AssertionError("This method should not be called.");
+
+        }
+
+        @Override
         public void undoDelete() {
             throw new AssertionError("This method should not be called.");
         }

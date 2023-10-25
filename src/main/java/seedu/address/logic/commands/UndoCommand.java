@@ -22,14 +22,13 @@ public class UndoCommand extends Command {
             + ": Undoes the deletion of a person done in the most recent command.\n"
             + "Example: " + COMMAND_WORD;
 
-    public static final String MESSAGE_UNDO_DELETE_FAILURE = "Cannot undo! There's nothing to undo!";
+    public static final String MESSAGE_FAILURE_UNDO_WITH_NO_UNDOABLE_COMMANDS = "There is no command to undo!";
     public static final String MESSAGE_UNDO_DELETE_SUCCESS = "Undo Successful! Contact added back: %1$s";
-    public static final String MESSAGE_UNDO_CLEAR_FAILURE = "Cannot undo! There's nothing to undo!";
     public static final String MESSAGE_UNDO_CLEAR_SUCCESS = "Undo Successful! All contacts have been added back!";
-
-    public static final String MESSAGE_UNDO_ADD_FAILURE = "Cannot undo! There's nothing to undo!";
     public static final String MESSAGE_UNDO_ADD_SUCCESS = "Undo Successful! Deleted Person: %1$s";
     public static final String MESSAGE_UNDO_EDIT_SUCCESS = "Undo Successful! Reverted back to: %1$s";
+
+
     /**
      * Constructor for UndoCommand is empty.
      */
@@ -38,6 +37,10 @@ public class UndoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
+
+        if (model.getPreviousUndoableCommandsSize() == 0) {
+            throw new CommandException(MESSAGE_FAILURE_UNDO_WITH_NO_UNDOABLE_COMMANDS);
+        }
 
         switch(model.getPreviousUndoableCommand()) {
         case "delete":
@@ -52,19 +55,14 @@ public class UndoCommand extends Command {
         default:
             return null;
         }
-
     }
 
     /**
      * Undoes a delete command.
      * @return returns CommandResult of the message when the undo is a success.
-     * @throws CommandException
      */
-    public CommandResult executeUndoDelete(Model model) throws CommandException {
-        //catch duplicate person undo
-        if (model.getDeletedPersonsSize() == 0) {
-            throw new CommandException(MESSAGE_UNDO_DELETE_FAILURE);
-        }
+    public CommandResult executeUndoDelete(Model model) {
+
         Person deletedPerson = model.getDeletedPerson();
         model.undoDelete();
         model.removePreviousUndoableCommand();
@@ -74,13 +72,8 @@ public class UndoCommand extends Command {
     /**
      * Undoes a clear command.
      * @return returns CommandResult of the message when the undo is a success.
-     * @throws CommandException
      */
-    public CommandResult executeUndoClear(Model model) throws CommandException {
-
-        if (model.getDeletedPersonsSize() == 0) {
-            throw new CommandException(MESSAGE_UNDO_CLEAR_FAILURE);
-        }
+    public CommandResult executeUndoClear(Model model) {
 
         int numberOfPreviousDeleteCommands = model.getNumberOfPreviousDeleteCommands();
         while (model.getDeletedPersonsSize() > numberOfPreviousDeleteCommands) {
@@ -95,6 +88,7 @@ public class UndoCommand extends Command {
      * @return returns CommandResult of the message when the undo is a success.
      */
     public CommandResult executeUndoAdd(Model model) {
+
         List<Person> lastShownList = model.getFilteredPersonList();
         int lastIndex = model.getAddressBookSize() - 1;
         Person personToDelete = lastShownList.get(lastIndex);
