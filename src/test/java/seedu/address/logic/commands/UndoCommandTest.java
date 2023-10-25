@@ -44,11 +44,6 @@ public class UndoCommandTest {
         UndoCommand undoCommand = new UndoCommand();
 
         //Do a simple delete and undo. Hence, there should be no previous undoable commands.
-        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
-        expectedModel.undoDelete();
-
-        //Do a simple delete and undo. Hence, there should be no previous undoable commands.
         model.deletePerson(personToDelete);
         model.storePreviousUndoableCommand("delete");
         model.undoDelete();
