@@ -113,6 +113,8 @@ public interface Model {
 
     int getPreviousUndoableCommandsSize();
 
+    int getNumberOfPreviousDeleteCommands();
+
     void undoDelete();
 
     void storePreviousUndoableCommand(String s);

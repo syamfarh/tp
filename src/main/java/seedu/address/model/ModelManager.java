@@ -6,6 +6,7 @@ import static seedu.address.commons.util.ComparatorUtil.APPTCOMPARATOR;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -80,6 +81,12 @@ public class ModelManager implements Model {
     @Override
     public int getPreviousUndoableCommandsSize() {
         return this.previousUndoableCommands.size();
+    }
+
+    @Override
+    public int getNumberOfPreviousDeleteCommands() {
+        int occurrences = Collections.frequency(previousUndoableCommands, "delete");
+        return occurrences;
     }
 
     @Override

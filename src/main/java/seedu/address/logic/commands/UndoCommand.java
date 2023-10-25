@@ -82,7 +82,8 @@ public class UndoCommand extends Command {
             throw new CommandException(MESSAGE_UNDO_CLEAR_FAILURE);
         }
 
-        while (model.getDeletedPersonsSize() > 0) {
+        int numberOfPreviousDeleteCommands = model.getNumberOfPreviousDeleteCommands();
+        while (model.getDeletedPersonsSize() > numberOfPreviousDeleteCommands) {
             model.undoDelete();
         }
         model.removePreviousUndoableCommand();

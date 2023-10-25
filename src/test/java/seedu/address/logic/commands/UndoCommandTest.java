@@ -21,7 +21,7 @@ public class UndoCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_undo_success() {
+    public void execute_undo_delete_success() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         UndoCommand undoCommand = new UndoCommand();
@@ -38,6 +38,7 @@ public class UndoCommandTest {
         assertCommandSuccess(undoCommand, model, expectedResult, expectedModel);
     }
 
+    //could be redundant.
     @Test
     public void execute_alreadyUndoneBefore_throwsCommandException() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
