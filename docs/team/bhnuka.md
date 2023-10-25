@@ -9,11 +9,15 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 Given below are my contributions to the project.
 
-* **New Feature**: To be added
-  * What it does: To be added
-  * Justification: To be added
-  * Highlights: To be added
-  * Credits: To be added
+* **New Parameter**: Added occupation parameter
+  * What it does: Allows the store the occupation of as person when adding the contact 
+  * Justification: As Financial Advisors, users may wish to store the Occupation of their clients, so as to get a better gauge on their clients overall financial profile and what investment plans might be more suitable for them.
+  * Highlights: As this was my first significant contribution to the groups code, it was initially rather daunting, considering that adding a parameter entails changing many classes (every class that has to do with Person), and additionally meant I had to update all the test cases. However, overall it was a smooth process of coding and deployment.
+
+* **New Feature**: Added the ability to clone contacts
+  * What it does: Allows the user to clone contacts if they want to add a similar contact 
+  * Justification: Users may have to add multiple similar contacts at one time (i.e people from the same household. As such, the clone feature provides and alternative should the user not wish to type out all the details to add a contact.
+  * Highlights: This enhancement was manageable in it's implementation. One difficulty faced was how to clone a command while ensuring that duplicate contacts still could not be held in the addressbook. This difficulty was overcome by adding an integer to the end of the name, so as to make the contacts dissimilar and hence, not duplicates of one another. 
 
 * **Code contributed**: [RepoSense link] (https://nus-cs2103-ay2324s1.github.io/tp-dashboard/#/widget/?search=bhnuka&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&chartGroupIndex=0&chartIndex=0" frameBorder="0" width="800px" height="142px")
 
@@ -21,19 +25,16 @@ Given below are my contributions to the project.
   * To be added
 
 * **Enhancements to existing features**:
-  * To be added
+  * Updated the GUI Colour Scheme and aesthetics (Pull request [\#65]())
+  * Updated Add Command to take in occupation as a parameter (Pull request [\#49]())
 
 * **Documentation**:
   * User Guide:
-    * To be added
+    * Added documentation on 'add' and 'clone'
   * Developer Guide:
-    * To be added
+    * Did implementation of the 'clone' feature
 
 * **Community**:
-  * PRs reviewed: To be added
-  * Contributed to forum discussions: To be added
-  * Reported bugs and suggestions for other teams in the class: To be added
-  * Some parts of the history feature I added was adopted by several other class mates: To be added
+  * PRs reviewed (with non-trivial review comments): (Pull request [\#43](), Pull request [\#50](), Pull request [\#66](), )
 
 * **Tools**:
-  * To be added
