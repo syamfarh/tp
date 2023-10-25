@@ -24,11 +24,12 @@ import seedu.address.testutil.PersonBuilder;
 
 
 public class UndoCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private UndoCommand undoCommand = new UndoCommand();
     private static final Person TEST = new PersonBuilder().withName("Test Best").withPhone("9482442")
             .withAppointmentDate("").withEmail("Test@example.com").withOccupation("Test")
             .withAddress("4th Test").build();
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private UndoCommand undoCommand = new UndoCommand();
+
 
     @Test
     public void execute_undoDelete_success() {
@@ -52,7 +53,7 @@ public class UndoCommandTest {
 
         String expectedResult = String.format(MESSAGE_UNDO_CLEAR_SUCCESS);
         clearCommand.execute(expectedModel);
-        while(expectedModel.getDeletedPersonsSize() > expectedModel.getNumberOfPreviousDeleteCommands()) {
+        while (expectedModel.getDeletedPersonsSize() > expectedModel.getNumberOfPreviousDeleteCommands()) {
             expectedModel.undoDelete();
         }
 
