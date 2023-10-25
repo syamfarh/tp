@@ -204,6 +204,10 @@ Precise expected outputs on failure:
 
 ![edit format](images/clonelargeindex.png)
 
+* When the person at index entered has already been cloned in FAPro, the error message “A clone of this person already exists. To clone again, please edit the previous clone first or alternatively, clone the previous clone.” is returned.
+
+![edit format](images/clonebeforeerror.png)
+
 ### Deleting a person : `delete`
 
 Deletes a contact from FAPro at the specified index.
