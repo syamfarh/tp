@@ -21,7 +21,7 @@
     <Scene>
       <stylesheets>
         <URL value="@DefaultTheme.css" />
-        <URL value="@Extensions.css" />
+        <URL value="@," />
       </stylesheets>
 
       <VBox>
