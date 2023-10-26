@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.nio.file.Path;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -113,6 +114,20 @@ public interface Model {
      * Returns the size of the deletedPersons ArrayList.
      */
     int getDeletedPersonsSize();
+
+    /**
+     * Returns a list of persons that have been previously deleted.
+     *
+     * @return A list of Person objects representing previously deleted persons.
+     */
+    List<Person> getDeletedPersons();
+
+    /**
+     * Clears the list of previously deleted persons.
+     * This method should be called after undoing delete operations or as needed to maintain consistency.
+     */
+    void clearDeletedPersons();
+
 
     /**
      * Returns the number of undoable commands in the previousUndoableCommands ArrayList.

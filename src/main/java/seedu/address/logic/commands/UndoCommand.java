@@ -23,7 +23,8 @@ public class UndoCommand extends Command {
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_FAILURE_UNDO_WITH_NO_UNDOABLE_COMMANDS = "There is no command to undo!";
-    public static final String MESSAGE_UNDO_DELETE_SUCCESS = "Undo Successful! Contact added back: %1$s";
+    public static final String MESSAGE_UNDO_DELETE_SUCCESS = "Undo Successful! Contact(s) added back: %1$s";
+    public static final String MESSAGE_UNDO_DELETE_FAILURE = "Undo Failure. Contact added back: %1$s";
     public static final String MESSAGE_UNDO_CLEAR_SUCCESS = "Undo Successful! All contacts have been added back!";
     public static final String MESSAGE_UNDO_ADD_SUCCESS = "Undo Successful! Deleted Person: %1$s";
     public static final String MESSAGE_UNDO_EDIT_SUCCESS = "Undo Successful! Reverted back to: %1$s";
@@ -62,12 +63,21 @@ public class UndoCommand extends Command {
      * @return returns CommandResult of the message when the undo is a success.
      */
     public CommandResult executeUndoDelete(Model model) {
+        List<Person> deletedPersons = model.getDeletedPersons(); // Get the list of deleted persons
+        int deletedSize = deletedPersons.size();
+        if (deletedPersons.isEmpty()) {
+            return new CommandResult(MESSAGE_UNDO_DELETE_FAILURE);
+        }
 
-        Person deletedPerson = model.getDeletedPerson();
-        model.undoDelete();
+        for (Person deletedPerson : deletedPersons) {
+            model.addPerson(deletedPerson); // Re-add each deleted person
+        }
+        model.clearDeletedPersons(); // Clear the list of deleted persons
         model.removePreviousUndoableCommand();
-        return new CommandResult(String.format(MESSAGE_UNDO_DELETE_SUCCESS, Messages.format(deletedPerson)));
+
+        return new CommandResult(String.format(MESSAGE_UNDO_DELETE_SUCCESS, deletedSize + " person(s)"));
     }
+
 
     /**
      * Undoes a clear command.

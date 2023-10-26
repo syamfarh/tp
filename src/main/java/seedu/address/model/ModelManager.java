@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -71,6 +72,16 @@ public class ModelManager implements Model {
     public void removeDeletedPerson() {
         int lastIndex = this.deletedPersons.size() - 1;
         this.deletedPersons.remove(lastIndex);
+    }
+
+    @Override
+    public List<Person> getDeletedPersons() {
+        return this.deletedPersons;
+    }
+
+    @Override
+    public void clearDeletedPersons() {
+        this.deletedPersons.clear();
     }
 
     @Override
