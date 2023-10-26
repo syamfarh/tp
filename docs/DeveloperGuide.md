@@ -275,13 +275,14 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                                 | So that I can…​                                                        |
-| -------- |--------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | user                                       | add a new person                                                             | add entries that I need                                                |
-| `* * *`  | user                                       | delete a person                                                              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name                                                        | locate details of persons without having to go through the entire list |
-| `* * *`  | financial advisor                          | edit contact details of clients                                              | client details are up to date                                          |
+| Priority | As a …​                                    | I want to …​                                                        | So that I can…​                                                        |
+| -------- |--------------------------------------------|---------------------------------------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | user                                       | add a new person                                                    | add entries that I need                                                |
+| `* * *`  | user                                       | delete a person                                                     | remove entries that I no longer need                                   |
+| `* * *`  | user                                       | find a person by name                                               | locate details of persons without having to go through the entire list |
+| `* * *`  | financial advisor                          | edit contact details of clients                                     | client details are up to date                                          |
 | `* *`    | impatient financial advisor                | be able to use and understand the functionalities easily through a help page | I do not have to waste too much time learning how to operate the app   |
+| `* *`    |  financial advisor                | be able to sort clients contact list              | easier to find client contact that I am looking for                    |
 
 *{More to be added}*
 
@@ -418,6 +419,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: Sort contact list**
+
+**MSS**
+
+1.  Financial Advisor requests to list persons
+2.  FAPro shows a list of persons 
+3.  Financial Advisor requests to sort contacts by a parameter
+4.  FAPro shows a sorted list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The parameter provided is invalid.
+
+    * 3b1. FAPro shows an error message: "Invalid command format!"
+
+      Use case resumes at step 2.
+
+* 3b. The parameter is specified multiple times.
+
+    * 3c1. FAPro shows an error message: "The parameter can only be specified once."
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
