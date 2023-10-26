@@ -12,14 +12,14 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Undoes a delete command, adding the deleted person back.
+ * Undoes the most recent undoable command. Undoable commands are: delete, clear, add, edit.
  */
 public class UndoCommand extends Command {
 
     public static final String COMMAND_WORD = "undo";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Undoes the deletion of a person done in the most recent command.\n"
+            + ": Undoes the most recent undoable command. Undoable commands are: delete, clear, add, edit.\n"
             + "Example: " + COMMAND_WORD;
 
     public static final String MESSAGE_FAILURE_UNDO_WITH_NO_UNDOABLE_COMMANDS = "There is no command to undo!";
