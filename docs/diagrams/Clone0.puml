@@ -1,0 +1,16 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Initial state
+
+package AddressBook {
+    class State1 as "<u>John:Person</u>"
+    class State2 as "<u>James:Person</u>"
+}
+State1 -[hidden]right-> State2
+hide State2
+
+@end
