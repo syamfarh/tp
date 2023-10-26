@@ -115,7 +115,7 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edits an existing client's parameter in FAPro.
+Edit a parameter in existing contacts, such as name, address, phone number, email, occupation, appointment date and tags.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`
 
@@ -126,7 +126,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/T
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
-Examples:
+Example commands:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
@@ -140,8 +140,16 @@ Examples:
 
 Precise expected outputs on failure:
 * If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
+
+![edit format](images/editfailuremissing.png)
+
 * If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
+
+![edit format](images/editfailureinvalid.png)
+
 * If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+
+![edit format](images/editfailuremultiple.png)
 
 ### Locating persons by name: `find`
 
