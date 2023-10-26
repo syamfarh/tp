@@ -399,14 +399,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 2.
 
-<<<<<<< HEAD
-**Use case: Find a person**
 
-**MSS**
-
-1.  Financial Advisor requests to find person(s) using a specific input
-2.  FAPro shows a list of person(s) who fits the search input
-=======
 **Use case: Clone a person**
 
 **MSS**
@@ -415,7 +408,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 2.  FAPro shows a list of persons
 3.  Financial Advisor requests to clone a specific person in the list
 4.  FAPro clones the person
->>>>>>> d625ad031f3a0183468f56439c86e8e6d92c1f4e
 
     Use case ends.
 
@@ -426,13 +418,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 1a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
       properly use the command.
 
-<<<<<<< HEAD
-      Use case resumes at step 1.
-
-* 2a. The list is empty because no contacts exist with the search input.
-
-  Use case ends.
-=======
 * 3a. The given index is invalid.
 
     * 3a1. FAPro shows an error message:  “Sorry, that value is not accepted! Please specify the index of the person you would like to clone! It should be non-negative and within the address book!”
@@ -444,7 +429,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3b1. FAPro shows an error message:  “A clone of this person already exists. To clone again, please edit the previous clone first or alternatively, clone the previous clone."
 
         Use case resumes at step 2.
->>>>>>> d625ad031f3a0183468f56439c86e8e6d92c1f4e
+
 
 **Use case: Find a person**
 
