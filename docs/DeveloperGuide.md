@@ -323,20 +323,18 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | user                                       | add a new person                                                             | add entries that I need                                                |
-| `* * *`  | user                                       | delete a person                                                              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name                                                        | locate details of persons without having to go through the entire list |
-| `* * *`  | financial advisor                          | find a person by address                                                     | line-up all my client meetings efficiently                             |
-| `* * *`  | financial advisor                          | find all contacts by appointment date                                        | see what appointments I have for that date                             |
-| `* * *`  | financial advisor                          | edit contact details of clients                                              | client details are up to date                                          |
-| `* *`    | impatient financial advisor                | be able to use and understand the functionalities easily through a help page | learn how to use the app without wasting too much time                 |
-<<<<<<< HEAD
-=======
-| `* *`    | lazy financial advisor                     | be able to clone a person                                                    | I can easily replicate contacts that are similar                       |
-| `* *`    | financial advisor                          | be able to sort clients contact list                                         | easier to find client contact that I am looking for                    |
->>>>>>> d625ad031f3a0183468f56439c86e8e6d92c1f4e
+| Priority | As a …​                          | I want to …​                          | So that I can…​                                                        |
+|----------|----------------------------------|---------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | user                             | add a new person                      | add entries that I need                                                |
+| `* * *`  | user                             | delete a person                       | remove entries that I no longer need                                   |
+| `* * *`  | user                             | find a person by name                 | locate details of persons without having to go through the entire list |
+| `* * *`  | financial advisor                | find a person by address              | line-up all my client meetings efficiently                             |
+| `* * *`  | financial advisor                | find all contacts by appointment date | see what appointments I have for that date                             |
+| `* * *`  | financial advisor                | edit contact details of clients       | client details are up to date                                          |
+| `* * *`  | financial advisor                | be able to view the help page         | quickly troubleshoot and learn how to operate the program              |
+| `* *`    | lazy financial advisor           | be able to clone a person             | I can easily replicate contacts that are similar                       |
+| `* *`    | financial advisor                | be able to sort clients contact list  | easier to find client contact that I am looking for                    |
+
 
 *{More to be added}*
 
@@ -489,14 +487,22 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         Use case resumes at step 2.
 
 
-**Use case: Display available commands**
+**Use case: Viewing help**
+
+Preconditions:
+
+* The user has opened FAPro.
+* The user is on the main application interface.
 
 **MSS**
 
-1.  Financial Advisor requests to display the list of available commands using help command
-2.  FAPro shows a help window listing all acceptable commands with their respective details
+1.  Financial Advisor requests viewing help.
+2.  FAPro shows a help window.
+3.  Financial Advisor views a list of all the main commands and a link to FAPro's 
+    user guide.
 
     Use case ends.
+
 
 **Use case: Sort contact list**
 
