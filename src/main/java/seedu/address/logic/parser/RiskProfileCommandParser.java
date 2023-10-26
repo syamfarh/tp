@@ -33,25 +33,10 @@ public class RiskProfileCommandParser implements Parser<RiskProfileCommand> {
 
         String result = argMultimap.getValue(PREFIX_RISKPROFILE).orElse("");
 
-        if (!isValidResult(result)) {
+        if (result.isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, RiskProfileCommand.MESSAGE_USAGE));
         }
 
         return new RiskProfileCommand(index, new RiskProfile(result));
-    }
-
-    private boolean isValidResult(String result) {
-        String[] characters = result.split(",");
-        if (characters.length != 8) {
-            return false;
-        }
-
-        for (String character : characters) {
-            if (!character.matches("[abcde]")) {
-                return false;
-            }
-        }
-
-        return true;
     }
 }

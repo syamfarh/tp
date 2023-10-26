@@ -20,7 +20,8 @@ import seedu.address.model.person.RiskProfile;
 public class RiskProfileCommand extends Command {
     public static final String COMMAND_WORD = "riskprofile";
     public static final String MESSAGE_ADD_RISKPROFILE_SUCCESS = "Added risk profile to Person: %1$s";
-
+    public static final String MESSAGE_INVALID_RESULT = "Result must have 8 comma-separated characters from 'a' to 'e'."
+        + "\n%1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the risk profile of the person identified "
         + "by the index number used in the last person listing. "
         + "Existing risk profile will be overwritten by the input.\n"
@@ -49,6 +50,10 @@ public class RiskProfileCommand extends Command {
 
         if (index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        }
+
+        if (!isValidResult(result.value)) {
+            throw new CommandException(String.format(MESSAGE_INVALID_RESULT, MESSAGE_USAGE));
         }
 
         int totalScore = calculateTotalScore(result.value);
@@ -178,6 +183,21 @@ public class RiskProfileCommand extends Command {
             break;
         }
         return result;
+    }
+
+    private boolean isValidResult(String result) {
+        String[] characters = result.split(",");
+        if (characters.length != 8) {
+            return false;
+        }
+
+        for (String character : characters) {
+            if (!character.matches("[abcde]")) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override

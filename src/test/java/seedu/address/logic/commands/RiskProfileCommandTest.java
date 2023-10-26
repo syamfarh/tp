@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RISKPROFILE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_RISKPROFILE_BOB;
@@ -15,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -74,6 +77,18 @@ public class RiskProfileCommandTest {
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(riskProfileCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    void execute_invalidResultInput_failure() {
+        String invalidResultInput = "abcd,e,f,a,b,a";
+        RiskProfileCommand riskProfileCommand =
+            new RiskProfileCommand(INDEX_FIRST_PERSON, new RiskProfile(invalidResultInput));
+
+        CommandException exception = assertThrows(CommandException.class, () -> riskProfileCommand.execute(model));
+
+        assertEquals(String.format(RiskProfileCommand.MESSAGE_INVALID_RESULT, RiskProfileCommand.MESSAGE_USAGE),
+            exception.getMessage());
     }
 
     @Test
