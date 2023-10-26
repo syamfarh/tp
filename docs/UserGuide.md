@@ -76,7 +76,7 @@ Format: `help`
 
 Adds a new entry to their address book for financial advisors, including personal details such as name, address, occupation, phone number and email.
 
-Precise command format:
+Format:
 * `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​`
 
 Example commands:
