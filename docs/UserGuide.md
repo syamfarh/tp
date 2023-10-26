@@ -187,18 +187,21 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-![edit format](images/deleteformat.png)
+![edit format](images/delete-UG/deleteformat.png)
 
 Precise expected outputs on success:
-* Message shown to user: "Contact x: name deleted".
+
+* Message shown to user: "Deleted Person: X", where X are the details of the deleted person.
 * Size of address book is reduced by 1.
 * GUI reflects that deleted contact is now no longer there.
 
-![edit format](images/deleteresult.png)
+![edit format](images/delete-UG/after_delete_success.png)
 
 Precise expected outputs on failure:
-* Error message shown to the user: "Sorry, that value is not accepted! Please specify the number of the contact you 
-  would like to delete! It should be a positive integer and within FAPro!"
+* Error message shown to the user: "The person index provided is invalid".
+* GUI reflects that delete is in red font.
+
+![edit format](images/delete-UG/after_delete_failure.png)
 
 ### Undoing a delete : `undo`
 
