@@ -1,7 +1,9 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -13,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -96,6 +99,23 @@ public class CloneCommandTest {
         assertFalse(cloneFirstCommand.equals(cloneSecondCommand));
     }
 
+    @Test
+    public void execute_duplicateClone_throwsCommandException() {
+        // Choose an index that exists in the filtered list
+        Index targetIndex = Index.fromOneBased(1);
+
+        // Clone the person at the selected index
+        CloneCommand cloneCommand = new CloneCommand(targetIndex);
+
+        // Execute the first clone, it should succeed
+        assertDoesNotThrow(() -> cloneCommand.execute(model));
+
+        // Now, execute the clone again, it should throw a CommandException
+        CommandException thrownException = assertThrows(CommandException.class, () -> cloneCommand.execute(model));
+
+        assertEquals(CloneCommand.MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE, thrownException.getMessage());
+    }
+
 
     @Test
     public void toStringMethod() {
@@ -131,7 +151,6 @@ public class CloneCommandTest {
      */
     private void showNoPerson(Model model) {
         model.updateFilteredPersonList(p -> false);
-
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
 }
