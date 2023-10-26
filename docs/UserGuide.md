@@ -76,12 +76,17 @@ Format: `help`
 
 Adds a new entry to their address book for financial advisors, including personal details such as name, address, occupation, phone number and email.
 
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​`
+Format:
+* `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​`
+
+Example commands:
+* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01`
+* `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567 t/Criminal`
 
 Acceptable values for each parameter:
 * Name: Valid string name.
 * Address: Valid string address. Contains postal code. (8 College Ave West, Singapore 138608).
-* Phone number: Valid string and phone number format (+65 8123 4567).
+* Phone number: Valid string and phone number format (81234567).
 * Email address: Valid string and email address format (johnd@example.com).
 * Occupation: Valid string occupation.
 * Tag: Valid string.
@@ -90,22 +95,27 @@ Acceptable values for each parameter:
 A person can have any number of tags (including 0)
 </div>
 
-Examples:
-* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01`
-* `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567 t/Criminal`
-
 ![edit format](images/addformat.png)
 
 Precise expected outputs on success:
-* Successful addition message. ‘John Doe has been added to your client list’
+* Successful addition message. ‘New Person added: X ’, where X are the details of the person added.
+* For example, for Robert Johnson (the example command), it would be: “New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: “. Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person.
 * The new entry is displayed in the address book GUI.
 
 ![edit format](images/addresult.png)
 
 Precise expected outputs on failure:
 * If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
+
+![edit format](images/addmissingparam.png)
+
 * If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
+
+![edit format](images/addinvalidemail.png)
+
 * If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+
+![edit format](images/addduplicateparam.png)
 
 ### Listing all persons : `list`
 
@@ -171,6 +181,53 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find_add geylang` returns all users whose addresses contain `geylang`
+
+### Cloning a person : `clone`
+
+Clones a contact from FAPro at the specified index.
+
+Format: `clone INDEX`
+* Clones the person at the specified `INDEX`.
+* The index refers to the index number shown in the displayed person list.
+
+Examples:
+* `list` followed by `clone 2` clones the 2nd person in the address book.
+* `find Betsy` followed by `clone 1` clones the 1st person in the results of the `find` command.
+
+Acceptable parameters for INDEX:
+* Only accept **non-negative** int values that are less than the size of the address book. Cannot be 0. Index must be for a contact that has not already been cloned.
+
+![edit format](images/cloneformat.png)
+
+Precise expected outputs on success:
+* Message shown to the user: "Cloned Person: X", where X are the details of the person who was cloned.
+* For example, if
+* "Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:" was cloned, then the output is
+* "Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags: "
+
+![edit format](images/cloneresult.png)
+
+Precise expected outputs on failure: 
+* When no index, zero or a negative index is entered next to the clone command, the error message
+* "Invalid command format!
+* clone: Clones the person identified by the index number used in the displayed person list.
+* Parameters: INDEX (must be a positive integer)."
+* is returned to the user.
+
+![edit format](images/cloneinvalidindex.png)
+
+* When the index entered is greater than the current number of contacts in the address book, the error message
+* “The person index provided is invalid.”
+* is returned to the user.
+
+![edit format](images/clonelargeindex.png)
+
+* When the person at index entered has already been cloned in FAPro, the error message
+* “A clone of this person already exists.
+* To clone again, please edit the previous clone first or alternatively, clone the previous clone.”
+* is returned to the user.
+
+![edit format](images/clonebeforeerror.png)
 
 ### Deleting a person : `delete`
 
@@ -249,10 +306,6 @@ FAPro data is saved automatically as a JSON file `[JAR file location]/data/fapro
 If your changes to the data file makes its format invalid, FAPro will discard all data and start with an empty data file at the next run. Hence, it is recommended to take a backup of the file before editing it.
 </div>
 
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
@@ -272,10 +325,11 @@ _Details coming soon ..._
 
 | Action     | Format, Examples                                                                                                                                                                          |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague` |
+| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague`  |
 | **Clear**  | `clear`                                                                                                                                                                                   |
+| **Clone**  | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                         |
 | **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                       |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                 |
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
 | **List**   | `list`                                                                                                                                                                                    |
 | **Help**   | `help`                                                                                                                                                                                    |

@@ -234,6 +234,40 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Clone feature
+
+#### Implementation
+
+The clone feature creates a copy of a person in the addressbook while only adding a number at the end of the name and maintaining all other variables. 
+
+Given below is an example usage scenario and how the clone mechanism behaves at each step.
+
+Step 1. The user executes "list" to see what Persons are available in the address book
+
+![Clone0](images/Clone0.png)
+
+Step 2. The user executes "clone 1" to clone the person at index 1 of the addressbook, John
+
+![Clone1](images/Clone1.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![CloneActivityDiagram](images/CloneActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How clone executes:**
+
+* **Alternative 1 (current choice):** Copies the person at the index provided and returns a person with a number next to their name
+  * Pros: Fast, prevents excessive copying of a person while ensuring that there are no struct duplicates
+  * Cons: Can be restrictive and time consuming, as you have to keep copying the clone if you wish to make a clone of a person
+
+* **Alternative 2:** Copies the person exactly as is while allowing for duplicates
+  * Pros: Fast, allows for as many copies of a person as the user desires
+  * Cons: Will be difficult to keep track of contacts, defeating the purpose of FAPro as a comprehensive yet focused contact organiserr
+
+_{more aspects and alternatives to be added}_
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -292,6 +326,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | financial advisor                          | find all contacts by appointment date                                        | see what appointments I have for that date                             |
 | `* * *`  | financial advisor                          | edit contact details of clients                                              | client details are up to date                                          |
 | `* *`    | impatient financial advisor                | be able to use and understand the functionalities easily through a help page | learn how to use the app without wasting too much time                 |
+| `* *`    | lazy financial advisor                     | be able to clone a person                                                    | I can easily replicate contacts that are similar                       |
+| `* *`    | financial advisor                          | be able to sort clients contact list                                         | easier to find client contact that I am looking for                    |
 
 *{More to be added}*
 
@@ -351,6 +387,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 3a. The given index is invalid.
 
     * 3a1. FAPro shows an error message:  “Sorry, that value is not accepted! Please specify the index of the person you would like to delete! It should be non-negative and within the address book!”
+
+        Use case resumes at step 2.
+
+**Use case: Clone a person**
+
+**MSS**
+
+1.  Financial Advisor requests to list persons
+2.  FAPro shows a list of persons
+3.  Financial Advisor requests to clone a specific person in the list
+4.  FAPro clones the person
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+    Use case ends.
+
+* 3a. The given index is invalid.
+
+    * 3a1. FAPro shows an error message:  “Sorry, that value is not accepted! Please specify the index of the person you would like to clone! It should be non-negative and within the address book!”
+
+        Use case resumes at step 2.
+
+* 3b. The given person has already been cloned.
+
+    * 3b1. FAPro shows an error message:  “A clone of this person already exists. To clone again, please edit the previous clone first or alternatively, clone the previous clone."
 
         Use case resumes at step 2.
 
@@ -421,6 +486,34 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
+**Use case: Sort contact list**
+
+**MSS**
+
+1.  Financial Advisor requests to list persons
+2.  FAPro shows a list of persons 
+3.  Financial Advisor requests to sort contacts by a parameter
+4.  FAPro shows a sorted list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The parameter provided is invalid.
+
+    * 3b1. FAPro shows an error message: "Invalid command format!"
+
+      Use case resumes at step 2.
+
+* 3b. The parameter is specified multiple times.
+
+    * 3c1. FAPro shows an error message: "The parameter can only be specified once."
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
@@ -489,6 +582,36 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Cloning a person
+
+1. Cloning a person whohas not been cloned while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `clone 1`<br>
+      Expected: First contact is cloned from the list. Details of the cloned contact shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `clone 0`<br>
+      Expected: No person is cloned. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect clone commands to try: `clone`, `clone x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+2. Cloning a person who has already been cloned while all persons are being shown
+
+   2. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `clone 1`<br>
+      Expected: First contact has already been cloned. Error message is returned.
+
+3. Cloning a clone while all persons are being shown
+
+   2. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `clone 1`<br>
+      Expected: The clone is cloned from the list and the number next to its name it incremented. Details of the cloned contact shown in the status message. Timestamp in the status bar is updated.
+
 
 ### Saving data
 
