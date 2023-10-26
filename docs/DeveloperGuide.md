@@ -238,6 +238,14 @@ _{more aspects and alternatives to be added}_
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Find by address feature
+
+#### Implementation
+
+The find by address/find_add feature filters the list of contacts in the address book based on their address.
+
+Given below is an example usage scenario and how the find_add feature works.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -276,12 +284,14 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
 | Priority | As a …​                                    | I want to …​                                                                 | So that I can…​                                                        |
-| -------- |--------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------|
+|----------|--------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------|
 | `* * *`  | user                                       | add a new person                                                             | add entries that I need                                                |
 | `* * *`  | user                                       | delete a person                                                              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name                                                        | locate details of persons without having to go through the entire list |
+| `* * *`  | financial advisor                          | find a person by address                                                     | line-up all my client meetings efficiently                             |
 | `* * *`  | financial advisor                          | edit contact details of clients                                              | client details are up to date                                          |
-| `* *`    | impatient financial advisor                | be able to use and understand the functionalities easily through a help page | I do not have to waste too much time learning how to operate the app   |
+| `* * *`  | financial advisor                          | edit contact details of clients                                              | client details are up to date                                          |
+| `* *`    | impatient financial advisor                | be able to use and understand the functionalities easily through a help page | learn how to use the app without wasting too much time                 |
 
 *{More to be added}*
 
@@ -408,7 +418,48 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 2.
 
-    
+**Use case: Find a person**
+
+**MSS**
+
+1.  Financial Advisor requests to find person(s) using a specific input
+2.  FAPro shows a list of person(s) who fits the search input
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The parameter is provided in an invalid format.
+
+    * 1a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to 
+            properly use the command.
+
+      Use case resumes at step 1.
+
+* 2a. The list is empty because no contacts exist with the search input.
+
+  Use case ends.
+
+**MSS**
+
+1.  Financial Advisor requests to find person(s) using a specific input
+2.  FAPro shows a list of person(s) who fits the search input
+
+    Use case ends.
+
+**Extensions**
+
+* 1a. The parameter is provided in an invalid format.
+
+    * 1a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
+      properly use the command.
+
+      Use case resumes at step 1.
+
+* 2a. The list is empty because no contacts exist with the search input.
+
+  Use case ends.
+
 **Use case: Display available commands**
 
 **MSS**
