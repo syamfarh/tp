@@ -53,7 +53,7 @@ public class UndoCommand extends Command {
         case "edit":
             return executeUndoEdit(model);
         default:
-            return null;
+            throw new AssertionError("Not an undoable command! There is an error!");
         }
     }
 
