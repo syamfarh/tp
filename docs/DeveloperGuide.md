@@ -246,6 +246,13 @@ The find by address/find_add feature filters the list of contacts in the address
 
 Given below is an example usage scenario and how the find_add feature works.
 
+Step 1. The financial adviser wants to find out all their clients living in Serangoon so that they can 
+        line up client appointments efficiently.
+
+Step 2. The financial adviser enters `find_add Serangoon` into the command box and presses enter.
+
+Step 3. A list of all contacts who have `Serangoon` in their address is listed.
+
 
 --------------------------------------------------------------------------------------------------------------------
 
