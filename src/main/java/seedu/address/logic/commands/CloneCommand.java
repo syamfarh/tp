@@ -110,14 +110,15 @@ public class CloneCommand extends Command {
 
         return clonedPerson;
     }
-    
+
     /**
      * Splits a given string into two substrings using the last space as the delimiter.
      *
      * @param input The input string to be split.
      * @return An array of two strings. The first element contains the characters before the last space,
      *         and the second element contains the characters after the last space. If there are no spaces
-     *         in the input string, the first element contains the original string, and the second element is an empty string.
+     *         in the input string, the first element contains the original string, and the second element
+     *         is an empty string.
      */
     private String[] splitStringAtLastSpace(String input) {
         int lastIndex = input.lastIndexOf(" ");
