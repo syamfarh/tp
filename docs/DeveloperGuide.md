@@ -268,6 +268,77 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Undo feature
+
+#### Implementation
+
+The `undo` feature undoes the most recent undoable command. The only undoable commands available are: `add`, `clone`, `edit`,
+`delete`, & `clear`. Commands that do not modify the address book, such as `list`, `find`, `sort` etc. are not 
+undoable commands.
+
+The undo mechanism is facilitated by the use of `ArrayLists` in `ModelManager` to store deleted persons, edited persons, 
+as well as the previous undoable commands. As such `ArrayLists` are instantiated every time the user starts the 
+program, undo does not store the commands from previous sessions and cannot undo changes made in previous sessions.
+
+The undo mechanism also changes the implementation of all the undoable commands. For all undoable commands, when they 
+are invoked, `ModelManager` will be called to store each command in an `ArrayList` named `previousUndoableCommands`. 
+Furthermore, for the `delete` and `clear` commands, each deleted person will be stored in an `ArrayList` named 
+`deletedPersons`. For the `edit` command, a `pair` of the original `person` and the edited `person` will be stored in an 
+`ArrayList` named `editedPersons`. 
+
+
+Additionally, it implements a single `execute` command which determines which type of undo operation to do based on the 
+most recent previous undoable command. The other undo operations are:
+* `UndoCommand#executeUndoDelete(Model)`
+* `UndoCommand#executeUndoClear(Model)`
+* `UndoCommand#executeUndoAdd(Model)`
+* `UndoCommand#executeUndoEdit(Model)`
+
+These operations make use of other operations exposed in the `Model` interface, which are:
+* `Model#storeDeletedPerson(Person)`
+* `Model#getDeletedPerson()`
+* `Model#removeDeletedPerson()`
+* `Model#getDeletedPersonsSize()`
+* `Model#getPreviousUndoableCommandsSize()`
+* `Model#getNumberOfPreviousDeleteCommands()`
+* `Model#undoDelete()`
+* `Model#storePreviousUndoableCommand(String)`
+* `Model#getPreviousUndoableCommand()`
+* `Model#removePreviousUndoableCommand()`
+* `Model#getAddressBookSize()`
+* `Model#storeEditedPersonsPair(Person, Person)`
+* `Model#getEditedPersonsPair()`
+* `Model#removeEditedPersonsPair()`
+
+Given below is an example usage scenario and how the undo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `ArrayList`s `previousUndoableCommands`, 
+`deletedPersons`, and `editedPersons` are initialized as a blank `ArrayList`.
+
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls 
+`Model#storePreviousUndoableCommand(String)`, adding the command as a String into `previousUndoableCommands`, and also 
+calls `Model#storeDeletedPerson(Person)`, adding the Person into `deletedPersons`.
+
+:information_source: **Note:** If an undoable command fails its execution, it will not call 
+`Model#storePreviousUndoableCommand(String)` so nothing is stored in `previousUndoableCommands`, and `ModelManager` 
+is unchanged.
+
+Step 3. The user now decides that deleting the person was a mistake, and decides to undo that action by executing 
+the `undo` command. The `undo` command will call `model#getPreviousUndoableCommand`, which gets the most recent 
+undoable command executed by the user. In this case, it is the `delete` command. Hence, `UndoCommand#executeUndoAdd
+(model)` is called, which adds back the deleted `Person` to the address book. 
+
+In the process, `Model#removePreviousUndoableCommand` is called, removing the delete command (as a String) from the  
+`ArrayList` `previousUndoableCommands`.
+
+The following sequence diagram shows how the `undo` operation and (mainly) `executeUndoAdd` operation works.
+
+Step 4. The user now decides to execute the command `list`. As this command is not an undoable command, 
+`Model#storePreviousUndoableCommand(String)` and other storing operations are not called, so `ModelManager` remains 
+unchanged.
+
+
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
@@ -323,15 +394,16 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                                 | So that I can…​                                                        |
-|----------|--------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | user                                       | add a new person                                                             | add entries that I need                                                |
-| `* * *`  | user                                       | delete a person                                                              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name                                                        | locate details of persons without having to go through the entire list |
-| `* * *`  | financial advisor                          | find a person by address                                                     | line-up all my client meetings efficiently                             |
-| `* * *`  | financial advisor                          | find all contacts by appointment date                                        | see what appointments I have for that date                             |
-| `* * *`  | financial advisor                          | edit contact details of clients                                              | client details are up to date                                          |
-| `* *`    | impatient financial advisor                | be able to use and understand the functionalities easily through a help page | learn how to use the app without wasting too much time                 |
+| Priority | As a …​                     | I want to …​                                                                 | So that I can…​                                                                          |
+|----------|-----------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------------------------|
+| `* * *`  | user                        | add a new person                                                             | add entries that I need                                                                  |
+| `* * *`  | user                        | delete a person                                                              | remove entries that I no longer need                                                     |
+| `* * *`  | user                        | find a person by name                                                        | locate details of persons without having to go through the entire list                   |
+| `* * *`  | financial advisor           | find a person by address                                                     | line-up all my client meetings efficiently                                               |
+| `* * *`  | financial advisor           | find all contacts by appointment date                                        | see what appointments I have for that date                                               |
+| `* * *`  | financial advisor           | edit contact details of clients                                              | client details are up to date                                                            |
+| `* *`    | impatient financial advisor | be able to use and understand the functionalities easily through a help page | learn how to use the app without wasting too much time                                   |
+| `* *`    | clumsy financial advisor    | be able to undo commands done previously such as delete, clear, edit, add    | undo my mistakes made with a simple command, rather than having to do multiple commands  | 
 <<<<<<< HEAD
 =======
 | `* *`    | lazy financial advisor                     | be able to clone a person                                                    | I can easily replicate contacts that are similar                       |
