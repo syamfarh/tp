@@ -136,20 +136,20 @@ Example commands:
 * Successful addition message. ‘Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], Occupation:[OCCUPATION], Address:[ADDRESS]…’
 * The new entry is displayed in the address book GUI.
 
-![edit format](images/editresult.png)
+![edit format](images/edit-UG/editresult.png)
 
 Precise expected outputs on failure:
 * If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
 
-![edit format](images/editfailuremissing.png)
+![edit format](images/edit-UG/editfailuremissing.png)
 
 * If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 
-![edit format](images/editfailureinvalid.png)
+![edit format](images/edit-UG/editfailureinvalid.png)
 
 * If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
 
-![edit format](images/editfailuremultiple.png)
+![edit format](images/edit-UG/editfailuremultiple.png)
 
 ### Locating persons by name: `find`
 
