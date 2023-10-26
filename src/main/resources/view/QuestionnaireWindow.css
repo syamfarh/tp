@@ -1,0 +1,7 @@
+#questionnaireMessage {
+    -fx-text-fill: black;
+}
+
+#questionnaireMessageMessageContainer {
+    -fx-background-color: derive(white, 20%);
+}

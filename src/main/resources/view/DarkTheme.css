@@ -350,3 +350,9 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+.risk-profile-label {
+    -fx-background-color: #FF5733; /* Set your desired background color */
+    -fx-padding: 1.5px; /* Set your desired padding */
+    -fx-background-radius: 4px;
+}

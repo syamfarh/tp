@@ -49,6 +49,8 @@ public class CommandTestUtil {
     public static final String VALID_APPOINTMENTDATE_AMY = "2023-11-20";
     public static final String VALID_APPOINTMENTDATE_BOB = "2023-11-21";
     public static final String VALID_APPOINTMENTDATE_JOHN = "2023-12-12";
+    public static final String VALID_RISKPROFILE_AMY = "a,a,b,b,b,d,e,c";
+    public static final String VALID_RISKPROFILE_BOB = "b,c,d,a,a,e,c,c";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 

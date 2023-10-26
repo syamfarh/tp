@@ -21,7 +21,7 @@
     <Scene>
       <stylesheets>
         <URL value="@DefaultTheme.css" />
-        <URL value="@Extensions.css" />
+        <URL value="@," />
       </stylesheets>
 
       <VBox>
@@ -31,6 +31,9 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
+          </Menu>
+          <Menu mnemonicParsing="false" text="Questionnaire">
+            <MenuItem fx:id="questionnaireMenuItem" mnemonicParsing="false" onAction="#handleQuestionnaire" text="Questionnaire" />
           </Menu>
         </MenuBar>
 
