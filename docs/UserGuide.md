@@ -227,9 +227,26 @@ Precise expected outputs on failure:
 
 ### Clearing all entries : `clear`
 
-Clears all entries from the address book.
+Clears all contacts in the address book.
 
 Format: `clear`
+
+Example:
+- `clear`
+
+Precise expected outputs on success:
+
+* Message shown to the user: "Address book has been cleared!".
+* GUI reflects that there are 0 contacts left.
+
+![edit-format](images/clear-UG/clear_success.png)
+
+Precise expected outputs on failure:
+
+* Message shown to the user: "Address book is empty. There is nothing to clear".
+* GUI reflects clear is in red font.
+
+![edit-format](images/clear-UG/clear_failure.png)
 
 ### Exiting the program : `exit`
 
