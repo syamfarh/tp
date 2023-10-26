@@ -176,7 +176,7 @@ Examples:
 
 Clones a contact from FAPro at the specified index.
 
-Format: `clone INDEX`
+Precise command format: `clone INDEX`
 * Clones the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 
