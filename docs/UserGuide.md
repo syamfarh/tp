@@ -102,10 +102,37 @@ Precise expected outputs on success:
 
 ![edit format](images/addresult.png)
 
-Precise expected outputs on failure:
+* Precise expected outputs on failure:
 * If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
 * If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 * If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+
+### Search by appointment day: `cal`
+
+Lists out all persons who have an appointment on the input date
+
+Format: `cal KEYWORD`
+
+* The input date has to be the exact date in YYYY-MM-DD format.
+e.g. `cal 2023-12-12` will not match `cal 12-12-2023` 
+* Only the appointment date is searched
+
+Examples:
+* `cal 2023-12-12` 
+
+![edit format](images/cal0.png)
+
+* Precise expected outputs on success:
+* Successful calendar message. “X persons listed!”, where X is the number of contacts who have the same 
+  appointment date as the input date. The list of contacts whose appointment dates match the input is listed.
+
+![edit format](images/cal1.png)
+
+* Precise expected outputs on failure:
+* If no date is input after the cal command, an error message explaining the error will be shown,
+  reminding the user to follow the correct input format.
+
+![edit format](images/cal2.png)
 
 ### Listing all persons : `list`
 
@@ -138,7 +165,7 @@ Examples:
 
 ![edit format](images/editresult.png)
 
-Precise expected outputs on failure:
+* Precise expected outputs on failure:
 * If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
 * If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 * If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
@@ -155,6 +182,20 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Only full words will be matched e.g. `Han` will not match `Hans`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
+  
+![edit format](images/find0.png)
+
+* Precise expected outputs on success:
+* Successful find message. ‘X persons listed!’’, where X is the number of contacts listed.
+  The list of contacts whose names contain the input name is shown.
+
+![edit format](images/find1.png)
+
+* Precise expected outputs on failure:
+* If no name is input after the find command, an error message explaining the error will be shown, 
+  reminding the user to follow the correct input format.
+
+![edit format](images/find2.png)
 
 ### Locating persons by address: `find_add`
 
@@ -171,6 +212,20 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Examples:
 * `find_add geylang` returns all users whose addresses contain `geylang`
+
+![edit format](images/findadd0.png)
+
+* Precise expected outputs on success:
+* Successful find message. ‘X persons listed!’’, where X is the number of contacts listed.
+  The list of contacts whose address contains the input address is shown.
+
+![edit format](images/findadd1.png)
+
+* Precise expected outputs on failure:
+* If no name is input after the find command, an error message explaining the error will be shown,
+  reminding the user to follow the correct input format.
+
+![edit format](images/findadd2.png)
 
 ### Deleting a person : `delete`
 
@@ -270,12 +325,13 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                          |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action     | Format, Examples                                                                                                                                                                         |
+|------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                                   |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                       |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
-| **List**   | `list`                                                                                                                                                                                    |
-| **Help**   | `help`                                                                                                                                                                                    |
+| **Clear**  | `clear`                                                                                                                                                                                  |
+| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                      |
+| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
+| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                               |
+| **Find Address** | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                       |
+| **List**   | `list`                                                                                                                                                                                   |
+| **Help**   | `help`                                                                                                                                                                                   |
