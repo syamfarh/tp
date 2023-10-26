@@ -2,13 +2,18 @@ package seedu.address.model;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.commons.util.ComparatorUtil.APPTCOMPARATOR;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.person.Person;
@@ -22,7 +27,10 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
-    private Person deletedPerson;
+    private final ArrayList<Person> deletedPersons;
+    private final ArrayList<Pair<Person, Person>> editedPersons;
+    private ArrayList<String> previousUndoableCommands;
+    private Comparator<Person> sortComparator;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -35,6 +43,10 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        deletedPersons = new ArrayList<>();
+        editedPersons = new ArrayList<>();
+        previousUndoableCommands = new ArrayList<>();
+        sortComparator = APPTCOMPARATOR;
     }
 
     /**
@@ -46,13 +58,73 @@ public class ModelManager implements Model {
 
     @Override
     public void storeDeletedPerson(Person deletedPerson) {
-        this.deletedPerson = deletedPerson;
+        this.deletedPersons.add(deletedPerson);
     }
 
     @Override
     public Person getDeletedPerson() {
-        return this.deletedPerson;
+        int lastIndex = deletedPersons.size() - 1;
+        return this.deletedPersons.get(lastIndex);
     }
+
+    @Override
+    public void removeDeletedPerson() {
+        int lastIndex = this.deletedPersons.size() - 1;
+        this.deletedPersons.remove(lastIndex);
+    }
+
+    @Override
+    public int getDeletedPersonsSize() {
+        return this.deletedPersons.size();
+    }
+
+    @Override
+    public int getPreviousUndoableCommandsSize() {
+        return this.previousUndoableCommands.size();
+    }
+
+    @Override
+    public int getNumberOfPreviousDeleteCommands() {
+        int occurrences = Collections.frequency(previousUndoableCommands, "delete");
+        return occurrences;
+    }
+
+    @Override
+    public void storePreviousUndoableCommand(String command) {
+        this.previousUndoableCommands.add(command);
+    }
+
+    @Override
+    public String getPreviousUndoableCommand() {
+        int lastIndex = this.getPreviousUndoableCommandsSize() - 1;
+        return this.previousUndoableCommands.get(lastIndex);
+    }
+
+    @Override
+    public void removePreviousUndoableCommand() {
+        int lastIndex = this.getPreviousUndoableCommandsSize() - 1;
+        this.previousUndoableCommands.remove(lastIndex);
+    }
+
+    @Override
+    public void storeEditedPersonsPair(Person editedPerson, Person originalPerson) {
+        Pair<Person, Person> toStore = new Pair<>(editedPerson, originalPerson);
+        editedPersons.add(toStore);
+    }
+
+    @Override
+    public Pair<Person, Person> getEditedPersonsPair() {
+        int lastIndex = editedPersons.size() - 1;
+        return editedPersons.get(lastIndex);
+    };
+
+    @Override
+    public void removeEditedPersonsPair() {
+        int lastIndex = editedPersons.size() - 1;
+        editedPersons.remove(lastIndex);
+    }
+
+
 
     //=========== UserPrefs ==================================================================================
 
@@ -127,10 +199,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void undo() {
+    public void undoDelete() {
         addressBook.addPerson(getDeletedPerson());
+        this.removeDeletedPerson();
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
+
+
+
 
 
     //=========== Filtered Person List Accessors =============================================================
@@ -141,13 +217,19 @@ public class ModelManager implements Model {
      */
     @Override
     public ObservableList<Person> getFilteredPersonList() {
-        return filteredPersons;
+        return filteredPersons.sorted(sortComparator);
     }
 
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateSortComparator(Comparator<Person> comparator) {
+        requireNonNull(comparator);
+        sortComparator = comparator;
     }
 
     @Override
@@ -165,6 +247,11 @@ public class ModelManager implements Model {
         return addressBook.equals(otherModelManager.addressBook)
                 && userPrefs.equals(otherModelManager.userPrefs)
                 && filteredPersons.equals(otherModelManager.filteredPersons);
+    }
+
+    @Override
+    public int getAddressBookSize() {
+        return addressBook.getSize();
     }
 
 }

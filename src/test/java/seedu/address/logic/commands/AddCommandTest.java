@@ -10,11 +10,13 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -24,6 +26,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyUserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
+
 
 public class AddCommandTest {
 
@@ -158,6 +161,14 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        /**
+         * @param comparator
+         */
+        @Override
+        public void updateSortComparator(Comparator<Person> comparator) {
+            throw new AssertionError("This method should not be called.");
+        }
+
         @Override
         public void storeDeletedPerson(Person deletedPerson) {
             throw new AssertionError("This method should not be called.");
@@ -169,9 +180,66 @@ public class AddCommandTest {
         }
 
         @Override
-        public void undo() {
+        public void removeDeletedPerson() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public int getDeletedPersonsSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getPreviousUndoableCommandsSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getNumberOfPreviousDeleteCommands() {
+            throw new AssertionError("This method should not be called.");
+
+        }
+
+        @Override
+        public void undoDelete() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void storePreviousUndoableCommand(String s) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public String getPreviousUndoableCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removePreviousUndoableCommand() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getAddressBookSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void storeEditedPersonsPair(Person editedPerson, Person originalPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Pair<Person, Person> getEditedPersonsPair() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeEditedPersonsPair() {
+            throw new AssertionError("This method should not be called.");
+        }
+
     }
 
     /**
@@ -197,6 +265,7 @@ public class AddCommandTest {
      */
     private class ModelStubAcceptingPersonAdded extends ModelStub {
         final ArrayList<Person> personsAdded = new ArrayList<>();
+        final ArrayList<String> previousUndoableCommands = new ArrayList<>();
 
         @Override
         public boolean hasPerson(Person person) {
@@ -208,6 +277,11 @@ public class AddCommandTest {
         public void addPerson(Person person) {
             requireNonNull(person);
             personsAdded.add(person);
+        }
+
+        @Override
+        public void storePreviousUndoableCommand(String command) {
+            previousUndoableCommands.add(command);
         }
 
         @Override

@@ -14,4 +14,6 @@ public interface ReadOnlyAddressBook {
      */
     ObservableList<Person> getPersonList();
 
+    int getSize();
+
 }
