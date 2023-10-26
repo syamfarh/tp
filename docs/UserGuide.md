@@ -190,21 +190,32 @@ Acceptable parameters for INDEX:
 ![edit format](images/cloneformat.png)
 
 Precise expected outputs on success:
-* Message shown to the user: “Cloned Person: X”, where X are the details of the person who was cloned.
-* For example, if “Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags: “ was cloned, the the output is “Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags: ”
+* Message shown to the user: "Cloned Person: X", where X are the details of the person who was cloned.
+* For example, if
+* "Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:" was cloned, then the output is
+* "Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags: "
 
 ![edit format](images/cloneresult.png)
 
 Precise expected outputs on failure: 
-* When no index, zero or a negative index is entered next to the clone command, the error message “Invalid command format! clone: Clones the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer)” is returned to the user
+* When no index, zero or a negative index is entered next to the clone command, the error message
+* "Invalid command format!
+* clone: Clones the person identified by the index number used in the displayed person list.
+* Parameters: INDEX (must be a positive integer)."
+* is returned to the user.
 
 ![edit format](images/cloneinvalidindex.png)
 
-* When the index entered is greater than the current number of contacts in the address book, the error message “The person index provided is invalid” is returned.
+* When the index entered is greater than the current number of contacts in the address book, the error message
+* “The person index provided is invalid.”
+* is returned to the user.
 
 ![edit format](images/clonelargeindex.png)
 
-* When the person at index entered has already been cloned in FAPro, the error message “A clone of this person already exists. To clone again, please edit the previous clone first or alternatively, clone the previous clone.” is returned.
+* When the person at index entered has already been cloned in FAPro, the error message
+* “A clone of this person already exists.
+* To clone again, please edit the previous clone first or alternatively, clone the previous clone.”
+* is returned to the user.
 
 ![edit format](images/clonebeforeerror.png)
 
