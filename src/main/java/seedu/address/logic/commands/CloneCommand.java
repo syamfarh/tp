@@ -50,8 +50,7 @@ public class CloneCommand extends Command {
             model.addPerson(clonedPerson);
             return new CommandResult(String.format(MESSAGE_CLONE_PERSON_SUCCESS, Messages.format(personToClone)));
         } catch (DuplicatePersonException e) {
-            System.out.println("");
-            return new CommandResult(String.format(MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE));
+            throw new CommandException(String.format(MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE));
         }
     }
 
