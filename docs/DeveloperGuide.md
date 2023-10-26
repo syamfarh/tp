@@ -289,7 +289,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* * *`  | user                                       | delete a person                                                              | remove entries that I no longer need                                   |
 | `* * *`  | user                                       | find a person by name                                                        | locate details of persons without having to go through the entire list |
 | `* * *`  | financial advisor                          | find a person by address                                                     | line-up all my client meetings efficiently                             |
-| `* * *`  | financial advisor                          | edit contact details of clients                                              | client details are up to date                                          |
+| `* * *`  | financial advisor                          | find all contacts by appointment date                                        | see what appointments I have for that date                             |
 | `* * *`  | financial advisor                          | edit contact details of clients                                              | client details are up to date                                          |
 | `* *`    | impatient financial advisor                | be able to use and understand the functionalities easily through a help page | learn how to use the app without wasting too much time                 |
 
@@ -354,34 +354,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 2.
 
-**Use case: Find persons**
+**Use case: Find a person**
 
 **MSS**
 
-1.  Financial Advisor requests to list persons
-2.  FAPro shows a list of persons
-3.  Financial Advisor requests to find a specific person in the list by name
-4.  FAPro displays the list of matching persons
+1.  Financial Advisor requests to find person(s) using a specific input
+2.  FAPro shows a list of person(s) who fits the search input
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The parameter is provided in an invalid format.
 
-    Use case ends.
+    * 1a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
+      properly use the command.
 
-* 3a. The given name is invalid.
+      Use case resumes at step 1.
 
-    * 3a1. FAPro shows an error message: "Illegal Input!"
+* 2a. The list is empty because no contacts exist with the search input.
 
-        Use case resumes at step 2.
-  
-* 3b. There are no results found.
-
-    * 3b1. FAPro shows an error message: "0 persons listed!"
-
-        Use case resumes at step 2.
+  Use case ends.
 
 **Use case: Edit a person**
 
@@ -418,47 +411,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 2.
 
-**Use case: Find a person**
-
-**MSS**
-
-1.  Financial Advisor requests to find person(s) using a specific input
-2.  FAPro shows a list of person(s) who fits the search input
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The parameter is provided in an invalid format.
-
-    * 1a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to 
-            properly use the command.
-
-      Use case resumes at step 1.
-
-* 2a. The list is empty because no contacts exist with the search input.
-
-  Use case ends.
-
-**MSS**
-
-1.  Financial Advisor requests to find person(s) using a specific input
-2.  FAPro shows a list of person(s) who fits the search input
-
-    Use case ends.
-
-**Extensions**
-
-* 1a. The parameter is provided in an invalid format.
-
-    * 1a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
-      properly use the command.
-
-      Use case resumes at step 1.
-
-* 2a. The list is empty because no contacts exist with the search input.
-
-  Use case ends.
 
 **Use case: Display available commands**
 
