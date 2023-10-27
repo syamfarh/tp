@@ -132,9 +132,9 @@ A list of all contacts with their details will be shown.
 
 ### Editing a person : `edit`
 
-Edits an existing client's parameter in FAPro.
+Edit a parameter in existing contacts, such as name, address, phone number, email, occupation, appointment date, and tags.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`
+Precise command format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [appt/APPOINTMENTDATE] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -143,22 +143,30 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/T
 * You can remove all the person’s tags by typing `t/` without
     specifying any tags after it.
 
-Examples:
+Example commands:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-![edit format](images/editformat.png)
+![edit format](images/edit-UG/editformat.png)
 
 * Precise expected outputs on success:
 * Successful addition message. ‘Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], Occupation:[OCCUPATION], Address:[ADDRESS]…’
 * The new entry is displayed in the address book GUI.
 
-![edit format](images/editresult.png)
+![edit format](images/edit-UG/editresult.png)
 
 Precise expected outputs on failure:
 * If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
+
+![edit format](images/edit-UG/editfailuremissing.png)
+
 * If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
+
+![edit format](images/edit-UG/editfailureinvalid.png)
+
 * If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+
+![edit format](images/edit-UG/editfailuremultiple.png)
 
 ### Locating persons by name: `find`
 
@@ -361,6 +369,32 @@ For undoing an edit command:
 
 ![edit format](images/undo-UG/undo_fail.png)
 
+### Sorting contacts : `sort`
+
+Sort contact lists by parameter name or appointment date.
+
+Precise command format: `undo parameter`
+
+Example commands:
+* `sort n/`
+
+Acceptable parameters:
+* `n/` sort by Name parameter
+* `appt/` sort by Appointment Date parameter
+
+![edit format](images/sort-UG/sortformat.png)
+
+Precise expected output on success:
+* Successful addition message. 'X person listed!', where X are the number of clients in the address book.
+* The sorted entry is displayed in the address book GUI.
+
+![edit format](images/sort-UG/sortresult.png)
+
+Precise expected outputs on failure:
+* If a required parameter is missing, an error message should indicate the invalid format. 
+* If a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
+
+![edit format](images/sort-UG/sortfailuremissing.png)
 
 ### Clearing all entries : `clear`
 
