@@ -35,6 +35,9 @@
           <Menu mnemonicParsing="false" text="Questionnaire">
             <MenuItem fx:id="questionnaireMenuItem" mnemonicParsing="false" onAction="#handleQuestionnaire" text="Questionnaire" />
           </Menu>
+          <Menu mnemonicParsing="false" text="Calendar">
+            <MenuItem fx:id="calendarItem" mnemonicParsing="false" onAction="#handleCalendar" text="Calendar" />
+          </Menu>
         </MenuBar>
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">
