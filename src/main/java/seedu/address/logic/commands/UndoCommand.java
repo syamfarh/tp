@@ -64,18 +64,30 @@ public class UndoCommand extends Command {
      */
     public CommandResult executeUndoDelete(Model model) {
         List<Person> deletedPersons = model.getDeletedPersons(); // Get the list of deleted persons
-        int deletedSize = deletedPersons.size();
-        if (deletedPersons.isEmpty()) {
+        String deletedPersonsDetails = Messages.formatPersons(deletedPersons);
+
+        if (deletedPersons.isEmpty() || model.getDeletedNumberList().isEmpty()) {
             return new CommandResult(MESSAGE_UNDO_DELETE_FAILURE);
         }
 
-        for (Person deletedPerson : deletedPersons) {
-            model.addPerson(deletedPerson); // Re-add each deleted person
+        int numberOfDeletes = model.getLastDeletedNumber();
+        while (numberOfDeletes > 0) {
+            for (Person deletedPerson : deletedPersons.subList(deletedPersons.size() - numberOfDeletes, deletedPersons.size() - 1)) {
+                model.addPerson(deletedPerson);
+                model.removeDeletedPerson();
+                model.removePreviousUndoableCommand();
+                numberOfDeletes--;
+                if (numberOfDeletes == 0) {
+                    break; // Exit the loop when numberOfDeletes reaches 0
+                }
+            }
         }
-        model.clearDeletedPersons(); // Clear the list of deleted persons
-        model.removePreviousUndoableCommand();
 
-        return new CommandResult(String.format(MESSAGE_UNDO_DELETE_SUCCESS, deletedSize + " person(s)"));
+        model.removeLastNumber();
+
+        String resultMessage = String.format(MESSAGE_UNDO_DELETE_SUCCESS, deletedPersonsDetails);
+
+        return new CommandResult(resultMessage);
     }
 
 
@@ -103,7 +115,7 @@ public class UndoCommand extends Command {
         int lastIndex = model.getAddressBookSize() - 1;
         Person personToDelete = lastShownList.get(lastIndex);
         model.deletePerson(personToDelete);
-
+        model.removePreviousUndoableCommand();
         return new CommandResult(String.format(MESSAGE_UNDO_ADD_SUCCESS, Messages.format(personToDelete)));
     }
 

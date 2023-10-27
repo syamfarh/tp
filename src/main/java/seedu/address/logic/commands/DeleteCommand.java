@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -44,7 +45,10 @@ public class DeleteCommand extends Command {
             if (zeroBasedIndex >= lastShownList.size() || zeroBasedIndex < 0) {
                 throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
             }
+        }
 
+        for (Index targetIndex : targetIndexes) {
+            int zeroBasedIndex = targetIndex.getZeroBased() - currentIndex;
             Person personToDelete = lastShownList.get(zeroBasedIndex);
             model.deletePerson(personToDelete);
             model.storePreviousUndoableCommand(COMMAND_WORD);
@@ -53,7 +57,10 @@ public class DeleteCommand extends Command {
             currentIndex++;
         }
 
-        return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS, deletedPersons.size() + " persons"));
+        model.storeDeletedNumberList(targetIndexes.size());
+        String resultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.formatPersons(deletedPersons));
+
+        return new CommandResult(resultMessage);
     }
 
     @Override

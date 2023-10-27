@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.jupiter.api.Test;
@@ -180,7 +181,17 @@ public class AddCommandTest {
         }
 
         @Override
+        public ArrayList<Person> getDeletedPersons() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void removeDeletedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void clearDeletedPersons() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -195,9 +206,28 @@ public class AddCommandTest {
         }
 
         @Override
+        public void removeLastNumber() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Integer> getDeletedNumberList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Integer getLastDeletedNumber() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int getNumberOfPreviousDeleteCommands() {
             throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void storeDeletedNumberList(int deletedNumber) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override

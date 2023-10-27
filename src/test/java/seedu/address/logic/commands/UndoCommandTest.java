@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showPersonAtIndex;
@@ -8,7 +9,11 @@ import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_ADD_SUCCESS;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_CLEAR_SUCCESS;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_DELETE_SUCCESS;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_EDIT_SUCCESS;
+import static seedu.address.testutil.TypicalIndexes.FIRST_INDEXES;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.BOB;
+import static seedu.address.testutil.TypicalPersons.CARL;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -21,6 +26,7 @@ import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
+import seedu.address.testutil.TypicalPersons;
 
 
 public class UndoCommandTest {
@@ -45,6 +51,7 @@ public class UndoCommandTest {
         model.storePreviousUndoableCommand("delete");
         assertCommandSuccess(undoCommand, model, expectedResult, expectedModel);
     }
+
 
     @Test
     public void execute_undoClear_success() throws CommandException {
