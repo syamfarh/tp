@@ -65,12 +65,14 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 ### Viewing help: `help`
 
-Shows a help window that lists all the main commands with their respective details and displays the link for more detailed 
-user guide.
+Shows a message listing all the main commands and explaining how to access the user guide.
+
+Precise command format: `help`
+
+Precise expected outcome on success: 
+A pop-up of a new window that lists out all the main commands with their respective details and displays a link to FAPro’s user guide.
 
 ![help window](images/helpWindow.png)
-
-Format: `help`
 
 ### Adding a person: `add`
 
@@ -117,11 +119,16 @@ Precise expected outputs on failure:
 
 ![edit format](images/addduplicateparam.png)
 
-### Listing all persons : `list`
+### List out all contacts : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts.
 
-Format: `list`
+Precise command format: `list`
+
+Precise expected outputs on success:
+A list of all contacts with their details will be shown.
+
+![list format](images/listResult.png)
 
 ### Editing a person : `edit`
 
@@ -307,9 +314,13 @@ Precise expected outputs on failure:
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the application.
 
-Format: `exit`
+Precise command format: `exit`
+
+Precise expected outcome on success:
+The FAPro application will be closed.
+
 
 ### Saving the data
 
