@@ -62,7 +62,7 @@
     "email" : "john@example.com",
     "occupation" : "Chef",
     "address" : "Block 222, John Street 2",
-    "appointmentDate" :  "2023-12-12",
+    "appointmentDate" :  "2023-12-12 08:30",
     "tags" : [ ]
   } ]
 }
