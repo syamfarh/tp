@@ -359,3 +359,41 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#cardPane #riskProfile{
+    -fx-padding: 2px;
+    -fx-background-radius: 3px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+#cardPane .lowRisk {
+     -fx-background-color: #4CAF50;
+}
+
+#cardPane .moderatelyLowRisk {
+     -fx-background-color: #2196F3;
+}
+
+#cardPane .moderateRisk {
+     -fx-background-color: #FFC107;
+}
+
+#cardPane .moderatelyHighRisk {
+     -fx-background-color: #FF6600;
+}
+
+#cardPane .highRisk {
+     -fx-background-color: #F44336;
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -7,6 +7,7 @@
     "occupation" : "Barber",
     "address" : "123, Jurong West Ave 6, #08-111",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -15,6 +16,7 @@
     "occupation" : "Musician",
     "address" : "311, Clementi Ave 2, #02-25",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +25,7 @@
     "occupation" : "Sheep Farmer",
     "address" : "wall street",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -31,6 +34,7 @@
     "occupation" : "Lecturer",
     "address" : "10th street",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -39,6 +43,7 @@
     "occupation" : "Seamstress",
     "address" : "michegan ave",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -47,6 +52,7 @@
     "occupation" : "Princess",
     "address" : "little tokyo",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -55,6 +61,7 @@
     "address" : "4th street",
     "occupation" : "Zoologist",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags" : [ ]
   }, {
     "name" : "John Doe",
@@ -63,6 +70,7 @@
     "occupation" : "Chef",
     "address" : "Block 222, John Street 2",
     "appointmentDate" :  "2023-12-12 08:30",
+    "riskProfile" : "",
     "tags" : [ ]
   } ]
 }
