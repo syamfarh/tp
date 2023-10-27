@@ -51,7 +51,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Occupation occupation = ParserUtil.parseOccupation(argMultimap.getValue(PREFIX_OCCUPATION).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        AppointmentDate apptDate = new AppointmentDate("");
         RiskProfile riskProfile = new RiskProfile("");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         AppointmentDate apptDate = ParserUtil.parseAppointmentDates(argMultimap.getAllValues(PREFIX_APPOINTMENTDATE));
