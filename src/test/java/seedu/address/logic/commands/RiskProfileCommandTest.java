@@ -81,7 +81,7 @@ public class RiskProfileCommandTest {
 
     @Test
     void execute_invalidResultInput_failure() {
-        String invalidResultInput = "abcd,e,f,a,b,a";
+        String invalidResultInput = "abcd,e,f,a,b";
         RiskProfileCommand riskProfileCommand =
             new RiskProfileCommand(INDEX_FIRST_PERSON, new RiskProfile(invalidResultInput));
 
@@ -89,6 +89,32 @@ public class RiskProfileCommandTest {
 
         assertEquals(String.format(RiskProfileCommand.MESSAGE_INVALID_RESULT, RiskProfileCommand.MESSAGE_USAGE),
             exception.getMessage());
+    }
+
+    @Test
+    public void calculateRiskLevel_boundaryTotalScore_success() {
+        assertEquals("Low", RiskProfileCommand.calculateRiskLevel(8));
+        assertEquals("Moderately Low", RiskProfileCommand.calculateRiskLevel(16));
+        assertEquals("Moderate", RiskProfileCommand.calculateRiskLevel(24));
+        assertEquals("Moderately High", RiskProfileCommand.calculateRiskLevel(32));
+        assertEquals("High", RiskProfileCommand.calculateRiskLevel(40));
+    }
+
+    @Test
+    public void calculateRiskLevel_invalidTotalScore_returnsEmptyString() {
+        assertEquals("", RiskProfileCommand.calculateRiskLevel(0));
+        assertEquals("", RiskProfileCommand.calculateRiskLevel(41));
+    }
+
+    @Test
+    public void isValidResult_invalidResultLength_failure() {
+        assertFalse(RiskProfileCommand.isValidResult("a,b,c,d"));
+        assertFalse(RiskProfileCommand.isValidResult("a,b,c,d,e,d,b,c,a"));
+    }
+
+    @Test
+    public void isValidResult_invalidResultCharacter_failure() {
+        assertFalse(RiskProfileCommand.isValidResult("a,b,c,d,e,f,g,h"));
     }
 
     @Test

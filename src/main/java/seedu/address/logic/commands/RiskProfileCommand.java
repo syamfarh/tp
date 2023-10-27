@@ -185,7 +185,7 @@ public class RiskProfileCommand extends Command {
         return result;
     }
 
-    private boolean isValidResult(String result) {
+    public static boolean isValidResult(String result) {
         String[] characters = result.split(",");
         if (characters.length != 8) {
             return false;
