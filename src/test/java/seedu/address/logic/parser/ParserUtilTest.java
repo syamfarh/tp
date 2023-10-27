@@ -27,6 +27,8 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_APPOINTMENTDATE_FORMAT = "20/11/2000";
     private static final String INVALID_APPOINTMENTDATE_CURRENTDATE = "2000-11-20";
+
+    private static final String INVALID_APPOINTMENTDATE_CURRENTDATE2 = "2000-11-20 23:00";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_NAME = "Rachel Walker";
@@ -159,6 +161,11 @@ public class ParserUtilTest {
     @Test
     public void parseAppointmentDate_invalidCurrentDate_throwsParseException() throws Exception {
         assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(INVALID_APPOINTMENTDATE_CURRENTDATE));
+    }
+
+    @Test
+    public void parseAppointmentDate_invalidCurrentDate2_throwsParseException() throws Exception {
+        assertThrows(ParseException.class, () -> ParserUtil.parseAppointmentDate(INVALID_APPOINTMENTDATE_CURRENTDATE2));
     }
 
     @Test

@@ -37,6 +37,7 @@ class AppointmentDateTest {
     public void isValidCurrentDate() {
         assertTrue(AppointmentDate.isValidCurrentDate("2050-11-20 23:00"));
         assertFalse(AppointmentDate.isValidCurrentDate("2000-11-20 23:00"));
+        assertFalse(AppointmentDate.isValidCurrentDate("2000-11-20"));
     }
 
     @Test
