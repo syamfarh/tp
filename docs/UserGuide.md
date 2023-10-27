@@ -254,7 +254,7 @@ For undoing a delete command:
 
 ![edit format](images/undo-UG/after_delete_1.png)
 
-* Undo .
+* Undo.
 * Message shown to the user: "Undo Successful! Contact added back: X", where X are the details of the person who was 
   just deleted, and now added back.
 * GUI reflects that the most recently deleted contact is added back.
