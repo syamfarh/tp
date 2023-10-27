@@ -117,9 +117,8 @@ Precise expected outputs on success:
 
 * If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
 
-<<<<<<< HEAD
 ![edit format](images/addduplicateparam.png)
-=======
+
 ### Search by appointment day: `cal`
 
 Lists out all persons who have an appointment on the input date.
@@ -297,7 +296,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 
 Finds persons whose address contain any of the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `find_add KEYWORD [MORE_KEYWORDS]`
 
 * The search is case-insensitive. e.g `tokyo` will match `Tokyo`.
 * The order of the keywords does not matter. e.g. `Little Tokyo` will match `Tokyo Little`.
