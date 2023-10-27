@@ -1,6 +1,8 @@
 package seedu.address.model.person;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
@@ -25,5 +27,9 @@ public class RiskProfileTest {
         // different result -> returns false
         RiskProfile differentResult = new RiskProfile("d,e,c,c,c,e,b,a");
         assertFalse(result.equals(differentResult));
+
+        // Test hashCode()
+        assertEquals(result.hashCode(), resultCopy.hashCode());
+        assertNotEquals(result.hashCode(), differentResult.hashCode());
     }
 }
