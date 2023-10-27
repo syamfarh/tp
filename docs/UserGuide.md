@@ -416,6 +416,32 @@ For undoing an edit command:
 
 ![edit format](images/undo-UG/undo_fail.png)
 
+### Sorting contacts : `sort`
+
+Sort contact lists by parameter name or appointment date.
+
+Precise command format: `undo parameter`
+
+Example commands:
+* `sort n/`
+
+Acceptable parameters:
+* `n/` sort by Name parameter
+* `appt/` sort by Appointment Date parameter
+
+![edit format](images/sort-UG/sortformat.png)
+
+Precise expected output on success:
+* Successful addition message. 'X person listed!', where X are the number of clients in the address book.
+* The sorted entry is displayed in the address book GUI.
+
+![edit format](images/sort-UG/sortresult.png)
+
+Precise expected outputs on failure:
+* If a required parameter is missing, an error message should indicate the invalid format. 
+* If a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
+
+![edit format](images/sort-UG/sortfailuremissing.png)
 
 ### Clearing all entries : `clear`
 
