@@ -15,7 +15,8 @@ import seedu.address.logic.parser.DateTimeParser;
 public class AppointmentDate implements Comparable<AppointmentDate> {
 
     public static final String MESSAGE_CONSTRAINTS_FORMAT =
-            "Appointment Date should follow the format of [mm/dd/yyyy HH:mm] or [dd-mm-yyyy HH:mm] or [yyyy-mm-dd HH:mm]";
+            "Appointment Date should follow the format of "
+                    + "[mm/dd/yyyy HH:mm] or [dd-mm-yyyy HH:mm] or [yyyy-mm-dd HH:mm]";
 
     public static final String MESSAGE_CONSTRAINTS_CURRENTDATE =
             "Appointment Date should be after the current date";

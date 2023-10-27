@@ -133,10 +133,13 @@ public class ParserUtil {
         return new AppointmentDate(DateTimeParser.convertDate(date));
     }
 
-    public static AppointmentDate parseAppointmentDates(Collection<String> tags) throws ParseException {
-        requireNonNull(tags);
+    /**
+     * Parses {@code Collection<String> appointmentDate} into a {@code AppointmentDate}.
+     */
+    public static AppointmentDate parseAppointmentDates(Collection<String> appt) throws ParseException {
+        requireNonNull(appt);
         final Set<Tag> tagSet = new HashSet<>();
-        for (String tagName : tags) {
+        for (String tagName : appt) {
             return parseAppointmentDate(tagName);
         }
 
