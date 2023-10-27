@@ -152,7 +152,7 @@ public class JsonAdaptedPersonTest {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
                         .withAppointmentDate("").withEmail("hans@example.com").withOccupation("Chef")
-                        .withAppointmentDate("20-11-2000").withAddress("chicago ave").build());
+                        .withAppointmentDate("20-11-2000 23:00").withAddress("chicago ave").build());
         String expectedMessage = AppointmentDate.MESSAGE_CONSTRAINTS_FORMAT;
         assertEquals(new PersonBuilder().withName("Ida Mueller").withPhone("8482131")
                 .withAppointmentDate("").withEmail("hans@example.com").withOccupation("Chef")

@@ -45,10 +45,10 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_ADDRESS_JOHN = "Block 222, John Street 2";
-
-    public static final String VALID_APPOINTMENTDATE_AMY = "2023-11-20";
-    public static final String VALID_APPOINTMENTDATE_BOB = "2023-11-21";
-    public static final String VALID_APPOINTMENTDATE_JOHN = "2023-12-12";
+  
+    public static final String VALID_APPOINTMENTDATE_AMY = "2023-11-20 08:30";
+    public static final String VALID_APPOINTMENTDATE_BOB = "2023-11-21 08:30";
+    public static final String VALID_APPOINTMENTDATE_JOHN = "2023-12-12 08:30";
     public static final String VALID_RISKPROFILE_AMY = "a,a,b,b,b,d,e,c";
     public static final String VALID_RISKPROFILE_BOB = "b,c,d,a,a,e,c,c";
     public static final String VALID_TAG_HUSBAND = "husband";
