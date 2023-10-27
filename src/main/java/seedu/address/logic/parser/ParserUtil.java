@@ -133,6 +133,16 @@ public class ParserUtil {
         return new AppointmentDate(DateTimeParser.convertDate(date));
     }
 
+    public static AppointmentDate parseAppointmentDates(Collection<String> tags) throws ParseException {
+        requireNonNull(tags);
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : tags) {
+            return parseAppointmentDate(tagName);
+        }
+
+        return parseAppointmentDate("");
+    }
+
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
