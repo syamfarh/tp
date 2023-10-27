@@ -4,6 +4,8 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javafx.util.Pair;
 import seedu.address.logic.Messages;
@@ -28,6 +30,7 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_ADD_SUCCESS = "Undo Successful! Deleted Person: %1$s";
     public static final String MESSAGE_UNDO_EDIT_SUCCESS = "Undo Successful! Reverted back to: %1$s";
 
+    private static Logger logger = Logger.getLogger("UndoCommand");
 
     /**
      * Constructor for UndoCommand is empty.
@@ -44,13 +47,17 @@ public class UndoCommand extends Command {
 
         switch(model.getPreviousUndoableCommand()) {
         case "delete":
+            logger.log(Level.INFO, "case: delete");
             return executeUndoDelete(model);
         case "clear":
+            logger.log(Level.INFO, "case: clear");
             return executeUndoClear(model);
         case "add":
         case "clone":
+            logger.log(Level.INFO, "case: add");
             return executeUndoAdd(model);
         case "edit":
+            logger.log(Level.INFO, "case: edit");
             return executeUndoEdit(model);
         default:
             throw new AssertionError("Not an undoable command! There is an error!");
