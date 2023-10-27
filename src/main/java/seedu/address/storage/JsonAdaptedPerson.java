@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.parser.DateParser;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.Email;
@@ -131,7 +130,7 @@ class JsonAdaptedPerson {
         } else if (!AppointmentDate.isValidCurrentDate(appointmentDate)) {
             modelAppointmentDate = new AppointmentDate("");
         } else {
-            modelAppointmentDate = new AppointmentDate(DateParser.convertDate(appointmentDate).toString());
+            modelAppointmentDate = new AppointmentDate(appointmentDate);
         }
 
 
