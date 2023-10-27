@@ -87,6 +87,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
+        assert helpMessage != null : "helpMessage must be initialized";
         helpMessage.setText(HELP_MESSAGE);
     }
 
