@@ -21,6 +21,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Occupation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RiskProfile;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -50,10 +51,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         Occupation occupation = ParserUtil.parseOccupation(argMultimap.getValue(PREFIX_OCCUPATION).get());
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        RiskProfile riskProfile = new RiskProfile("");
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
         AppointmentDate apptDate = ParserUtil.parseAppointmentDates(argMultimap.getAllValues(PREFIX_APPOINTMENTDATE));
 
-        Person person = new Person(name, phone, email, occupation, address, apptDate, tagList);
+        Person person = new Person(name, phone, email, occupation, address, apptDate, riskProfile, tagList);
 
         return new AddCommand(person);
     }

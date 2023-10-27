@@ -6,6 +6,7 @@
     "occupation": "Barber",
     "address": "123, Jurong West Ave 6, #08-111",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags": [ "friends" ]
   }, {
     "name": "Alice Pauline",
@@ -13,6 +14,7 @@
     "email": "pauline@example.com",
     "occupation": "Barber",
     "appointmentDate" : "",
-    "address": "4th street"
+    "address": "4th street",
+    "riskProfile" : ""
   } ]
 }

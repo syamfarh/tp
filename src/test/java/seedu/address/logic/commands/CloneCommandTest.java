@@ -142,7 +142,7 @@ public class CloneCommandTest {
         Name clonedName = new Name(nameWithoutNumbers + " " + updatedNumericSuffixStr);
         Person clonedPerson = new Person(clonedName, personToClone.getPhone(), personToClone.getEmail(),
                 personToClone.getOccupation(), personToClone.getAddress(), personToClone.getApptDate(),
-                personToClone.getTags());
+                personToClone.getRiskProfile(), personToClone.getTags());
         return clonedPerson;
     }
 

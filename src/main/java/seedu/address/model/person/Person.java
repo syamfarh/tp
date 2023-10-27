@@ -26,6 +26,7 @@ public class Person {
     private final Address address;
 
     private final AppointmentDate apptDate;
+    private final RiskProfile riskProfile;
 
     private final Set<Tag> tags = new HashSet<>();
 
@@ -33,7 +34,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Occupation occupation, Address address,
-                  AppointmentDate apptDate, Set<Tag> tags) {
+                  AppointmentDate apptDate, RiskProfile result, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, occupation, address, tags);
         this.name = name;
         this.phone = phone;
@@ -41,6 +42,7 @@ public class Person {
         this.occupation = occupation;
         this.address = address;
         this.apptDate = apptDate;
+        this.riskProfile = result;
         this.tags.addAll(tags);
     }
 
@@ -66,6 +68,9 @@ public class Person {
 
     public AppointmentDate getApptDate() {
         return apptDate;
+    }
+    public RiskProfile getRiskProfile() {
+        return riskProfile;
     }
 
     /**
@@ -129,6 +134,7 @@ public class Person {
                 .add("occupation", occupation)
                 .add("address", address)
                 .add("appointmentDate", apptDate)
+                .add("riskProfile", riskProfile)
                 .add("tags", tags)
                 .toString();
     }
