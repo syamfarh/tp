@@ -65,12 +65,14 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 ### Viewing help: `help`
 
-Shows a help window that lists all the main commands with their respective details and displays the link for more detailed 
-user guide.
+Shows a message listing all the main commands and explaining how to access the user guide.
+
+Precise command format: `help`
+
+Precise expected outcome on success: 
+A pop-up of a new window that lists out all the main commands with their respective details and displays a link to FAPro’s user guide.
 
 ![help window](images/helpWindow.png)
-
-Format: `help`
 
 ### Adding a person: `add`
 
@@ -117,11 +119,16 @@ Precise expected outputs on failure:
 
 ![edit format](images/addduplicateparam.png)
 
-### Listing all persons : `list`
+### List out all contacts : `list`
 
-Shows a list of all persons in the address book.
+Shows a list of all contacts.
 
-Format: `list`
+Precise command format: `list`
+
+Precise expected outputs on success:
+A list of all contacts with their details will be shown.
+
+![list format](images/listResult.png)
 
 ### Editing a person : `edit`
 
@@ -244,42 +251,115 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-![edit format](images/deleteformat.png)
+![edit format](images/delete-UG/deleteformat.png)
 
 Precise expected outputs on success:
-* Message shown to user: "Contact x: name deleted".
+
+* Message shown to user: "Deleted Person: X", where X are the details of the deleted person.
 * Size of address book is reduced by 1.
 * GUI reflects that deleted contact is now no longer there.
 
-![edit format](images/deleteresult.png)
+![edit format](images/delete-UG/after_delete_success.png)
 
 Precise expected outputs on failure:
-* Error message shown to the user: "Sorry, that value is not accepted! Please specify the number of the contact you 
-  would like to delete! It should be a positive integer and within FAPro!"
+* Error message shown to the user: "The person index provided is invalid".
+* GUI reflects that delete is in red font.
 
-### Undoing a delete : `undo`
+![edit format](images/delete-UG/after_delete_failure.png)
 
-Undoes a single delete done previously. 
+### Undoing a command : `undo`
+
+Undoes the most recent undoable command. Undoable commands include: add, clone, delete, clear, edit.
 
 Format: `undo`
 
-First, delete a contact. This assumes there are contacts to delete.
+Examples:
+* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` followed by `undo` will 
+  delete the added contact.
+* `clone 1`, assuming there is a contact to clone, followed by `undo` will delete the cloned contact.
+* `delete 1`, assuming there is a contact to delete, followed by `undo` will add the contact back.
+* `clear`, assuming there is at least one contact to clear, followed by `undo` will add all cleared contacts back.
+* `edit 1 p/91234567`, assuming there is a contact to edit, followed by `undo` will revert the edit of the contact.
+* Assuming there are 3 contacts, `delete 1`, which deletes the first contact, followed by `clear`, which clears the 
+  remaining 2 contacts, followed by `undo` will only add the 2 cleared contacts back. A subsequent `undo` will add 
+  back the contact deleted.
+* `edit 1 p/91234567`, assuming there is a contact to edit, edits the first contact, followed by `delete 1`, deletes 
+  the first contact. Then, `undo` will add back the deleted contact, and the next `undo` will revert the edit of the 
+  contact (which was also just added back).
 
-![edit format](images/undo-UG/one_contact_GUI.png)
+#### Precise expected outputs on success:
+
+For undoing an add command:
+
+* Add a contact.
+
+![edit format](images/undo-UG/after_add_scrolled_down.png)
+
+* Undo.
+* Message shown to the user: "Undo Successful! Deleted Person: X", where X are the details of the person who was 
+  just added, and now deleted.
+* GUI reflects that the most recently added contact is deleted.
+
+![edit format](images/undo-UG/after_add_undo_scrolled_down.png)
+
+For undoing a clone command:
+
+* Clone a contact.
+
+![edit format](images/undo-UG/after_clone_1_scrolled_down.png)
+
+* Undo.
+* Message shown to the user: "Undo Successful! Deleted Person: X", where X are the details of the person who was 
+  just cloned, and now deleted.
+* GUI reflects that the most recently cloned contact is deleted.
+
+![edit format](images/undo-UG/after_clone_undo_scrolled_down.png)
+
+For undoing a delete command:
+
+* Delete a contact.
 
 ![edit format](images/undo-UG/after_delete_1.png)
 
-Then, undo the delete.
+* Undo.
+* Message shown to the user: "Undo Successful! Contact added back: X", where X are the details of the person who was 
+  just deleted, and now added back.
+* GUI reflects that the most recently deleted contact is added back.
 
-![edit format](images/undo-UG/undo_successful.png)
-Precise expected output on success:
-* Message shown to user: "Undo Successful!"
-* Size of address book increased by 1.
-* GUI reflects that most recently deleted contact is added.
+![edit format](images/undo-UG/after_delete_undo_scrolled_down.png)
+
+For undoing a clear command:
+
+* Clear all contacts.
+
+![edit format](images/undo-UG/after_clear.png)
+
+* Undo.
+* Message shown to the user: "Undo Successful! ALl contacts have been added back!".
+* GUI reflects that all cleared contacts are added back.
+
+![edit format](images/undo-UG/after_clear_undo.png)
+
+For undoing an edit command:
+
+* Edit a contact.
+
+![edit format](images/undo-UG/after_edit_1.png)
+
+* Undo.
+* Message shown to the user: "Undo Successful! Reverted back to: X", where X are the details of the person before 
+  the edit.
+* GUI reflects that the edited contact has been reverted.
+
+![edit format](images/undo-UG/after_edit_undo.png)
+
+#### Precise expected outputs on failure:
+* Caused by using undo when there are no previous commands to undo.
+* Error message shown to the user: "There is no command to undo!".
+* GUI reflects undo text in red font.
+
 
 ![edit format](images/undo-UG/undo_fail.png)
-Precise expected outputs on failure:
-* Error message shown to the user: "The person already exists in the address book"
 
 
 ### Clearing all entries : `clear`
@@ -307,9 +387,13 @@ Precise expected outputs on failure:
 
 ### Exiting the program : `exit`
 
-Exits the program.
+Exits the application.
 
-Format: `exit`
+Precise command format: `exit`
+
+Precise expected outcome on success:
+The FAPro application will be closed.
+
 
 ### Saving the data
 
