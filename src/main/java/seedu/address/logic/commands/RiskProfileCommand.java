@@ -185,6 +185,12 @@ public class RiskProfileCommand extends Command {
         return result;
     }
 
+    /**
+     * Checks if the given input is a valid result.
+     *
+     * @param result Result to be validated.
+     * @return {@code true} if the input is a valid result, {@code false} otherwise.
+     */
     public static boolean isValidResult(String result) {
         String[] characters = result.split(",");
         if (characters.length != 8) {
