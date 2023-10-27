@@ -44,7 +44,7 @@ public class UndoCommandTest {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
         expectedModel.deletePerson(personToDelete);
 
-        String expectedResult = String.format(MESSAGE_UNDO_DELETE_SUCCESS, Messages.format(personToDelete));
+        String expectedResult = String.format(MESSAGE_UNDO_DELETE_SUCCESS, Messages.formatPersons());
         expectedModel.undoDelete();
 
         model.deletePerson(personToDelete);

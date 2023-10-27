@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javafx.util.Pair;
@@ -63,33 +64,29 @@ public class UndoCommand extends Command {
      * @return returns CommandResult of the message when the undo is a success.
      */
     public CommandResult executeUndoDelete(Model model) {
-        List<Person> deletedPersons = model.getDeletedPersons(); // Get the list of deleted persons
-        String deletedPersonsDetails = Messages.formatPersons(deletedPersons);
+        ArrayList<Person> deletedPersons = model.getDeletedPersons();
+        int numberOfDeletes = model.getLastDeletedNumber();
+        List<Person> undoDeletedPersons = new ArrayList<>(deletedPersons.subList(deletedPersons.size() - numberOfDeletes, deletedPersons.size()));
+        String deletedPersonsDetails = Messages.formatPersons(undoDeletedPersons);
 
         if (deletedPersons.isEmpty() || model.getDeletedNumberList().isEmpty()) {
             return new CommandResult(MESSAGE_UNDO_DELETE_FAILURE);
         }
 
-        int numberOfDeletes = model.getLastDeletedNumber();
-        while (numberOfDeletes > 0) {
-            for (Person deletedPerson : deletedPersons.subList(deletedPersons.size() - numberOfDeletes, deletedPersons.size() - 1)) {
-                model.addPerson(deletedPerson);
-                model.removeDeletedPerson();
-                model.removePreviousUndoableCommand();
-                numberOfDeletes--;
-                if (numberOfDeletes == 0) {
-                    break; // Exit the loop when numberOfDeletes reaches 0
-                }
-            }
+        for (Person deletedPerson : undoDeletedPersons) {
+            model.addPerson(deletedPerson);
+            model.removeDeletedPerson();
+            model.removePreviousUndoableCommand();
         }
 
+
+        // Remove the corresponding number of deletes
         model.removeLastNumber();
 
         String resultMessage = String.format(MESSAGE_UNDO_DELETE_SUCCESS, deletedPersonsDetails);
 
         return new CommandResult(resultMessage);
     }
-
 
     /**
      * Undoes a clear command.
