@@ -115,9 +115,9 @@ Format: `list`
 
 ### Editing a person : `edit`
 
-Edit a parameter in existing contacts, such as name, address, phone number, email, occupation, appointment date and tags.
+Edit a parameter in existing contacts, such as name, address, phone number, email, occupation, appointment date, and tags.
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [appt/APPOINTMENTDATE] [t/TAG]…​`
+Precise command format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [appt/APPOINTMENTDATE] [t/TAG]…​`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
@@ -236,7 +236,7 @@ Precise expected outputs on failure:
 
 Sort contact lists by parameter name or appointment date.
 
-Format: `undo PARAMETER`
+Precise command format: `undo parameter`
 
 Example commands:
 * `sort n/`
