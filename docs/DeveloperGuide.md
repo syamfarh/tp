@@ -234,10 +234,129 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 _{more aspects and alternatives to be added}_
 
+### Clone feature
+
+#### Implementation
+
+The clone feature creates a copy of a person in the addressbook while only adding a number at the end of the name and maintaining all other variables. 
+
+Given below is an example usage scenario and how the clone mechanism behaves at each step.
+
+Step 1. The user executes "list" to see what Persons are available in the address book
+
+![Clone0](images/Clone0.png)
+
+Step 2. The user executes "clone 1" to clone the person at index 1 of the addressbook, John
+
+![Clone1](images/Clone1.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![CloneActivityDiagram](images/CloneActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How clone executes:**
+
+* **Alternative 1 (current choice):** Copies the person at the index provided and returns a person with a number next to their name
+  * Pros: Fast, prevents excessive copying of a person while ensuring that there are no struct duplicates
+  * Cons: Can be restrictive and time consuming, as you have to keep copying the clone if you wish to make a clone of a person
+
+* **Alternative 2:** Copies the person exactly as is while allowing for duplicates
+  * Pros: Fast, allows for as many copies of a person as the user desires
+  * Cons: Will be difficult to keep track of contacts, defeating the purpose of FAPro as a comprehensive yet focused contact organiserr
+
+_{more aspects and alternatives to be added}_
+
+### Undo feature
+
+#### Implementation
+
+The `undo` feature undoes the most recent undoable command. The only undoable commands available are: `add`, `clone`, `edit`,
+`delete`, & `clear`. Commands that do not modify the address book, such as `list`, `find`, `sort` etc. are not 
+undoable commands.
+
+The undo mechanism is facilitated by the use of `ArrayLists` in `ModelManager` to store deleted persons, edited persons, 
+as well as the previous undoable commands. As such `ArrayLists` are instantiated every time the user starts the 
+program, undo does not store the commands from previous sessions and cannot undo changes made in previous sessions.
+
+The undo mechanism also changes the implementation of all the undoable commands. For all undoable commands, when they 
+are invoked, `ModelManager` will be called to store each command in an `ArrayList` named `previousUndoableCommands`. 
+Furthermore, for the `delete` and `clear` commands, each deleted person will be stored in an `ArrayList` named 
+`deletedPersons`. For the `edit` command, a `pair` of the original `person` and the edited `person` will be stored in an 
+`ArrayList` named `editedPersons`. 
+
+
+Additionally, it implements a single `execute` command which determines which type of undo operation to do based on the 
+most recent previous undoable command. The other undo operations are:
+* `UndoCommand#executeUndoDelete(Model)`
+* `UndoCommand#executeUndoClear(Model)`
+* `UndoCommand#executeUndoAdd(Model)`
+* `UndoCommand#executeUndoEdit(Model)`
+
+These operations make use of other operations exposed in the `Model` interface, which are:
+* `Model#storeDeletedPerson(Person)`
+* `Model#getDeletedPerson()`
+* `Model#removeDeletedPerson()`
+* `Model#getDeletedPersonsSize()`
+* `Model#getPreviousUndoableCommandsSize()`
+* `Model#getNumberOfPreviousDeleteCommands()`
+* `Model#undoDelete()`
+* `Model#storePreviousUndoableCommand(String)`
+* `Model#getPreviousUndoableCommand()`
+* `Model#removePreviousUndoableCommand()`
+* `Model#getAddressBookSize()`
+* `Model#storeEditedPersonsPair(Person, Person)`
+* `Model#getEditedPersonsPair()`
+* `Model#removeEditedPersonsPair()`
+
+Given below is an example usage scenario and how the undo mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time. The `ArrayList`s `previousUndoableCommands`, 
+`deletedPersons`, and `editedPersons` are initialized as a blank `ArrayList`.
+
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls 
+`Model#storePreviousUndoableCommand(String)`, adding the command as a String into `previousUndoableCommands`, and also 
+calls `Model#storeDeletedPerson(Person)`, adding the Person into `deletedPersons`.
+
+:information_source: **Note:** If an undoable command fails its execution, it will not call 
+`Model#storePreviousUndoableCommand(String)` so nothing is stored in `previousUndoableCommands`, and `ModelManager` 
+is unchanged.
+
+Step 3. The user now decides that deleting the person was a mistake, and decides to undo that action by executing 
+the `undo` command. The `undo` command will call `model#getPreviousUndoableCommand`, which gets the most recent 
+undoable command executed by the user. In this case, it is the `delete` command. Hence, `UndoCommand#executeUndoAdd
+(model)` is called, which adds back the deleted `Person` to the address book. 
+
+In the process, `Model#removePreviousUndoableCommand` is called, removing the delete command (as a String) from the  
+`ArrayList` `previousUndoableCommands`.
+
+The following sequence diagram shows how the `undo` operation and (mainly) `executeUndoAdd` operation works.
+
+Step 4. The user now decides to execute the command `list`. As this command is not an undoable command, 
+`Model#storePreviousUndoableCommand(String)` and other storing operations are not called, so `ModelManager` remains 
+unchanged.
+
+
+
 ### \[Proposed\] Data archiving
 
 _{Explain here how the data archiving feature will be implemented}_
 
+### Find by address feature
+
+#### Implementation
+
+The find by address/find_add feature filters the list of contacts in the address book based on their address.
+
+Given below is an example usage scenario and how the find_add feature works.
+
+Step 1. The financial adviser wants to find out all their clients living in Serangoon so that they can 
+        line up client appointments efficiently.
+
+Step 2. The financial adviser enters `find_add Serangoon` into the command box and presses enter.
+
+Step 3. A list of all contacts who have `Serangoon` in their address is listed.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -275,13 +394,18 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                                    | I want to …​                                                                 | So that I can…​                                                        |
-| -------- |--------------------------------------------|------------------------------------------------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | user                                       | add a new person                                                             | add entries that I need                                                |
-| `* * *`  | user                                       | delete a person                                                              | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name                                                        | locate details of persons without having to go through the entire list |
-| `* * *`  | financial advisor                          | edit contact details of clients                                              | client details are up to date                                          |
-| `* *`    | impatient financial advisor                | be able to use and understand the functionalities easily through a help page | I do not have to waste too much time learning how to operate the app   |
+| Priority | As a …​                          | I want to …​                          | So that I can…​                                                        |
+|----------|----------------------------------|---------------------------------------|------------------------------------------------------------------------|
+| `* * *`  | user                             | add a new person                      | add entries that I need                                                |
+| `* * *`  | user                             | delete a person                       | remove entries that I no longer need                                   |
+| `* * *`  | user                             | find a person by name                 | locate details of persons without having to go through the entire list |
+| `* * *`  | financial advisor                | find a person by address              | line-up all my client meetings efficiently                             |
+| `* * *`  | financial advisor                | find all contacts by appointment date | see what appointments I have for that date                             |
+| `* * *`  | financial advisor                | edit contact details of clients       | client details are up to date                                          |
+| `* * *`  | financial advisor                | be able to view the help page         | quickly troubleshoot and learn how to operate the program              |
+| `* *`    | lazy financial advisor           | be able to clone a person             | I can easily replicate contacts that are similar                       |
+| `* *`    | financial advisor                | be able to sort clients contact list  | easier to find client contact that I am looking for                    |
+| `* *`    | clumsy financial advisor         | be able to undo commands done previously such as delete, clear, edit, add    | undo my mistakes made with a simple command, rather than having to do multiple commands  | 
 
 *{More to be added}*
 
@@ -344,34 +468,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 2.
 
-**Use case: Find persons**
+
+**Use case: Clone a person**
 
 **MSS**
 
 1.  Financial Advisor requests to list persons
 2.  FAPro shows a list of persons
-3.  Financial Advisor requests to find a specific person in the list by name
-4.  FAPro displays the list of matching persons
+3.  Financial Advisor requests to clone a specific person in the list
+4.  FAPro clones the person
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The parameter is provided in an invalid format.
+
+    * 1a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
+      properly use the command.
+
+* 3a. The given index is invalid.
+
+    * 3a1. FAPro shows an error message:  “Sorry, that value is not accepted! Please specify the index of the person you would like to clone! It should be non-negative and within the address book!”
+
+        Use case resumes at step 2.
+
+* 3b. The given person has already been cloned.
+
+    * 3b1. FAPro shows an error message:  “A clone of this person already exists. To clone again, please edit the previous clone first or alternatively, clone the previous clone."
+
+        Use case resumes at step 2.
+
+
+**Use case: Find a person**
+
+**MSS**
+
+1.  Financial Advisor requests to find person(s) using a specific input
+2.  FAPro shows a list of person(s) who fits the search input
 
     Use case ends.
 
-* 3a. The given name is invalid.
+**Extensions**
 
-    * 3a1. FAPro shows an error message: "Illegal Input!"
+* 1a. The parameter is provided in an invalid format.
 
-        Use case resumes at step 2.
-  
-* 3b. There are no results found.
+    * 1a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
+      properly use the command.
 
-    * 3b1. FAPro shows an error message: "0 persons listed!"
+      Use case resumes at step 1.
 
-        Use case resumes at step 2.
+* 2a. The list is empty because no contacts exist with the search input.
+
+  Use case ends.
 
 **Use case: Edit a person**
 
@@ -408,16 +557,52 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
         Use case resumes at step 2.
 
-    
-**Use case: Display available commands**
+
+**Use case: Viewing help**
+
+Preconditions:
+
+* The user has opened FAPro.
+* The user is on the main application interface.
 
 **MSS**
 
-1.  Financial Advisor requests to display the list of available commands using help command
-2.  FAPro shows a help window listing all acceptable commands with their respective details
+1.  Financial Advisor requests viewing help.
+2.  FAPro shows a help window.
+3.  Financial Advisor views a list of all the main commands and a link to FAPro's 
+    user guide.
 
     Use case ends.
 
+
+**Use case: Sort contact list**
+
+**MSS**
+
+1.  Financial Advisor requests to list persons
+2.  FAPro shows a list of persons 
+3.  Financial Advisor requests to sort contacts by a parameter
+4.  FAPro shows a sorted list
+
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+
+* 3a. The parameter provided is invalid.
+
+    * 3b1. FAPro shows an error message: "Invalid command format!"
+
+      Use case resumes at step 2.
+
+* 3b. The parameter is specified multiple times.
+
+    * 3c1. FAPro shows an error message: "The parameter can only be specified once."
+
+      Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
@@ -486,6 +671,36 @@ testers are expected to do more *exploratory* testing.
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_
+
+### Cloning a person
+
+1. Cloning a person whohas not been cloned while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   1. Test case: `clone 1`<br>
+      Expected: First contact is cloned from the list. Details of the cloned contact shown in the status message. Timestamp in the status bar is updated.
+
+   1. Test case: `clone 0`<br>
+      Expected: No person is cloned. Error details shown in the status message. Status bar remains the same.
+
+   1. Other incorrect clone commands to try: `clone`, `clone x`, `...` (where x is larger than the list size)<br>
+      Expected: Similar to previous.
+
+2. Cloning a person who has already been cloned while all persons are being shown
+
+   2. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `clone 1`<br>
+      Expected: First contact has already been cloned. Error message is returned.
+
+3. Cloning a clone while all persons are being shown
+
+   2. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `clone 1`<br>
+      Expected: The clone is cloned from the list and the number next to its name it incremented. Details of the cloned contact shown in the status message. Timestamp in the status bar is updated.
+
 
 ### Saving data
 
