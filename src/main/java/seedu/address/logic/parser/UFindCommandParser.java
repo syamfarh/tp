@@ -4,6 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.UFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -21,6 +22,11 @@ public class UFindCommandParser {
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS);
+
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() &&
+        argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            throw new ParseException(Messages.getErrorMessageForMultiplePrefixes());
+        }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             return new FindCommandParser().parse(argMultimap.getValue(PREFIX_NAME).get());
