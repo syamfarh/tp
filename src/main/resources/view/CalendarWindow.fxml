@@ -5,7 +5,11 @@
 <?import javafx.scene.layout.*?>
 
 <?import com.calendarfx.view.MonthView?>
+<?import javafx.scene.image.Image?>
 <fx:root resizable="false" title="Calendar" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/calendar2.png" />
+    </icons>
     <scene>
         <Scene>
             <VBox fx:id="calendarContainer">
