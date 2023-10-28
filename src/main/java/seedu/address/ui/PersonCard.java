@@ -43,6 +43,8 @@ public class PersonCard extends UiPart<Region> {
 
     @FXML
     private Label appointmentDate;
+    @FXML
+    private Label riskProfile;
 
     @FXML
     private FlowPane tags;
@@ -60,8 +62,45 @@ public class PersonCard extends UiPart<Region> {
         address.setText(person.getAddress().value);
         email.setText(person.getEmail().value);
         appointmentDate.setText("Appointment Date: " + person.getApptDate().toString());
+        setRiskProfileText(person.getRiskProfile().value);
         person.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
+    }
+
+    private void setRiskProfileText(String riskProfileText) {
+        if (isRiskProfileNotEmpty(riskProfileText)) {
+            riskProfile.setText(riskProfileText);
+            applyRiskProfileStyles(riskProfileText);
+        } else {
+            riskProfile.setVisible(false);
+        }
+    }
+
+    private void applyRiskProfileStyles(String riskProfileText) {
+        switch (riskProfileText) {
+        case "Low":
+            riskProfile.getStyleClass().addAll("riskProfile", "lowRisk");
+            break;
+        case "Moderately Low":
+            riskProfile.getStyleClass().addAll("riskProfile", "moderatelyLowRisk");
+            break;
+        case "Moderate":
+            riskProfile.getStyleClass().addAll("riskProfile", "moderateRisk");
+            break;
+        case "Moderately High":
+            riskProfile.getStyleClass().addAll("riskProfile", "moderatelyHighRisk");
+            break;
+        case "High":
+            riskProfile.getStyleClass().addAll("riskProfile", "highRisk");
+            break;
+        default:
+            riskProfile.setVisible(false);
+            break;
+        }
+    }
+
+    private static boolean isRiskProfileNotEmpty(String riskProfile) {
+        return riskProfile != null && !riskProfile.isEmpty();
     }
 }

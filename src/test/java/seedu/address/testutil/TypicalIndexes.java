@@ -17,4 +17,6 @@ public class TypicalIndexes {
         INDEX_THIRD_PERSON);
     public static final List<Index> SECOND_INDEXES = Arrays.asList(INDEX_SECOND_PERSON, INDEX_THIRD_PERSON,
             INDEX_FOURTH_PERSON);
+    public static final Index INDEX_NINTH_PERSON = Index.fromOneBased(9);
+    public static final Index INDEX_TENTH_PERSON = Index.fromOneBased(10);
 }

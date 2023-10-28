@@ -35,11 +35,15 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private QuestionnaireWindow questionnaireWindow;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+    @FXML
+    private MenuItem questionnaireMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -66,6 +70,7 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        questionnaireWindow = new QuestionnaireWindow();
     }
 
     public Stage getPrimaryStage() {
@@ -74,7 +79,9 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(questionnaireMenuItem, KeyCombination.valueOf("F2"));
     }
+
 
     /**
      * Sets the accelerator of a MenuItem.
@@ -147,6 +154,18 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleQuestionnaire() {
+        if (!questionnaireWindow.isShowing()) {
+            questionnaireWindow.show();
+        } else {
+            questionnaireWindow.focus();
+        }
+    }
+
     void show() {
         primaryStage.show();
     }
@@ -160,6 +179,7 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        questionnaireWindow.hide();
         primaryStage.hide();
     }
 
@@ -181,6 +201,10 @@ public class MainWindow extends UiPart<Stage> {
             personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowQuestionnaire()) {
+                handleQuestionnaire();
             }
 
             if (commandResult.isExit()) {

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENTDATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RISKPROFILE;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.FIRST_INDEXES;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -27,11 +28,14 @@ import seedu.address.logic.commands.FindAddCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.QuestionnaireCommand;
+import seedu.address.logic.commands.RiskProfileCommand;
 import seedu.address.logic.commands.SortCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.RiskProfile;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -102,6 +106,20 @@ public class AddressBookParserTest {
     public void parseCommand_help() throws Exception {
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD) instanceof HelpCommand);
         assertTrue(parser.parseCommand(HelpCommand.COMMAND_WORD + " 3") instanceof HelpCommand);
+    }
+
+    @Test
+    public void parseCommand_questionnaire() throws Exception {
+        assertTrue(parser.parseCommand(QuestionnaireCommand.COMMAND_WORD) instanceof QuestionnaireCommand);
+        assertTrue(parser.parseCommand(QuestionnaireCommand.COMMAND_WORD + " 3") instanceof QuestionnaireCommand);
+    }
+
+    @Test
+    public void parseCommand_riskprofile() throws Exception {
+        final RiskProfile result = new RiskProfile("a,a,b,c,c,d,d,e");
+        RiskProfileCommand command = (RiskProfileCommand) parser.parseCommand(RiskProfileCommand.COMMAND_WORD + " "
+            + INDEX_FIRST_PERSON.getOneBased() + " " + PREFIX_RISKPROFILE + result.value);
+        assertEquals(new RiskProfileCommand(INDEX_FIRST_PERSON, result), command);
     }
 
     @Test
