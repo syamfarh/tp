@@ -39,11 +39,9 @@ public class UFindCommandParser implements Parser<Command> {
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             return new FindCommandParser().parse(argMultimap.getValue(PREFIX_NAME).get());
-        } else if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+        } else {
             return new FindAddCommandParser().parse(argMultimap.getValue(PREFIX_ADDRESS).get());
         }
-        // should never reach this line
-        throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UFindCommand.MESSAGE_USAGE));
     }
 
     /**
