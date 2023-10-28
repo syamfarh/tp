@@ -21,11 +21,6 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         List<Index> indexes = parseIndexes(args);
-
-        if (indexes.isEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_INDEX);
-        }
-
         return new DeleteCommand(indexes);
     }
 
