@@ -69,6 +69,7 @@ public class Person {
     public AppointmentDate getApptDate() {
         return apptDate;
     }
+
     public RiskProfile getRiskProfile() {
         return riskProfile;
     }
