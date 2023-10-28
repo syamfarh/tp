@@ -25,7 +25,7 @@ public class UndoCommand extends Command {
 
     public static final String MESSAGE_FAILURE_UNDO_WITH_NO_UNDOABLE_COMMANDS = "There is no command to undo!";
     public static final String MESSAGE_UNDO_DELETE_SUCCESS = "Undo Successful! Contact(s) added back: %1$s";
-    public static final String MESSAGE_UNDO_DELETE_FAILURE = "Undo Failure. Contact added back: %1$s";
+    public static final String MESSAGE_UNDO_DELETE_FAILURE = "Undo Failure.";
     public static final String MESSAGE_UNDO_CLEAR_SUCCESS = "Undo Successful! All contacts have been added back!";
     public static final String MESSAGE_UNDO_ADD_SUCCESS = "Undo Successful! Deleted Person: %1$s";
     public static final String MESSAGE_UNDO_EDIT_SUCCESS = "Undo Successful! Reverted back to: %1$s";
