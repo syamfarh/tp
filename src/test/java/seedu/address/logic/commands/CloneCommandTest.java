@@ -28,7 +28,7 @@ public class CloneCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredListSpacesNoSuffix_success() {
+    public void execute_validIndexUnfilteredListSpacesNoSuffix_success() throws CommandException {
         Person personToClone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         CloneCommand cloneCommand = new CloneCommand(INDEX_FIRST_PERSON);
 
@@ -62,7 +62,7 @@ public class CloneCommandTest {
     }
 
     @Test
-    public void execute_validIndexUnfilteredListNoSpacesNoSuffix_success() {
+    public void execute_validIndexUnfilteredListNoSpacesNoSuffix_success() throws CommandException {
         Person personToClone = model.getFilteredPersonList().get(INDEX_NINTH_PERSON.getZeroBased());
         CloneCommand cloneCommand = new CloneCommand(INDEX_NINTH_PERSON);
 
@@ -96,7 +96,7 @@ public class CloneCommandTest {
     }
 
     @Test
-    public void execute_validIndexUnfilteredListSpacesSuffix_success() {
+    public void execute_validIndexUnfilteredListSpacesSuffix_success() throws CommandException {
         Person personToClone = model.getFilteredPersonList().get(INDEX_TENTH_PERSON.getZeroBased());
         CloneCommand cloneCommand = new CloneCommand(INDEX_TENTH_PERSON);
 
