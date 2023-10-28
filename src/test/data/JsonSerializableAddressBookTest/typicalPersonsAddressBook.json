@@ -7,6 +7,7 @@
     "occupation" : "Fisherman",
     "address" : "123, Jurong West Ave 4, #08-111",
     "appointmentDate" : "",
+    "riskProfile" : "a,a,b,b,b,d,e,c",
     "tags" : [ "friends" ]
   }, {
     "name" : "Paul",
@@ -15,6 +16,7 @@
     "occupation" : "Golfer",
     "address" : "123, Jurong West Ave 5, #08-111",
     "appointmentDate" : "",
+    "riskProfile" : "a,a,b,b,b,d,e,c",
     "tags" : [ "friends" ]
   }, {
     "name" : "Alice Pauline",
@@ -23,7 +25,7 @@
     "occupation" : "Barber",
     "address" : "123, Jurong West Ave 6, #08-111",
     "appointmentDate" : "",
-    "riskProfile" : "",
+    "riskProfile" : "a,a,b,b,b,d,e,c",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -32,7 +34,7 @@
     "occupation" : "Musician",
     "address" : "311, Clementi Ave 2, #02-25",
     "appointmentDate" : "",
-    "riskProfile" : "",
+    "riskProfile" : "d,c,a,e,b,b,c,a",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
