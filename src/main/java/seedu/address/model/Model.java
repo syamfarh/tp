@@ -123,13 +123,6 @@ public interface Model {
     ArrayList<Person> getDeletedPersons();
 
     /**
-     * Clears the list of previously deleted persons.
-     * This method should be called after undoing delete operations or as needed to maintain consistency.
-     */
-    void clearDeletedPersons();
-
-
-    /**
      * Returns the number of undoable commands in the previousUndoableCommands ArrayList.
      */
     int getPreviousUndoableCommandsSize();

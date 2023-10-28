@@ -81,11 +81,6 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void clearDeletedPersons() {
-        this.deletedPersons.clear();
-    }
-
-    @Override
     public int getDeletedPersonsSize() {
         return this.deletedPersons.size();
     }
