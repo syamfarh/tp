@@ -47,6 +47,8 @@ public class CloneCommandTest {
                 .append(expectedClonedPerson.getAddress())
                 .append("; AppointmentDate: ")
                 .append(expectedClonedPerson.getApptDate())
+                .append("; RiskProfile: ")
+                .append(expectedClonedPerson.getRiskProfile())
                 .append("; Tags: ");
         expectedClonedPerson.getTags().forEach(builder::append);
         String expectedClonedPersonS = builder.toString();
@@ -81,6 +83,8 @@ public class CloneCommandTest {
                 .append(expectedClonedPerson.getAddress())
                 .append("; AppointmentDate: ")
                 .append(expectedClonedPerson.getApptDate())
+                .append("; RiskProfile: ")
+                .append(expectedClonedPerson.getRiskProfile())
                 .append("; Tags: ");
         expectedClonedPerson.getTags().forEach(builder::append);
         String expectedClonedPersonS = builder.toString();
@@ -115,6 +119,8 @@ public class CloneCommandTest {
                 .append(expectedClonedPerson.getAddress())
                 .append("; AppointmentDate: ")
                 .append(expectedClonedPerson.getApptDate())
+                .append("; RiskProfile: ")
+                .append(expectedClonedPerson.getRiskProfile())
                 .append("; Tags: ");
         expectedClonedPerson.getTags().forEach(builder::append);
         String expectedClonedPersonS = builder.toString();

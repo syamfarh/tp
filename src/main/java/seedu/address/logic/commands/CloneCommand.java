@@ -20,13 +20,13 @@ public class CloneCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Clones the person identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
+            + "Parameters: INDEX (must be a positive integer).\n"
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_CLONE_PERSON_SUCCESS = "Cloned Person: %1$s";
 
-    public static final String MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE = "A clone of this person already exists. To "
-        + "clone again, please edit the previous clone first or alternatively, clone the previous clone.";
+    public static final String MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE = "A clone of this person already exists.\n"
+        + "To clone again, please edit the previous clone first or alternatively, clone the previous clone.";
 
     private final Index targetIndex;
 
@@ -106,8 +106,7 @@ public class CloneCommand extends Command {
         Name clonedName = new Name(updatedName);
         Person clonedPerson = new Person(clonedName, personToClone.getPhone(), personToClone.getEmail(),
                 personToClone.getOccupation(), personToClone.getAddress(), personToClone.getApptDate(),
-                personToClone.getTags());
-
+                personToClone.getRiskProfile(), personToClone.getTags());
         return clonedPerson;
     }
 

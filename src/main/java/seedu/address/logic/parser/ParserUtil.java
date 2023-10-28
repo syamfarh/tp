@@ -130,7 +130,20 @@ public class ParserUtil {
         if (!AppointmentDate.isValidCurrentDate(trimmedDate)) {
             throw new ParseException(AppointmentDate.MESSAGE_CONSTRAINTS_CURRENTDATE);
         }
-        return new AppointmentDate(DateParser.convertDate(date));
+        return new AppointmentDate(DateTimeParser.convertDate(date));
+    }
+
+    /**
+     * Parses {@code Collection<String> appointmentDate} into a {@code AppointmentDate}.
+     */
+    public static AppointmentDate parseAppointmentDates(Collection<String> appt) throws ParseException {
+        requireNonNull(appt);
+        final Set<Tag> tagSet = new HashSet<>();
+        for (String tagName : appt) {
+            return parseAppointmentDate(tagName);
+        }
+
+        return parseAppointmentDate("");
     }
 
     /**

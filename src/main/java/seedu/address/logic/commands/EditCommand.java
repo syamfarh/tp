@@ -30,6 +30,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Occupation;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.RiskProfile;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -54,7 +55,7 @@ public class EditCommand extends Command {
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "johndoe@example.com";
 
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Person: %1$s";
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Edited Client: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -109,10 +110,11 @@ public class EditCommand extends Command {
         Occupation updatedOccupation = editPersonDescriptor.getOccupation().orElse(personToEdit.getOccupation());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         AppointmentDate updatedApptDate = editPersonDescriptor.getAppointmentDate().orElse(personToEdit.getApptDate());
+        RiskProfile updatedRiskProfile = personToEdit.getRiskProfile();
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedOccupation, updatedAddress, updatedApptDate,
-                updatedTags);
+                updatedRiskProfile, updatedTags);
     }
 
     @Override
