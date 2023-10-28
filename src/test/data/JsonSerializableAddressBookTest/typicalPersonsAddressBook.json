@@ -1,13 +1,31 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
+    "name" : "Simon 1",
+    "phone" : "94932143",
+    "email" : "simon@example.com",
+    "occupation" : "Fisherman",
+    "address" : "123, Jurong West Ave 4, #08-111",
+    "appointmentDate" : "",
+    "riskProfile" : "a,a,b,b,b,d,e,c",
+    "tags" : [ "friends" ]
+  }, {
+    "name" : "Paul",
+    "phone" : "94352433",
+    "email" : "paul@example.com",
+    "occupation" : "Golfer",
+    "address" : "123, Jurong West Ave 5, #08-111",
+    "appointmentDate" : "",
+    "riskProfile" : "a,a,b,b,b,d,e,c",
+    "tags" : [ "friends" ]
+  }, {
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "occupation" : "Barber",
     "address" : "123, Jurong West Ave 6, #08-111",
     "appointmentDate" : "",
-    "riskProfile" : "",
+    "riskProfile" : "a,a,b,b,b,d,e,c",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -16,7 +34,7 @@
     "occupation" : "Musician",
     "address" : "311, Clementi Ave 2, #02-25",
     "appointmentDate" : "",
-    "riskProfile" : "",
+    "riskProfile" : "d,c,a,e,b,b,c,a",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
