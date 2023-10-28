@@ -30,6 +30,7 @@ public class ModelManager implements Model {
     private final ArrayList<Person> deletedPersons;
     private final ArrayList<Pair<Person, Person>> editedPersons;
     private ArrayList<String> previousUndoableCommands;
+    private ArrayList<Integer> deletedNumberList;
     private Comparator<Person> sortComparator;
 
     /**
@@ -46,6 +47,7 @@ public class ModelManager implements Model {
         deletedPersons = new ArrayList<>();
         editedPersons = new ArrayList<>();
         previousUndoableCommands = new ArrayList<>();
+        deletedNumberList = new ArrayList<>();
         sortComparator = APPTCOMPARATOR;
     }
 
@@ -71,6 +73,11 @@ public class ModelManager implements Model {
     public void removeDeletedPerson() {
         int lastIndex = this.deletedPersons.size() - 1;
         this.deletedPersons.remove(lastIndex);
+    }
+
+    @Override
+    public ArrayList<Person> getDeletedPersons() {
+        return this.deletedPersons;
     }
 
     @Override
@@ -110,6 +117,26 @@ public class ModelManager implements Model {
     public void storeEditedPersonsPair(Person editedPerson, Person originalPerson) {
         Pair<Person, Person> toStore = new Pair<>(editedPerson, originalPerson);
         editedPersons.add(toStore);
+    }
+
+    @Override
+    public void storeDeletedNumberList(int deletedNumber) {
+        this.deletedNumberList.add(deletedNumber);
+    }
+
+    @Override
+    public Integer getLastDeletedNumber() {
+        return this.deletedNumberList.get(this.deletedNumberList.size() - 1);
+    }
+
+    @Override
+    public ArrayList<Integer> getDeletedNumberList() {
+        return this.deletedNumberList;
+    }
+
+    @Override
+    public void removeLastNumber() {
+        this.deletedNumberList.remove(this.deletedNumberList.size() - 1);
     }
 
     @Override

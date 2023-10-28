@@ -1,5 +1,6 @@
 package seedu.address.logic;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -51,5 +52,27 @@ public class Messages {
         person.getTags().forEach(builder::append);
         return builder.toString();
     }
+
+    /**
+     * Formats the list of persons for display to the user.
+     */
+    public static String formatPersons(List<Person> personList) {
+        final StringBuilder builder = new StringBuilder();
+
+        for (Person person : personList) {
+            builder.append("\n")
+                    .append(person.getName())
+                    .append("; Phone: ").append(person.getPhone())
+                    .append("; Email: ").append(person.getEmail())
+                    .append("; Occupation: ").append(person.getOccupation())
+                    .append("; Address: ").append(person.getAddress())
+                    .append("; AppointmentDate: ").append(person.getApptDate())
+                    .append("; Tags: ");
+            person.getTags().forEach(builder::append);
+        }
+
+        return builder.toString();
+    }
+
 
 }
