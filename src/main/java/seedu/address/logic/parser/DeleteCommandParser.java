@@ -24,7 +24,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
             List<Index> indexes = parseIndexes(args);
 
             if (indexes.isEmpty()) {
-                throw new ParseException("At least one index must be provided for the delete command.");
+                throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
             }
 
             return new DeleteCommand(indexes);
