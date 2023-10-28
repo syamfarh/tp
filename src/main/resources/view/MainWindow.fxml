@@ -36,7 +36,7 @@
             <MenuItem fx:id="questionnaireMenuItem" mnemonicParsing="false" onAction="#handleQuestionnaire" text="Questionnaire" />
           </Menu>
           <Menu mnemonicParsing="false" text="Calendar">
-            <MenuItem fx:id="calendarItem" mnemonicParsing="false" onAction="#handleCalendar" text="Calendar" />
+            <MenuItem fx:id="calendarMenuItem" mnemonicParsing="false" onAction="#handleCalendar" text="Calendar" />
           </Menu>
         </MenuBar>
 

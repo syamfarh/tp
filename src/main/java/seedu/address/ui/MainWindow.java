@@ -48,6 +48,9 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem questionnaireMenuItem;
 
     @FXML
+    private MenuItem calendarMenuItem;
+
+    @FXML
     private StackPane personListPanelPlaceholder;
 
     @FXML
@@ -73,7 +76,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         questionnaireWindow = new QuestionnaireWindow();
-        calendarWindow = new CalendarWindow();
+        calendarWindow = new CalendarWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -83,6 +86,7 @@ public class MainWindow extends UiPart<Stage> {
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
         setAccelerator(questionnaireMenuItem, KeyCombination.valueOf("F2"));
+        setAccelerator(calendarMenuItem, KeyCombination.valueOf("F3"));
     }
 
 
