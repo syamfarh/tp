@@ -66,7 +66,8 @@ public class UndoCommand extends Command {
     public CommandResult executeUndoDelete(Model model) {
         ArrayList<Person> deletedPersons = model.getDeletedPersons();
         int numberOfDeletes = model.getLastDeletedNumber();
-        List<Person> undoDeletedPersons = new ArrayList<>(deletedPersons.subList(deletedPersons.size() - numberOfDeletes, deletedPersons.size()));
+        List<Person> undoDeletedPersons = new ArrayList<>(deletedPersons.subList(deletedPersons.size()
+            - numberOfDeletes, deletedPersons.size()));
         String deletedPersonsDetails = Messages.formatPersons(undoDeletedPersons);
 
         if (deletedPersons.isEmpty() || model.getDeletedNumberList().isEmpty()) {
