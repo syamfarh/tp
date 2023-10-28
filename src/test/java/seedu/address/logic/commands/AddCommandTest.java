@@ -190,11 +190,6 @@ public class AddCommandTest {
         }
 
         @Override
-        public void clearDeletedPersons() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public int getDeletedPersonsSize() {
             throw new AssertionError("This method should not be called.");
         }
