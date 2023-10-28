@@ -97,27 +97,27 @@ Acceptable values for each parameter:
 A person can have any number of tags (including 0)
 </div>
 
-![edit format](images/addformat.png)
+![edit format](images/add-UG/addformat.png)
 
 Precise expected outputs on success:
 * Successful addition message. ‘New Person added: X ’, where X are the details of the person added.
 * For example, for Robert Johnson (the example command), it would be: “New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: “. Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person.
 * The new entry is displayed in the address book GUI.
 
-![edit format](images/addresult.png)
+![edit format](images/add-UG/addresult.png)
 
 * Precise expected outputs on failure:
 * If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
 
-![edit format](images/addmissingparam.png)
+![edit format](images/add-UG/addmissingparam.png)
 
 * If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 
-![edit format](images/addinvalidemail.png)
+![edit format](images/add-UG/addinvalidemail.png)
 
 * If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
 
-![edit format](images/addduplicateparam.png)
+![edit format](images/add-UG/addduplicateparam.png)
 
 ### Search by appointment day: `cal`
 
@@ -132,19 +132,19 @@ Format: `cal KEYWORD`
 Examples:
 * `cal 2023-12-12`
 
-![edit format](images/cal0.png)
+![edit format](images/cal-UG/cal0.png)
 
 * Precise expected outputs on success:
 * Successful calendar message. “X persons listed!”, where X is the number of contacts who have the same
   appointment date as the input date. The list of contacts whose appointment dates match the input is listed.
 
-![edit format](images/cal1.png)
+![edit format](images/cal-UG/cal1.png)
 
 * Precise expected outputs on failure:
 * If no date is input after the cal command, an error message explaining the error will be shown,
   reminding the user to follow the correct input format.
 
-![edit format](images/cal2.png)
+![edit format](images/cal-UG/cal2.png)
 
 ### Cloning a person : `clone`
 
@@ -161,7 +161,7 @@ Examples:
 Acceptable parameters for INDEX:
 * Only accept **non-negative** int values that are less than the size of the address book. Cannot be 0. Index must be for a contact that has not already been cloned.
 
-![edit format](images/cloneformat.png)
+![edit format](images/clone-UG/cloneformat.png)
 
 Precise expected outputs on success:
 * Message shown to the user: "Cloned Person: X", where X are the details of the person who was cloned.
@@ -169,7 +169,7 @@ Precise expected outputs on success:
 * "Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:" was cloned, then the output is
 * "Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags: "
 
-![edit format](images/cloneresult.png)
+![edit format](images/clone-UG/cloneresult.png)
 
 Precise expected outputs on failure:
 * When no index, zero or a negative index is entered next to the clone command, the error message
@@ -178,51 +178,66 @@ Precise expected outputs on failure:
 * Parameters: INDEX (must be a positive integer)."
 * is returned to the user.
 
-![edit format](images/cloneinvalidindex.png)
+![edit format](images/clone-UG/cloneinvalidindex.png)
 
 * When the index entered is greater than the current number of contacts in the address book, the error message
 * “The person index provided is invalid.”
 * is returned to the user.
 
-![edit format](images/clonelargeindex.png)
+![edit format](images/clone-UG/clonelargeindex.png)
 
 * When the person at index entered has already been cloned in FAPro, the error message
 * “A clone of this person already exists.
 * To clone again, please edit the previous clone first or alternatively, clone the previous clone.”
 * is returned to the user.
 
-![edit format](images/clonebeforeerror.png)
+![edit format](images/clone-UG/clonebeforeerror.png)
 
 ### Deleting a person : `delete`
 
-Deletes a contact from FAPro at the specified index.
+Deletes a contact from FAPro at the specified indexes.
 
-Format: `delete INDEX`
-* Deletes the person at the specified `INDEX`.
+Format: `delete INDEX1 INDEX2 INDEX 3`
+* Deletes the person at `INDEX1`, `INDEX2' and `INDEX3'. (i.e if delete 1 2 3 is input, deletes person at index 1, index 2 and index 3 respectively)
 * The index refers to the index number shown in the displayed person list.
 
 Acceptable parameters for INDEX:
-* The index **must be a positive integer** 1, 2, 3, …​ (less than the size of the contact list in FAPro)
+* The indexes **must be a positive integers** 1, 2, 3, …​ (less than the size of the contact list in FAPro)
+* The indexes must have a space inbetween and no commas (i.e delete 1,2,3 is invalid)
 
 Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+* `list` followed by `delete 2 5` deletes the 2nd and 5th person in the address book.
 
 ![edit format](images/delete-UG/deleteformat.png)
 
 Precise expected outputs on success:
 
-* Message shown to user: "Deleted Person: X", where X are the details of the deleted person.
-* Size of address book is reduced by 1.
-* GUI reflects that deleted contact is now no longer there.
+* Message shown to user: "Deleted Person(s): X", where X are the details of the deleted persons.
+* Size of address book is reduced by however many indexes were entered. (i.e if you entered delete 2 3 4, as you entered 3 indexes, the size of the address book decreases by 3) 
+* GUI reflects that deleted contacts are now no longer there.
 
-![edit format](images/delete-UG/after_delete_success.png)
+![edit format](images/delete-UG/deleteafter.png)
 
 Precise expected outputs on failure:
-* Error message shown to the user: "The person index provided is invalid".
+
+* If any of the entered indexes are invalid:
+* Error message shown to the user:
+* "The person index provided is invalid."
 * GUI reflects that delete is in red font.
 
-![edit format](images/delete-UG/after_delete_failure.png)
+![edit format](images/delete-UG/deletewrongindex.png)
+
+* If no index is placed after the delete command
+* Error message shown to user:
+* "Invalid command format! 
+* delete: Deletes the person(s) identified by the index number used in the displayed person list.
+* Parameters: INDEXES (must be positive integers, separated by spaces)
+* Example: delete 1 3 5"
+* GUI reflects that delete is in red font.
+
+![edit format](images/delete-UG/deletenoindex.png)
 
 ### List out all contacts : `list`
 
@@ -278,19 +293,19 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 * Persons matching at least one keyword will be returned (i.e. `OR` search).
   e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
 
-![edit format](images/find0.png)
+![edit format](images/find-UG/find0.png)
 
 * Precise expected outputs on success:
 * Successful find message. ‘X persons listed!’’, where X is the number of contacts listed.
   The list of contacts whose names contain the input name is shown.
 
-![edit format](images/find1.png)
+![edit format](images/find-UG/find1.png)
 
 * Precise expected outputs on failure:
 * If no name is input after the find command, an error message explaining the error will be shown,
   reminding the user to follow the correct input format.
 
-![edit format](images/find2.png)
+![edit format](images/find-UG/find2.png)
 
 ### Locating persons by address: `find_add`
 
@@ -308,19 +323,19 @@ Format: `find_add KEYWORD [MORE_KEYWORDS]`
 Examples:
 * `find_add geylang` returns all users whose addresses contain `geylang`.
 
-![edit format](images/findadd0.png)
+![edit format](images/findadd-UG/findadd0.png)
 
 * Precise expected outputs on success:
 * Successful find message. ‘X persons listed!’’, where X is the number of contacts listed.
   The list of contacts whose address contains the input address is shown.
 
-![edit format](images/findadd1.png)
+![edit format](images/findadd-UG/findadd1.png)
 
 * Precise expected outputs on failure:
 * If no name is input after the find command, an error message explaining the error will be shown,
   reminding the user to follow the correct input format.
 
-![edit format](images/findadd2.png)
+![edit format](images/findadd-UG/findadd2.png)
 
 ### Undoing a command : `undo`
 
