@@ -31,6 +31,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.QuestionnaireCommand;
 import seedu.address.logic.commands.RiskProfileCommand;
 import seedu.address.logic.commands.SortCommand;
+import seedu.address.logic.commands.UFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -126,6 +127,24 @@ public class AddressBookParserTest {
     public void parseCommand_list() throws Exception {
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
         assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+    }
+
+    @Test
+    public void parseCommand_ufind_returnFind() throws Exception {
+        List<String> ufindKeywords = Arrays.asList("n/", "alice", "bobby");
+        List<String> findKeywords = Arrays.asList("alice", "bobby");
+        FindCommand command = (FindCommand) parser.parseCommand(
+                UFindCommand.COMMAND_WORD + " " + ufindKeywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindCommand(new NameContainsKeywordsPredicate(findKeywords)), command);
+    }
+
+    @Test
+    public void parseCommand_ufind_returnFindAdd() throws Exception {
+        List<String> ufindKeywords = Arrays.asList("a/", "tokyo", "geylang");
+        List<String> findAddKeywords = Arrays.asList("tokyo", "geylang");
+        FindAddCommand command = (FindAddCommand) parser.parseCommand(
+                UFindCommand.COMMAND_WORD + " " + ufindKeywords.stream().collect(Collectors.joining(" ")));
+        assertEquals(new FindAddCommand(new AddressContainsKeywordsPredicate(findAddKeywords)), command);
     }
 
     @Test
