@@ -83,7 +83,7 @@ public class CloneCommand extends Command {
      * @param personToClone The original Person object to be cloned.
      * @return A new Person object with the name having an incremented numeric suffix.
      */
-    public static Person clonePerson(Person personToClone){
+    public static Person clonePerson(Person personToClone) {
         String originalName = personToClone.getName().toString();
         String[] parts = splitStringAtLastSpace(originalName);
         int numericSuffix;
