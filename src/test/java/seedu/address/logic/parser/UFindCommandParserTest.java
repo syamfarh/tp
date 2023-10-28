@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.getErrorMessageForMultiplePrefixes;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -43,5 +44,10 @@ public class UFindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " a/ \n geylang \n \t Tokyo  \t", expectedFindAddCommand);
+    }
+
+    @Test
+    public void parse_multiplePrefix_throwsParseException() {
+        assertParseFailure(parser, " n/Alice a/geylang", getErrorMessageForMultiplePrefixes());
     }
 }
