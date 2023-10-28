@@ -21,7 +21,7 @@ public class FindAddCommandParserTest {
     }
 
     @Test
-    public void parse_validArgs_returnsFindCommand() {
+    public void parse_validArgs_returnsFindAddCommand() {
         // no leading and trailing whitespaces
         FindAddCommand expectedFindAddCommand =
                 new FindAddCommand(new AddressContainsKeywordsPredicate(Arrays.asList("geylang", "Tokyo")));

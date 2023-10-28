@@ -4,15 +4,25 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
+import java.util.stream.Stream;
+
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.UFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import java.util.stream.Stream;
+/**
+ * Parses the input arguments and creates a new FindCommand or FindAddCommand depending on user input prefix
+ */
+public class UFindCommandParser implements Parser<Command> {
 
-public class UFindCommandParser {
-
+    /**
+     * Parses the given {@code String} of arguments in the context of the UFindCommand
+     * and returns a FindCommand or FindAddCommand object for execution.
+     * @param args User input
+     * @return FindCommand or FindAddCommand depending on prefix user specified
+     * @throws ParseException if the user input does not conform with the expected format
+     */
     public Command parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS);
@@ -23,8 +33,7 @@ public class UFindCommandParser {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS);
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() &&
-        argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             throw new ParseException(Messages.getErrorMessageForMultiplePrefixes());
         }
 
