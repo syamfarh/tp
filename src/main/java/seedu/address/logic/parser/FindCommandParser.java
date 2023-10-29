@@ -2,6 +2,7 @@ package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_APPOINTMENTDATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
@@ -25,22 +26,32 @@ public class FindCommandParser implements Parser<Command> {
      */
     public Command parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_APPOINTMENTDATE);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME) && !arePrefixesPresent(argMultimap, PREFIX_ADDRESS)) {
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME) && !arePrefixesPresent(argMultimap, PREFIX_ADDRESS)
+                && !arePrefixesPresent(argMultimap, PREFIX_APPOINTMENTDATE)) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS, PREFIX_APPOINTMENTDATE);
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent() && argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+        if (argMultimap.getValue(PREFIX_NAME).isPresent()
+                && argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            throw new ParseException(Messages.getErrorMessageForMultiplePrefixes());
+        } else if (argMultimap.getValue(PREFIX_NAME).isPresent()
+                && argMultimap.getValue(PREFIX_APPOINTMENTDATE).isPresent()) {
+            throw new ParseException(Messages.getErrorMessageForMultiplePrefixes());
+        } else if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()
+                && argMultimap.getValue(PREFIX_APPOINTMENTDATE).isPresent()) {
             throw new ParseException(Messages.getErrorMessageForMultiplePrefixes());
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
             return new FindNameCommandParser().parse(argMultimap.getValue(PREFIX_NAME).get());
-        } else {
+        } else if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             return new FindAddCommandParser().parse(argMultimap.getValue(PREFIX_ADDRESS).get());
+        } else {
+            return new CalendarCommandParser().parse(argMultimap.getValue(PREFIX_APPOINTMENTDATE).get());
         }
     }
 

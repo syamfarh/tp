@@ -76,6 +76,9 @@ public class AddressBookParser {
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
+        case FindCommand.COMMAND_WORD:
+            return new FindCommandParser().parse(arguments);
+
         case FindNameCommand.COMMAND_WORD:
             return new FindNameCommandParser().parse(arguments);
 
@@ -99,9 +102,6 @@ public class AddressBookParser {
 
         case RiskProfileCommand.COMMAND_WORD:
             return new RiskProfileCommandParser().parse(arguments);
-
-        case FindCommand.COMMAND_WORD:
-            return new FindCommandParser().parse(arguments);
 
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();

@@ -9,10 +9,12 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.CalendarCommand;
 import seedu.address.logic.commands.FindAddCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.CalendarContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 public class FindCommandParserTest {
@@ -44,6 +46,17 @@ public class FindCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " a/ \n geylang \n \t Tokyo  \t", expectedFindAddCommand);
+    }
+
+    @Test
+    public void parse_validArgs_returnsCalendarCommand() {
+        // no leading and trailing whitespaces
+        CalendarCommand expectedCalendarCommand =
+                new CalendarCommand(new CalendarContainsKeywordsPredicate(Arrays.asList("2023-12-12")));
+        assertParseSuccess(parser, " appt/2023-12-12", expectedCalendarCommand);
+
+        // multiple whitespaces between keywords
+        assertParseSuccess(parser, " appt/ \n 2023-12-12", expectedCalendarCommand);
     }
 
     @Test
