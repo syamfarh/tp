@@ -38,7 +38,7 @@ public class UFindCommandParser implements Parser<Command> {
         }
 
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            return new FindCommandParser().parse(argMultimap.getValue(PREFIX_NAME).get());
+            return new FindNameCommandParser().parse(argMultimap.getValue(PREFIX_NAME).get());
         } else {
             return new FindAddCommandParser().parse(argMultimap.getValue(PREFIX_ADDRESS).get());
         }
