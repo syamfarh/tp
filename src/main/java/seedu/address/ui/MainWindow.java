@@ -37,6 +37,8 @@ public class MainWindow extends UiPart<Stage> {
 
     private QuestionnaireWindow questionnaireWindow;
 
+    private CalendarWindow calendarWindow;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
@@ -44,6 +46,9 @@ public class MainWindow extends UiPart<Stage> {
     private MenuItem helpMenuItem;
     @FXML
     private MenuItem questionnaireMenuItem;
+
+    @FXML
+    private MenuItem calendarMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -71,6 +76,7 @@ public class MainWindow extends UiPart<Stage> {
 
         helpWindow = new HelpWindow();
         questionnaireWindow = new QuestionnaireWindow();
+        calendarWindow = new CalendarWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -80,6 +86,7 @@ public class MainWindow extends UiPart<Stage> {
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
         setAccelerator(questionnaireMenuItem, KeyCombination.valueOf("F2"));
+        setAccelerator(calendarMenuItem, KeyCombination.valueOf("F3"));
     }
 
 
@@ -165,6 +172,19 @@ public class MainWindow extends UiPart<Stage> {
             questionnaireWindow.focus();
         }
     }
+
+    /**
+     * Opens the calendar window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleCalendar() {
+        if (!calendarWindow.isShowing()) {
+            calendarWindow.show();
+        } else {
+            calendarWindow.focus();
+        }
+    }
+
 
     void show() {
         primaryStage.show();

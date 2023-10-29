@@ -185,7 +185,6 @@ public class CloneCommandTest {
         assertEquals(CloneCommand.MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE, thrownException.getMessage());
     }
 
-
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
