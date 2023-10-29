@@ -12,7 +12,8 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names/addresses contain "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names/addresses/"
+            + "appointment dates contain "
             + "any of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: n/ or a/ or appt/ KEYWORD [MORE_KEYWORDS]...\n"
             + "Note: You can only search for either name or address or appointment date at one time.\n"
