@@ -8,15 +8,17 @@ import seedu.address.model.Model;
  * Name or address searched depends on prefix in user input.
  * Keyword matching is case-insensitive.
  */
-public class UFindCommand extends Command {
+public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "ufind";
+    public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names/addresses contain "
             + "any of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: n/ or a/ KEYWORD [MORE_KEYWORDS]...\n"
-            + "Note: You can only search for either name or address at one time.\n"
-            + "Example: " + COMMAND_WORD + " n/ alice bob charlie";
+            + "Parameters: n/ or a/ or appt/ KEYWORD [MORE_KEYWORDS]...\n"
+            + "Note: You can only search for either name or address or appointment date at one time.\n"
+            + "Example 1: " + COMMAND_WORD + " n/ alice bob\n"
+            + "Example 2: " + COMMAND_WORD + " a/ tokyo geylang\n"
+            + "Example 3: " + COMMAND_WORD + " appt/ 2023-10-31";
 
     // main functionality of finding either by name or address lies within the individual find features
     // themselves, this method has no functionality

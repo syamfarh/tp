@@ -25,13 +25,13 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindAddCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.QuestionnaireCommand;
 import seedu.address.logic.commands.RiskProfileCommand;
 import seedu.address.logic.commands.SortCommand;
-import seedu.address.logic.commands.UFindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
@@ -134,7 +134,7 @@ public class AddressBookParserTest {
         List<String> ufindKeywords = Arrays.asList("n/", "alice", "bobby");
         List<String> findKeywords = Arrays.asList("alice", "bobby");
         FindNameCommand command = (FindNameCommand) parser.parseCommand(
-                UFindCommand.COMMAND_WORD + " " + ufindKeywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " " + ufindKeywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindNameCommand(new NameContainsKeywordsPredicate(findKeywords)), command);
     }
 
@@ -143,7 +143,7 @@ public class AddressBookParserTest {
         List<String> ufindKeywords = Arrays.asList("a/", "tokyo", "geylang");
         List<String> findAddKeywords = Arrays.asList("tokyo", "geylang");
         FindAddCommand command = (FindAddCommand) parser.parseCommand(
-                UFindCommand.COMMAND_WORD + " " + ufindKeywords.stream().collect(Collectors.joining(" ")));
+                FindCommand.COMMAND_WORD + " " + ufindKeywords.stream().collect(Collectors.joining(" ")));
         assertEquals(new FindAddCommand(new AddressContainsKeywordsPredicate(findAddKeywords)), command);
     }
 

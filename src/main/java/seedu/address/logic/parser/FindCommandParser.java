@@ -8,13 +8,13 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.UFindCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Parses the input arguments and creates a new FindCommand or FindAddCommand depending on user input prefix
  */
-public class UFindCommandParser implements Parser<Command> {
+public class FindCommandParser implements Parser<Command> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the UFindCommand
@@ -28,7 +28,7 @@ public class UFindCommandParser implements Parser<Command> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ADDRESS);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME) && !arePrefixesPresent(argMultimap, PREFIX_ADDRESS)) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, UFindCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_ADDRESS);

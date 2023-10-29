@@ -10,18 +10,18 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindAddCommand;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindNameCommand;
-import seedu.address.logic.commands.UFindCommand;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 
-public class UFindCommandParserTest {
+public class FindCommandParserTest {
 
-    private UFindCommandParser parser = new UFindCommandParser();
+    private FindCommandParser parser = new FindCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, UFindCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommand.MESSAGE_USAGE));
     }
 
     @Test
