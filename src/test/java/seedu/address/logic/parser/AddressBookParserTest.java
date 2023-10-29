@@ -130,7 +130,7 @@ public class AddressBookParserTest {
     }
 
     @Test
-    public void parseCommand_ufind_returnFind() throws Exception {
+    public void parseCommand_ufind_returnFindName() throws Exception {
         List<String> ufindKeywords = Arrays.asList("n/", "alice", "bobby");
         List<String> findKeywords = Arrays.asList("alice", "bobby");
         FindNameCommand command = (FindNameCommand) parser.parseCommand(
