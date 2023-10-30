@@ -8,7 +8,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_NINTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_TENTH_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -19,7 +21,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
 
 public class CloneCommandTest {
@@ -27,12 +28,12 @@ public class CloneCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
+    public void execute_validIndexUnfilteredListSpacesNoSuffix_success() {
         Person personToClone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         CloneCommand cloneCommand = new CloneCommand(INDEX_FIRST_PERSON);
 
         // Creating the expected cloned person
-        Person expectedClonedPerson = clonePerson(personToClone);
+        Person expectedClonedPerson = CloneCommand.clonePerson(personToClone);
 
         StringBuilder builder = new StringBuilder();
         builder.append(personToClone.getName())
@@ -52,6 +53,74 @@ public class CloneCommandTest {
 
         String expectedMessage = String.format(CloneCommand.MESSAGE_CLONE_PERSON_SUCCESS,
             expectedClonedPersonS); // Only compare the name
+
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addPerson(expectedClonedPerson);
+
+        assertCommandSuccess(cloneCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredListNoSpacesNoSuffix_success() {
+        Person personToClone = model.getFilteredPersonList().get(INDEX_NINTH_PERSON.getZeroBased());
+        CloneCommand cloneCommand = new CloneCommand(INDEX_NINTH_PERSON);
+
+        // Creating the expected cloned person
+        Person expectedClonedPerson = CloneCommand.clonePerson(personToClone);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(personToClone.getName())
+                .append("; Phone: ")
+                .append(expectedClonedPerson.getPhone())
+                .append("; Email: ")
+                .append(expectedClonedPerson.getEmail())
+                .append("; Occupation: ")
+                .append(expectedClonedPerson.getOccupation())
+                .append("; Address: ")
+                .append(expectedClonedPerson.getAddress())
+                .append("; AppointmentDate: ")
+                .append(expectedClonedPerson.getApptDate())
+                .append("; Tags: ");
+        expectedClonedPerson.getTags().forEach(builder::append);
+        String expectedClonedPersonS = builder.toString();
+
+        String expectedMessage = String.format(CloneCommand.MESSAGE_CLONE_PERSON_SUCCESS,
+                expectedClonedPersonS); // Only compare the name
+
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addPerson(expectedClonedPerson);
+
+        assertCommandSuccess(cloneCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredListSpacesSuffix_success() {
+        Person personToClone = model.getFilteredPersonList().get(INDEX_TENTH_PERSON.getZeroBased());
+        CloneCommand cloneCommand = new CloneCommand(INDEX_TENTH_PERSON);
+
+        // Creating the expected cloned person
+        Person expectedClonedPerson = CloneCommand.clonePerson(personToClone);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(personToClone.getName())
+                .append("; Phone: ")
+                .append(expectedClonedPerson.getPhone())
+                .append("; Email: ")
+                .append(expectedClonedPerson.getEmail())
+                .append("; Occupation: ")
+                .append(expectedClonedPerson.getOccupation())
+                .append("; Address: ")
+                .append(expectedClonedPerson.getAddress())
+                .append("; AppointmentDate: ")
+                .append(expectedClonedPerson.getApptDate())
+                .append("; Tags: ");
+        expectedClonedPerson.getTags().forEach(builder::append);
+        String expectedClonedPersonS = builder.toString();
+
+        String expectedMessage = String.format(CloneCommand.MESSAGE_CLONE_PERSON_SUCCESS,
+                expectedClonedPersonS); // Only compare the name
 
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
@@ -116,34 +185,12 @@ public class CloneCommandTest {
         assertEquals(CloneCommand.MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE, thrownException.getMessage());
     }
 
-
     @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
         CloneCommand cloneCommand = new CloneCommand(targetIndex);
         String expected = CloneCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, cloneCommand.toString());
-    }
-
-    /**
-     * Creates a cloned person based on the given person.
-     */
-    private Person clonePerson(Person personToClone) {
-        int numericSuffix;
-        String numericSuffixStr = personToClone.getName().toString().replaceAll("[^0-9]", "");
-        String nameWithoutNumbers = personToClone.getName().toString().replaceAll("[0-9]", "");
-        if (numericSuffixStr.isEmpty()) {
-            numericSuffix = 0;
-        } else {
-            numericSuffix = Integer.parseInt(numericSuffixStr);
-        }
-        numericSuffix++;
-        String updatedNumericSuffixStr = String.valueOf(numericSuffix);
-        Name clonedName = new Name(nameWithoutNumbers + " " + updatedNumericSuffixStr);
-        Person clonedPerson = new Person(clonedName, personToClone.getPhone(), personToClone.getEmail(),
-                personToClone.getOccupation(), personToClone.getAddress(), personToClone.getApptDate(),
-                personToClone.getTags());
-        return clonedPerson;
     }
 
     /**

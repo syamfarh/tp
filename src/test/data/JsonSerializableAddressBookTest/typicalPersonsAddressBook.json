@@ -1,12 +1,31 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
   "persons" : [ {
+    "name" : "Simon 1",
+    "phone" : "94932143",
+    "email" : "simon@example.com",
+    "occupation" : "Fisherman",
+    "address" : "123, Jurong West Ave 4, #08-111",
+    "appointmentDate" : "",
+    "riskProfile" : "a,a,b,b,b,d,e,c",
+    "tags" : [ "friends" ]
+  }, {
+    "name" : "Paul",
+    "phone" : "94352433",
+    "email" : "paul@example.com",
+    "occupation" : "Golfer",
+    "address" : "123, Jurong West Ave 5, #08-111",
+    "appointmentDate" : "",
+    "riskProfile" : "a,a,b,b,b,d,e,c",
+    "tags" : [ "friends" ]
+  }, {
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "occupation" : "Barber",
     "address" : "123, Jurong West Ave 6, #08-111",
     "appointmentDate" : "",
+    "riskProfile" : "a,a,b,b,b,d,e,c",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -15,6 +34,7 @@
     "occupation" : "Musician",
     "address" : "311, Clementi Ave 2, #02-25",
     "appointmentDate" : "",
+    "riskProfile" : "d,c,a,e,b,b,c,a",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -23,6 +43,7 @@
     "occupation" : "Sheep Farmer",
     "address" : "wall street",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -31,6 +52,7 @@
     "occupation" : "Lecturer",
     "address" : "10th street",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -39,6 +61,7 @@
     "occupation" : "Seamstress",
     "address" : "michegan ave",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -47,6 +70,7 @@
     "occupation" : "Princess",
     "address" : "little tokyo",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags" : [ ]
   }, {
     "name" : "George Best",
@@ -55,6 +79,7 @@
     "address" : "4th street",
     "occupation" : "Zoologist",
     "appointmentDate" : "",
+    "riskProfile" : "",
     "tags" : [ ]
   }, {
     "name" : "John Doe",
@@ -62,7 +87,8 @@
     "email" : "john@example.com",
     "occupation" : "Chef",
     "address" : "Block 222, John Street 2",
-    "appointmentDate" :  "2023-12-12",
+    "appointmentDate" :  "2023-12-12 08:30",
+    "riskProfile" : "",
     "tags" : [ ]
   } ]
 }

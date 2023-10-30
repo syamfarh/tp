@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.Scene?>
+<?import java.net.URL?>
+
+<fx:root resizable="false" title="Risk Assessment Questionnaire" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+    <icons>
+        <Image url="@/images/questionnaire_icon.png" />
+    </icons>
+    <scene>
+        <Scene>
+            <stylesheets>
+                <URL value="@QuestionnaireWindow.css" />
+            </stylesheets>
+
+            <VBox alignment="CENTER_LEFT" fx:id="questionnaireMessageContainer">
+                <ScrollPane maxHeight="600">
+                    <VBox spacing="10">
+                        <Label fx:id="marks" text="Label">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Label>
+                        <Label fx:id="questionnaireMessage" text="Label">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Label>
+                        <Label fx:id="riskCategory" text="Label">
+                            <HBox.margin>
+                                <Insets right="5.0" />
+                            </HBox.margin>
+                        </Label>
+                        <opaqueInsets>
+                            <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                        </opaqueInsets>
+                        <padding>
+                            <Insets bottom="10.0" left="5.0" right="10.0" top="5.0" />
+                        </padding>
+                    </VBox>
+                </ScrollPane>
+            </VBox>
+        </Scene>
+    </scene>
+</fx:root>

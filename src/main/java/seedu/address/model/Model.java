@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -115,6 +116,13 @@ public interface Model {
     int getDeletedPersonsSize();
 
     /**
+     * Returns a list of persons that have been previously deleted.
+     *
+     * @return A list of Person objects representing previously deleted persons.
+     */
+    ArrayList<Person> getDeletedPersons();
+
+    /**
      * Returns the number of undoable commands in the previousUndoableCommands ArrayList.
      */
     int getPreviousUndoableCommandsSize();
@@ -170,4 +178,24 @@ public interface Model {
      * from the editedPersons ArrayList.
      */
     void removeEditedPersonsPair();
+
+    /**
+     * Stores the number of deletes associated with a delete command in a queue
+     */
+    void storeDeletedNumberList(int deletedNumber);
+
+    /**
+     * Returns the number associated with the last delete command
+     */
+    Integer getLastDeletedNumber();
+
+    /**
+     * Returns the deleted number list
+     */
+    ArrayList<Integer> getDeletedNumberList();
+
+    /**
+     * Removes the last number from the number list
+     */
+    void removeLastNumber();
 }
