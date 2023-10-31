@@ -83,10 +83,13 @@ public class CalendarWindow extends UiPart<Stage> {
                 switch (event.getCode()) {
                 case LEFT:
                     System.out.println("here");
-                    calendarView.getMonthPage().goForward();
+                    calendarView.getMonthPage().goBack();
                     break;
                 case RIGHT:
-                    calendarView.getMonthPage().goBack();
+                    calendarView.getMonthPage().goForward();
+                    break;
+                case ENTER:
+                    calendarView.getMonthPage().goToday();
                     break;
                 default:
                     break;
