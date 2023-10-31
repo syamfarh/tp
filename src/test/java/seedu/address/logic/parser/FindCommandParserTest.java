@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CalendarCommand;
 import seedu.address.logic.commands.FindAddCommand;
+import seedu.address.logic.commands.FindApptCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.model.person.AddressContainsKeywordsPredicate;
@@ -51,8 +52,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_validArgs_returnsCalendarCommand() {
         // no leading and trailing whitespaces
-        CalendarCommand expectedCalendarCommand =
-                new CalendarCommand(new CalendarContainsKeywordsPredicate(Arrays.asList("2023-12-12")));
+        FindApptCommand expectedCalendarCommand =
+                new FindApptCommand(new CalendarContainsKeywordsPredicate(Arrays.asList("2023-12-12")));
         assertParseSuccess(parser, " appt/2023-12-12", expectedCalendarCommand);
 
         // multiple whitespaces between keywords
