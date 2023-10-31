@@ -8,11 +8,16 @@ import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_ADD_SUCCESS;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_CLEAR_SUCCESS;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_DELETE_SUCCESS;
 import static seedu.address.logic.commands.UndoCommand.MESSAGE_UNDO_EDIT_SUCCESS;
+import static seedu.address.testutil.TypicalIndexes.FIRST_INDEXES;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -32,19 +37,36 @@ public class UndoCommandTest {
 
 
     @Test
-    public void execute_undoDelete_success() {
-        Person personToDelete = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-
+    public void execute_undoDelete_success() throws CommandException {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedModel.deletePerson(personToDelete);
+        List<Person> personsToDelete = new ArrayList<>();
+        List<Index> indexesToDelete = FIRST_INDEXES;
 
-        String expectedResult = String.format(MESSAGE_UNDO_DELETE_SUCCESS, Messages.format(personToDelete));
-        expectedModel.undoDelete();
+        DeleteCommand deleteCommand = new DeleteCommand(indexesToDelete);
 
-        model.deletePerson(personToDelete);
-        model.storePreviousUndoableCommand("delete");
+        for (Index targetIndex : FIRST_INDEXES) {
+            Person personToDelete = model.getFilteredPersonList().get(targetIndex.getZeroBased());
+            personsToDelete.add(personToDelete);
+        }
+
+        String expectedResult = String.format(MESSAGE_UNDO_DELETE_SUCCESS, Messages.formatPersons(personsToDelete));
+
+        deleteCommand.execute(expectedModel);
+
+        for (Person deletedPerson : personsToDelete) {
+            expectedModel.addPerson(deletedPerson);
+            expectedModel.removeDeletedPerson();
+            expectedModel.removePreviousUndoableCommand();
+        }
+
+        expectedModel.removeLastNumber();
+
+        deleteCommand.execute(model);
+
         assertCommandSuccess(undoCommand, model, expectedResult, expectedModel);
     }
+
+
 
     @Test
     public void execute_undoClear_success() throws CommandException {
@@ -53,6 +75,7 @@ public class UndoCommandTest {
 
         String expectedResult = String.format(MESSAGE_UNDO_CLEAR_SUCCESS);
         clearCommand.execute(expectedModel);
+
         while (expectedModel.getDeletedPersonsSize() > expectedModel.getNumberOfPreviousDeleteCommands()) {
             expectedModel.undoDelete();
         }
