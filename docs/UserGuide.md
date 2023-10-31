@@ -150,46 +150,45 @@ Examples:
 
 Clones a contact from FAPro at the specified index.
 
-Format: `clone INDEX`
-* Clones the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+#### Format:
+`clone INDEX`
+* Clones the person at the specified `INDEX`
+* The index refers to the index number shown in the displayed person list
 
-Examples:
-* `list` followed by `clone 2` clones the 2nd person in the address book.
-* `find Betsy` followed by `clone 1` clones the 1st person in the results of the `find` command.
+#### Example commands:
+* `list` followed by `clone 2` clones the 2nd person in the address book
+* `find Betsy` followed by `clone 1` clones the 1st person in the results of the `find` command
 
-Acceptable parameters for INDEX:
-* Only accept **non-negative** int values that are less than the size of the address book. Cannot be 0. Index must be for a contact that has not already been cloned.
+#### Acceptable parameters for INDEX:
+* Only accept **non-negative** int values that are less than the size of the address book. Cannot be 0. Index must be for a contact that has not already been cloned
 
 ![edit format](images/cloneformat.png)
 
-Precise expected outputs on success:
-* Message shown to the user: "Cloned Person: X", where X are the details of the person who was cloned.
+#### Precise expected outputs on success:
+* Message shown to the user: "Cloned Person: X", where X are the details of the person who was cloned
 * For example, if
-* "Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:" was cloned, then the output is
+* "Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:" is the person being cloned, then the output is
 * "Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags: "
 
 ![edit format](images/cloneresult.png)
 
-Precise expected outputs on failure:
-* When no index, zero or a negative index is entered next to the clone command, the error message
-* "Invalid command format!
-* clone: Clones the person identified by the index number used in the displayed person list.
-* Parameters: INDEX (must be a positive integer)."
-* is returned to the user.
+#### Precise expected outputs on failure:
+
+When no index, zero or a negative index is entered next to the clone command, the error message
+* "Invalid command format! clone: Clones the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer)."
+is returned to the user
 
 ![edit format](images/cloneinvalidindex.png)
 
-* When the index entered is greater than the current number of contacts in the address book, the error message
+When the index entered is greater than the current number of contacts in the address book, the error message
 * “The person index provided is invalid.”
-* is returned to the user.
+is returned to the user
 
 ![edit format](images/clonelargeindex.png)
 
-* When the person at index entered has already been cloned in FAPro, the error message
-* “A clone of this person already exists.
-* To clone again, please edit the previous clone first or alternatively, clone the previous clone.”
-* is returned to the user.
+When the person at index entered has already been cloned in FAPro, the error message
+* “A clone of this person already exists. To clone again, please edit the previous clone first or alternatively, clone the previous clone.”
+is returned to the user
 
 ![edit format](images/clonebeforeerror.png)
 
