@@ -20,16 +20,21 @@ public class CommandResult {
     /** Risk Assessment Questionnaire  should be shown to the user. */
     private final boolean showQuestionnaire;
 
+    /** Risk Assessment Questionnaire  should be shown to the user. */
+    private final boolean showCalendar;
+
     /** The application should exit. */
     private final boolean exit;
 
     /**
      * Constructs a {@code CommandResult} with the specified fields.
      */
-    public CommandResult(String feedbackToUser, boolean showHelp, boolean showQuestionnaire, boolean exit) {
+    public CommandResult(String feedbackToUser, boolean showHelp, boolean showQuestionnaire,
+                         boolean showCalendar, boolean exit) {
         this.feedbackToUser = requireNonNull(feedbackToUser);
         this.showHelp = showHelp;
         this.showQuestionnaire = showQuestionnaire;
+        this.showCalendar = showCalendar;
         this.exit = exit;
     }
 
@@ -38,7 +43,8 @@ public class CommandResult {
      * and other fields set to their default value.
      */
     public CommandResult(String feedbackToUser) {
-        this(feedbackToUser, false, false, false);
+        this(feedbackToUser, false,
+                false, false, false);
     }
 
     public String getFeedbackToUser() {
@@ -53,6 +59,9 @@ public class CommandResult {
         return showQuestionnaire;
     }
 
+    public boolean isShowCalendar() {
+        return showCalendar;
+    }
     public boolean isExit() {
         return exit;
     }
@@ -72,12 +81,13 @@ public class CommandResult {
         return feedbackToUser.equals(otherCommandResult.feedbackToUser)
                 && showHelp == otherCommandResult.showHelp
                 && showQuestionnaire == otherCommandResult.showQuestionnaire
+                && showCalendar == otherCommandResult.showCalendar
                 && exit == otherCommandResult.exit;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(feedbackToUser, showHelp, showQuestionnaire, exit);
+        return Objects.hash(feedbackToUser, showHelp, showQuestionnaire, showCalendar, exit);
     }
 
     @Override
@@ -86,6 +96,7 @@ public class CommandResult {
                 .add("feedbackToUser", feedbackToUser)
                 .add("showHelp", showHelp)
                 .add("showQuestionnaire", showQuestionnaire)
+                .add("showCalendar", showCalendar)
                 .add("exit", exit)
                 .toString();
     }
