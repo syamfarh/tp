@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
@@ -22,6 +23,7 @@ public class DateTimeParser {
      */
     public static LocalDateTime convertDate(String date) {
         DateTimeFormatter dateTimeFormatter = STRINGTODATETIME.toFormatter();
+        LocalDateTime.parse(date, dateTimeFormatter);
         return LocalDateTime.parse(date, dateTimeFormatter);
     }
     /**
