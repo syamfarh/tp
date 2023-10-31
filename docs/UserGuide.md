@@ -252,13 +252,13 @@ Examples:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
 
-![edit format](images/editformat.png)
+![edit format](images/edit-UG/editformat.png)
 
 * Precise expected outputs on success:
 * Successful addition message. ‘Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], Occupation:[OCCUPATION], Address:[ADDRESS]…’
 * The new entry is displayed in the address book GUI.
 
-![edit format](images/editresult.png)
+![edit format](images/edit-UG/editresult.png)
 
 * Precise expected outputs on failure:
 * If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
