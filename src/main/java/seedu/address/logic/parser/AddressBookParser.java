@@ -67,7 +67,6 @@ public class AddressBookParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-            
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
@@ -88,7 +87,7 @@ public class AddressBookParser {
 
         case QuestionnaireCommand.COMMAND_WORD:
             return new QuestionnaireCommand();
-            
+
         case CalendarCommand.COMMAND_WORD:
             return new CalendarCommand();
             

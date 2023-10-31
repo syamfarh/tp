@@ -9,7 +9,6 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.commands.CalendarCommand;
 import seedu.address.logic.commands.FindAddCommand;
 import seedu.address.logic.commands.FindApptCommand;
 import seedu.address.logic.commands.FindCommand;
