@@ -1,58 +1,30 @@
 package seedu.address.logic.commands;
 
-import static java.util.Objects.requireNonNull;
-
-import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose name contains any of the argument keywords.
- * Keyword matching is case insensitive.
+ * Finds and lists all persons in address book whose name or address contains any of the argument keywords.
+ * Name or address searched depends on prefix in user input.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " alice bob charlie";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose names/addresses/"
+            + "appointment dates contain "
+            + "any of the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
+            + "Parameters: n/ or a/ or appt/ KEYWORD [MORE_KEYWORDS]...\n"
+            + "Note: You can only search for either name or address or appointment date at one time.\n"
+            + "Example 1: " + COMMAND_WORD + " n/ alice bob\n"
+            + "Example 2: " + COMMAND_WORD + " a/ tokyo geylang\n"
+            + "Example 3: " + COMMAND_WORD + " appt/ 2023-10-31";
 
-    private final NameContainsKeywordsPredicate predicate;
-
-    public FindCommand(NameContainsKeywordsPredicate predicate) {
-        this.predicate = predicate;
-    }
-
+    // main functionality of finding either by name or address lies within the individual find features
+    // themselves, this method has no functionality
     @Override
-    public CommandResult execute(Model model) {
-        requireNonNull(model);
-        model.updateFilteredPersonList(predicate);
-        return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-
-        // instanceof handles nulls
-        if (!(other instanceof FindCommand)) {
-            return false;
-        }
-
-        FindCommand otherFindCommand = (FindCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this)
-                .add("predicate", predicate)
-                .toString();
+    public CommandResult execute(Model model) throws CommandException {
+        throw new CommandException("This method is not meant to be called!");
     }
 }

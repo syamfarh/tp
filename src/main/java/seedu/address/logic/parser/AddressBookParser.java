@@ -10,14 +10,12 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.CalendarCommand;
-import seedu.address.logic.commands.FindApptCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.CloneCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindAddCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -69,18 +67,12 @@ public class AddressBookParser {
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
-
-        case FindApptCommand.COMMAND_WORD:
-            return new CalendarCommandParser().parse(arguments);
-
+            
         case ClearCommand.COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
-
-        case FindAddCommand.COMMAND_WORD:
-            return new FindAddCommandParser().parse(arguments);
 
         case CloneCommand.COMMAND_WORD:
             return new CloneCommandParser().parse(arguments);
@@ -96,14 +88,16 @@ public class AddressBookParser {
 
         case QuestionnaireCommand.COMMAND_WORD:
             return new QuestionnaireCommand();
+            
         case CalendarCommand.COMMAND_WORD:
             return new CalendarCommand();
+            
         case RiskProfileCommand.COMMAND_WORD:
             return new RiskProfileCommandParser().parse(arguments);
-
+            
         case UndoCommand.COMMAND_WORD:
             return new UndoCommand();
-
+            
         case SortCommand.COMMAND_WORD:
             return new SortCommandParser().parse(arguments);
 
