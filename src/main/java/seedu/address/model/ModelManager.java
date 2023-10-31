@@ -265,7 +265,16 @@ public class ModelManager implements Model {
         this.removeAddedPerson();
     }
 
+    @Override
+    public void undoEdit() {
+        Pair<Person, Person> pairToRestore = this.getEditedPersonsPair();
 
+        Person editedPerson = pairToRestore.getKey();
+        Person originalPerson = pairToRestore.getValue();
+
+        this.setPerson(editedPerson, originalPerson);
+        this.removeEditedPersonsPair();
+    }
 
 
 

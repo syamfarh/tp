@@ -79,6 +79,8 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -152,9 +154,16 @@ public interface Model {
     void undoAdd();
 
     /**
+     * Undoes the most recent edit command.
+     * This method should only be invoked when the previous command is an edit command.
+     */
+    void undoEdit();
+
+    /**
      * Stores the command as a String into the previousUndoableCommands ArrayList.
      * @param s the command as a String
      */
+
     void storePreviousUndoableCommand(String s);
 
     /**
