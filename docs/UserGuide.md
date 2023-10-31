@@ -197,39 +197,39 @@ Precise expected outputs on failure:
 
 Deletes a contact from FAPro at the specified indexes.
 
-Format: `delete INDEX1 INDEX2 INDEX 3`
+#### Format: `delete INDEX1 INDEX2 INDEX 3`
 * Deletes the person at `INDEX1`, `INDEX2' and `INDEX3'. (i.e if delete 1 2 3 is input, deletes person at index 1, index 2 and index 3 respectively)
-* The index refers to the index number shown in the displayed person list.
+* The index refers to the index number shown in the displayed person list
 
-Acceptable parameters for INDEX:
-* The indexes **must be a positive integers** 1, 2, 3, …​ (less than the size of the contact list in FAPro)
+#### Acceptable parameters for INDEX:
+* The indexes **must be a positive integers** 1 2 3 …​ (less than the size of the contact list in FAPro)
 * The indexes must have a space inbetween and no commas (i.e delete 1,2,3 is invalid)
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
-* `list` followed by `delete 2 5` deletes the 2nd and 5th person in the address book.
+#### Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command
+* `list` followed by `delete 2 5` deletes the 2nd and 5th person in the address book
 
 ![edit format](images/delete-UG/deleteformat.png)
 
-Precise expected outputs on success:
+#### Precise expected outputs on success:
 
-* Message shown to user: "Deleted Person(s): X", where X are the details of the deleted persons.
+* Message shown to user: "Deleted Person(s): X", where X are the details of the deleted persons
 * Size of address book is reduced by however many indexes were entered. (i.e if you entered delete 2 3 4, as you entered 3 indexes, the size of the address book decreases by 3) 
-* GUI reflects that deleted contacts are now no longer there.
+* GUI reflects that deleted contacts are now no longer there
 
 ![edit format](images/delete-UG/deleteafter.png)
 
-Precise expected outputs on failure:
+#### Precise expected outputs on failure:
 
-* If any of the entered indexes are invalid:
+If any of the entered indexes are invalid:
 * Error message shown to the user:
 * "The person index provided is invalid."
-* GUI reflects that delete is in red font.
+* GUI reflects that delete is in red font
 
 ![edit format](images/delete-UG/deletewrongindex.png)
 
-* If no index is placed after the delete command
+If no index is placed after the delete command
 * Error message shown to user:
 * "Invalid command format! 
 * delete: Deletes the person(s) identified by the index number used in the displayed person list.
@@ -296,7 +296,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 ![edit format](images/find-UG/find0.png)
 
 * Precise expected outputs on success:
-* Successful find message. ‘X persons listed!’’, where X is the number of contacts listed.
+* Successful find message. ‘X persons listed!’, where X is the number of contacts listed.
   The list of contacts whose names contain the input name is shown.
 
 ![edit format](images/find-UG/find1.png)
@@ -326,7 +326,7 @@ Examples:
 ![edit format](images/findadd-UG/findadd0.png)
 
 * Precise expected outputs on success:
-* Successful find message. ‘X persons listed!’’, where X is the number of contacts listed.
+* Successful find message. ‘X persons listed!’, where X is the number of contacts listed.
   The list of contacts whose address contains the input address is shown.
 
 ![edit format](images/findadd-UG/findadd1.png)
@@ -526,7 +526,7 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 | **Calendar**     | `cal KEYWORD`<br> e.g., `cal 2023-12-12`                                                                                                                                                  |
 | **Clone**        | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                         |
 | **Clear**        | `clear`                                                                                                                                                                                   |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                       |
+| **Delete**       | `delete INDEXES`<br> e.g., `delete 1 2 3`                                                                                                                                                       |
 | **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                |
 | **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
 | **Find Address** | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                        |
