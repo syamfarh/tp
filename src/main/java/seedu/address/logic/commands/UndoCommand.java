@@ -84,8 +84,7 @@ public class UndoCommand extends Command {
         for (Person deletedPerson : undoDeletedPersons) {
             model.addPerson(deletedPerson);
             model.removeDeletedPerson();
-            model.removePreviousUndoableCommand(); //could result in some buggy behaviour, since we remove 3 undoable
-            // commands.
+            model.removePreviousUndoableCommand();
         }
 
 
@@ -117,10 +116,6 @@ public class UndoCommand extends Command {
      */
     public CommandResult executeUndoAdd(Model model) {
 
-
-        //List<Person> lastShownList = model.getFilteredPersonList();
-        //int lastIndex = model.getAddressBookSize() - 1;
-        //Person personToDelete = lastShownList.get(lastIndex);
         Person personToDelete = model.getAddedPerson();
         model.undoAdd();
         model.removePreviousUndoableCommand();
