@@ -83,7 +83,7 @@ Precise command format: `calendar`
 Precise expected outcome on success:
 A pop-up of a new window that how the calendar window in a month-to-month page.
 
-![help window]()
+![calendar window](images/calendarWindow.png)
 
 ### Adding a person: `add`
 
@@ -183,9 +183,8 @@ Precise expected outputs on success:
 ![clone format](images/cloneresult.png)
 
 Precise expected outputs on failure:
-* When no index, zero or a negative index is entered next to the clone command, the error message
-* "Invalid command format!
-* clone: Clones the person identified by the index number used in the displayed person list.
+* When no index, zero or a negative index is entered next to the clone command, the error message 
+* "Invalid command format! clone: Clones the person identified by the index number used in the displayed person list.
 * Parameters: INDEX (must be a positive integer)."
 * is returned to the user.
 
@@ -197,8 +196,7 @@ Precise expected outputs on failure:
 
 ![clone format](images/clonelargeindex.png)
 
-* When the person at index entered has already been cloned in FAPro, the error message
-* “A clone of this person already exists.
+* When the person at index entered has already been cloned in FAPro, the error message “A clone of this person already exists.
 * To clone again, please edit the previous clone first or alternatively, clone the previous clone.”
 * is returned to the user.
 
@@ -431,12 +429,12 @@ For undoing an edit command:
 
 Sort contact lists by parameter name or appointment date.
 
-Precise command format: `undo parameter`
+Precise command format: `undo PREFIX_TAG`
 
 Example commands:
 * `sort n/`
 
-Acceptable parameters:
+Acceptable prefix tag:
 * `n/` sort by Name parameter
 * `appt/` sort by Appointment Date parameter
 
@@ -449,8 +447,8 @@ Precise expected output on success:
 ![sort format](images/sort-UG/sortresult.png)
 
 Precise expected outputs on failure:
-* If a required parameter is missing, an error message should indicate the invalid format. 
-* If a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
+* If a required prefix tag is missing, an error message should indicate the invalid format. 
+* If a prefix tag provided is invalid (e.g., e/), an error message should indicate the invalid format.
 
 ![sort format](images/sort-UG/sortfailuremissing.png)
 
@@ -529,4 +527,10 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 | **Help**         | `help`                                                                                                                                                                                    |
 | **List**         | `list`                                                                                                                                                                                    |
 | **Sort**         | `sort` <br> e.g., `sort appt/` `sort n/`                                                                                                                                                   |
+
+## Glossary
+| Word           | Meaning                                                   |
+|----------------|-----------------------------------------------------------|
+| **Parameter**  | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS |
+| **Prefix tag** | word that is added in front of parameter.<br/>e.g. n/, o/, a/  |
 
