@@ -230,6 +230,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void undoDelete(Person deletedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoAdd() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoEdit() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void storePreviousUndoableCommand(String s) {
             throw new AssertionError("This method should not be called.");
         }
@@ -264,6 +279,21 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+
+        @Override
+        public void storeAddedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getAddedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeAddedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

@@ -67,7 +67,6 @@ public class UndoCommandTest {
     }
 
 
-
     @Test
     public void execute_undoClear_success() throws CommandException {
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
