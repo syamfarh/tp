@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CalCommand;
+import seedu.address.logic.commands.CalendarCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -113,8 +113,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_cal() throws Exception {
-        assertTrue(parser.parseCommand(CalCommand.COMMAND_WORD) instanceof CalCommand);
-        assertTrue(parser.parseCommand(CalCommand.COMMAND_WORD + " 3") instanceof CalCommand);
+        assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD) instanceof CalendarCommand);
+        assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD + " 3") instanceof CalendarCommand);
     }
 
     @Test
