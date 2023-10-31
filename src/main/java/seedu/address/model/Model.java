@@ -209,7 +209,7 @@ public interface Model {
     /**
      * Removes the last number from the number list.
      */
-    void removeLastNumber();
+    void removeLastDeletedNumber();
 
     /**
      * Updates and stores the most recently added person in the addedPersons ArrayList.

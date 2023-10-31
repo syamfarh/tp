@@ -74,10 +74,16 @@ public class UndoCommand extends Command {
 
         ArrayList<Person> deletedPersons = model.getDeletedPersons();
         int numberOfDeletes = model.getLastDeletedNumber();
+
+        // Make a new list containing only the persons deleted from the previous delete command.
         List<Person> undoDeletedPersons = new ArrayList<>(deletedPersons.subList(deletedPersons.size()
             - numberOfDeletes, deletedPersons.size()));
+        //can catch errors here. should assert first that deletedPersons is not empty.
+        // also possible to check if deletedPersons.size() == sum of model.getLastdeletednumber()
+
         String deletedPersonsDetails = Messages.formatPersons(undoDeletedPersons);
 
+        //
         if (deletedPersons.isEmpty() || model.getDeletedNumberList().isEmpty()) {
             return new CommandResult(MESSAGE_UNDO_DELETE_FAILURE);
         }
@@ -87,9 +93,8 @@ public class UndoCommand extends Command {
             model.removePreviousUndoableCommand();
         }
 
-
         // Remove the corresponding number of deletes
-        model.removeLastNumber();
+        model.removeLastDeletedNumber();
 
         String resultMessage = String.format(MESSAGE_UNDO_DELETE_SUCCESS, deletedPersonsDetails);
 

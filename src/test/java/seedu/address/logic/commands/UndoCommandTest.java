@@ -59,7 +59,7 @@ public class UndoCommandTest {
             expectedModel.removePreviousUndoableCommand();
         }
 
-        expectedModel.removeLastNumber();
+        expectedModel.removeLastDeletedNumber();
 
         deleteCommand.execute(model);
 

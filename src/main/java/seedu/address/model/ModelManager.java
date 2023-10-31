@@ -155,7 +155,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void removeLastNumber() {
+    public void removeLastDeletedNumber() {
         this.deletedNumberList.remove(this.deletedNumberList.size() - 1);
     }
 

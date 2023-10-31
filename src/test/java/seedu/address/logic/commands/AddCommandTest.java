@@ -200,7 +200,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void removeLastNumber() {
+        public void removeLastDeletedNumber() {
             throw new AssertionError("This method should not be called.");
         }
 
