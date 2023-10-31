@@ -139,6 +139,8 @@ public interface Model {
      */
     void undoDelete();
 
+    void undoAdd();
+
     /**
      * Stores the command as a String into the previousUndoableCommands ArrayList.
      * @param s the command as a String
@@ -198,4 +200,10 @@ public interface Model {
      * Removes the last number from the number list
      */
     void removeLastNumber();
+
+    void storeAddedPerson(Person addedPerson);
+
+    Person getAddedPerson();
+
+    void removeAddedPerson();
 }
