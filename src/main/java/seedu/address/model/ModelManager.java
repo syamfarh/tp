@@ -79,6 +79,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public int getAddedPersonsSize() {
+        return this.addedPersons.size();
+    }
+
+    @Override
     public void storeDeletedPerson(Person deletedPerson) {
         this.deletedPersons.add(deletedPerson);
     }
@@ -138,6 +143,22 @@ public class ModelManager implements Model {
         Pair<Person, Person> toStore = new Pair<>(editedPerson, originalPerson);
         editedPersons.add(toStore);
     }
+    @Override
+    public Pair<Person, Person> getEditedPersonsPair() {
+        int lastIndex = editedPersons.size() - 1;
+        return editedPersons.get(lastIndex);
+    };
+
+    @Override
+    public void removeEditedPersonsPair() {
+        int lastIndex = editedPersons.size() - 1;
+        editedPersons.remove(lastIndex);
+    }
+
+    @Override
+    public int getEditedPersonsSize() {
+        return this.editedPersons.size();
+    }
 
     @Override
     public void storeDeletedNumberList(int deletedNumber) {
@@ -159,17 +180,7 @@ public class ModelManager implements Model {
         this.deletedNumberList.remove(this.deletedNumberList.size() - 1);
     }
 
-    @Override
-    public Pair<Person, Person> getEditedPersonsPair() {
-        int lastIndex = editedPersons.size() - 1;
-        return editedPersons.get(lastIndex);
-    };
 
-    @Override
-    public void removeEditedPersonsPair() {
-        int lastIndex = editedPersons.size() - 1;
-        editedPersons.remove(lastIndex);
-    }
 
 
 

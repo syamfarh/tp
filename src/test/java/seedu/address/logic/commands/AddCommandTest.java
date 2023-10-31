@@ -88,7 +88,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all of the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -161,13 +161,11 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        /**
-         * @param comparator
-         */
         @Override
         public void updateSortComparator(Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
         }
+
 
         @Override
         public void storeDeletedPerson(Person deletedPerson) {
@@ -279,6 +277,10 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public int getEditedPersonsSize() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void storeAddedPerson(Person person) {
@@ -292,6 +294,11 @@ public class AddCommandTest {
 
         @Override
         public void removeAddedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getAddedPersonsSize() {
             throw new AssertionError("This method should not be called.");
         }
     }

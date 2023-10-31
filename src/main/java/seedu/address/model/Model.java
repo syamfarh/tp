@@ -96,6 +96,8 @@ public interface Model {
      */
     void updateSortComparator(Comparator<Person> comparator);
 
+    int getAddedPersonsSize();
+
     /**
      * Updates and stores the most recently deleted person in the deletedPersons ArrayList.
      * @param deletedPerson
@@ -199,6 +201,8 @@ public interface Model {
      * from the editedPersons ArrayList.
      */
     void removeEditedPersonsPair();
+
+    int getEditedPersonsSize();
 
     /**
      * Stores the number of deletes associated with a delete command in a queue.
