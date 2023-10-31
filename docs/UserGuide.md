@@ -519,13 +519,14 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 | Action           | Format, Examples                                                                                                                                                                          |
 |------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Calendar**     | `cal KEYWORD`<br> e.g., `cal 2023-12-12`                                                                                                                                                  |
+| **Calendar**     | `calendar`                                                                                                                                                                                |
 | **Clone**        | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                         |
 | **Clear**        | `clear`                                                                                                                                                                                   |
 | **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                       |
 | **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                |
 | **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
 | **Find Address** | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                        |
-| **List**         | `list`                                                                                                                                                                                    |
 | **Help**         | `help`                                                                                                                                                                                    |
-| **Calendar**     | `calendar`|
+| **List**         | `list`                                                                                                                                                                                    |
+| **Sort**         | `sort` <br> e.g., `sort appt/` `sort n/`                                                                                                                                                   |
+
