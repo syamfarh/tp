@@ -139,6 +139,13 @@ public interface Model {
     void undoDelete();
 
     /**
+     * Overloaded method of undoDelete(). This undoes the delete command with a specific person to add back in the
+     * address book.
+     * @param deletedPerson
+     */
+    void undoDelete(Person deletedPerson);
+
+    /**
      * Undoes the most recent add command.
      * This method should only be invoked when the previous command is an add command.
      */
@@ -220,4 +227,6 @@ public interface Model {
      * Removes the most recently added person from the addedPersons ArrayList.
      */
     void removeAddedPerson();
+
+
 }

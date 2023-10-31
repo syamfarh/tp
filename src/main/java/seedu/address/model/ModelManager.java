@@ -253,6 +253,13 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public void undoDelete(Person person) {
+        addressBook.addPerson(person);
+        this.removeDeletedPerson();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
     public void undoAdd() {
         addressBook.removePerson(getAddedPerson());
         this.removeAddedPerson();

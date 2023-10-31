@@ -71,6 +71,7 @@ public class UndoCommand extends Command {
      * @return returns CommandResult of the message when the undo is a success.
      */
     public CommandResult executeUndoDelete(Model model) {
+
         ArrayList<Person> deletedPersons = model.getDeletedPersons();
         int numberOfDeletes = model.getLastDeletedNumber();
         List<Person> undoDeletedPersons = new ArrayList<>(deletedPersons.subList(deletedPersons.size()
@@ -82,8 +83,7 @@ public class UndoCommand extends Command {
         }
 
         for (Person deletedPerson : undoDeletedPersons) {
-            model.addPerson(deletedPerson);
-            model.removeDeletedPerson();
+            model.undoDelete(deletedPerson);
             model.removePreviousUndoableCommand();
         }
 
