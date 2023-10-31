@@ -22,6 +22,13 @@ public class Messages {
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
 
+    public static final String MESSAGE_WRONG_DATE_FORMAT =
+            "Appointment Date should follow the format of "
+                    + "[mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd].";
+
+    public static final String MESSAGE_INVALID_INPUT_DATE =
+            "Appointment Date should be after the current date.";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
