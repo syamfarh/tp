@@ -103,7 +103,7 @@ public class CloneCommand extends Command {
                 numericSuffix = Integer.parseInt(parts[1].trim());
 
                 // Check if the numeric suffix is within a valid range
-                if (numericSuffix < Integer.MAX_VALUE) {
+                if (0 < numericSuffix && numericSuffix < Integer.MAX_VALUE) {
                     numericSuffix++;
                     updatedName = parts[0] + " " + numericSuffix;
                 } else {
