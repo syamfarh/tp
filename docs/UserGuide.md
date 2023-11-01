@@ -177,7 +177,7 @@ is the person being cloned, then the output is:
 
 ```Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags: ```
 
-![edit format](images/cloneresult.png)
+![clone format](images/cloneresult.png)
 
 #### Precise expected outputs on failure:
 
@@ -189,7 +189,7 @@ If no index, 0 or a negative index is entered next to the clone command
 
 * GUI reflects that clone is in red font
 
-![edit format](images/cloneinvalidindex.png)
+![clone format](images/cloneinvalidindex.png)
 
 If the index entered is greater than the current number of contacts in the address book
 
@@ -199,17 +199,17 @@ If the index entered is greater than the current number of contacts in the addre
 
 * GUI reflects that clone is in red font
 
-![edit format](images/clonelargeindex.png)
+![clone format](images/clonelargeindex.png)
 
 If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
 
 * Error Message:
 
-```iguuguo```
+```The integer suffix of the person being cloned is out of range. Please note that the smallest possible suffix that a person can have is 1 and the largest possible suffix that a person can have is 2147483647. As such, if your suffix is 0 or 2147483647, please consider editing the names of your contacts first.```
 
 * GUI reflects that clone is in red font
 
-![edit format](images/clonesuffixerror.png)
+![clone format](images/clonesuffixerror.png)
 
 ### Deleting a person : `delete`
 
