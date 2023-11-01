@@ -140,33 +140,6 @@ Multiple values specified for the following single-valued field(s): n/
 
 ![add format](images/addduplicateparam.png)
 
-### Search by appointment day: `cal`
-
-Lists out all persons who have an appointment on the input date.
-
-Format: `cal KEYWORD`
-
-* The input date has to be the exact date in YYYY-MM-DD format.
-  e.g. `cal 2023-12-12` will not match `cal 12-12-2023` .
-* Only the appointment date is searched.
-
-Examples:
-* `cal 2023-12-12`
-
-![edit format](images/cal0.png)
-
-* Precise expected outputs on success:
-* Successful calendar message. “X persons listed!”, where X is the number of contacts who have the same
-  appointment date as the input date. The list of contacts whose appointment dates match the input is listed.
-
-![edit format](images/cal1.png)
-
-* Precise expected outputs on failure:
-* If no date is input after the cal command, an error message explaining the error will be shown,
-  reminding the user to follow the correct input format.
-
-![edit format](images/cal2.png)
-
 ### Cloning a person : `clone`
 
 Clones a contact from FAPro at the specified index.
