@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.CalendarCommand;
-import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.CalendarContainsKeywordsPredicate;
 
 public class CalendarCommandParserTest {
@@ -31,7 +31,7 @@ public class CalendarCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "hello", String.format(AppointmentDate.MESSAGE_CONSTRAINTS_FORMAT));
-        assertParseFailure(parser, "1999-10-10", String.format(AppointmentDate.MESSAGE_CONSTRAINTS_CURRENTDATE));
+        assertParseFailure(parser, "hello", String.format(Messages.MESSAGE_WRONG_DATE_FORMAT));
+        assertParseFailure(parser, "1999-10-10", String.format(Messages.MESSAGE_INVALID_INPUT_DATE));
     }
 }
