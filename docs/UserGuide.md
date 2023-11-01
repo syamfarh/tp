@@ -288,30 +288,45 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons based onthe given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+#### Format: 
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+* `find n/NAME [MORE NAMES]`
 
-![edit format](images/find0.png)
+* `find a/ADDRESS [MORE ADDRESSES]` 
 
-* Precise expected outputs on success:
-* Successful find message. ‘X persons listed!’’, where X is the number of contacts listed.
+* `find appt/APPOINTMENTDATE`
+
+#### Example commands:
+* `find n/John Alice`
+* `find a/Tokyo Geylang`
+* `find appt/2024-01-01`
+
+#### Acceptable values for each parameter:
+* Name: Valid string name.
+* Address: Valid string address.
+* Appointment Date: Valid dates (after current date), in the format of `yyyy-mm-dd`.
+
+![edit format](images/find_n0.png)
+
+#### Precise expected outputs on success:
+* Successful find message. ‘X persons listed!’, where X is the number of contacts listed.
   The list of contacts whose names contain the input name is shown.
 
-![edit format](images/find1.png)
+![edit format](images/find_n1.png)
 
-* Precise expected outputs on failure:
-* If no name is input after the find command, an error message explaining the error will be shown,
-  reminding the user to follow the correct input format.
+##### Precise expected outputs on failure:
+If no name is input after the find command, an error message explaining the error will be shown, 
+reminding the user to follow the correct input format.
 
-![edit format](images/find2.png)
+* Error Message:
+
+```
+Invalid command format! find n/: Finds all persons whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+```
+
+![edit format](images/find_n2.png)
 
 ### Locating persons by address: `find_add`
 
