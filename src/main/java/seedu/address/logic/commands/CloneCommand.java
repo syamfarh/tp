@@ -25,9 +25,6 @@ public class CloneCommand extends Command {
 
     public static final String MESSAGE_CLONE_PERSON_SUCCESS = "Cloned Person: %1$s";
 
-    public static final String MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE = "A clone of this person already exists.\n"
-        + "To clone again, please edit the previous clone first or alternatively, clone the previous clone.";
-
     private final Index targetIndex;
 
     public CloneCommand(Index targetIndex) {
@@ -46,12 +43,15 @@ public class CloneCommand extends Command {
         Person personToClone = lastShownList.get(targetIndex.getZeroBased());
 
         Person clonedPerson = clonePerson(personToClone);
-        try {
-            model.addPerson(clonedPerson);
-            model.storePreviousUndoableCommand(COMMAND_WORD);
-            return new CommandResult(String.format(MESSAGE_CLONE_PERSON_SUCCESS, Messages.format(personToClone)));
-        } catch (DuplicatePersonException e) {
-            throw new CommandException(String.format(MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE));
+
+        while (true) {
+            try {
+                model.addPerson(clonedPerson);
+                model.storePreviousUndoableCommand(COMMAND_WORD);
+                return new CommandResult(String.format(MESSAGE_CLONE_PERSON_SUCCESS, Messages.format(personToClone)));
+            } catch (DuplicatePersonException e) {
+                clonedPerson = clonePerson(clonedPerson);
+            }
         }
     }
 

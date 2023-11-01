@@ -169,23 +169,6 @@ public class CloneCommandTest {
     }
 
     @Test
-    public void execute_duplicateClone_throwsCommandException() {
-        // Choose an index that exists in the filtered list
-        Index targetIndex = Index.fromOneBased(1);
-
-        // Clone the person at the selected index
-        CloneCommand cloneCommand = new CloneCommand(targetIndex);
-
-        // Execute the first clone, it should succeed
-        assertDoesNotThrow(() -> cloneCommand.execute(model));
-
-        // Now, execute the clone again, it should throw a CommandException
-        CommandException thrownException = assertThrows(CommandException.class, () -> cloneCommand.execute(model));
-
-        assertEquals(CloneCommand.MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE, thrownException.getMessage());
-    }
-
-    @Test
     public void toStringMethod() {
         Index targetIndex = Index.fromOneBased(1);
         CloneCommand cloneCommand = new CloneCommand(targetIndex);
