@@ -1,9 +1,7 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -28,7 +26,7 @@ public class CloneCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredListSpacesNoSuffix_success() {
+    public void execute_validIndexUnfilteredListSpacesNoSuffix_success() throws CommandException {
         Person personToClone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         CloneCommand cloneCommand = new CloneCommand(INDEX_FIRST_PERSON);
 
@@ -62,7 +60,7 @@ public class CloneCommandTest {
     }
 
     @Test
-    public void execute_validIndexUnfilteredListNoSpacesNoSuffix_success() {
+    public void execute_validIndexUnfilteredListNoSpacesNoSuffix_success() throws CommandException {
         Person personToClone = model.getFilteredPersonList().get(INDEX_NINTH_PERSON.getZeroBased());
         CloneCommand cloneCommand = new CloneCommand(INDEX_NINTH_PERSON);
 
@@ -96,7 +94,7 @@ public class CloneCommandTest {
     }
 
     @Test
-    public void execute_validIndexUnfilteredListSpacesSuffix_success() {
+    public void execute_validIndexUnfilteredListSpacesSuffix_success() throws CommandException {
         Person personToClone = model.getFilteredPersonList().get(INDEX_TENTH_PERSON.getZeroBased());
         CloneCommand cloneCommand = new CloneCommand(INDEX_TENTH_PERSON);
 
