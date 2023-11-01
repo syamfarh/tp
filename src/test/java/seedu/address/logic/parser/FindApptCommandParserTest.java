@@ -9,24 +9,24 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
-import seedu.address.logic.commands.CalendarCommand;
+import seedu.address.logic.commands.FindApptCommand;
 import seedu.address.model.person.CalendarContainsKeywordsPredicate;
 
-public class CalendarCommandParserTest {
+public class FindApptCommandParserTest {
     private CalendarCommandParser parser = new CalendarCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
         assertParseFailure(parser, "     ", String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                CalendarCommand.MESSAGE_USAGE));
+                FindApptCommand.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_validArgs_returnsCalendarCommand() {
         // no leading and trailing whitespaces
-        CalendarCommand expectedCalendarCommand =
-                new CalendarCommand(new CalendarContainsKeywordsPredicate(List.of("2023-12-12")));
-        assertParseSuccess(parser, "2023-12-12", expectedCalendarCommand);
+        FindApptCommand expectedFindApptCommand =
+                new FindApptCommand(new CalendarContainsKeywordsPredicate(List.of("2023-12-12")));
+        assertParseSuccess(parser, "2023-12-12", expectedFindApptCommand);
     }
 
     @Test

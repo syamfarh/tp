@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.CalendarCommand;
+import seedu.address.logic.commands.FindApptCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.EditCommand;
@@ -137,9 +137,9 @@ public class AddressBookParserTest {
     public void parseCommand_find_returnsCalendar() throws Exception {
         List<String> findKeywords = Arrays.asList("appt/", "2023-12-12");
         List<String> calendarKeywords = List.of("2023-12-12");
-        CalendarCommand command = (CalendarCommand) parser.parseCommand(
+        FindApptCommand command = (FindApptCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + findKeywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new CalendarCommand(new CalendarContainsKeywordsPredicate(calendarKeywords)), command);
+        assertEquals(new FindApptCommand(new CalendarContainsKeywordsPredicate(calendarKeywords)), command);
     }
 
     @Test
