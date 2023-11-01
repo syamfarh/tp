@@ -202,7 +202,7 @@ Deletes a contact from FAPro at the specified indexes.
 * The index refers to the index number shown in the displayed person list
 
 #### Acceptable parameters for INDEX:
-* The indexes **must be a positive integers** 1 2 3 …​ (less than the size of the contact list in FAPro)
+* The indexes **must be a positive integers** (i.e 1 2 3 etc.) (less than the size of the contact list in FAPro)
 * The indexes must have a space inbetween and no commas (i.e delete 1,2,3 is invalid)
 
 #### Examples:
@@ -214,7 +214,8 @@ Deletes a contact from FAPro at the specified indexes.
 
 #### Precise expected outputs on success:
 
-* Message shown to user: "Deleted Person(s): X", where X are the details of the deleted persons
+* Message shown to user:
+"Deleted Person(s): X", where X are the details of the deleted persons
 * Size of address book is reduced by however many indexes were entered. (i.e if you entered delete 2 3 4, as you entered 3 indexes, the size of the address book decreases by 3) 
 * GUI reflects that deleted contacts are now no longer there
 
@@ -224,17 +225,17 @@ Deletes a contact from FAPro at the specified indexes.
 
 If any of the entered indexes are invalid:
 * Error message shown to the user:
-* "The person index provided is invalid."
+"The person index provided is invalid."
 * GUI reflects that delete is in red font
 
 ![edit format](images/delete-UG/deletewrongindex.png)
 
-If no index is placed after the delete command
+If no index is placed after the delete command:
 * Error message shown to user:
-* "Invalid command format! 
-* delete: Deletes the person(s) identified by the index number used in the displayed person list.
-* Parameters: INDEXES (must be positive integers, separated by spaces)
-* Example: delete 1 3 5"
+"Invalid command format! 
+delete: Deletes the person(s) identified by the index number used in the displayed person list. 
+Parameters: INDEXES (must be positive integers, separated by spaces)
+Example: delete 1 3 5"
 * GUI reflects that delete is in red font.
 
 ![edit format](images/delete-UG/deletenoindex.png)
