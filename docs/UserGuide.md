@@ -79,10 +79,10 @@ A pop-up of a new window that lists out all the main commands with their respect
 Adds a new entry to their address book for financial advisors, including personal details such as name, address, occupation, phone number and email.
 
 #### Format:
-* `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​`
+* `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG] [appt/APPOINTMENT_DATE]
 
 #### Example commands:
-* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01`
+* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01 appt/12-12-2023 08:30`
 * `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567 t/Criminal`
 
 #### Acceptable values for each parameter:
@@ -92,6 +92,7 @@ Adds a new entry to their address book for financial advisors, including persona
 * Email address: Valid string and email address format (johnd@example.com).
 * Occupation: Valid string occupation.
 * Tag: Valid string.
+* Appointment Date: Only accepted in yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm format
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
