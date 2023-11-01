@@ -11,9 +11,9 @@ import seedu.address.model.person.CalendarContainsKeywordsPredicate;
  * Finds and lists all persons in address book whose appointment date contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class CalendarCommand extends Command {
+public class FindApptCommand extends Command {
 
-    public static final String COMMAND_WORD = "cal";
+    public static final String COMMAND_WORD = "find appt/";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose appointment date contains "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
@@ -22,7 +22,7 @@ public class CalendarCommand extends Command {
 
     private final CalendarContainsKeywordsPredicate predicate;
 
-    public CalendarCommand(CalendarContainsKeywordsPredicate predicate) {
+    public FindApptCommand(CalendarContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -41,11 +41,11 @@ public class CalendarCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof CalendarCommand)) {
+        if (!(other instanceof FindApptCommand)) {
             return false;
         }
 
-        CalendarCommand otherCalCommand = (CalendarCommand) other;
+        FindApptCommand otherCalCommand = (FindApptCommand) other;
         return predicate.equals(otherCalCommand.predicate);
     }
 
