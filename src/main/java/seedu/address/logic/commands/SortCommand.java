@@ -17,8 +17,8 @@ public class SortCommand extends Command {
 
     public static final String COMMAND_WORD = "sort";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": sort all persons by name or appointment date.\n "
-            + "Parameters: KEYWORD [PARAMETER n/ or appt/]\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Sort all persons by name or appointment date.\n"
+            + "Parameters: KEYWORD [PREFIX n/ or appt/]\n"
             + "Example: " + COMMAND_WORD + " n/";
 
 
