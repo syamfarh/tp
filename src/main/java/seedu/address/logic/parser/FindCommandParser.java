@@ -51,7 +51,7 @@ public class FindCommandParser implements Parser<Command> {
         } else if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             return new FindAddCommandParser().parse(argMultimap.getValue(PREFIX_ADDRESS).get());
         } else {
-            return new CalendarCommandParser().parse(argMultimap.getValue(PREFIX_APPOINTMENTDATE).get());
+            return new FindApptCommandParser().parse(argMultimap.getValue(PREFIX_APPOINTMENTDATE).get());
         }
     }
 

@@ -14,7 +14,7 @@ import seedu.address.model.person.CalendarContainsKeywordsPredicate;
 /**
  * Parses input arguments and creates a new FindApptCommand object
  */
-public class CalendarCommandParser implements Parser<FindApptCommand> {
+public class FindApptCommandParser implements Parser<FindApptCommand> {
 
     /**
      * Parses the given {@code String} of arguments in the context of the FindApptCommand

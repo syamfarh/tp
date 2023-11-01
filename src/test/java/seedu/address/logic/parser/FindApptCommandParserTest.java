@@ -13,7 +13,7 @@ import seedu.address.logic.commands.FindApptCommand;
 import seedu.address.model.person.CalendarContainsKeywordsPredicate;
 
 public class FindApptCommandParserTest {
-    private CalendarCommandParser parser = new CalendarCommandParser();
+    private FindApptCommandParser parser = new FindApptCommandParser();
 
     @Test
     public void parse_emptyArg_throwsParseException() {
