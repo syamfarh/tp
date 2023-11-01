@@ -225,17 +225,23 @@ Deletes a contact from FAPro at the specified indexes.
 
 If any of the entered indexes are invalid:
 * Error message shown to the user:
+
+```
 "The person index provided is invalid."
+```
+
 * GUI reflects that delete is in red font
 
 ![edit format](images/delete-UG/deletewrongindex.png)
 
 If no index is placed after the delete command:
 * Error message shown to user:
-"Invalid command format! 
+```
+Invalid command format! 
 delete: Deletes the person(s) identified by the index number used in the displayed person list. 
 Parameters: INDEXES (must be positive integers, separated by spaces)
 Example: delete 1 3 5"
+```
 * GUI reflects that delete is in red font.
 
 ![edit format](images/delete-UG/deletenoindex.png)
