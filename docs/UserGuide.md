@@ -110,15 +110,35 @@ A person can have any number of tags (including 0)
 
 If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
 
+* Error Message:
+
+```
+Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
+```
+
 ![edit format](images/addmissingparam.png)
 
 If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 
-![edit format](images/addinvalidemail.png)
+```
+Emails should be of the format local-part@domain and adhere to the following constraints:
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+```
+
+![add format](images/addinvalidemail.png)
 
 If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
 
-![edit format](images/addduplicateparam.png)
+```
+Multiple values specified for the following single-valued field(s): n/
+```
+
+![add format](images/addduplicateparam.png)
 
 ### Search by appointment day: `cal`
 
