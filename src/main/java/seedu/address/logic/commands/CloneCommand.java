@@ -83,7 +83,7 @@ public class CloneCommand extends Command {
      * @param personToClone The original Person object to be cloned.
      * @return A new Person object with the name having an incremented numeric suffix.
      */
-    public static Person clonePerson(Person personToClone) {
+    public static Person clonePerson(Person personToClone) throws CommandException {
         String originalName = personToClone.getName().toString();
         String[] parts = splitStringAtLastSpace(originalName);
         int numericSuffix;
@@ -99,8 +99,19 @@ public class CloneCommand extends Command {
             updatedName = parts[0] + " " + parts[1] + " " + numericSuffix;
         } else if (parts[1].matches("\\d+")) {
             // Case 3: name has spaces and suffix is only an integer
-            numericSuffix = Integer.parseInt(parts[1].trim()) + 1;
-            updatedName = parts[0] + " " + numericSuffix;
+            try {
+                numericSuffix = Integer.parseInt(parts[1].trim());
+
+                // Check if the numeric suffix is within a valid range
+                if (numericSuffix < Integer.MAX_VALUE) {
+                    numericSuffix++;
+                    updatedName = parts[0] + " " + numericSuffix;
+                } else {
+                    throw new CommandException(Messages.MESSAGE_PERSON_SUFFIX_OUT_OF_RANGE);
+                }
+            } catch (NumberFormatException e) {
+                throw new CommandException(Messages.MESSAGE_PERSON_SUFFIX_OUT_OF_RANGE);
+            }
         }
 
         Name clonedName = new Name(updatedName);

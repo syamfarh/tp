@@ -21,6 +21,10 @@ public class Messages {
             + "Please search for either name or address or appointment date at a time.";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_PERSON_SUFFIX_OUT_OF_RANGE =
+        "The integer suffix of the person being cloned is out of range. Please note that the largest possible suffix "
+        + "that a person can have is 2147483647. As such, if your suffix is 2147483647, please consider editing "
+        + "the names of your contacts first";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
