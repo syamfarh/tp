@@ -9,6 +9,7 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.CalendarCommand;
+import seedu.address.model.person.AppointmentDate;
 import seedu.address.model.person.CalendarContainsKeywordsPredicate;
 
 public class CalendarCommandParserTest {
@@ -26,5 +27,11 @@ public class CalendarCommandParserTest {
         CalendarCommand expectedCalendarCommand =
                 new CalendarCommand(new CalendarContainsKeywordsPredicate(List.of("2023-12-12")));
         assertParseSuccess(parser, "2023-12-12", expectedCalendarCommand);
+    }
+
+    @Test
+    public void parse_invalidArgs_throwsParseException() {
+        assertParseFailure(parser, "hello", String.format(AppointmentDate.MESSAGE_CONSTRAINTS_FORMAT));
+        assertParseFailure(parser, "1999-10-10", String.format(AppointmentDate.MESSAGE_CONSTRAINTS_CURRENTDATE));
     }
 }
