@@ -24,7 +24,7 @@ public class Messages {
     public static final String MESSAGE_PERSON_SUFFIX_OUT_OF_RANGE =
         "The integer suffix of the person being cloned is out of range. Please note that the smallest possible suffix"
         + " that a person can have is 1 and the largest possible suffix that a person can have is 2147483647. As such,"
-        + " if your suffix is 0 or 2147483647, please consider editing the names of your contacts first";
+        + " if your suffix is 0 or 2147483647, please consider editing the names of your contacts first.";
 
     /**
      * Returns an error message indicating the duplicate prefixes.
