@@ -99,17 +99,13 @@ public class CloneCommand extends Command {
             updatedName = parts[0] + " " + parts[1] + " " + numericSuffix;
         } else if (parts[1].matches("\\d+")) {
             // Case 3: name has spaces and suffix is only an integer
-            try {
-                numericSuffix = Integer.parseInt(parts[1].trim());
+            numericSuffix = Integer.parseInt(parts[1].trim());
 
-                // Check if the numeric suffix is within a valid range
-                if (0 < numericSuffix && numericSuffix < Integer.MAX_VALUE) {
-                    numericSuffix++;
-                    updatedName = parts[0] + " " + numericSuffix;
-                } else {
-                    throw new CommandException(Messages.MESSAGE_PERSON_SUFFIX_OUT_OF_RANGE);
-                }
-            } catch (NumberFormatException e) {
+            // Check if the numeric suffix is within a valid range
+            if (0 < numericSuffix && numericSuffix < Integer.MAX_VALUE) {
+                numericSuffix++;
+                updatedName = parts[0] + " " + numericSuffix;
+            } else {
                 throw new CommandException(Messages.MESSAGE_PERSON_SUFFIX_OUT_OF_RANGE);
             }
         }
