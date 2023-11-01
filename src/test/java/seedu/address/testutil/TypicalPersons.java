@@ -65,6 +65,16 @@ public class TypicalPersons {
             .withPhone("94932143").withOccupation("Fisherman").withAppointmentDate("")
             .withRiskProfile("a,a,b,b,b,d,e,c").withTags("friends").build();
 
+    public static final Person SIMON2 = new PersonBuilder().withName("Simon 2")
+            .withAddress("123, Jurong West Ave 4, #08-111").withEmail("simon@example.com")
+            .withPhone("94932143").withOccupation("Fisherman").withAppointmentDate("")
+            .withRiskProfile("a,a,b,b,b,d,e,c").withTags("friends").build();
+
+    public static final Person RICHARD = new PersonBuilder().withName("Richard Davis 2147483647")
+            .withAddress("123, Jurong West Ave 4, #08-111").withEmail("richard@example.com")
+            .withPhone("94932143").withOccupation("Fisherman").withAppointmentDate("")
+            .withRiskProfile("a,a,b,b,b,d,e,c").withTags("friends").build();
+
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
             .withAppointmentDate("").withEmail("stefan@example.com").withOccupation("Unemployed")
@@ -106,6 +116,6 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(SIMON, PAUL, ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JOHN));
+        return new ArrayList<>(Arrays.asList(SIMON2, RICHARD, SIMON, PAUL, ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JOHN));
     }
 }

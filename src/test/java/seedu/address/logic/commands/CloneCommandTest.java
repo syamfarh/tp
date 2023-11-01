@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_ELEVENTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_NINTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
@@ -94,7 +95,7 @@ public class CloneCommandTest {
     }
 
     @Test
-    public void execute_validIndexUnfilteredListSpacesSuffix_success() throws CommandException {
+    public void execute_validIndexUnfilteredCloneInList_success() throws CommandException {
         Person personToClone = model.getFilteredPersonList().get(INDEX_TENTH_PERSON.getZeroBased());
         CloneCommand cloneCommand = new CloneCommand(INDEX_TENTH_PERSON);
 
@@ -165,6 +166,16 @@ public class CloneCommandTest {
         // different indexes -> returns false
         assertFalse(cloneFirstCommand.equals(cloneSecondCommand));
     }
+
+    @Test
+    public void execute_validIndexUnfilteredListInvalidSuffix_throwsCommandException() {
+        // Create a scenario where the name has an invalid numeric suffix
+        Person personToClone = model.getFilteredPersonList().get(INDEX_ELEVENTH_PERSON.getZeroBased());
+        CloneCommand cloneCommand = new CloneCommand(INDEX_ELEVENTH_PERSON);
+
+        assertCommandFailure(cloneCommand, model, Messages.MESSAGE_PERSON_SUFFIX_OUT_OF_RANGE);
+    }
+
 
     @Test
     public void toStringMethod() {
