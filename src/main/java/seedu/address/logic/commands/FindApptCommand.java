@@ -15,9 +15,9 @@ public class FindApptCommand extends Command {
 
     public static final String COMMAND_WORD = "find_appt";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose appointment date contains "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose appointment date matches "
+            + "the specified input date and displays them as a list with index numbers.\n"
+            + "Parameters: KEYWORD\n"
             + "Example: " + COMMAND_WORD + " 2023-12-12";
 
     private final CalendarContainsKeywordsPredicate predicate;
