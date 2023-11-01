@@ -455,14 +455,13 @@ Acceptable prefix tag:
 ![sort format](images/sort-UG/sortformat.png)
 
 Precise expected output on success:
-* Successful addition message. 'X person listed!', where X are the number of clients in the address book.
+* Successful addition message. 'X person listed!', where X is the number of clients in the address book.
 * The sorted entry is displayed in the address book GUI.
 
 ![sort format](images/sort-UG/sortresult.png)
 
 Precise expected outputs on failure:
-<br> If a required parameter is missing, an error message should indicate the invalid format. 
-<br> If a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
+<br> If a required parameter is missing, an error message should indicate the invalid format. If a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
 
 * Error Message:
 
