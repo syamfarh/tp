@@ -171,11 +171,15 @@ After cloning, the clone is the exact same original, other than a suffix either 
 * Message shown to the user: "Cloned Person: X", where X are the details of the person the clone is based off.
 * For example, if
 
-```Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags: ```
+```
+Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:
+```
 
 is the person being cloned, then the output is:
 
-```Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags: ```
+```
+Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:
+```
 
 ![clone format](images/cloneresult.png)
 
@@ -185,7 +189,9 @@ If no index, 0 or a negative index is entered next to the clone command
 
 * Error Message:
 
-```Invalid command format! clone: Clones the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer).```
+```
+Invalid command format! clone: Clones the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer).
+```
 
 * GUI reflects that clone is in red font
 
@@ -195,7 +201,9 @@ If the index entered is greater than the current number of contacts in the addre
 
 * Error Message:
 
-```The person index provided is invalid.```
+```
+The person index provided is invalid.
+```
 
 * GUI reflects that clone is in red font
 
@@ -205,7 +213,9 @@ If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
 
 * Error Message:
 
-```The integer suffix of the person being cloned is out of range. Please note that the smallest possible suffix that a person can have is 1 and the largest possible suffix that a person can have is 2147483647. As such, if your suffix is 0 or 2147483647, please consider editing the names of your contacts first.```
+```
+The integer suffix of the person being cloned is out of range. Please note that the smallest possible suffix that a person can have is 1 and the largest possible suffix that a person can have is 2147483647. As such, if your suffix is 0 or 2147483647, please consider editing the names of your contacts first.
+```
 
 * GUI reflects that clone is in red font
 
