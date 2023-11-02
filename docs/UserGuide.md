@@ -693,6 +693,86 @@ There is no command to undo!
 
 ![undo format](images/undo-UG/undo_fail.png)
 
+### Redoing an undo command : `redo`
+
+Redoes the most recent undo command. 
+
+
+#### Format:
+* `redo`
+
+
+#### Example commands:
+
+* `delete 1` will delete the first contact in the address book
+
+  `undo` will then reverse the `delete 1` command
+
+  `redo` will then reapply the `delete 1` command
+
+
+* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` will add this contact in 
+  the address book
+
+  `undo` will then reverse the `add` command (i.e. John Doe is no longer in the address book)
+
+  `redo` will then reapply the `add` command (i.e. John Doe is back in the address book)
+
+  `undo` will then reverse the `redo` command (i.e. John Doe is no longer in the address book)
+
+  #### Note: while it is possible to `undo` `redo` commands, this is only possible before any other `add`, `clone`, `edit`, `delete`, `clear` command is executed.
+
+  Now, `redo` will reapply the `add` command (i.e John Doe is back in the address book) 
+
+  `delete 1` will delete the first contact in the address book
+
+  `undo` will reverse the `delete 1` command
+
+  `undo` once again will not reverse the `redo` command
+
+
+#### Precise expected outputs on success:
+
+For example, `add` a contact, then `undo`, then `redo`
+
+* Add a contact
+
+![redo_format](images/redo-UG/add_person.png)
+
+* Undo 
+
+![redo_format](images/redo-UG/undo_success.png)
+
+* Redo
+* Message shown to the user: 
+
+```
+Redo successful!
+```
+
+![redo_format](images/redo-UG/redo_success.png)
+
+* If wanted, undo again
+* Message shown to the user: 
+
+```
+Undo successful!
+```
+
+![redo_format]
+
+#### Precise expected outputs on failure:
+
+When there is no command to redo, i.e. no previous `undo` command
+
+* Error message shown to the user:
+
+```
+Redo unsuccessful! There is nothing to redo!
+```
+![redo_format](images/redo-UG/redo_failure.png)
+
+
 ### Sorting contacts : `sort`
 
 Sort contact lists by prefix name or appointment date.
@@ -825,22 +905,23 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 ## Command summary
                                                                                                                                          
-| Action              | Format, Examples                                                                                                                                                                        |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action              | Format, Examples                                                                                                                                                                         |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Calendar**        | `calendar`                                                                                                                                                                              |
-| **Clone**           | `clone INDEX`<br> e.g. `clone 3`                                                                                                                                                        |
-| **Clear**           | `clear`                                                                                                                                                                                 |
-| **Delete**          | `delete INDEXES`<br> e.g., `delete 1 2 3`                                                                                                                                               |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                               |
-| **Undo**            | `undo`                                                                                                                                                                                  |
-| **Find**            | `find PREFIX KEYWORD` <br> e.g. `find n/ James Jake`, `find a/Tokyo Geylang`, `find appt/2040-01-01`                                                                                    |
-| **List**            | `list`                                                                                                                                                                                  |
-| **Help**            | `help`                                                                                                                                                                                  |
-| **Questionnaire**   | `questionnaire`                                                                                                                                                                         |
-| **Sort**            | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                          |
-| **Risk Profile**    | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                     |
-| **Exit**            | `exit`                                                                                                                                                                                  |
+| **Calendar**        | `calendar`                                                                                                                                                                               |
+| **Clone**           | `clone INDEX`<br> e.g. `clone 3`                                                                                                                                                         |
+| **Clear**           | `clear`                                                                                                                                                                                  |
+| **Delete**          | `delete INDEXES`<br> e.g., `delete 1 2 3`                                                                                                                                                |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                |
+| **Undo**            | `undo`                                                                                                                                                                                   |
+| **Redo**            | `redo`                                                                                                                                                                                   |
+| **Find**            | `find PREFIX KEYWORD` <br> e.g. `find n/ James Jake`, `find a/Tokyo Geylang`, `find appt/2040-01-01`                                                                                     |
+| **List**            | `list`                                                                                                                                                                                   |
+| **Help**            | `help`                                                                                                                                                                                   |
+| **Questionnaire**   | `questionnaire`                                                                                                                                                                          |
+| **Sort**            | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                           |
+| **Risk Profile**    | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                      |
+| **Exit**            | `exit`                                                                                                                                                                                   |
 
 ## Glossary
 
