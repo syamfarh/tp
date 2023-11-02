@@ -329,7 +329,7 @@ where X is the number of contacts listed
 
 ##### Precise expected outputs on failure:
 If no name is input after the find command, an error message explaining the error will be shown, 
-reminding the user to follow the correct input format.
+reminding the user to follow the correct input format
 
 * Error message shown to the user:
 
@@ -356,7 +356,7 @@ where X is the number of contacts listed
 
 ##### Precise expected outputs on failure:
 If no address is input after the find command, an error message explaining the error will be shown,
-reminding the user to follow the correct input format.
+reminding the user to follow the correct input format
 
 * Error message shown to the user:
 
@@ -371,7 +371,6 @@ Invalid command format! find a/: Finds all persons whose address contain any of 
 ![find_appt format](images/find_appt0.png)
 
 #### Precise expected outputs on success:
-
 * Message shown to the user:
 ```
 X persons listed!
@@ -383,10 +382,9 @@ where X is the number of contacts listed
 
 ##### Precise expected outputs on failure:
 If no date is input after the find command, an error message explaining the error will be shown,
-reminding the user to follow the correct input format.
+reminding the user to follow the correct input format
 
 * Error message shown to the user:
-
 ```
 Invalid command format! find_appt: Finds all persons whose appointment date matches the specified input date and displays them as a list with index numbers.
 ```
@@ -394,10 +392,9 @@ Invalid command format! find_appt: Finds all persons whose appointment date matc
 ![find_appt format](images/find_appt2.png)
 
 If an input date does not follow the accepted format, an error message explaining the error will be shown,
-reminding the user to follow the correct input format.
+reminding the user to follow the correct input format
 
 * Error message shown to the user:
-
 ```
 Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd].
 ```
@@ -405,10 +402,9 @@ Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yy
 ![find_appt format](images/find_appt3.png)
 
 If an input date is a past date (a date before the current date), an error message explaining the error will be shown, 
-reminding the user to input a valid date.
+reminding the user to input a valid date
 
 * Error message shown to the user:
-
 ```
 Appointment Date should be after the current date.
 ```
