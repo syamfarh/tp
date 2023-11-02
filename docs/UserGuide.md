@@ -293,7 +293,7 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons based onthe given keywords.
+Finds persons based on the given keywords.
 
 #### Format: 
 
@@ -309,19 +309,19 @@ Finds persons based onthe given keywords.
 * `find appt/2024-01-01`
 
 #### Acceptable values for each parameter:
-* Name: Valid string name.
-* Address: Valid string address.
-* Appointment Date: Valid dates (after current date), in the format of `yyyy-mm-dd`.
+* Name: Valid string name
+* Address: Valid string address
+* Appointment date: Valid dates (after current date), in the format of `yyyy-mm-dd`
 
-#### Name
+#### _Name_
 
-![edit format](images/find_n0.png)
+![find_name format](images/find_n0.png)
 
 #### Precise expected outputs on success:
-* Successful find message. ‘X persons listed!’, where X is the number of contacts listed.
-  The list of contacts whose names contain the input name is shown.
+* Message shown to the user: "X persons listed!", where X is the number of contacts listed
+* The list of contacts whose names contain the input name is shown
 
-![edit format](images/find_n1.png)
+![find_name format](images/find_n1.png)
 
 ##### Precise expected outputs on failure:
 If no name is input after the find command, an error message explaining the error will be shown, 
@@ -333,17 +333,17 @@ reminding the user to follow the correct input format.
 Invalid command format! find n/: Finds all persons whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
 ```
 
-![edit format](images/find_n2.png)
+![find_name format](images/find_n2.png)
 
-#### Address
+#### _Address_
 
-![edit format](images/find_a0.png)
+![find_add format](images/find_a0.png)
 
 #### Precise expected outputs on success:
-* Successful find message. ‘X persons listed!’, where X is the number of contacts listed.
-  The list of contacts whose address contain the input address is shown.
+* Message shown to the user: "X persons listed!", where X is the number of contacts listed
+* The list of contacts whose address contain the input address is shown
 
-![edit format](images/find_a1.png)
+![find_add format](images/find_a1.png)
 
 ##### Precise expected outputs on failure:
 If no address is input after the find command, an error message explaining the error will be shown,
@@ -355,17 +355,17 @@ reminding the user to follow the correct input format.
 Invalid command format! find a/: Finds all persons whose address contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
 ```
 
-![edit format](images/find_a2.png)
+![find_add format](images/find_a2.png)
 
-#### Appointment Date
+#### _Appointment Date_
 
-![edit format](images/find_appt0.png)
+![find_appt format](images/find_appt0.png)
 
 #### Precise expected outputs on success:
-* Successful find message. ‘X persons listed!’, where X is the number of contacts listed.
-  The list of contacts whose appointment date matches the input date is shown.
+* Message shown to the user: "X persons listed!", where X is the number of contacts listed
+* The list of contacts whose appointment date matches the input date is shown
 
-![edit format](images/find_appt1.png)
+![find_appt format](images/find_appt1.png)
 
 ##### Precise expected outputs on failure:
 If no date is input after the find command, an error message explaining the error will be shown,
@@ -377,7 +377,7 @@ reminding the user to follow the correct input format.
 Invalid command format! find_appt: Finds all persons whose appointment date matches the specified input date and displays them as a list with index numbers.
 ```
 
-![edit format](images/find_appt2.png)
+![find_appt format](images/find_appt2.png)
 
 If an input date does not follow the accepted format, an error message explaining the error will be shown,
 reminding the user to follow the correct input format.
@@ -388,7 +388,7 @@ reminding the user to follow the correct input format.
 Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd].
 ```
 
-![edit format](images/find_appt3.png)
+![find_appt format](images/find_appt3.png)
 
 If an input date is a past date (a date before the current date), an error message explaining the error will be shown, 
 reminding the user to input a valid date.
@@ -399,7 +399,7 @@ reminding the user to input a valid date.
 Appointment Date should be after the current date.
 ```
 
-![edit format](images/find_appt4.png)
+![find_appt format](images/find_appt4.png)
 
 ### Undoing a command : `undo`
 
