@@ -673,22 +673,22 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 ## Command summary
 
-| Action            | Format, Examples                                                                                                                                                                             |
-|------------------ |----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague`    |
-| **Calendar**      | `calendar`                                                                                                                                                                                   |
-| **Clone**         | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                            |
-| **Clear**         | `clear`                                                                                                                                                                                      |
-| **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                          |
-| **Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                   |
-| **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                   |
-| **Find Address**  | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                           |
-| **List**          | `list`                                                                                                                                                                                       |
-| **Help**          | `help`                                                                                                                                                                                       |
-| **Questionnaire** | `questionnaire`                                                                                                                                                                              |
-| **Sort**          | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                               |
-| **Risk Profile**  | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                          |
-| **Exit**          | `exit`   
+| Action              | Format, Examples                                                                                                                                                                            |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague`   |
+| **Calendar**        | `calendar`                                                                                                                                                                                  |
+| **Clone**           | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                           |
+| **Clear**           | `clear`                                                                                                                                                                                     |
+| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                         |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                  |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
+| **Find Address**    | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                          |
+| **List**            | `list`                                                                                                                                                                                      |
+| **Help**            | `help`                                                                                                                                                                                      |
+| **Questionnaire**   | `questionnaire`                                                                                                                                                                             |
+| **Sort**            | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                              |
+| **Risk Profile**    | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                         |
+| **Exit**            | `exit`                                                                                                                                                                                      |
 
 ## Glossary
 | Word          | Meaning                                                   |
