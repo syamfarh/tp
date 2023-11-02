@@ -379,11 +379,22 @@ For undoing a delete command:
 ![undo format](images/undo-UG/after_delete_1.png)
 
 * Undo
-* Message shown to the user: "Undo Successful! Contact added back: X", where X are the details of the person who was
+* Message shown to the user: "Undo Successful! Contact(s) added back: X", where X are the details of the person who was
   just deleted, and now added back
 * GUI reflects that the most recently deleted contact is added back
 
 ![undo format](images/undo-UG/after_delete_undo.png)
+
+* Delete multiple contacts (In this case, 2 contacts)
+
+![undo format](images/undo-UG/after_delete_multiple.png)
+
+* Undo
+* Message shown to the user: "Undo Successful! Contact(s) added back: X", where X are the details of the persons who 
+  were just deleted, and now added back
+* GUI reflects that the most recently deleted contacts are added back
+
+![undo_format](images/undo-UG/after_delete_multiple_undo.png)
 
 For undoing a clear command:
 
