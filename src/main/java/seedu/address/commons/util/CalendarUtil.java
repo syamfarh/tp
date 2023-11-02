@@ -1,5 +1,7 @@
 package seedu.address.commons.util;
 
+import static java.util.Objects.requireNonNull;
+
 import com.calendarfx.model.Entry;
 import com.calendarfx.model.Interval;
 
@@ -15,10 +17,11 @@ public class CalendarUtil {
      * @param person
      */
     public static Entry createNewEntry(Person person) {
+        requireNonNull(person);
         Interval interval =
                 new Interval(person.getApptDate().valueInLocalDateTime,
                         person.getApptDate().valueInLocalDateTime.plusHours(1));
-        Entry entry = new Entry(person.getName().toString(), interval);
+        Entry entry = new Entry(person.getName().toString(), interval, person.getName().toString());
         return entry;
     }
 }
