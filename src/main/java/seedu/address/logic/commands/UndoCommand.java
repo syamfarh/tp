@@ -91,7 +91,7 @@ public class UndoCommand extends Command {
             return new CommandResult(MESSAGE_UNDO_DELETE_FAILURE);
         }
 
-        model.addToRedoStateList();
+        model.addToRedoableStateList();
 
         /* Undo the deletion of each person deleted from a single command. */
         for (Person deletedPerson : undoDeletedPersons) {
@@ -113,7 +113,7 @@ public class UndoCommand extends Command {
      */
     public CommandResult executeUndoClear(Model model) {
 
-        model.addToRedoStateList();
+        model.addToRedoableStateList();
         int numberOfPreviousDeleteCommands = model.getNumberOfPreviousDeleteCommands();
 
         /* Undo each individual delete command */
@@ -133,7 +133,7 @@ public class UndoCommand extends Command {
      */
     public CommandResult executeUndoAdd(Model model) {
 
-        model.addToRedoStateList();
+        model.addToRedoableStateList();
 
         Person personToDelete = model.getAddedPerson();
         model.undoAdd();
@@ -148,7 +148,7 @@ public class UndoCommand extends Command {
      */
     public CommandResult executeUndoEdit(Model model) {
 
-        model.addToRedoStateList();
+        model.addToRedoableStateList();
 
         Pair<Person, Person> pairToRestore = model.getEditedPersonsPair();
         Person originalPerson = pairToRestore.getValue();
@@ -166,9 +166,9 @@ public class UndoCommand extends Command {
      */
     public CommandResult executeUndoRedo(Model model) {
 
-        model.addToRedoStateList();
+        model.addToRedoableStateList();
         model.removePreviousUndoableCommand();
-        model.restoreStateFromUndoRedid();
+        model.restoreUndoableState();
 
         return new CommandResult(MESSAGE_UNDO_REDO_SUCCESS);
     }

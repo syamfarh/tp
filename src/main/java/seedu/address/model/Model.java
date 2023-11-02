@@ -79,23 +79,51 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-    void addToRedoStateList();
+    /**
+     * Adds the state of the address book before the undo to the redoableStateList ArrayList.
+     */
+    void addToRedoableStateList();
 
-    int getRedoStateListSize();
+    /**
+     * Returns the number of states that are redoable.
+     * @return
+     */
+    int getRedoableStateListSize();
 
-    void resetRedoStateList();
+    /**
+     * Resets the redoableStateList ArrayList to an empty ArrayList.
+     */
+    void resetRedoableStateList();
 
-    void restoreStateFromRedo();
+    /**
+     * Restores the most recent redoable state. In essence, this is a redo, but only used for redoing a previous undo.
+     */
+    void restoreRedoableState();
 
-    void addToUndoRedidStateList();
+    /**
+     * Adds the state of the address book before the redo to the undoableStateList ArrayList.
+     */
+    void addToUndoableStateList();
 
-    int getUndoRedidStateListSize();
+    /**
+     * Returns the number of states that are undoable.
+     */
+    int getUndoableStateListSize();
 
-    void resetUndoRedidStateList();
+    /**
+     * Resets the undoableStateList ArrayList to an empty ArrayList.
+     */
+    void resetUndoableStateList();
 
-    void restoreStateFromUndoRedid();
+    /**
+     * Restores the most recent undoable state. In essence, this is an undo, but only used for undoing a previous redo.
+     */
+    void restoreUndoableState();
 
-    void removeRedoCommandsFromUndoableCommands();
+    /**
+     * Removes all "redo" strings in the previousUndoableCommands ArrayList.
+     */
+    void removeRedoCommands();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();

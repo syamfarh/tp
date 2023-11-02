@@ -33,8 +33,8 @@ public class ModelManager implements Model {
     private final ArrayList<Pair<Person, Person>> editedPersons;
     private ArrayList<String> previousUndoableCommands;
     private ArrayList<Integer> deletedNumberList;
-    private ArrayList<ReadOnlyAddressBook> redoStateList;
-    private ArrayList<ReadOnlyAddressBook> undoRedidStateList;
+    private ArrayList<ReadOnlyAddressBook> redoableStateList;
+    private ArrayList<ReadOnlyAddressBook> undoableStateList;
 
 
     private Comparator<Person> sortComparator;
@@ -55,8 +55,8 @@ public class ModelManager implements Model {
         editedPersons = new ArrayList<>();
         previousUndoableCommands = new ArrayList<>();
         deletedNumberList = new ArrayList<>();
-        redoStateList = new ArrayList<>();
-        undoRedidStateList = new ArrayList<>();
+        redoableStateList = new ArrayList<>();
+        undoableStateList = new ArrayList<>();
         sortComparator = APPTCOMPARATOR;
     }
 
@@ -187,8 +187,63 @@ public class ModelManager implements Model {
         this.deletedNumberList.remove(this.deletedNumberList.size() - 1);
     }
 
+    @Override
+    public void addToRedoableStateList() {
+        this.redoableStateList.add(new AddressBook(this.addressBook));
+    }
 
+    @Override
+    public int getRedoableStateListSize() {
+        return this.redoableStateList.size();
+    }
 
+    @Override
+    public void resetRedoableStateList() {
+        this.redoableStateList = new ArrayList<>();
+    }
+
+    @Override
+    public void restoreRedoableState() {
+        int lastIndex = getRedoableStateListSize() - 1;
+        ReadOnlyAddressBook addressBookToRestore = this.redoableStateList.get(lastIndex);
+        addressBook.resetData(addressBookToRestore);
+        this.redoableStateList.remove(lastIndex);
+    }
+
+    @Override
+    public void addToUndoableStateList() {
+        this.undoableStateList.add(new AddressBook(this.addressBook));
+    }
+
+    @Override
+    public int getUndoableStateListSize() {
+        return this.undoableStateList.size();
+    }
+
+    @Override
+    public void resetUndoableStateList() {
+        this.undoableStateList = new ArrayList<>();
+    }
+
+    @Override
+    public void restoreUndoableState() {
+        int lastIndex = getUndoableStateListSize() - 1;
+        ReadOnlyAddressBook addressBookToRestore = this.undoableStateList.get(lastIndex);
+        addressBook.resetData(addressBookToRestore);
+        this.undoableStateList.remove(lastIndex);
+    }
+
+    @Override
+    public void removeRedoCommands() {
+
+        Iterator<String> itr = previousUndoableCommands.iterator();
+        while (itr.hasNext()) {
+            String command = itr.next();
+            if (command.equals("redo")) {
+                itr.remove();
+            }
+        }
+    }
 
 
     //=========== UserPrefs ==================================================================================
@@ -293,67 +348,6 @@ public class ModelManager implements Model {
         this.setPerson(editedPerson, originalPerson);
         this.removeEditedPersonsPair();
     }
-
-
-    @Override
-    public void addToRedoStateList() {
-        this.redoStateList.add(new AddressBook(this.addressBook));
-    }
-
-    @Override
-    public int getRedoStateListSize() {
-        return this.redoStateList.size();
-    }
-
-    @Override
-    public void resetRedoStateList() {
-        this.redoStateList = new ArrayList<>();
-    }
-
-    @Override
-    public void restoreStateFromRedo() {
-        int lastIndex = getRedoStateListSize() - 1;
-        ReadOnlyAddressBook addressBookToRestore = this.redoStateList.get(lastIndex);
-        addressBook.resetData(addressBookToRestore);
-        this.redoStateList.remove(lastIndex);
-    }
-
-    @Override
-    public void addToUndoRedidStateList() {
-        this.undoRedidStateList.add(new AddressBook(this.addressBook));
-    }
-
-    @Override
-    public int getUndoRedidStateListSize() {
-        return this.undoRedidStateList.size();
-    }
-
-    @Override
-    public void resetUndoRedidStateList() {
-        this.undoRedidStateList = new ArrayList<>();
-    }
-
-    @Override
-    public void restoreStateFromUndoRedid() {
-        int lastIndex = getUndoRedidStateListSize() - 1;
-        ReadOnlyAddressBook addressBookToRestore = this.undoRedidStateList.get(lastIndex);
-        addressBook.resetData(addressBookToRestore);
-        this.undoRedidStateList.remove(lastIndex);
-    }
-
-    @Override
-    public void removeRedoCommandsFromUndoableCommands() {
-
-        Iterator<String> itr = previousUndoableCommands.iterator();
-        while (itr.hasNext()) {
-            String command = itr.next();
-            if (command.equals("redo")) {
-                itr.remove();
-            }
-        }
-    }
-
-
 
 
     //=========== Filtered Person List Accessors =============================================================

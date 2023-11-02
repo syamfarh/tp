@@ -26,14 +26,14 @@ public class RedoCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
 
-        if (model.getRedoStateListSize() <= 0) {
+        if (model.getRedoableStateListSize() <= 0) {
             throw new CommandException(MESSAGE_REDO_FAILURE);
         }
 
-        model.addToUndoRedidStateList();
+        model.addToUndoableStateList();
 
         model.storePreviousUndoableCommand(COMMAND_WORD);
-        model.restoreStateFromRedo();
+        model.restoreRedoableState();
 
         return new CommandResult(MESSAGE_REDO_SUCCESS);
     }

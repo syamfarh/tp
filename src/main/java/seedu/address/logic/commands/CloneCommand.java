@@ -49,9 +49,9 @@ public class CloneCommand extends Command {
                 model.addPerson(clonedPerson);
                 model.storePreviousUndoableCommand(COMMAND_WORD);
 
-                model.resetRedoStateList();
-                model.resetUndoRedidStateList();
-                model.removeRedoCommandsFromUndoableCommands();
+                model.resetRedoableStateList();
+                model.resetUndoableStateList();
+                model.removeRedoCommands();
 
                 return new CommandResult(String.format(MESSAGE_CLONE_PERSON_SUCCESS, Messages.format(personToClone)));
             } catch (DuplicatePersonException e) {

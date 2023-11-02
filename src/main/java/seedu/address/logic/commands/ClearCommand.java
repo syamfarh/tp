@@ -34,9 +34,9 @@ public class ClearCommand extends Command {
 
         model.storePreviousUndoableCommand(COMMAND_WORD);
 
-        model.resetRedoStateList();
-        model.resetUndoRedidStateList();
-        model.removeRedoCommandsFromUndoableCommands();
+        model.resetRedoableStateList();
+        model.resetUndoableStateList();
+        model.removeRedoCommands();
 
         return new CommandResult(MESSAGE_SUCCESS);
     }
