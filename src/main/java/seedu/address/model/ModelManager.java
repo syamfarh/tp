@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -328,7 +329,7 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void resetUndoRedidStateListSize() {
+    public void resetUndoRedidStateList() {
         this.undoRedidStateList = new ArrayList<>();
     }
 
@@ -338,6 +339,18 @@ public class ModelManager implements Model {
         ReadOnlyAddressBook addressBookToRestore = this.undoRedidStateList.get(lastIndex);
         addressBook.resetData(addressBookToRestore);
         this.undoRedidStateList.remove(lastIndex);
+    }
+
+    @Override
+    public void removeRedoCommandsFromUndoableCommands() {
+        int size = getPreviousUndoableCommandsSize();
+        Iterator<String> itr = previousUndoableCommands.iterator();
+        while (itr.hasNext()) {
+            String command = itr.next();
+            if (command.equals("redo")) {
+                itr.remove();
+            }
+        }
     }
 
 

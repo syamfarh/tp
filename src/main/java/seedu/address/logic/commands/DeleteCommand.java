@@ -57,7 +57,11 @@ public class DeleteCommand extends Command {
         }
 
         model.storeDeletedNumberList(targetIndexes.size());
+
         model.resetRedoStateList();
+        model.resetUndoRedidStateList();
+        model.removeRedoCommandsFromUndoableCommands();
+
         String resultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.formatPersons(deletedPersons));
 
         return new CommandResult(resultMessage);

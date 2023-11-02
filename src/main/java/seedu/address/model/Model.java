@@ -92,9 +92,11 @@ public interface Model {
 
     int getUndoRedidStateListSize();
 
-    void resetUndoRedidStateListSize();
+    void resetUndoRedidStateList();
 
     void restoreStateFromUndoRedid();
+
+    void removeRedoCommandsFromUndoableCommands();
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
