@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CalendarUtil;
 import seedu.address.logic.Logic;
@@ -41,7 +42,6 @@ public class CalendarWindow extends UiPart<Stage> {
         public void handle(KeyEvent event) {
             switch (event.getCode()) {
             case LEFT:
-                System.out.println("here");
                 calendarView.getMonthPage().goBack();
                 break;
             case RIGHT:
@@ -63,6 +63,7 @@ public class CalendarWindow extends UiPart<Stage> {
      */
     public CalendarWindow(Stage root) {
         super(FXML, root);
+        //configure calendar view
         calendarView = new CalendarView();
         clients = new Calendar("Clients");
         CalendarSource myCalendarSource = new CalendarSource("My Calendars");
@@ -70,7 +71,7 @@ public class CalendarWindow extends UiPart<Stage> {
         calendarView.getCalendarSources().addAll(myCalendarSource);
         clients.setStyle(Calendar.Style.STYLE1);
         calendarView.setRequestedTime(LocalTime.now());
-
+        calendarView.getMonthPage().getMonthView().setDisable(true);
         updateTimeThread = new Thread("Calendar: Update Time Thread") {
             @Override
             public void run() {
@@ -94,13 +95,11 @@ public class CalendarWindow extends UiPart<Stage> {
         updateTimeThread.setPriority(Thread.MIN_PRIORITY);
         updateTimeThread.setDaemon(true);
         updateTimeThread.start();
-        root.setWidth(1000);
-        root.setHeight(600);
+        //set calendar view in scene
         Scene scene = new Scene(calendarView.getMonthPage());
+        //add eventHandler for navigating calendar window to different month page
         scene.addEventFilter(KeyEvent.KEY_PRESSED, keyNavigator);
-
         root.setScene(scene);
-        calendarView.getMonthPage().getMonthView().setDisable(true);
         root.setResizable(true);
     }
 
@@ -110,6 +109,8 @@ public class CalendarWindow extends UiPart<Stage> {
     public CalendarWindow(Logic logic) {
         this(new Stage());
         this.logic = logic;
+        // Configure the window size
+        setWindowDefaultSize(logic.getGuiSettings());
     }
 
     /**
@@ -168,6 +169,18 @@ public class CalendarWindow extends UiPart<Stage> {
         clients.clear();
         for (Person p : lists) {
             clients.addEntry(CalendarUtil.createNewEntry(p));
+        }
+    }
+
+    /**
+     * Sets the default size based on {@code guiSettings}.
+     */
+    private void setWindowDefaultSize(GuiSettings guiSettings) {
+        getRoot().setHeight(guiSettings.getWindowHeight());
+        getRoot().setWidth(guiSettings.getWindowWidth());
+        if (guiSettings.getWindowCoordinates() != null) {
+            getRoot().setX(guiSettings.getWindowCoordinates().getX());
+            getRoot().setY(guiSettings.getWindowCoordinates().getY());
         }
     }
 
