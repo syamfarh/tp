@@ -33,6 +33,8 @@ public class ClearCommand extends Command {
         }
 
         model.storePreviousUndoableCommand(COMMAND_WORD);
+        model.resetRedoStateList();
+
         return new CommandResult(MESSAGE_SUCCESS);
     }
 }

@@ -32,12 +32,14 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_ADD_SUCCESS = "Undo Successful! Deleted Person: %1$s";
     public static final String MESSAGE_UNDO_EDIT_SUCCESS = "Undo Successful! Reverted back to: %1$s";
 
+    public static final String MESSAGE_UNDO_REDO_SUCCESS = "Undo Successful!";
+
     private static Logger logger = Logger.getLogger("UndoCommand");
 
     /**
      * Constructor for UndoCommand is empty.
      */
-    public UndoCommand() {};
+    public UndoCommand() {}
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -61,6 +63,8 @@ public class UndoCommand extends Command {
         case "edit":
             logger.log(Level.INFO, "case: edit");
             return executeUndoEdit(model);
+        case "redo":
+            return executeUndoRedo(model);
         default:
             throw new AssertionError("Not an undoable command! There is an error!");
         }
@@ -119,6 +123,7 @@ public class UndoCommand extends Command {
 
         // Remove 'clear' from the list of previous undoable commands.
         model.removePreviousUndoableCommand();
+
         return new CommandResult(String.format(MESSAGE_UNDO_CLEAR_SUCCESS));
     }
 
@@ -153,5 +158,18 @@ public class UndoCommand extends Command {
         model.removePreviousUndoableCommand();
 
         return new CommandResult(String.format(MESSAGE_UNDO_EDIT_SUCCESS, Messages.format(originalPerson)));
+    }
+
+    /**
+     * Undoes a redo command.
+     * @return returns CommandResult of the message when the undo is a success.
+     */
+    public CommandResult executeUndoRedo(Model model) {
+
+        model.addToRedoStateList();
+        model.removePreviousUndoableCommand();
+        model.restoreStateFromUndoRedid();
+
+        return new CommandResult(MESSAGE_UNDO_REDO_SUCCESS);
     }
 }

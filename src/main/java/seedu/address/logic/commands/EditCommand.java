@@ -94,6 +94,9 @@ public class EditCommand extends Command {
         model.storeEditedPersonsPair(editedPerson, personToEdit);
         model.storePreviousUndoableCommand(COMMAND_WORD);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+
+        model.resetRedoStateList();
+
         return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, Messages.format(editedPerson)));
     }
 

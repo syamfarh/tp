@@ -24,7 +24,7 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final ArrayList<Person> addedPersons;
@@ -33,6 +33,7 @@ public class ModelManager implements Model {
     private ArrayList<String> previousUndoableCommands;
     private ArrayList<Integer> deletedNumberList;
     private ArrayList<ReadOnlyAddressBook> redoStateList;
+    private ArrayList<ReadOnlyAddressBook> undoRedidStateList;
 
 
     private Comparator<Person> sortComparator;
@@ -54,6 +55,7 @@ public class ModelManager implements Model {
         previousUndoableCommands = new ArrayList<>();
         deletedNumberList = new ArrayList<>();
         redoStateList = new ArrayList<>();
+        undoRedidStateList = new ArrayList<>();
         sortComparator = APPTCOMPARATOR;
     }
 
@@ -294,7 +296,7 @@ public class ModelManager implements Model {
 
     @Override
     public void addToRedoStateList() {
-        this.redoStateList.add(addressBook);
+        this.redoStateList.add(new AddressBook(this.addressBook));
     }
 
     @Override
@@ -304,9 +306,39 @@ public class ModelManager implements Model {
 
     @Override
     public void resetRedoStateList() {
-        redoStateList = new ArrayList<>();
+        this.redoStateList = new ArrayList<>();
     }
 
+    @Override
+    public void restoreStateFromRedo() {
+        int lastIndex = getRedoStateListSize() - 1;
+        ReadOnlyAddressBook addressBookToRestore = this.redoStateList.get(lastIndex);
+        addressBook.resetData(addressBookToRestore);
+        this.redoStateList.remove(lastIndex);
+    }
+
+    @Override
+    public void addToUndoRedidStateList() {
+        this.undoRedidStateList.add(new AddressBook(this.addressBook));
+    }
+
+    @Override
+    public int getUndoRedidStateListSize() {
+        return this.undoRedidStateList.size();
+    }
+
+    @Override
+    public void resetUndoRedidStateListSize() {
+        this.undoRedidStateList = new ArrayList<>();
+    }
+
+    @Override
+    public void restoreStateFromUndoRedid() {
+        int lastIndex = getUndoRedidStateListSize() - 1;
+        ReadOnlyAddressBook addressBookToRestore = this.undoRedidStateList.get(lastIndex);
+        addressBook.resetData(addressBookToRestore);
+        this.undoRedidStateList.remove(lastIndex);
+    }
 
 
 

@@ -58,6 +58,7 @@ public class AddCommand extends Command {
 
         model.addPerson(toAdd);
         model.storePreviousUndoableCommand(COMMAND_WORD);
+        model.resetRedoStateList();
         return new CommandResult(String.format(MESSAGE_SUCCESS, Messages.format(toAdd)));
     }
 
