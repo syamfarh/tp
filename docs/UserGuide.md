@@ -58,9 +58,9 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application
 </div>
 
 ### Viewing help: `help`
@@ -79,19 +79,20 @@ A pop-up of a new window that lists out all the main commands with their respect
 Adds a new entry to their address book for financial advisors, including personal details such as name, address, occupation, phone number and email.
 
 #### Format:
-* `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​`
+* `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG] [appt/APPOINTMENT_DATE]
 
 #### Example commands:
-* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01`
-* `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567 t/Criminal`
+* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01 appt/12-12-2023 08:30`
+* `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567`
 
 #### Acceptable values for each parameter:
-* Name: Valid string name.
-* Address: Valid string address. Contains postal code. (8 College Ave West, Singapore 138608).
-* Phone number: Valid string and phone number format (81234567).
-* Email address: Valid string and email address format (johnd@example.com).
-* Occupation: Valid string occupation.
-* Tag: Valid string.
+* Name: Valid string name
+* Address: Valid string address (8 College Ave West)
+* Phone number: Valid string (Numbers only) (81234567)
+* Email address: Valid string and email address format (johnd@example.com)
+* Occupation: Valid string occupation
+* Tag: Valid string
+* Appointment date: Only accepted in yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm format
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -100,9 +101,9 @@ A person can have any number of tags (including 0)
 ![add format](images/addformat.png)
 
 #### Precise expected outputs on success:
-* Successful addition message. ‘New Person added: X ’, where X are the details of the person added.
-* For example, for Robert Johnson (the example command), it would be: “New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: “. Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person.
-* The new entry is displayed in the address book GUI.
+* Successful addition message. ‘New Person added: X ’, where X are the details of the person added
+* For example, for Robert Johnson (the example command), it would be: “New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: “. Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
+* The new entry is displayed in the address book GUI
 
 ![add format](images/addresult.png)
 
