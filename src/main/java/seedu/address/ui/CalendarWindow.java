@@ -71,6 +71,7 @@ public class CalendarWindow extends UiPart<Stage> {
         calendarView.getCalendarSources().addAll(myCalendarSource);
         clients.setStyle(Calendar.Style.STYLE1);
         calendarView.setRequestedTime(LocalTime.now());
+        //prevent adding events directly to calendar window
         calendarView.getMonthPage().getMonthView().setDisable(true);
         updateTimeThread = new Thread("Calendar: Update Time Thread") {
             @Override
