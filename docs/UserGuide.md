@@ -442,20 +442,20 @@ For undoing an edit command:
 
 Sort contact lists by prefix name or appointment date.
 
-Format: 
+#### Format: 
 * `sort PREFIX`
 
-Example commands:
+#### Example commands:
 * `sort n/`
 * `sort appt/`
 
-Acceptable prefix tag:
+#### Acceptable prefix tag:
 * `n/` sort by Name prefix
 * `appt/` sort by Appointment Date prefix
 
 ![sort format](images/sort-UG/sortformat.png)
 
-Precise expected output on success:
+#### Precise expected output on success:
 * Successful addition message. 'X person listed!', where X is the number of clients in the address book.
 * The sorted entry is displayed in the address book GUI.
 
@@ -550,3 +550,9 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 | **List**         | `list`                                                                                                                                                                                |
 | **Help**         | `help`                                                                                                                                                                                |
 | **Sort** | `sort PREFIX` <br> e.g. `sort appt/` `sort n/` |
+
+## Glossary
+| Word          | Meaning                                                   |
+|---------------|-----------------------------------------------------------|
+| **Parameter** | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS |
+| **Prefix** | word that is added in front of parameter.<br/>e.g. n/, o/, a/  |
