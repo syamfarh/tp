@@ -549,3 +549,9 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 | **List**         | `list`                                                                                                                                                                                |
 | **Help**         | `help`                                                                                                                                                                                |
 | **Sort** | `sort PREFIX` <br> e.g. `sort appt/` `sort n/` |
+
+## Glossary
+| Word          | Meaning                                                   |
+|---------------|-----------------------------------------------------------|
+| **Parameter** | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS |
+| **Prefix** | word that is added in front of parameter.<br/>e.g. n/, o/, a/  |
