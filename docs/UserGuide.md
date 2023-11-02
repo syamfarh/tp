@@ -101,7 +101,14 @@ A person can have any number of tags (including 0)
 ![add format](images/addformat.png)
 
 #### Precise expected outputs on success:
-* Successful addition message. ‘New Person added: X ’, where X are the details of the person added
+* Message shown to the user:
+
+```
+New Person added: X
+```
+
+where X are the details of the person added
+
 * For example, for Robert Johnson (the example command), it would be: “New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: “. Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
 * The new entry is displayed in the address book GUI
 
@@ -111,7 +118,7 @@ A person can have any number of tags (including 0)
 
 If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
 
-* Error Message:
+* Error message shown to the user:
 
 ```
 Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
@@ -120,6 +127,8 @@ Invalid command format! add: Adds a person to the address book. Parameters: n/NA
 ![add format](images/addmissingparam.png)
 
 If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
+
+* Error message shown to the user:
 
 ```
 Emails should be of the format local-part@domain and adhere to the following constraints:
@@ -134,6 +143,8 @@ The domain name must:
 ![add format](images/addinvalidemail.png)
 
 If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+
+* Error message shown to the user:
 
 ```
 Multiple values specified for the following single-valued field(s): n/
