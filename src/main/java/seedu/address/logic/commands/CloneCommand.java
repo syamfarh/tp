@@ -25,9 +25,6 @@ public class CloneCommand extends Command {
 
     public static final String MESSAGE_CLONE_PERSON_SUCCESS = "Cloned Person: %1$s";
 
-    public static final String MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE = "A clone of this person already exists.\n"
-        + "To clone again, please edit the previous clone first or alternatively, clone the previous clone.";
-
     private final Index targetIndex;
 
     public CloneCommand(Index targetIndex) {
@@ -46,12 +43,15 @@ public class CloneCommand extends Command {
         Person personToClone = lastShownList.get(targetIndex.getZeroBased());
 
         Person clonedPerson = clonePerson(personToClone);
-        try {
-            model.addPerson(clonedPerson);
-            model.storePreviousUndoableCommand(COMMAND_WORD);
-            return new CommandResult(String.format(MESSAGE_CLONE_PERSON_SUCCESS, Messages.format(personToClone)));
-        } catch (DuplicatePersonException e) {
-            throw new CommandException(String.format(MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE));
+
+        while (true) {
+            try {
+                model.addPerson(clonedPerson);
+                model.storePreviousUndoableCommand(COMMAND_WORD);
+                return new CommandResult(String.format(MESSAGE_CLONE_PERSON_SUCCESS, Messages.format(personToClone)));
+            } catch (DuplicatePersonException e) {
+                clonedPerson = clonePerson(clonedPerson);
+            }
         }
     }
 
@@ -83,7 +83,7 @@ public class CloneCommand extends Command {
      * @param personToClone The original Person object to be cloned.
      * @return A new Person object with the name having an incremented numeric suffix.
      */
-    public static Person clonePerson(Person personToClone) {
+    public static Person clonePerson(Person personToClone) throws CommandException {
         String originalName = personToClone.getName().toString();
         String[] parts = splitStringAtLastSpace(originalName);
         int numericSuffix;
@@ -99,8 +99,15 @@ public class CloneCommand extends Command {
             updatedName = parts[0] + " " + parts[1] + " " + numericSuffix;
         } else if (parts[1].matches("\\d+")) {
             // Case 3: name has spaces and suffix is only an integer
-            numericSuffix = Integer.parseInt(parts[1].trim()) + 1;
-            updatedName = parts[0] + " " + numericSuffix;
+            numericSuffix = Integer.parseInt(parts[1].trim());
+
+            // Check if the numeric suffix is within a valid range
+            if (0 < numericSuffix && numericSuffix < Integer.MAX_VALUE) {
+                numericSuffix++;
+                updatedName = parts[0] + " " + numericSuffix;
+            } else {
+                throw new CommandException(Messages.MESSAGE_PERSON_SUFFIX_OUT_OF_RANGE);
+            }
         }
 
         Name clonedName = new Name(updatedName);

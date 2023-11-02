@@ -47,7 +47,9 @@ public class RiskProfileCommandTest {
         String expectedRiskLevel = RiskProfileCommand.calculateRiskLevel(totalScore);
 
         String expectedMessage = String.format(RiskProfileCommand.MESSAGE_ADD_RISKPROFILE_SUCCESS,
-            new PersonBuilder(firstPerson).withRiskProfile(expectedRiskLevel).build());
+            editedPerson.getName(), editedPerson.getPhone(), editedPerson.getEmail(),
+            editedPerson.getOccupation(), editedPerson.getAddress(), editedPerson.getApptDate(),
+            expectedRiskLevel, editedPerson.getTags());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -70,8 +72,9 @@ public class RiskProfileCommandTest {
         String expectedRiskLevel = RiskProfileCommand.calculateRiskLevel(totalScore);
 
         String expectedMessage = String.format(RiskProfileCommand.MESSAGE_ADD_RISKPROFILE_SUCCESS,
-            new PersonBuilder(model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased()))
-            .withRiskProfile(expectedRiskLevel).build());
+            editedPerson.getName(), editedPerson.getPhone(), editedPerson.getEmail(),
+            editedPerson.getOccupation(), editedPerson.getAddress(), editedPerson.getApptDate(),
+            expectedRiskLevel, editedPerson.getTags());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);

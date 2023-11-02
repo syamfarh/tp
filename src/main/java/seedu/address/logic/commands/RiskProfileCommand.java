@@ -19,18 +19,20 @@ import seedu.address.model.person.RiskProfile;
  */
 public class RiskProfileCommand extends Command {
     public static final String COMMAND_WORD = "riskprofile";
-    public static final String MESSAGE_ADD_RISKPROFILE_SUCCESS = "Added risk profile to Person: %1$s";
-    public static final String MESSAGE_INVALID_RESULT = "Result must have 8 comma-separated characters from 'a' to 'e'."
+    public static final String MESSAGE_ADD_RISKPROFILE_SUCCESS = "Added risk profile to Person: %1$s; Phone: %2$s; "
+        + "Email: %3$s; Occupation: %4$s; Address: %5$s; "
+        + "Appointment Date: %6$s; Risk Profile: %7$s; Tags: %8$s";
+    public static final String MESSAGE_INVALID_RESULT = "Result must have 8 comma-separated characters from 'a' to 'e'!"
         + "\n%1$s";
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds the risk profile of the person identified "
         + "by the index number used in the last person listing. "
         + "Existing risk profile will be overwritten by the input.\n"
-        + "Parameters: INDEX (must be a positive integer)"
+        + "Parameters: INDEX (must be a positive integer) "
         + PREFIX_RISKPROFILE + "[RESULT]\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_RISKPROFILE + "a,e,b,d,c,a,d,e";
 
-    private final Index index;
+    private final Index personToEdit;
     private final RiskProfile result;
 
     /**
@@ -40,7 +42,7 @@ public class RiskProfileCommand extends Command {
     public RiskProfileCommand(Index index, RiskProfile result) {
         requireAllNonNull(index, result);
 
-        this.index = index;
+        this.personToEdit = index;
         this.result = result;
     }
 
@@ -48,7 +50,7 @@ public class RiskProfileCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (personToEdit.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
         }
 
@@ -61,7 +63,7 @@ public class RiskProfileCommand extends Command {
 
         RiskProfile riskProfile = new RiskProfile(riskLevel);
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = lastShownList.get(this.personToEdit.getZeroBased());
         Person editedPerson = new Person(
             personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(), personToEdit.getOccupation(),
             personToEdit.getAddress(), personToEdit.getApptDate(), riskProfile, personToEdit.getTags());
@@ -78,7 +80,15 @@ public class RiskProfileCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        return String.format(MESSAGE_ADD_RISKPROFILE_SUCCESS, personToEdit);
+        return String.format(MESSAGE_ADD_RISKPROFILE_SUCCESS,
+            personToEdit.getName(),
+            personToEdit.getPhone(),
+            personToEdit.getEmail(),
+            personToEdit.getOccupation(),
+            personToEdit.getAddress(),
+            personToEdit.getApptDate(),
+            personToEdit.getRiskProfile(),
+            personToEdit.getTags());
     }
 
     /**
@@ -177,7 +187,7 @@ public class RiskProfileCommand extends Command {
         }
 
         RiskProfileCommand e = (RiskProfileCommand) other;
-        return index.equals(e.index)
+        return personToEdit.equals(e.personToEdit)
             && result.equals(e.result);
     }
 }

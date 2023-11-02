@@ -26,6 +26,7 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindAddCommand;
+import seedu.address.logic.commands.FindApptCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.FindNameCommand;
 import seedu.address.logic.commands.HelpCommand;
@@ -102,6 +103,12 @@ public class AddressBookParserTest {
     }
 
     @Test
+    public void parseCommand_calendar() throws Exception {
+        assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD) instanceof CalendarCommand);
+        assertTrue(parser.parseCommand(CalendarCommand.COMMAND_WORD + " 3") instanceof CalendarCommand);
+    }
+
+    @Test
     public void parseCommand_riskprofile() throws Exception {
         final RiskProfile result = new RiskProfile("a,a,b,c,c,d,d,e");
         RiskProfileCommand command = (RiskProfileCommand) parser.parseCommand(RiskProfileCommand.COMMAND_WORD + " "
@@ -137,9 +144,9 @@ public class AddressBookParserTest {
     public void parseCommand_find_returnsCalendar() throws Exception {
         List<String> findKeywords = Arrays.asList("appt/", "2023-12-12");
         List<String> calendarKeywords = List.of("2023-12-12");
-        CalendarCommand command = (CalendarCommand) parser.parseCommand(
+        FindApptCommand command = (FindApptCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + findKeywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new CalendarCommand(new CalendarContainsKeywordsPredicate(calendarKeywords)), command);
+        assertEquals(new FindApptCommand(new CalendarContainsKeywordsPredicate(calendarKeywords)), command);
     }
 
     @Test
