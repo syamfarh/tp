@@ -13,8 +13,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
-import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
+
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
@@ -24,9 +25,9 @@ public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
 
-    private static final Person testPersonAlice = ALICE;
-    private static final Person testPersonAliceEdited = EDITEDALICE;
-    private static final Person testPersonBenson = BENSON;
+    private final Person testPersonAlice = ALICE;
+    private final Person testPersonAliceEdited = EDITEDALICE;
+    private final Person testPersonBenson = BENSON;
 
     @Test
     public void constructor() {
