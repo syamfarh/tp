@@ -303,7 +303,7 @@ Format: `find KEYWORD [MORE_KEYWORDS]`
 ![edit format](images/find0.png)
 
 * Precise expected outputs on success:
-* Successful find message. ‘X persons listed!’, where X is the number of contacts listed.
+* Successful find message. ‘X persons listed!’’, where X is the number of contacts listed.
   The list of contacts whose names contain the input name is shown.
 
 ![edit format](images/find1.png)
@@ -333,7 +333,7 @@ Examples:
 ![edit format](images/findadd0.png)
 
 * Precise expected outputs on success:
-* Successful find message. ‘X persons listed!’, where X is the number of contacts listed.
+* Successful find message. ‘X persons listed!’’, where X is the number of contacts listed.
   The list of contacts whose address contains the input address is shown.
 
 ![edit format](images/findadd1.png)
