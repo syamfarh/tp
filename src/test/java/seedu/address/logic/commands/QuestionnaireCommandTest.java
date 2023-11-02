@@ -15,7 +15,8 @@ public class QuestionnaireCommandTest {
     @Test
     public void execute_questionnaire_success() {
         CommandResult expectedCommandResult =
-            new CommandResult(SHOWING_QUESTIONNAIRE_MESSAGE, false, true, false);
+                new CommandResult(SHOWING_QUESTIONNAIRE_MESSAGE, false, true, false,
+                        false);
         assertCommandSuccess(new QuestionnaireCommand(), model, expectedCommandResult, expectedModel);
     }
 }
