@@ -32,38 +32,45 @@ public class TypicalPersons {
 
     public static final Person ALICE = new PersonBuilder().withName("Alice Pauline")
             .withAddress("123, Jurong West Ave 6, #08-111").withEmail("alice@example.com")
-            .withPhone("94351253").withOccupation("Barber").withAppointmentDate("")
+            .withPhone("94351253").withOccupation("Barber").withAppointmentDate("2023-12-13 08:30")
             .withRiskProfile("a,a,b,b,b,d,e,c").withTags("friends").build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432").withOccupation("Musician")
-            .withAppointmentDate("").withRiskProfile("d,c,a,e,b,b,c,a").withTags("owesMoney", "friends").build();
+            .withAppointmentDate("2023-12-14 08:30").withRiskProfile("d,c,a,e,b,b,c,a")
+            .withTags("owesMoney", "friends").build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withAppointmentDate("")
+            .withAppointmentDate("2023-12-15 08:30")
             .withEmail("heinz@example.com").withOccupation("Sheep Farmer").withAddress("wall street")
             .withRiskProfile("").build();
     public static final Person DANIEL = new PersonBuilder().withName("Daniel Meier").withPhone("87652533")
             .withEmail("cornelia@example.com").withOccupation("Lecturer").withAddress("10th street")
-            .withAppointmentDate("").withRiskProfile("").withTags("friends").build();
+            .withAppointmentDate("2023-12-16 08:30").withRiskProfile("").withTags("friends").build();
     public static final Person ELLE = new PersonBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withAppointmentDate("").withEmail("werner@example.com").withOccupation("Seamstress")
+            .withAppointmentDate("2023-12-17 08:30").withEmail("werner@example.com").withOccupation("Seamstress")
             .withAddress("michegan ave").withRiskProfile("").build();
     public static final Person FIONA = new PersonBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withAppointmentDate("").withEmail("lydia@example.com").withOccupation("Princess")
+            .withAppointmentDate("2023-12-18 08:30").withEmail("lydia@example.com").withOccupation("Princess")
             .withAddress("little tokyo").withRiskProfile("").build();
     public static final Person GEORGE = new PersonBuilder().withName("George Best").withPhone("9482442")
-            .withAppointmentDate("").withEmail("anna@example.com").withOccupation("Zoologist")
+            .withAppointmentDate("2023-12-19 08:30").withEmail("george@example.com").withOccupation("Zoologist")
             .withAddress("4th street").withRiskProfile("").build();
-
-    public static final Person PAUL = new PersonBuilder().withName("Paul")
-            .withAddress("123, Jurong West Ave 5, #08-111").withEmail("paul@example.com")
-            .withPhone("94352433").withOccupation("Golfer").withAppointmentDate("")
-            .withRiskProfile("a,a,b,b,b,d,e,c").withTags("friends").build();
-
-    public static final Person SIMON = new PersonBuilder().withName("Simon 1")
-            .withAddress("123, Jurong West Ave 4, #08-111").withEmail("simon@example.com")
-            .withPhone("94932143").withOccupation("Fisherman").withAppointmentDate("")
-            .withRiskProfile("a,a,b,b,b,d,e,c").withTags("friends").build();
+    public static final Person KHALID = new PersonBuilder().withName("Khalid")
+            .withAddress("5th Street").withEmail("khalid@example.com")
+            .withPhone("94352433").withOccupation("Golfer").withAppointmentDate("2023-12-20 08:30")
+            .withRiskProfile("").withTags("friends").build();
+    public static final Person LENNY = new PersonBuilder().withName("Lenny David")
+            .withAddress("6th Street").withEmail("lenny@example.com")
+            .withPhone("94932143").withOccupation("Fisherman").withAppointmentDate("2023-12-21 08:30")
+            .withRiskProfile("").withTags("friends").build();
+    public static final Person LENNY1 = new PersonBuilder().withName("Lenny David 1")
+            .withAddress("6th Street").withEmail("lenny@example.com")
+            .withPhone("94932143").withOccupation("Fisherman").withAppointmentDate("2023-12-22 08:30")
+            .withRiskProfile("").withTags("friends").build();
+    public static final Person OWEN = new PersonBuilder().withName("Owen Davis 2147483647")
+            .withAddress("7th Street").withEmail("owen@example.com")
+            .withPhone("94932143").withOccupation("Fisherman").withAppointmentDate("2023-12-23 08:30")
+            .withRiskProfile("").withTags("friends").build();
 
     // Manually added
     public static final Person HOON = new PersonBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -106,6 +113,7 @@ public class TypicalPersons {
     }
 
     public static List<Person> getTypicalPersons() {
-        return new ArrayList<>(Arrays.asList(SIMON, PAUL, ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE, JOHN));
+        return new ArrayList<>(Arrays.asList(OWEN, LENNY, LENNY1, KHALID, ALICE, BENSON, CARL, DANIEL, ELLE, FIONA,
+                GEORGE, JOHN));
     }
 }

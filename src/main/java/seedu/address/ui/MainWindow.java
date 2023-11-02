@@ -200,6 +200,7 @@ public class MainWindow extends UiPart<Stage> {
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
         questionnaireWindow.hide();
+        calendarWindow.hide();
         primaryStage.hide();
     }
 
@@ -225,6 +226,10 @@ public class MainWindow extends UiPart<Stage> {
 
             if (commandResult.isShowQuestionnaire()) {
                 handleQuestionnaire();
+            }
+
+            if (commandResult.isShowCalendar()) {
+                handleCalendar();
             }
 
             if (commandResult.isExit()) {
