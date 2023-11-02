@@ -5,24 +5,24 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.AddressContainsKeywordsPredicate;
+import seedu.address.model.person.CalendarContainsKeywordsPredicate;
 
 /**
- * Finds and lists all persons in address book whose address contains any of the argument keywords.
+ * Finds and lists all persons in address book whose appointment date contains any of the argument keywords.
  * Keyword matching is case insensitive.
  */
-public class FindAddCommand extends Command {
+public class FindApptCommand extends Command {
 
-    public static final String COMMAND_WORD = "find a/";
+    public static final String COMMAND_WORD = "find appt/";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose address contain any of "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose appointment date contains "
             + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
             + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " block 123";
+            + "Example: " + COMMAND_WORD + " 2023-12-12";
 
-    private final AddressContainsKeywordsPredicate predicate;
+    private final CalendarContainsKeywordsPredicate predicate;
 
-    public FindAddCommand(AddressContainsKeywordsPredicate predicate) {
+    public FindApptCommand(CalendarContainsKeywordsPredicate predicate) {
         this.predicate = predicate;
     }
 
@@ -41,12 +41,12 @@ public class FindAddCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof FindAddCommand)) {
+        if (!(other instanceof FindApptCommand)) {
             return false;
         }
 
-        FindAddCommand otherFindCommand = (FindAddCommand) other;
-        return predicate.equals(otherFindCommand.predicate);
+        FindApptCommand otherCalCommand = (FindApptCommand) other;
+        return predicate.equals(otherCalCommand.predicate);
     }
 
     @Override

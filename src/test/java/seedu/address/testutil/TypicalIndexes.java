@@ -19,4 +19,6 @@ public class TypicalIndexes {
             INDEX_FOURTH_PERSON);
     public static final Index INDEX_NINTH_PERSON = Index.fromOneBased(9);
     public static final Index INDEX_TENTH_PERSON = Index.fromOneBased(10);
+    public static final Index INDEX_ELEVENTH_PERSON = Index.fromOneBased(11);
+    public static final Index INDEX_TWELFTH_PERSON = Index.fromOneBased(12);
 }
