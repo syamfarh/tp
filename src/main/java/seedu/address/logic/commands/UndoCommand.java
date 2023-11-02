@@ -15,7 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Undoes the most recent undoable command. Undoable commands are: delete, clear, add, edit.
+ * Undoes the most recent undoable command. Undoable commands are: delete, clear, add, clone, edit.
  */
 public class UndoCommand extends Command {
 
@@ -71,25 +71,30 @@ public class UndoCommand extends Command {
      * @return returns CommandResult of the message when the undo is a success.
      */
     public CommandResult executeUndoDelete(Model model) {
+
         ArrayList<Person> deletedPersons = model.getDeletedPersons();
         int numberOfDeletes = model.getLastDeletedNumber();
+
+        // Make a new list containing only the persons deleted from the previous delete command.
         List<Person> undoDeletedPersons = new ArrayList<>(deletedPersons.subList(deletedPersons.size()
             - numberOfDeletes, deletedPersons.size()));
+        //can catch errors here. should assert first that deletedPersons is not empty.
+        // also possible to check if deletedPersons.size() == sum of model.getLastdeletednumber()
+
         String deletedPersonsDetails = Messages.formatPersons(undoDeletedPersons);
 
         if (deletedPersons.isEmpty() || model.getDeletedNumberList().isEmpty()) {
             return new CommandResult(MESSAGE_UNDO_DELETE_FAILURE);
         }
 
+        // Undo the deletion of each person deleted from a single command.
         for (Person deletedPerson : undoDeletedPersons) {
-            model.addPerson(deletedPerson);
-            model.removeDeletedPerson();
+            model.undoDelete(deletedPerson);
             model.removePreviousUndoableCommand();
         }
 
-
         // Remove the corresponding number of deletes
-        model.removeLastNumber();
+        model.removeLastDeletedNumber();
 
         String resultMessage = String.format(MESSAGE_UNDO_DELETE_SUCCESS, deletedPersonsDetails);
 
@@ -103,9 +108,13 @@ public class UndoCommand extends Command {
     public CommandResult executeUndoClear(Model model) {
 
         int numberOfPreviousDeleteCommands = model.getNumberOfPreviousDeleteCommands();
+
+        // Undo each individual delete command
         while (model.getDeletedPersonsSize() > numberOfPreviousDeleteCommands) {
             model.undoDelete();
         }
+
+        // Remove 'clear' from the list of previous undoable commands.
         model.removePreviousUndoableCommand();
         return new CommandResult(String.format(MESSAGE_UNDO_CLEAR_SUCCESS));
     }
@@ -116,11 +125,10 @@ public class UndoCommand extends Command {
      */
     public CommandResult executeUndoAdd(Model model) {
 
-        List<Person> lastShownList = model.getFilteredPersonList();
-        int lastIndex = model.getAddressBookSize() - 1;
-        Person personToDelete = lastShownList.get(lastIndex);
-        model.deletePerson(personToDelete);
+        Person personToDelete = model.getAddedPerson();
+        model.undoAdd();
         model.removePreviousUndoableCommand();
+
         return new CommandResult(String.format(MESSAGE_UNDO_ADD_SUCCESS, Messages.format(personToDelete)));
     }
 
@@ -129,11 +137,12 @@ public class UndoCommand extends Command {
      * @return returns CommandResult of the message when the undo is a success.
      */
     public CommandResult executeUndoEdit(Model model) {
+
         Pair<Person, Person> pairToRestore = model.getEditedPersonsPair();
-        Person editedPerson = pairToRestore.getKey();
         Person originalPerson = pairToRestore.getValue();
-        model.setPerson(editedPerson, originalPerson);
-        model.removeEditedPersonsPair();
+
+        model.undoEdit();
+
         model.removePreviousUndoableCommand();
 
         return new CommandResult(String.format(MESSAGE_UNDO_EDIT_SUCCESS, Messages.format(originalPerson)));
