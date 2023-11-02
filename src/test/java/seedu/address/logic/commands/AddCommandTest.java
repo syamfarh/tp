@@ -392,6 +392,16 @@ public class AddCommandTest {
             previousUndoableCommands.add(command);
         }
 
+        //Blank override methods since redo is not being tested.
+        @Override
+        public void resetRedoableStateList() {}
+
+        @Override
+        public void resetUndoableStateList() {}
+
+        @Override
+        public void removeRedoCommands() {}
+
         @Override
         public ReadOnlyAddressBook getAddressBook() {
             return new AddressBook();
