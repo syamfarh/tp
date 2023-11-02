@@ -161,7 +161,7 @@ After cloning, the clone is the exact same original, other than a suffix either 
 * `find Betsy` followed by `clone 1` clones the 1st person in the results of the `find` command
 
 #### Acceptable parameters:
-* `INDEXES` Only accept **non-negative** int values that are less than the size of the address book. Must have at least one.
+* `INDEXES` Only accept **non-negative** int values that are less than the size of the address book. Must have at least one
 * `PERSON` If the person being cloned has a suffix at the end, the suffix cannot be 0 or 2147483647 (MAX_INT)
 
 
