@@ -123,8 +123,7 @@ This command can also be used to update the client risk profile
 Added risk profile to Person: X
 ```
 where X are the details of the person edited
-* A risk profile label with a specified color will be added to the contact.
-  There are 5 categories:
+* A risk profile label with a specified color will be added to the contact which has 5 categories:
   <span style="background-color:#4CAF50; color:white;">**Low**</span>,
   <span style="background-color:#2196F3; color:white;">**Moderately Low**</span>.
   <span style="background-color:#FFC107; color:white;">**Moderate**</span>,
