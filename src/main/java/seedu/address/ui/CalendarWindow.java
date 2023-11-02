@@ -36,6 +36,26 @@ public class CalendarWindow extends UiPart<Stage> {
 
     private CalendarView calendarView;
 
+    private EventHandler<KeyEvent> keyNavigator = new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent event) {
+            switch (event.getCode()) {
+            case LEFT:
+                System.out.println("here");
+                calendarView.getMonthPage().goBack();
+                break;
+            case RIGHT:
+                calendarView.getMonthPage().goForward();
+                break;
+            case ENTER:
+                calendarView.getMonthPage().goToday();
+                break;
+            default:
+                break;
+            }
+        }
+    };
+
     /**
      * Creates a new CalendarWindow.
      *
@@ -77,25 +97,7 @@ public class CalendarWindow extends UiPart<Stage> {
         root.setWidth(1000);
         root.setHeight(600);
         Scene scene = new Scene(calendarView.getMonthPage());
-        scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent event) {
-                switch (event.getCode()) {
-                case LEFT:
-                    System.out.println("here");
-                    calendarView.getMonthPage().goBack();
-                    break;
-                case RIGHT:
-                    calendarView.getMonthPage().goForward();
-                    break;
-                case ENTER:
-                    calendarView.getMonthPage().goToday();
-                    break;
-                default:
-                    break;
-                }
-            }
-        });
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, keyNavigator);
 
         root.setScene(scene);
         calendarView.getMonthPage().getMonthView().setDisable(true);
