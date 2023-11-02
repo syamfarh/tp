@@ -395,7 +395,7 @@ Listed all persons
 Edits an existing client's parameter in FAPro.
 
 #### Format: 
-* `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…`
+* `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [appt/APPOINTMENTDATE] [a/ADDRESS] [t/TAG]…`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided
@@ -411,25 +411,28 @@ Edits an existing client's parameter in FAPro.
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags
 
-![edit format](images/editformat.png)
+![edit format](images/edit-UG/editformat.png)
 
-* Precise expected outputs on success:
+#### Precise expected outputs on success:
 * Message shown to the user:
 ```
 Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], Occupation:[OCCUPATION], Address:[ADDRESS]…
 ```
 * The new entry is displayed in the address book GUI.
 
-![edit format](images/editresult.png)
+![edit format](images/edit-UG/editresult.png)
 
-* Precise expected outputs on failure:
+#### Precise expected outputs on failure:
+
+If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing. 
 ```
-// copy paste error message
+Invalid command format! 
+edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [appt/APPOINTMENTDATE] [t/TAG]...
+Example: edit 1 p/91234567 e/johndoe@example.com
 ```
 
-* If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
-* If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
-* If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+![edit format](images/edit-UG/editfailure.png)
 
 ### Locating persons by name: `find`
 
