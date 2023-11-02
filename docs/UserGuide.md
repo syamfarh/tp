@@ -188,7 +188,7 @@ After cloning, the clone is the exact same original, other than a suffix either 
 ![clone format](images/cloneformat.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user: "Cloned Person: X", where X are the details of the person the clone is based off.
+* Message shown to the user: "Cloned Person: X", where X are the details of the person the clone is based off
 * For example, if
 
 ```
