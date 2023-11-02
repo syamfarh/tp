@@ -58,9 +58,9 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
-  e.g. if the command specifies `help 123`, it will be interpreted as `help`.
+  e.g. if the command specifies `help 123`, it will be interpreted as `help`
 
-* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application.
+* If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application
 </div>
 
 ### Viewing help: `help`
@@ -78,46 +78,79 @@ A pop-up of a new window that lists out all the main commands with their respect
 
 Adds a new entry to their address book for financial advisors, including personal details such as name, address, occupation, phone number and email.
 
-Format:
-* `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​`
+#### Format:
+* `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG] [appt/APPOINTMENT_DATE]
 
-Example commands:
-* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01`
-* `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567 t/Criminal`
+#### Example commands:
+* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01 appt/12-12-2023 08:30`
+* `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567`
 
-Acceptable values for each parameter:
-* Name: Valid string name.
-* Address: Valid string address. Contains postal code. (8 College Ave West, Singapore 138608).
-* Phone number: Valid string and phone number format (81234567).
-* Email address: Valid string and email address format (johnd@example.com).
-* Occupation: Valid string occupation.
-* Tag: Valid string.
+#### Acceptable values for each parameter:
+* Name: Valid string name
+* Address: Valid string address (8 College Ave West)
+* Phone number: Valid string (Numbers only) (81234567)
+* Email address: Valid string and email address format (johnd@example.com)
+* Occupation: Valid string occupation
+* Tag: Valid string
+* Appointment date: Only accepted in yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm format
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
 </div>
 
-![edit format](images/addformat.png)
+![add format](images/addformat.png)
 
-Precise expected outputs on success:
-* Successful addition message. ‘New Person added: X ’, where X are the details of the person added.
-* For example, for Robert Johnson (the example command), it would be: “New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: “. Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person.
-* The new entry is displayed in the address book GUI.
+#### Precise expected outputs on success:
+* Message shown to the user:
 
-![edit format](images/addresult.png)
+```
+New Person added: X
+```
 
-* Precise expected outputs on failure:
-* If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
+where X are the details of the person added
 
-![edit format](images/addmissingparam.png)
+* For example, for Robert Johnson (the example command), it would be: “New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: “. Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
+* The new entry is displayed in the address book GUI
 
-* If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
+![add format](images/addresult.png)
 
-![edit format](images/addinvalidemail.png)
+#### Precise expected outputs on failure:
 
-* If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
 
-![edit format](images/addduplicateparam.png)
+* Error message shown to the user:
+
+```
+Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
+```
+
+![add format](images/addmissingparam.png)
+
+If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
+
+* Error message shown to the user:
+
+```
+Emails should be of the format local-part@domain and adhere to the following constraints:
+1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+The domain name must:
+    - end with a domain label at least 2 characters long
+    - have each domain label start and end with alphanumeric characters
+    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+```
+
+![add format](images/addinvalidemail.png)
+
+If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+
+* Error message shown to the user:
+
+```
+Multiple values specified for the following single-valued field(s): n/
+```
+
+![add format](images/addduplicateparam.png)
 
 ### Search by appointment day: `cal`
 
@@ -132,66 +165,100 @@ Format: `cal KEYWORD`
 Examples:
 * `cal 2023-12-12`
 
-![edit format](images/cal0.png)
+![cal format](images/cal0.png)
 
 * Precise expected outputs on success:
 * Successful calendar message. “X persons listed!”, where X is the number of contacts who have the same
   appointment date as the input date. The list of contacts whose appointment dates match the input is listed.
 
-![edit format](images/cal1.png)
+![cal format](images/cal1.png)
 
 * Precise expected outputs on failure:
 * If no date is input after the cal command, an error message explaining the error will be shown,
   reminding the user to follow the correct input format.
 
-![edit format](images/cal2.png)
+![cal format](images/cal2.png)
 
 ### Cloning a person : `clone`
 
 Clones a contact from FAPro at the specified index.
 
-Format: `clone INDEX`
-* Clones the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+#### Format:
+`clone INDEX`
+* Clones the person at the specified `INDEX`
+* The index refers to the index number shown in the displayed person list
 
-Examples:
-* `list` followed by `clone 2` clones the 2nd person in the address book.
-* `find Betsy` followed by `clone 1` clones the 1st person in the results of the `find` command.
+#### Example commands:
+After cloning, the clone is the exact same original, other than a suffix either being attached at the end of their name or, if a suffix is already present, the suffix at the end of their name is incremented
+* `list` followed by `clone 2` clones the 2nd person in the address book
+* `find Betsy` followed by `clone 1` clones the 1st person in the results of the `find` command
 
-Acceptable parameters for INDEX:
-* Only accept **non-negative** int values that are less than the size of the address book. Cannot be 0. Index must be for a contact that has not already been cloned.
+#### Acceptable parameters:
+* `INDEXES` Only accept **non-negative** int values that are less than the size of the address book. Must have at least one
+* `PERSON` If the person being cloned has a suffix at the end, the suffix cannot be 0 or 2147483647 (MAX_INT)
 
-![edit format](images/cloneformat.png)
+![clone format](images/cloneformat.png)
 
-Precise expected outputs on success:
-* Message shown to the user: "Cloned Person: X", where X are the details of the person who was cloned.
+#### Precise expected outputs on success:
+* Message shown to the user:
+
+```
+Cloned Person: X
+```
+
+where X are the details of the person the clone is based off
+
 * For example, if
-* "Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:" was cloned, then the output is
-* "Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags: "
 
-![edit format](images/cloneresult.png)
+```
+Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:
+```
 
-Precise expected outputs on failure:
-* When no index, zero or a negative index is entered next to the clone command, the error message
-* "Invalid command format!
-* clone: Clones the person identified by the index number used in the displayed person list.
-* Parameters: INDEX (must be a positive integer)."
-* is returned to the user.
+is the person being cloned, then the output is:
 
-![edit format](images/cloneinvalidindex.png)
+```
+Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:
+```
 
-* When the index entered is greater than the current number of contacts in the address book, the error message
-* “The person index provided is invalid.”
-* is returned to the user.
+![clone format](images/cloneresult.png)
 
-![edit format](images/clonelargeindex.png)
+#### Precise expected outputs on failure:
 
-* When the person at index entered has already been cloned in FAPro, the error message
-* “A clone of this person already exists.
-* To clone again, please edit the previous clone first or alternatively, clone the previous clone.”
-* is returned to the user.
+If no index, 0 or a negative index is entered next to the clone command
 
-![edit format](images/clonebeforeerror.png)
+* Error message shown to the user:
+
+```
+Invalid command format! clone: Clones the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer).
+```
+
+* GUI reflects that clone is in red font
+
+![clone format](images/cloneinvalidindex.png)
+
+If the index entered is greater than the current number of contacts in the address book
+
+* Error message shown to the user:
+
+```
+The person index provided is invalid.
+```
+
+* GUI reflects that clone is in red font
+
+![clone format](images/clonelargeindex.png)
+
+If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
+
+* Error message shown to the user:
+
+```
+The integer suffix of the person being cloned is out of range. Please note that the smallest possible suffix that a person can have is 1 and the largest possible suffix that a person can have is 2147483647. As such, if your suffix is 0 or 2147483647, please consider editing the names of your contacts first.
+```
+
+* GUI reflects that clone is in red font
+
+![clone format](images/clonesuffixerror.png)
 
 ### Deleting a person : `delete`
 
@@ -208,7 +275,7 @@ Examples:
 * `list` followed by `delete 2` deletes the 2nd person in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
 
-![edit format](images/delete-UG/deleteformat.png)
+![delete format](images/delete-UG/deleteformat.png)
 
 Precise expected outputs on success:
 
@@ -216,13 +283,13 @@ Precise expected outputs on success:
 * Size of address book is reduced by 1.
 * GUI reflects that deleted contact is now no longer there.
 
-![edit format](images/delete-UG/after_delete_success.png)
+![delete format](images/delete-UG/after_delete_success.png)
 
 Precise expected outputs on failure:
 * Error message shown to the user: "The person index provided is invalid".
 * GUI reflects that delete is in red font.
 
-![edit format](images/delete-UG/after_delete_failure.png)
+![delete format](images/delete-UG/after_delete_failure.png)
 
 ### List out all contacts : `list`
 
@@ -387,26 +454,26 @@ For undoing a clear command:
 
 * Clear all contacts.
 
-![edit format](images/undo-UG/after_clear.png)
+![undo format](images/undo-UG/after_clear.png)
 
 * Undo.
 * Message shown to the user: "Undo Successful! ALl contacts have been added back!".
 * GUI reflects that all cleared contacts are added back.
 
-![edit format](images/undo-UG/after_clear_undo.png)
+![undo format](images/undo-UG/after_clear_undo.png)
 
 For undoing an edit command:
 
 * Edit a contact.
 
-![edit format](images/undo-UG/after_edit_1.png)
+![undo format](images/undo-UG/after_edit_1.png)
 
 * Undo.
 * Message shown to the user: "Undo Successful! Reverted back to: X", where X are the details of the person before
   the edit.
 * GUI reflects that the edited contact has been reverted.
 
-![edit format](images/undo-UG/after_edit_undo.png)
+![undo format](images/undo-UG/after_edit_undo.png)
 
 #### Precise expected outputs on failure:
 * Caused by using undo when there are no previous commands to undo.
@@ -414,34 +481,65 @@ For undoing an edit command:
 * GUI reflects undo text in red font.
 
 
-![edit format](images/undo-UG/undo_fail.png)
+![undo format](images/undo-UG/undo_fail.png)
 
 ### Sorting contacts : `sort`
 
-Sort contact lists by parameter name or appointment date.
+Sort contact lists by prefix name or appointment date.
 
-Precise command format: `undo parameter`
+#### Format: 
+* `sort PREFIX`
 
-Example commands:
+#### Example commands:
 * `sort n/`
+* `sort appt/`
 
-Acceptable parameters:
-* `n/` sort by Name parameter
-* `appt/` sort by Appointment Date parameter
+#### Acceptable prefix tag:
+* `n/` sort by Name prefix
+* `appt/` sort by Appointment Date prefix
 
-![edit format](images/sort-UG/sortformat.png)
+![sort format](images/sort-UG/sortformat.png)
 
-Precise expected output on success:
-* Successful addition message. 'X person listed!', where X are the number of clients in the address book.
+#### Precise expected output on success:
+* Successful addition message. 'X person listed!', where X is the number of clients in the address book.
 * The sorted entry is displayed in the address book GUI.
 
-![edit format](images/sort-UG/sortresult.png)
+![sort format](images/sort-UG/sortresult.png)
 
 Precise expected outputs on failure:
-* If a required parameter is missing, an error message should indicate the invalid format. 
-* If a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
+<br> If either a required parameter is missing or a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
 
-![edit format](images/sort-UG/sortfailuremissing.png)
+* Error Message:
+
+```
+Invalid command format!
+sort: Sort all persons by name or appointmnet date.
+Parameters: KEYWORD [PREFIX n/ or appt/]
+Example: sort n/
+```
+
+![sort format](images/sort-UG/sortfailuremissing.png)
+
+### Opening calendar window : `calendar`
+
+Open a new calendar window.
+
+#### Format:
+* `calendar`
+
+#### Example commands:
+* `calendar`
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<li>You can open calendar window by pressing f3 key.
+<li>Arrow key navigate you to different months.
+<li>Enter key navigate you back to the current month.
+</div>
+
+#### Precise expected outputs on success:
+* A pop-up of a new calendar window of the current month that indicate client's appointments in the date.
+
+![calendar format](images/calendarWindow.png)
 
 ### Clearing all entries : `clear`
 
@@ -457,14 +555,14 @@ Precise expected outputs on success:
 * Message shown to the user: "Address book has been cleared!".
 * GUI reflects that there are 0 contacts left.
 
-![edit-format](images/clear-UG/clear_success.png)
+![clear format](images/clear-UG/clear_success.png)
 
 Precise expected outputs on failure:
 
 * Message shown to the user: "Address book is empty. There is nothing to clear".
 * GUI reflects clear is in red font.
 
-![edit-format](images/clear-UG/clear_failure.png)
+![clear format](images/clear-UG/clear_failure.png)
 
 ### Exiting the program : `exit`
 
@@ -505,15 +603,22 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                                                                                          |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action           | Format, Examples                                                                                                                                                                         |
+|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Calendar**     | `cal KEYWORD`<br> e.g., `cal 2023-12-12`                                                                                                                                                  |
-| **Clone**        | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                         |
-| **Clear**        | `clear`                                                                                                                                                                                   |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                       |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
-| **Find Address** | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                        |
-| **List**         | `list`                                                                                                                                                                                    |
-| **Help**         | `help`                                                                                                                                                                                    |
+| **Calendar**     | `calendar`                                                                                                                                                                                |
+| **Clone**        | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                        |
+| **Clear**        | `clear`                                                                                                                                                                                  |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                      |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                               |
+| **Find Address** | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                       |
+| **List**         | `list`                                                                                                                                                                                   |
+| **Help**         | `help`                                                                                                                                                                                   |
+| **Sort** | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                           |
+
+## Glossary
+| Word          | Meaning                                                   |
+|---------------|-----------------------------------------------------------|
+| **Parameter** | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS |
+| **Prefix** | word that is added in front of parameter.<br/>e.g. n/, o/, a/  |

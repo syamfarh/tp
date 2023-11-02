@@ -10,7 +10,9 @@ import com.calendarfx.view.CalendarView;
 
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.CalendarUtil;
@@ -75,6 +77,26 @@ public class CalendarWindow extends UiPart<Stage> {
         root.setWidth(1000);
         root.setHeight(600);
         Scene scene = new Scene(calendarView.getMonthPage());
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                switch (event.getCode()) {
+                case LEFT:
+                    System.out.println("here");
+                    calendarView.getMonthPage().goBack();
+                    break;
+                case RIGHT:
+                    calendarView.getMonthPage().goForward();
+                    break;
+                case ENTER:
+                    calendarView.getMonthPage().goToday();
+                    break;
+                default:
+                    break;
+                }
+            }
+        });
+
         root.setScene(scene);
         calendarView.getMonthPage().getMonthView().setDisable(true);
         root.setResizable(true);
