@@ -224,7 +224,7 @@ Deletes a contact from FAPro at the specified indexes.
 * The index refers to the index number shown in the displayed person list
 
 #### Acceptable parameters for INDEX:
-* The indexes **must be a positive integers** (i.e 1 2 3 etc.) (less than the size of the contact list in FAPro)
+* The indexes **must be positive integers** (i.e 1 2 3 etc.) (less than the size of the contact list in FAPro)
 * The indexes must have a space inbetween and no commas (i.e delete 1,2,3 is invalid)
 
 #### Examples:
@@ -243,7 +243,7 @@ Deleted Person(s): X
 ```
 
 where X are the details of the deleted persons
-* Size of address book is reduced by however many indexes were entered. (i.e if you entered delete 2 3 4, as you entered 3 indexes, the size of the address book decreases by 3) 
+* Size of address book is reduced by however many indexes were entered (i.e if you entered delete 2 3 4, as you entered 3 indexes, the size of the address book decreases by 3) 
 * GUI reflects that deleted contacts are now no longer there
 
 ![delete format](images/delete-UG/deleteafter.png
