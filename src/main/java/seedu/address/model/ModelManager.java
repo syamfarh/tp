@@ -32,6 +32,9 @@ public class ModelManager implements Model {
     private final ArrayList<Pair<Person, Person>> editedPersons;
     private ArrayList<String> previousUndoableCommands;
     private ArrayList<Integer> deletedNumberList;
+    private ArrayList<ReadOnlyAddressBook> redoStateList;
+
+
     private Comparator<Person> sortComparator;
 
     /**
@@ -50,6 +53,7 @@ public class ModelManager implements Model {
         editedPersons = new ArrayList<>();
         previousUndoableCommands = new ArrayList<>();
         deletedNumberList = new ArrayList<>();
+        redoStateList = new ArrayList<>();
         sortComparator = APPTCOMPARATOR;
     }
 
@@ -285,6 +289,22 @@ public class ModelManager implements Model {
 
         this.setPerson(editedPerson, originalPerson);
         this.removeEditedPersonsPair();
+    }
+
+
+    @Override
+    public void addToRedoStateList() {
+        this.redoStateList.add(addressBook);
+    }
+
+    @Override
+    public int getRedoStateListSize() {
+        return this.redoStateList.size();
+    }
+
+    @Override
+    public void resetRedoStateList() {
+        redoStateList = new ArrayList<>();
     }
 
 

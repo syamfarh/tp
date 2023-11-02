@@ -78,7 +78,7 @@ public class UndoCommand extends Command {
         // Make a new list containing only the persons deleted from the previous delete command.
         List<Person> undoDeletedPersons = new ArrayList<>(deletedPersons.subList(deletedPersons.size()
             - numberOfDeletes, deletedPersons.size()));
-        //can catch errors here. should assert first that deletedPersons is not empty.
+        // can catch errors here. should assert first that deletedPersons is not empty.
         // also possible to check if deletedPersons.size() == sum of model.getLastdeletednumber()
 
         String deletedPersonsDetails = Messages.formatPersons(undoDeletedPersons);
@@ -87,7 +87,9 @@ public class UndoCommand extends Command {
             return new CommandResult(MESSAGE_UNDO_DELETE_FAILURE);
         }
 
-        // Undo the deletion of each person deleted from a single command.
+        model.addToRedoStateList();
+
+        /* Undo the deletion of each person deleted from a single command. */
         for (Person deletedPerson : undoDeletedPersons) {
             model.undoDelete(deletedPerson);
             model.removePreviousUndoableCommand();
@@ -107,9 +109,10 @@ public class UndoCommand extends Command {
      */
     public CommandResult executeUndoClear(Model model) {
 
+        model.addToRedoStateList();
         int numberOfPreviousDeleteCommands = model.getNumberOfPreviousDeleteCommands();
 
-        // Undo each individual delete command
+        /* Undo each individual delete command */
         while (model.getDeletedPersonsSize() > numberOfPreviousDeleteCommands) {
             model.undoDelete();
         }
@@ -125,6 +128,8 @@ public class UndoCommand extends Command {
      */
     public CommandResult executeUndoAdd(Model model) {
 
+        model.addToRedoStateList();
+
         Person personToDelete = model.getAddedPerson();
         model.undoAdd();
         model.removePreviousUndoableCommand();
@@ -137,6 +142,8 @@ public class UndoCommand extends Command {
      * @return returns CommandResult of the message when the undo is a success.
      */
     public CommandResult executeUndoEdit(Model model) {
+
+        model.addToRedoStateList();
 
         Pair<Person, Person> pairToRestore = model.getEditedPersonsPair();
         Person originalPerson = pairToRestore.getValue();
