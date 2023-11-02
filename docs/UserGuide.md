@@ -326,9 +326,10 @@ Examples:
 
 Undoes the most recent undoable command. Undoable commands include: add, clone, delete, clear, edit.
 
-Format: `undo`
+#### Format: 
+`undo`
 
-Examples:
+#### Example commands:
 * `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` followed by `undo` will
   delete the added contact.
 * `clone 1`, assuming there is a contact to clone, followed by `undo` will delete the cloned contact.
@@ -337,7 +338,7 @@ Examples:
 * `edit 1 p/91234567`, assuming there is a contact to edit, followed by `undo` will revert the edit of the contact.
 * Assuming there are 3 contacts, `delete 1`, which deletes the first contact, followed by `clear`, which clears the
   remaining 2 contacts, followed by `undo` will only add the 2 cleared contacts back. A subsequent `undo` will add
-  back the contact deleted.
+  back the contact deleted at the beginning.
 * `edit 1 p/91234567`, assuming there is a contact to edit, edits the first contact, followed by `delete 1`, deletes
   the first contact. Then, `undo` will add back the deleted contact, and the next `undo` will revert the edit of the
   contact (which was also just added back).
@@ -346,75 +347,83 @@ Examples:
 
 For undoing an add command:
 
-* Add a contact.
+* Add a contact
 
-![edit format](images/undo-UG/after_add_scrolled_down.png)
+![undo format](images/undo-UG/after_add.png)
 
-* Undo.
-* Message shown to the user: "Undo Successful! Deleted Person: X", where X are the details of the person who was
-  just added, and now deleted.
-* GUI reflects that the most recently added contact is deleted.
+* Undo
+* Message shown to the user:
+* "Undo Successful! Deleted Person: X", where X are the details of the person who was
+  just added, and now deleted
+* GUI reflects that the most recently added contact is deleted
 
-![edit format](images/undo-UG/after_add_undo_scrolled_down.png)
+![undo format](images/undo-UG/after_add_undo.png)
 
 For undoing a clone command:
 
-* Clone a contact.
+* Clone a contact
 
-![edit format](images/undo-UG/after_clone_1_scrolled_down.png)
+![undo format](images/undo-UG/after_clone_1.png)
 
-* Undo.
+* Undo
 * Message shown to the user: "Undo Successful! Deleted Person: X", where X are the details of the person who was
-  just cloned, and now deleted.
-* GUI reflects that the most recently cloned contact is deleted.
+  just cloned, and now deleted
+* GUI reflects that the most recently cloned contact is deleted
 
-![edit format](images/undo-UG/after_clone_undo_scrolled_down.png)
+![undo format](images/undo-UG/after_clone_undo.png)
 
 For undoing a delete command:
 
-* Delete a contact.
+* Delete a contact
 
-![edit format](images/undo-UG/after_delete_1.png)
+![undo format](images/undo-UG/after_delete_1.png)
 
-* Undo.
+* Undo
 * Message shown to the user: "Undo Successful! Contact added back: X", where X are the details of the person who was
-  just deleted, and now added back.
-* GUI reflects that the most recently deleted contact is added back.
+  just deleted, and now added back
+* GUI reflects that the most recently deleted contact is added back
 
-![edit format](images/undo-UG/after_delete_undo_scrolled_down.png)
+![undo format](images/undo-UG/after_delete_undo.png)
 
 For undoing a clear command:
 
-* Clear all contacts.
+* Clear all contacts
 
-![edit format](images/undo-UG/after_clear.png)
+![undo format](images/undo-UG/after_clear.png)
 
-* Undo.
-* Message shown to the user: "Undo Successful! ALl contacts have been added back!".
-* GUI reflects that all cleared contacts are added back.
+* Undo
+* Message shown to the user: "Undo Successful! ALl contacts have been added back!"
+* GUI reflects that all cleared contacts are added back
 
-![edit format](images/undo-UG/after_clear_undo.png)
+![undo format](images/undo-UG/after_clear_undo.png)
 
 For undoing an edit command:
 
 * Edit a contact.
 
-![edit format](images/undo-UG/after_edit_1.png)
+![undo format](images/undo-UG/after_edit.png)
 
-* Undo.
+* Undo
 * Message shown to the user: "Undo Successful! Reverted back to: X", where X are the details of the person before
-  the edit.
-* GUI reflects that the edited contact has been reverted.
+  the edit
+* GUI reflects that the edited contact has been reverted
 
-![edit format](images/undo-UG/after_edit_undo.png)
+![undo format](images/undo-UG/after_edit_undo.png)
 
 #### Precise expected outputs on failure:
-* Caused by using undo when there are no previous commands to undo.
-* Error message shown to the user: "There is no command to undo!".
-* GUI reflects undo text in red font.
+
+When there is no command to undo, i.e. no previous `add`, `clone`, `delete`, `clear`, or `edit` command
+
+* Error message:
+
+```
+"There is no command to undo!"
+```
+
+* GUI reflects undo text in red font
 
 
-![edit format](images/undo-UG/undo_fail.png)
+![undo format](images/undo-UG/undo_fail.png)
 
 ### Sorting contacts : `sort`
 
