@@ -328,7 +328,6 @@ Exits the application.
 #### Precise expected outcome on success:
 * The FAPro application will be closed
 
-
 ### Saving the data
 
 FAPro data is saved in the hard disk automatically after any command that changes the data. There is no need to save manually.
