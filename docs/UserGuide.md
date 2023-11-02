@@ -406,8 +406,11 @@ For undoing an add command:
 
 * Undo
 * Message shown to the user:
-* "Undo Successful! Deleted Person: X", where X are the details of the person who was
-  just added, and now deleted
+
+```
+Undo Successful! Deleted Person: X
+```
+where X are the details of the person who was just added, and now deleted
 * GUI reflects that the most recently added contact is deleted
 
 ![undo format](images/undo-UG/after_add_undo.png)
@@ -419,8 +422,12 @@ For undoing a clone command:
 ![undo format](images/undo-UG/after_clone_1.png)
 
 * Undo
-* Message shown to the user: "Undo Successful! Deleted Person: X", where X are the details of the person who was
-  just cloned, and now deleted
+* Message shown to the user: 
+
+```
+Undo Successful! Deleted Person: X
+```
+where X are the details of the person who was just cloned, and now deleted
 * GUI reflects that the most recently cloned contact is deleted
 
 ![undo format](images/undo-UG/after_clone_undo.png)
@@ -432,8 +439,12 @@ For undoing a delete command:
 ![undo format](images/undo-UG/after_delete_1.png)
 
 * Undo
-* Message shown to the user: "Undo Successful! Contact(s) added back: X", where X are the details of the person who was
-  just deleted, and now added back
+* Message shown to the user: 
+
+```
+Undo Successful! Contact(s) added back: X
+```
+where X are the details of the person who was just deleted, and now added back
 * GUI reflects that the most recently deleted contact is added back
 
 ![undo format](images/undo-UG/after_delete_undo.png)
@@ -443,8 +454,12 @@ For undoing a delete command:
 ![undo format](images/undo-UG/after_delete_multiple.png)
 
 * Undo
-* Message shown to the user: "Undo Successful! Contact(s) added back: X", where X are the details of the persons who 
-  were just deleted, and now added back
+* Message shown to the user: 
+
+```
+Undo Successful! Contact(s) added back: X
+```
+where X are the details of the persons who were just deleted, and now added back
 * GUI reflects that the most recently deleted contacts are added back
 
 ![undo_format](images/undo-UG/after_delete_multiple_undo.png)
@@ -456,21 +471,32 @@ For undoing a clear command:
 ![undo format](images/undo-UG/after_clear.png)
 
 * Undo
-* Message shown to the user: "Undo Successful! ALl contacts have been added back!"
+* Message shown to the user: 
+
+```
+Undo Successful! All contacts have been added back!
+```
+
 * GUI reflects that all cleared contacts are added back
 
 ![undo format](images/undo-UG/after_clear_undo.png)
 
 For undoing an edit command:
 
-* Edit a contact.
+* Edit a contact
 
 
 ![undo format](images/undo-UG/after_edit.png)
 
 
 * Undo
-* Message shown to the user: "Undo Successful! Reverted back to: X", where X are the details of the person before
+* Message shown to the user: 
+
+```
+Undo Successful! Reverted back to: X
+```
+
+where X are the details of the person before
   the edit
 * GUI reflects that the edited contact has been reverted
 
@@ -480,10 +506,10 @@ For undoing an edit command:
 
 When there is no command to undo, i.e. no previous `add`, `clone`, `delete`, `clear`, or `edit` command
 
-* Error message:
+* Error message shown to the user:
 
 ```
-"There is no command to undo!"
+There is no command to undo!
 ```
 
 * GUI reflects undo text in red font
@@ -611,19 +637,20 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                                                                                         |
-|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action           | Format, Examples                                                                                                                                                                          |
+|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague` |
 | **Calendar**     | `calendar`                                                                                                                                                                                |
-| **Clone**        | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                        |
-| **Clear**        | `clear`                                                                                                                                                                                  |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                      |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                               |
-| **Find Address** | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                       |
-| **List**         | `list`                                                                                                                                                                                   |
-| **Help**         | `help`                                                                                                                                                                                   |
-| **Sort** | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                           |
+| **Clone**        | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                         |
+| **Clear**        | `clear`                                                                                                                                                                                   |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                       |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                |
+| **Undo**         | `undo`                                                                                                                                                                                    |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
+| **Find Address** | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                        |
+| **List**         | `list`                                                                                                                                                                                    |
+| **Help**         | `help`                                                                                                                                                                                    |
+| **Sort**         | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                            |
 
 ## Glossary
 | Word          | Meaning                                                   |
