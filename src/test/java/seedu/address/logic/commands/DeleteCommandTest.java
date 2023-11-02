@@ -80,6 +80,11 @@ public class DeleteCommandTest {
     }
 
     @Test
+    public void execute_didNotStoreDeletedPerson_throwsAssertion() {
+
+    }
+
+    @Test
     public void equals() {
         DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_PERSON);
         DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_PERSON);
@@ -117,4 +122,5 @@ public class DeleteCommandTest {
 
         assertTrue(model.getFilteredPersonList().isEmpty());
     }
+
 }
