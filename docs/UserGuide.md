@@ -67,12 +67,89 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 Shows a message listing all the main commands and explaining how to access the user guide.
 
-Precise command format: `help`
+#### Format: `help`
 
-Precise expected outcome on success: 
-A pop-up of a new window that lists out all the main commands with their respective details and displays a link to FAPro’s user guide.
+![help format](images/helpFormat.png)
+
+#### Precise expected outcome on success:
+* Successful message: Opened help window
+* A pop-up window lists all the main commands and displays a link to FAPro's user guide
 
 ![help window](images/helpWindow.png)
+
+### Viewing risk assessment questionnaire: `questionnaire`
+
+Displays questions that are going to be used for generating client risk profile levels.
+
+#### Format: `questionnaire`
+
+![questionnaire format](images/questionnaireFormat.png)
+
+#### Precise expected outcome on success:
+* Successful message: Opened questionnaire window
+* A pop-up window shows the risk assessment multiple choice questions, including the grading and risk profile categories criteria
+
+![questionnaire window](images/questionnaireWindow.png)
+
+### Adds risk profile level to a contact:`riskprofile`
+
+Generates the client risk profile level based on their response of risk assessment questionnaire provided in Questionnaire tab and adds it to their contact.
+
+#### Format:
+* `riskprofile INDEX res/RESULT`
+
+#### Example commands:
+* `riskprofile 3 res/a,b,c,d,e,e,b,c`
+
+![riskprofile format](images/riskProfileFormat.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+This command can also be used to update the client risk profile
+</div>
+
+#### Acceptable values for each parameter:
+* INDEX: Only accept positive integers less than the size of the contacts displayed
+* RESULT: Valid result format, 8 comma-separated characters from 'a' - 'e' (e,b,a,c,b,b,a,e)
+
+#### Precise expected outcome on success:
+* Successful message: "Added risk profile to Person: X", where X are the details of the person edited
+* A risk profile label with a specified color will be added to the contact.
+  There are 5 categories:
+  <span style="background-color:#4CAF50; color:white;">**Low**</span>,
+  <span style="background-color:#2196F3; color:white;">**Moderately Low**</span>.
+  <span style="background-color:#FFC107; color:white;">**Moderate**</span>,
+  <span style="background-color:#FF6600; color:white;">**Moderately High**</span>,
+  <span style="background-color:#F44336; color:white;">**High**</span>
+
+![riskprofile result](images/riskProfileResult.png)
+
+<div markdown="span" class="alert alert-warning">
+:warning: **Warning:**
+Once the risk profile label is added to the contact, it cannot be removed
+</div>
+
+#### Precise expected outputs on failure:
+If the RESULT is empty
+* Error message:
+```
+Invalid command format! 
+riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
+Existing risk profile will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) res/[RESULT]
+Example: riskprofile 1 res/a,e,b,d,c,a,d,e
+```
+![invalid risk profile 1](images/invalidRiskProfile1.png)
+
+If the RESULT is not separated by commas or not in the range of 'a' - 'e'
+* Error message:
+```
+Result must have 8 comma-separated characters from 'a' to 'e'!
+riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
+Existing risk profile will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) res/[RESULT]
+Example: riskprofile 1 res/a,e,b,d,c,a,d,e
+```
+![invalid risk profile 2](images/invalidRiskProfile2.png)
 
 ### Adding a person: `add`
 
@@ -113,12 +190,15 @@ Precise expected outputs on failure:
 
 Shows a list of all contacts.
 
-Precise command format: `list`
+#### Format: `list`
 
-Precise expected outputs on success:
-A list of all contacts with their details will be shown.
+![list format](images/listFormat.png)
 
-![list format](images/listResult.png)
+#### Precise expected outputs on success:
+* Successful message: Listed all persons
+* List all contacts with their details
+
+![list result](images/listResult.png)
 
 ### Editing a person : `edit`
 
@@ -242,10 +322,11 @@ Format: `clear`
 
 Exits the application.
 
-Precise command format: `exit`
+#### Format: 
+* `exit`
 
-Precise expected outcome on success:
-The FAPro application will be closed.
+#### Precise expected outcome on success:
+* The FAPro application will be closed
 
 
 ### Saving the data
@@ -271,6 +352,9 @@ _Details coming soon ..._
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAPro home folder.
 
+**Q**: How do I view the main commands and refer to the FAPro’s User Guide?<br>
+**A**: Click the Help tab or type the `help` in the command box.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -281,12 +365,15 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                          |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                                   |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                       |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
-| **List**   | `list`                                                                                                                                                                                    |
-| **Help**   | `help`                                                                                                                                                                                    |
+| Action            | Format, Examples                                                                                                                                                                             |
+|-------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**           | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague`    |
+| **Clear**         | `clear`                                                                                                                                                                                      |
+| **Delete**        | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                          |
+| **Edit**          | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                   |
+| **Find**          | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                   |
+| **List**          | `list`                                                                                                                                                                                       |
+| **Help**          | `help`                                                                                                                                                                                       |
+| **Questionnaire** | `questionnaire`                                                                                                                                                                              |
+| **Risk Profile**  | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                          |
+| **Exit**          | `exit`                                                                                                                                                                                       |
