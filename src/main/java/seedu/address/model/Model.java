@@ -79,7 +79,6 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
-
     void addToRedoStateList();
 
     int getRedoStateListSize();

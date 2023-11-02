@@ -301,6 +301,53 @@ public class AddCommandTest {
         public int getAddedPersonsSize() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addToRedoStateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getRedoStateListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetRedoStateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void restoreStateFromRedo() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addToUndoRedidStateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getUndoRedidStateListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetUndoRedidStateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void restoreStateFromUndoRedid() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeRedoCommandsFromUndoableCommands() {
+            throw new AssertionError("This method should not be called.");
+
+        }
+
     }
 
     /**

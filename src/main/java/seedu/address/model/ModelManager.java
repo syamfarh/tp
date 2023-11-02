@@ -343,7 +343,7 @@ public class ModelManager implements Model {
 
     @Override
     public void removeRedoCommandsFromUndoableCommands() {
-        int size = getPreviousUndoableCommandsSize();
+
         Iterator<String> itr = previousUndoableCommands.iterator();
         while (itr.hasNext()) {
             String command = itr.next();
