@@ -318,7 +318,11 @@ Finds persons based on the given keywords.
 ![find_name format](images/find_n0.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user: "X persons listed!", where X is the number of contacts listed
+* Message shown to the user: 
+```
+X persons listed!
+```
+where X is the number of contacts listed
 * The list of contacts whose names contain the input name is shown
 
 ![find_name format](images/find_n1.png)
@@ -327,7 +331,7 @@ Finds persons based on the given keywords.
 If no name is input after the find command, an error message explaining the error will be shown, 
 reminding the user to follow the correct input format.
 
-* Error Message:
+* Error message shown to the user:
 
 ```
 Invalid command format! find n/: Finds all persons whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
@@ -340,7 +344,12 @@ Invalid command format! find n/: Finds all persons whose names contain any of th
 ![find_add format](images/find_a0.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user: "X persons listed!", where X is the number of contacts listed
+
+* Message shown to the user:
+```
+X persons listed!
+```
+where X is the number of contacts listed
 * The list of contacts whose address contain the input address is shown
 
 ![find_add format](images/find_a1.png)
@@ -349,7 +358,7 @@ Invalid command format! find n/: Finds all persons whose names contain any of th
 If no address is input after the find command, an error message explaining the error will be shown,
 reminding the user to follow the correct input format.
 
-* Error Message:
+* Error message shown to the user:
 
 ```
 Invalid command format! find a/: Finds all persons whose address contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
@@ -362,7 +371,12 @@ Invalid command format! find a/: Finds all persons whose address contain any of 
 ![find_appt format](images/find_appt0.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user: "X persons listed!", where X is the number of contacts listed
+
+* Message shown to the user:
+```
+X persons listed!
+```
+where X is the number of contacts listed
 * The list of contacts whose appointment date matches the input date is shown
 
 ![find_appt format](images/find_appt1.png)
@@ -371,7 +385,7 @@ Invalid command format! find a/: Finds all persons whose address contain any of 
 If no date is input after the find command, an error message explaining the error will be shown,
 reminding the user to follow the correct input format.
 
-* Error Message:
+* Error message shown to the user:
 
 ```
 Invalid command format! find_appt: Finds all persons whose appointment date matches the specified input date and displays them as a list with index numbers.
@@ -382,7 +396,7 @@ Invalid command format! find_appt: Finds all persons whose appointment date matc
 If an input date does not follow the accepted format, an error message explaining the error will be shown,
 reminding the user to follow the correct input format.
 
-* Error Message:
+* Error message shown to the user:
 
 ```
 Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd].
@@ -393,7 +407,7 @@ Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yy
 If an input date is a past date (a date before the current date), an error message explaining the error will be shown, 
 reminding the user to input a valid date.
 
-* Error Message:
+* Error message shown to the user:
 
 ```
 Appointment Date should be after the current date.
