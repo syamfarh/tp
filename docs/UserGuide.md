@@ -321,34 +321,63 @@ The integer suffix of the person being cloned is out of range. Please note that 
 
 ### Deleting a person : `delete`
 
-Deletes a contact from FAPro at the specified index.
+Deletes a contact from FAPro at the specified indexes.
 
-Format: `delete INDEX`
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
+#### Format: `delete INDEX1 INDEX2 INDEX 3`
+* Deletes the person at `INDEX1`, `INDEX2' and `INDEX3'. (i.e if delete 1 2 3 is input, deletes person at index 1, index 2 and index 3 respectively)
+* The index refers to the index number shown in the displayed person list
 
-Acceptable parameters for INDEX:
-* The index **must be a positive integer** 1, 2, 3, …​ (less than the size of the contact list in FAPro)
+#### Acceptable parameters for INDEX:
+* The indexes **must be positive integers** (i.e 1 2 3 etc.) (less than the size of the contact list in FAPro)
+* The indexes must have a space inbetween and no commas (i.e delete 1,2,3 is invalid)
 
-Examples:
-* `list` followed by `delete 2` deletes the 2nd person in the address book.
-* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command.
+#### Examples:
+* `list` followed by `delete 2` deletes the 2nd person in the address book
+* `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command
+* `list` followed by `delete 2 5` deletes the 2nd and 5th person in the address book
 
 ![delete format](images/delete-UG/deleteformat.png)
 
-Precise expected outputs on success:
+#### Precise expected outputs on success:
 
-* Message shown to user: "Deleted Person: X", where X are the details of the deleted person.
-* Size of address book is reduced by 1.
-* GUI reflects that deleted contact is now no longer there.
+* Message shown to the user:
 
-![delete format](images/delete-UG/after_delete_success.png)
+```
+Deleted Person(s): X
+```
 
-Precise expected outputs on failure:
-* Error message shown to the user: "The person index provided is invalid".
-* GUI reflects that delete is in red font.
+where X are the details of the deleted persons
+* Size of address book is reduced by however many indexes were entered (i.e if you entered delete 2 3 4, as you entered 3 indexes, the size of the address book decreases by 3) 
+* GUI reflects that deleted contacts are now no longer there
 
-![delete format](images/delete-UG/after_delete_failure.png)
+![delete format](images/delete-UG/deleteafter.png
+
+#### Precise expected outputs on failure:
+
+If any of the entered indexes are invalid:
+* Error message shown to the user:
+
+```
+The person index provided is invalid.
+```
+
+* GUI reflects that delete is in red font
+
+![edit format](images/delete-UG/deletewrongindex.png)
+
+If no index is placed after the delete command:
+* Error message shown to the user:
+
+```
+Invalid command format! 
+delete: Deletes the person(s) identified by the index number used in the displayed person list. 
+Parameters: INDEXES (must be positive integers, separated by spaces)
+Example: delete 1 3 5"
+```
+
+* GUI reflects that delete is in red font
+
+![delete format](images/delete-UG/deletenoindex.png)
 
 ### List out all contacts : `list`
 
@@ -782,14 +811,14 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-
+                                                                                                                                         |
 | Action              | Format, Examples                                                                                                                                                                            |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague`   |
 | **Calendar**        | `calendar`                                                                                                                                                                                  |
 | **Clone**           | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                           |
 | **Clear**           | `clear`                                                                                                                                                                                     |
-| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                         |
+| **Delete**          | `delete INDEXES`<br> e.g., `delete 1 2 3`                                                                                                                                                   |
 | **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                  |
 | **Undo**            | `undo`                                                                                                                                                                                      |
 | **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
@@ -801,10 +830,9 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 | **Risk Profile**    | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                         |
 | **Exit**            | `exit`                                                                                                                                                                                      |
 
-
 ## Glossary
-| Word          | Meaning                                                   |
-|---------------|-----------------------------------------------------------|
+| Word          | Meaning                                                         |
+|---------------|-----------------------------------------------------------------|
 | **Parameter** | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS |
-| **Prefix** | word that is added in front of parameter.<br/>e.g. n/, o/, a/  |
+| **Prefix**    | word that is added in front of parameter.<br/>e.g. n/, o/, a/   |
 
