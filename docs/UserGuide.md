@@ -441,20 +441,20 @@ For undoing an edit command:
 
 Sort contact lists by prefix name or appointment date.
 
-Format: 
+#### Format: 
 * `sort PREFIX`
 
-Example commands:
+#### Example commands:
 * `sort n/`
 * `sort appt/`
 
-Acceptable prefix tag:
+#### Acceptable prefix tag:
 * `n/` sort by Name prefix
 * `appt/` sort by Appointment Date prefix
 
 ![sort format](images/sort-UG/sortformat.png)
 
-Precise expected output on success:
+#### Precise expected output on success:
 * Successful addition message. 'X person listed!', where X is the number of clients in the address book.
 * The sorted entry is displayed in the address book GUI.
 
