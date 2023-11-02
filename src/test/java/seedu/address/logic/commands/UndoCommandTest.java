@@ -59,13 +59,12 @@ public class UndoCommandTest {
             expectedModel.removePreviousUndoableCommand();
         }
 
-        expectedModel.removeLastNumber();
+        expectedModel.removeLastDeletedNumber();
 
         deleteCommand.execute(model);
 
         assertCommandSuccess(undoCommand, model, expectedResult, expectedModel);
     }
-
 
 
     @Test
