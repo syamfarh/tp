@@ -13,7 +13,7 @@ import seedu.address.model.person.CalendarContainsKeywordsPredicate;
  */
 public class FindApptCommand extends Command {
 
-    public static final String COMMAND_WORD = "find_appt";
+    public static final String COMMAND_WORD = "find appt/";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all persons whose appointment date matches "
             + "the specified input date and displays them as a list with index numbers.\n"
