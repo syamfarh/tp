@@ -65,14 +65,100 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 ### Viewing help: `help`
 
-Shows a message listing all the main commands and explaining how to access the user guide.
+Shows a message listing all the main commands and explaining how to access the user guide
 
-Precise command format: `help`
+#### Format: `help`
 
-Precise expected outcome on success:
-A pop-up of a new window that lists out all the main commands with their respective details and displays a link to FAPro’s user guide.
+![help format](images/helpFormat.png)
+
+#### Precise expected outcome on success:
+* Message shown to the user:
+```
+Opened help window.
+```
+* A pop-up window lists all the main commands and displays a link to FAPro's user guide
 
 ![help window](images/helpWindow.png)
+
+### Viewing risk assessment questionnaire: `questionnaire`
+
+Displays questions that are used for generating client risk profile levels
+
+#### Format: `questionnaire`
+
+![questionnaire format](images/questionnaireFormat.png)
+
+#### Precise expected outcome on success:
+* Message shown to the user:
+```
+Opened questionnaire window.
+```
+* A pop-up window shows the risk assessment multiple choice questions, including the grading and risk profile categories criteria
+
+![questionnaire window](images/questionnaireWindow.png)
+
+### Adds risk profile level to a contact:`riskprofile`
+
+Generates the client risk profile level based on their response of risk assessment questionnaire provided in Questionnaire tab and adds it to their contact
+
+#### Format:
+* `riskprofile INDEX res/RESULT`
+
+#### Example commands:
+* `riskprofile 3 res/a,b,c,d,e,e,b,c`
+
+![riskprofile format](images/riskProfileFormat.png)
+
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+This command can also be used to update the client risk profile
+</div>
+
+#### Acceptable values for each parameter:
+* INDEX: Only accept positive integers less than the size of the contacts displayed
+* RESULT: Valid result format, 8 comma-separated characters from 'a' - 'e' (e,b,a,c,b,b,a,e)
+
+#### Precise expected outcome on success:
+* Message shown to the user:
+```
+Added risk profile to Person: X
+```
+where X are the details of the person edited
+* A risk profile label with a specified color will be added to the contact which has 5 categories:
+  <span style="background-color:#4CAF50; color:white;">**Low**</span>,
+  <span style="background-color:#2196F3; color:white;">**Moderately Low**</span>.
+  <span style="background-color:#FFC107; color:white;">**Moderate**</span>,
+  <span style="background-color:#FF6600; color:white;">**Moderately High**</span>,
+  <span style="background-color:#F44336; color:white;">**High**</span>
+
+![riskprofile result](images/riskProfileResult.png)
+
+<div markdown="span" class="alert alert-warning">
+:warning: **Warning:**
+Once the risk profile label is added to the contact, it cannot be removed
+</div>
+
+#### Precise expected outputs on failure:
+If the RESULT is empty
+* Error message shown to the user:
+```
+Invalid command format! 
+riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
+Existing risk profile will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) res/[RESULT]
+Example: riskprofile 1 res/a,e,b,d,c,a,d,e
+```
+![invalid risk profile 1](images/invalidRiskProfile1.png)
+
+If the RESULT is not separated by commas or not in the range of 'a' - 'e'
+* Error message shown to the user:
+```
+Result must have 8 comma-separated characters from 'a' to 'e'!
+riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
+Existing risk profile will be overwritten by the input.
+Parameters: INDEX (must be a positive integer) res/[RESULT]
+Example: riskprofile 1 res/a,e,b,d,c,a,d,e
+```
+![invalid risk profile 2](images/invalidRiskProfile2.png)
 
 ### Adding a person: `add`
 
@@ -101,7 +187,14 @@ A person can have any number of tags (including 0)
 ![add format](images/addformat.png)
 
 #### Precise expected outputs on success:
-* Successful addition message. ‘New Person added: X ’, where X are the details of the person added
+* Message shown to the user:
+
+```
+New Person added: X
+```
+
+where X are the details of the person added
+
 * For example, for Robert Johnson (the example command), it would be: “New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: “. Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
 * The new entry is displayed in the address book GUI
 
@@ -111,7 +204,7 @@ A person can have any number of tags (including 0)
 
 If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
 
-* Error Message:
+* Error message shown to the user:
 
 ```
 Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
@@ -120,6 +213,8 @@ Invalid command format! add: Adds a person to the address book. Parameters: n/NA
 ![add format](images/addmissingparam.png)
 
 If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
+
+* Error message shown to the user:
 
 ```
 Emails should be of the format local-part@domain and adhere to the following constraints:
@@ -134,6 +229,8 @@ The domain name must:
 ![add format](images/addinvalidemail.png)
 
 If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+
+* Error message shown to the user:
 
 ```
 Multiple values specified for the following single-valued field(s): n/
@@ -189,7 +286,14 @@ After cloning, the clone is the exact same original, other than a suffix either 
 ![clone format](images/cloneformat.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user: "Cloned Person: X", where X are the details of the person the clone is based off
+* Message shown to the user:
+
+```
+Cloned Person: X
+```
+
+where X are the details of the person the clone is based off
+
 * For example, if
 
 ```
@@ -208,7 +312,7 @@ Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: 
 
 If no index, 0 or a negative index is entered next to the clone command
 
-* Error Message:
+* Error message shown to the user:
 
 ```
 Invalid command format! clone: Clones the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer).
@@ -220,7 +324,7 @@ Invalid command format! clone: Clones the person identified by the index number 
 
 If the index entered is greater than the current number of contacts in the address book
 
-* Error Message:
+* Error message shown to the user:
 
 ```
 The person index provided is invalid.
@@ -230,17 +334,13 @@ The person index provided is invalid.
 
 ![clone format](images/clonelargeindex.png)
 
-
 If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
 
-* Error Message:
+* Error message shown to the user:
 
 ```
 The integer suffix of the person being cloned is out of range. Please note that the smallest possible suffix that a person can have is 1 and the largest possible suffix that a person can have is 2147483647. As such, if your suffix is 0 or 2147483647, please consider editing the names of your contacts first.
 ```
-
-![clone format](images/clonelargeindex.png)
-
 
 * GUI reflects that clone is in red font
 
@@ -279,14 +379,22 @@ Precise expected outputs on failure:
 
 ### List out all contacts : `list`
 
-Shows a list of all contacts.
+Shows a list of all contacts
 
-Precise command format: `list`
+#### Format: 
+* `list`
 
-Precise expected outputs on success:
-A list of all contacts with their details will be shown.
+![list format](images/listFormat.png)
 
-![list format](images/listResult.png)
+#### Precise expected outputs on success:
+* Message shown to the user:
+```
+Listed all persons
+```
+
+* List all contacts with their details
+
+![list result](images/listResult.png)
 
 ### Editing a person : `edit`
 
@@ -599,13 +707,13 @@ Precise expected outputs on failure:
 
 ### Exiting the program : `exit`
 
-Exits the application.
+Exits the application
 
-Precise command format: `exit`
+#### Format: 
+* `exit`
 
-Precise expected outcome on success:
-The FAPro application will be closed.
-
+#### Precise expected outcome on success:
+* The FAPro application will be closed
 
 ### Saving the data
 
@@ -626,6 +734,9 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAPro home folder.
 
+**Q**: How do I view the main commands and refer to the FAPro’s User Guide?<br>
+**A**: Click the Help tab or type the `help` in the command box.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -636,23 +747,28 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                                                                                          |
-|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Calendar**     | `calendar`                                                                                                                                                                                |
-| **Clone**        | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                         |
-| **Clear**        | `clear`                                                                                                                                                                                   |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                       |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                |
-| **Undo**         | `undo`                                                                                                                                                                                    |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                |
-| **Find Address** | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                        |
-| **List**         | `list`                                                                                                                                                                                    |
-| **Help**         | `help`                                                                                                                                                                                    |
-| **Sort**         | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                            |
+| Action              | Format, Examples                                                                                                                                                                            |
+|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague`   |
+| **Calendar**        | `calendar`                                                                                                                                                                                  |
+| **Clone**           | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                           |
+| **Clear**           | `clear`                                                                                                                                                                                     |
+| **Delete**          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                         |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                  |
+| **Undo**            | `undo`                                                                                                                                                                                      |
+| **Find**            | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                  |
+| **Find Address**    | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                          |
+| **List**            | `list`                                                                                                                                                                                      |
+| **Help**            | `help`                                                                                                                                                                                      |
+| **Questionnaire**   | `questionnaire`                                                                                                                                                                             |
+| **Sort**            | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                              |
+| **Risk Profile**    | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                         |
+| **Exit**            | `exit`                                                                                                                                                                                      |
+
 
 ## Glossary
 | Word          | Meaning                                                   |
 |---------------|-----------------------------------------------------------|
 | **Parameter** | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS |
 | **Prefix** | word that is added in front of parameter.<br/>e.g. n/, o/, a/  |
+
