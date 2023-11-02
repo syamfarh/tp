@@ -1,12 +1,49 @@
 {
   "_comment": "AddressBook save file which contains the same Person values as in TypicalPersons#getTypicalAddressBook()",
-  "persons" : [ {
+  "persons" : [{
+    "name" : "Owen Davis 2147483647",
+    "phone" : "94932143",
+    "email" : "owen@example.com",
+    "occupation" : "Fisherman",
+    "address" : "7th Street",
+    "appointmentDate" : "2023-12-23 08:30",
+    "riskProfile" : "",
+    "tags" : [ "friends" ]
+  }, {
+    "name" : "Lenny David",
+    "phone" : "94932143",
+    "email" : "lenny@example.com",
+    "occupation" : "Fisherman",
+    "address" : "6th Street",
+    "appointmentDate" : "2023-12-21 08:30",
+    "riskProfile" : "",
+    "tags" : [ "friends" ]
+  } ,{
+    "name" : "Lenny David 1",
+    "phone" : "94932143",
+    "email" : "lenny@example.com",
+    "occupation" : "Fisherman",
+    "address" : "6th Street",
+    "appointmentDate" : "2023-12-22 08:30",
+    "riskProfile" : "",
+    "tags" : [ "friends" ]
+  }, {
+    "name" : "Khalid",
+    "phone" : "94352433",
+    "email" : "khalid@example.com",
+    "occupation" : "Golfer",
+    "address" : "5th Street",
+    "appointmentDate" : "2023-12-20 08:30",
+    "riskProfile" : "",
+    "tags" : [ "friends" ]
+  }, {
     "name" : "Alice Pauline",
     "phone" : "94351253",
     "email" : "alice@example.com",
     "occupation" : "Barber",
     "address" : "123, Jurong West Ave 6, #08-111",
-    "appointmentDate" : "",
+    "appointmentDate" : "2023-12-13 08:30",
+    "riskProfile" : "a,a,b,b,b,d,e,c",
     "tags" : [ "friends" ]
   }, {
     "name" : "Benson Meier",
@@ -14,7 +51,8 @@
     "email" : "johnd@example.com",
     "occupation" : "Musician",
     "address" : "311, Clementi Ave 2, #02-25",
-    "appointmentDate" : "",
+    "appointmentDate" : "2023-12-14 08:30",
+    "riskProfile" : "d,c,a,e,b,b,c,a",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "name" : "Carl Kurz",
@@ -22,7 +60,8 @@
     "email" : "heinz@example.com",
     "occupation" : "Sheep Farmer",
     "address" : "wall street",
-    "appointmentDate" : "",
+    "appointmentDate" : "2023-12-15 08:30",
+    "riskProfile" : "",
     "tags" : [ ]
   }, {
     "name" : "Daniel Meier",
@@ -30,7 +69,8 @@
     "email" : "cornelia@example.com",
     "occupation" : "Lecturer",
     "address" : "10th street",
-    "appointmentDate" : "",
+    "appointmentDate" : "2023-12-16 08:30",
+    "riskProfile" : "",
     "tags" : [ "friends" ]
   }, {
     "name" : "Elle Meyer",
@@ -38,7 +78,8 @@
     "email" : "werner@example.com",
     "occupation" : "Seamstress",
     "address" : "michegan ave",
-    "appointmentDate" : "",
+    "appointmentDate" : "2023-12-17 08:30",
+    "riskProfile" : "",
     "tags" : [ ]
   }, {
     "name" : "Fiona Kunz",
@@ -46,15 +87,17 @@
     "email" : "lydia@example.com",
     "occupation" : "Princess",
     "address" : "little tokyo",
-    "appointmentDate" : "",
+    "appointmentDate" : "2023-12-18 08:30",
+    "riskProfile" : "",
     "tags" : [ ]
   }, {
     "name" : "George Best",
     "phone" : "9482442",
-    "email" : "anna@example.com",
+    "email" : "george@example.com",
     "address" : "4th street",
     "occupation" : "Zoologist",
-    "appointmentDate" : "",
+    "appointmentDate" : "2023-12-19 08:30",
+    "riskProfile" : "",
     "tags" : [ ]
   }, {
     "name" : "John Doe",
@@ -62,7 +105,8 @@
     "email" : "john@example.com",
     "occupation" : "Chef",
     "address" : "Block 222, John Street 2",
-    "appointmentDate" :  "2023-12-12",
+    "appointmentDate" :  "2023-12-12 08:30",
+    "riskProfile" : "",
     "tags" : [ ]
   } ]
 }

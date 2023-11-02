@@ -88,7 +88,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A default model stub that have all of the methods failing.
+     * A default model stub that has all of the methods failing.
      */
     private class ModelStub implements Model {
         @Override
@@ -161,13 +161,11 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
-        /**
-         * @param comparator
-         */
         @Override
         public void updateSortComparator(Comparator<Person> comparator) {
             throw new AssertionError("This method should not be called.");
         }
+
 
         @Override
         public void storeDeletedPerson(Person deletedPerson) {
@@ -176,6 +174,11 @@ public class AddCommandTest {
 
         @Override
         public Person getDeletedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Person> getDeletedPersons() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -195,13 +198,47 @@ public class AddCommandTest {
         }
 
         @Override
+        public void removeLastDeletedNumber() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ArrayList<Integer> getDeletedNumberList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Integer getLastDeletedNumber() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public int getNumberOfPreviousDeleteCommands() {
             throw new AssertionError("This method should not be called.");
+        }
 
+        @Override
+        public void storeDeletedNumberList(int deletedNumber) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public void undoDelete() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoDelete(Person deletedPerson) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoAdd() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void undoEdit() {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -240,6 +277,30 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public int getEditedPersonsSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void storeAddedPerson(Person person) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Person getAddedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeAddedPerson() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getAddedPersonsSize() {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**

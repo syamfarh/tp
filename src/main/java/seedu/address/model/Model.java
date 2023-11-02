@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.function.Predicate;
 
@@ -78,6 +79,8 @@ public interface Model {
      */
     void setPerson(Person target, Person editedPerson);
 
+
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -92,6 +95,8 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateSortComparator(Comparator<Person> comparator);
+
+    int getAddedPersonsSize();
 
     /**
      * Updates and stores the most recently deleted person in the deletedPersons ArrayList.
@@ -115,6 +120,13 @@ public interface Model {
     int getDeletedPersonsSize();
 
     /**
+     * Returns a list of persons that have been previously deleted.
+     *
+     * @return A list of Person objects representing previously deleted persons.
+     */
+    ArrayList<Person> getDeletedPersons();
+
+    /**
      * Returns the number of undoable commands in the previousUndoableCommands ArrayList.
      */
     int getPreviousUndoableCommandsSize();
@@ -126,15 +138,34 @@ public interface Model {
 
     /**
      * Undoes the most recent delete command.
-     * COULD BE BUGGY HERE
-     * IF WE UNDO AND MOST RECENT COMMAND IS NOT DELETE
+     * This method should only be invoked when the previous command is a delete command.
      */
     void undoDelete();
+
+    /**
+     * Overloaded method of undoDelete(). This undoes the delete command with a specific person to add back in the
+     * address book.
+     * @param deletedPerson
+     */
+    void undoDelete(Person deletedPerson);
+
+    /**
+     * Undoes the most recent add command.
+     * This method should only be invoked when the previous command is an add command.
+     */
+    void undoAdd();
+
+    /**
+     * Undoes the most recent edit command.
+     * This method should only be invoked when the previous command is an edit command.
+     */
+    void undoEdit();
 
     /**
      * Stores the command as a String into the previousUndoableCommands ArrayList.
      * @param s the command as a String
      */
+
     void storePreviousUndoableCommand(String s);
 
     /**
@@ -170,4 +201,45 @@ public interface Model {
      * from the editedPersons ArrayList.
      */
     void removeEditedPersonsPair();
+
+    int getEditedPersonsSize();
+
+    /**
+     * Stores the number of deletes associated with a delete command in a queue.
+     */
+    void storeDeletedNumberList(int deletedNumber);
+
+    /**
+     * Returns the number associated with the last delete command.
+     */
+    Integer getLastDeletedNumber();
+
+    /**
+     * Returns the deleted number list.
+     */
+    ArrayList<Integer> getDeletedNumberList();
+
+    /**
+     * Removes the last number from the number list.
+     */
+    void removeLastDeletedNumber();
+
+    /**
+     * Updates and stores the most recently added person in the addedPersons ArrayList.
+     * Note that this method is invoked for a clone command too, since a clone will still add a person.
+     * @param addedPerson the person that was most recently added.
+     */
+    void storeAddedPerson(Person addedPerson);
+
+    /**
+     * Returns the most recently added person in the addedPersons ArrayList.
+     */
+    Person getAddedPerson();
+
+    /**
+     * Removes the most recently added person from the addedPersons ArrayList.
+     */
+    void removeAddedPerson();
+
+
 }

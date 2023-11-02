@@ -27,9 +27,11 @@ public class ModelManager implements Model {
     private final AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
+    private final ArrayList<Person> addedPersons;
     private final ArrayList<Person> deletedPersons;
     private final ArrayList<Pair<Person, Person>> editedPersons;
     private ArrayList<String> previousUndoableCommands;
+    private ArrayList<Integer> deletedNumberList;
     private Comparator<Person> sortComparator;
 
     /**
@@ -43,9 +45,11 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
+        addedPersons = new ArrayList<>();
         deletedPersons = new ArrayList<>();
         editedPersons = new ArrayList<>();
         previousUndoableCommands = new ArrayList<>();
+        deletedNumberList = new ArrayList<>();
         sortComparator = APPTCOMPARATOR;
     }
 
@@ -54,6 +58,29 @@ public class ModelManager implements Model {
      */
     public ModelManager() {
         this(new AddressBook(), new UserPrefs());
+    }
+
+
+    @Override
+    public void storeAddedPerson(Person addedPerson) {
+        this.addedPersons.add(addedPerson);
+    }
+
+    @Override
+    public Person getAddedPerson() {
+        int lastIndex = addedPersons.size() - 1;
+        return this.addedPersons.get(lastIndex);
+    }
+
+    @Override
+    public void removeAddedPerson() {
+        int lastIndex = addedPersons.size() - 1;
+        this.addedPersons.remove(lastIndex);
+    }
+
+    @Override
+    public int getAddedPersonsSize() {
+        return this.addedPersons.size();
     }
 
     @Override
@@ -71,6 +98,11 @@ public class ModelManager implements Model {
     public void removeDeletedPerson() {
         int lastIndex = this.deletedPersons.size() - 1;
         this.deletedPersons.remove(lastIndex);
+    }
+
+    @Override
+    public ArrayList<Person> getDeletedPersons() {
+        return this.deletedPersons;
     }
 
     @Override
@@ -111,7 +143,6 @@ public class ModelManager implements Model {
         Pair<Person, Person> toStore = new Pair<>(editedPerson, originalPerson);
         editedPersons.add(toStore);
     }
-
     @Override
     public Pair<Person, Person> getEditedPersonsPair() {
         int lastIndex = editedPersons.size() - 1;
@@ -123,6 +154,33 @@ public class ModelManager implements Model {
         int lastIndex = editedPersons.size() - 1;
         editedPersons.remove(lastIndex);
     }
+
+    @Override
+    public int getEditedPersonsSize() {
+        return this.editedPersons.size();
+    }
+
+    @Override
+    public void storeDeletedNumberList(int deletedNumber) {
+        this.deletedNumberList.add(deletedNumber);
+    }
+
+    @Override
+    public Integer getLastDeletedNumber() {
+        return this.deletedNumberList.get(this.deletedNumberList.size() - 1);
+    }
+
+    @Override
+    public ArrayList<Integer> getDeletedNumberList() {
+        return this.deletedNumberList;
+    }
+
+    @Override
+    public void removeLastDeletedNumber() {
+        this.deletedNumberList.remove(this.deletedNumberList.size() - 1);
+    }
+
+
 
 
 
@@ -188,13 +246,13 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
+        storeAddedPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
     }
 
     @Override
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
-
         addressBook.setPerson(target, editedPerson);
     }
 
@@ -203,6 +261,30 @@ public class ModelManager implements Model {
         addressBook.addPerson(getDeletedPerson());
         this.removeDeletedPerson();
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void undoDelete(Person person) {
+        addressBook.addPerson(person);
+        this.removeDeletedPerson();
+        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+    }
+
+    @Override
+    public void undoAdd() {
+        addressBook.removePerson(getAddedPerson());
+        this.removeAddedPerson();
+    }
+
+    @Override
+    public void undoEdit() {
+        Pair<Person, Person> pairToRestore = this.getEditedPersonsPair();
+
+        Person editedPerson = pairToRestore.getKey();
+        Person originalPerson = pairToRestore.getValue();
+
+        this.setPerson(editedPerson, originalPerson);
+        this.removeEditedPersonsPair();
     }
 
 

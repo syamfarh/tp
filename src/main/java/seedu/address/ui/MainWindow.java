@@ -35,11 +35,20 @@ public class MainWindow extends UiPart<Stage> {
     private ResultDisplay resultDisplay;
     private HelpWindow helpWindow;
 
+    private QuestionnaireWindow questionnaireWindow;
+
+    private CalendarWindow calendarWindow;
+
     @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
     private MenuItem helpMenuItem;
+    @FXML
+    private MenuItem questionnaireMenuItem;
+
+    @FXML
+    private MenuItem calendarMenuItem;
 
     @FXML
     private StackPane personListPanelPlaceholder;
@@ -66,6 +75,8 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+        questionnaireWindow = new QuestionnaireWindow();
+        calendarWindow = new CalendarWindow(logic);
     }
 
     public Stage getPrimaryStage() {
@@ -74,7 +85,10 @@ public class MainWindow extends UiPart<Stage> {
 
     private void setAccelerators() {
         setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(questionnaireMenuItem, KeyCombination.valueOf("F2"));
+        setAccelerator(calendarMenuItem, KeyCombination.valueOf("F3"));
     }
+
 
     /**
      * Sets the accelerator of a MenuItem.
@@ -147,6 +161,31 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
+    /**
+     * Opens the help window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleQuestionnaire() {
+        if (!questionnaireWindow.isShowing()) {
+            questionnaireWindow.show();
+        } else {
+            questionnaireWindow.focus();
+        }
+    }
+
+    /**
+     * Opens the calendar window or focuses on it if it's already opened.
+     */
+    @FXML
+    public void handleCalendar() {
+        if (!calendarWindow.isShowing()) {
+            calendarWindow.show();
+        } else {
+            calendarWindow.focus();
+        }
+    }
+
+
     void show() {
         primaryStage.show();
     }
@@ -160,6 +199,8 @@ public class MainWindow extends UiPart<Stage> {
                 (int) primaryStage.getX(), (int) primaryStage.getY());
         logic.setGuiSettings(guiSettings);
         helpWindow.hide();
+        questionnaireWindow.hide();
+        calendarWindow.hide();
         primaryStage.hide();
     }
 
@@ -181,6 +222,14 @@ public class MainWindow extends UiPart<Stage> {
             personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
             if (commandResult.isShowHelp()) {
                 handleHelp();
+            }
+
+            if (commandResult.isShowQuestionnaire()) {
+                handleQuestionnaire();
+            }
+
+            if (commandResult.isShowCalendar()) {
+                handleCalendar();
             }
 
             if (commandResult.isExit()) {

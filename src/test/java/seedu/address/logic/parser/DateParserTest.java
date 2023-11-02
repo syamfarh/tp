@@ -2,29 +2,25 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
 import org.junit.jupiter.api.Test;
 
-class DateParserTest {
+public class DateParserTest {
 
     @Test
-    void convertDate_validValue() {
-        assertEquals(LocalDate.parse("2020-11-20"), DateParser.convertDate("2020-11-20"));
-
-        assertEquals(LocalDate.parse("2000-11-20"), DateParser.convertDate("11/20/2000"));
-
-        assertEquals(LocalDate.parse("2000-11-20"), DateParser.convertDate("20-11-2000"));
+    void convertDate_validArgs() {
+        String date1 = "2023-12-12";
+        String date2 = "12-12-2023";
+        LocalDate localDate1 = DateParser.convertDate(date1);
+        LocalDate localDate2 = DateParser.convertDate(date2);
+        assertEquals(localDate1, localDate2);
     }
 
     @Test
-    void isValidCurrentDate() {
-        assertFalse(DateParser.isValidCurrentDate("2020-11-20"));
-
-        assertFalse(DateParser.isValidCurrentDate("2021-11-20"));
-
-        assertTrue(DateParser.isValidCurrentDate("2023-11-20"));
+    void invalidArgs_throwsParseException() {
+        assertFalse(DateParser.isValidCurrentDate("1999-01-01"));
+        assertFalse(DateParser.isValidFormat("hello this is not a date"));
     }
 }

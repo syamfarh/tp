@@ -7,6 +7,7 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.EDITEDALICE;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -14,13 +15,19 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.person.Person;
 import seedu.address.testutil.AddressBookBuilder;
 
 public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
+
+    private final Person testPersonAlice = ALICE;
+    private final Person testPersonAliceEdited = EDITEDALICE;
+    private final Person testPersonBenson = BENSON;
 
     @Test
     public void constructor() {
@@ -93,6 +100,7 @@ public class ModelManagerTest {
         assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredPersonList().remove(0));
     }
 
+
     @Test
     public void equals() {
         AddressBook addressBook = new AddressBookBuilder().withPerson(ALICE).withPerson(BENSON).build();
@@ -129,4 +137,173 @@ public class ModelManagerTest {
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
         assertFalse(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
     }
+
+    // Unit testing methods
+    @Test
+    public void storeAddedPerson() {
+        modelManager.storeAddedPerson(testPersonAlice);
+        assertEquals(testPersonAlice, modelManager.getAddedPerson());
+    }
+
+    //Should I remove this test for a getter?
+    @Test
+    public void getAddedPerson() {
+        modelManager.storeAddedPerson(testPersonAlice);
+        modelManager.storeAddedPerson(testPersonBenson);
+        assertEquals(modelManager.getAddedPerson(), testPersonBenson);
+    }
+
+    @Test
+    public void removeAddedPerson() {
+        modelManager.storeAddedPerson(testPersonAlice);
+        modelManager.storeAddedPerson(testPersonBenson);
+        modelManager.removeAddedPerson();
+        assertEquals(modelManager.getAddedPerson(), testPersonAlice);
+    }
+
+    @Test
+    public void removeAddedPerson_throwsIndexOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> modelManager.removeAddedPerson());
+    }
+
+
+    @Test
+    public void storeDeletedPerson() {
+        modelManager.storeDeletedPerson(testPersonAlice);
+        assertEquals(testPersonAlice, modelManager.getDeletedPerson());
+    }
+
+    @Test
+    public void removeDeletedPerson() {
+        modelManager.storeDeletedPerson(testPersonAlice);
+        modelManager.storeDeletedPerson(testPersonBenson);
+        modelManager.removeDeletedPerson();
+        assertEquals(modelManager.getDeletedPerson(), testPersonAlice);
+    }
+
+    @Test
+    public void removeDeletedPerson_throwsIndexOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> modelManager.removeDeletedPerson());
+    }
+
+    @Test
+    public void storePreviousUndoableCommand() {
+        modelManager.storePreviousUndoableCommand("TEST");
+        assertEquals(modelManager.getPreviousUndoableCommand(), "TEST");
+    }
+
+    @Test
+    public void removePreviousUndoableCommand() {
+        modelManager.storePreviousUndoableCommand("TEST1");
+        modelManager.storePreviousUndoableCommand("TEST2");
+        modelManager.removePreviousUndoableCommand();
+        assertEquals(modelManager.getPreviousUndoableCommand(), "TEST1");
+    }
+
+    @Test
+    public void removePreviousUndoableCommand_throwsIndexOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> modelManager.removePreviousUndoableCommand());
+    }
+
+    @Test
+    public void storeEditedPersonsPair() {
+        Pair<Person, Person> testPersons = new Pair<>(testPersonAlice, testPersonBenson);
+        modelManager.storeEditedPersonsPair(testPersonAlice, testPersonBenson);
+        assertEquals(modelManager.getEditedPersonsPair(), testPersons);
+    }
+
+    @Test
+    public void removeEditedPersonsPair() {
+        Pair<Person, Person> testPersons = new Pair<>(testPersonAlice, testPersonBenson);
+        modelManager.storeEditedPersonsPair(testPersonAlice, testPersonBenson);
+        modelManager.storeEditedPersonsPair(testPersonBenson, testPersonAlice);
+        modelManager.removeEditedPersonsPair();
+        assertEquals(modelManager.getEditedPersonsPair(), testPersons);
+    }
+
+    @Test
+    public void removeEditedPersonsPair_throwsIndexOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> modelManager.removeEditedPersonsPair());
+    }
+
+    @Test
+    public void storeDeletedNumberList() {
+        modelManager.storeDeletedNumberList(1);
+        assertEquals(modelManager.getLastDeletedNumber(), 1);
+    }
+
+    @Test
+    public void removeLastDeletedNumber() {
+        modelManager.storeDeletedNumberList(1);
+        modelManager.storeDeletedNumberList(2);
+        modelManager.removeLastDeletedNumber();
+        assertEquals(modelManager.getLastDeletedNumber(), 1);
+    }
+
+    @Test
+    public void removeLastDeletedNumber_throwsIndexOutOfBoundsException() {
+        assertThrows(IndexOutOfBoundsException.class, () -> modelManager.removeLastDeletedNumber());
+    }
+
+    @Test
+    public void addPerson_storesAddedPersonInArrayList() {
+        modelManager.addPerson(testPersonAlice);
+        assertEquals(modelManager.getAddedPerson(), testPersonAlice);
+    }
+
+    @Test
+    public void undoDelete() {
+        modelManager.addPerson(testPersonAlice);
+
+        //Make sure person is added into addedPersons array list.
+        assertEquals(modelManager.getAddedPersonsSize(), 1);
+
+        modelManager.deletePerson(testPersonAlice);
+
+        //Make sure person is added into deletedPersons array list.
+        assertEquals(modelManager.getDeletedPersonsSize(), 1);
+
+        modelManager.undoDelete();
+
+        //Make sure the person is added back to the address book.
+        assertTrue(modelManager.hasPerson(testPersonAlice));
+        //Make sure the deleted person is removed from the deletedPersons array list.
+        assertEquals(modelManager.getDeletedPersonsSize(), 0);
+        //Make sure the addedPersons array list is unchanged.
+        assertEquals(modelManager.getAddedPersonsSize(), 1);
+    }
+
+    @Test
+    public void undoAdd() {
+        modelManager.addPerson(testPersonAlice);
+
+        //Make sure person is added into addedPersons array list.
+        assertEquals(modelManager.getAddedPersonsSize(), 1);
+
+        modelManager.undoAdd();
+
+        //Make sure person is removed from addedPersons array list.
+        assertEquals(modelManager.getAddedPersonsSize(), 0);
+        //Make sure person is deleted from address book.
+        assertFalse(modelManager.hasPerson(testPersonAlice));
+    }
+
+    @Test
+    public void undoEdit() {
+        modelManager.addPerson(testPersonAlice);
+        modelManager.setPerson(testPersonAlice, testPersonAliceEdited);
+
+        modelManager.storeEditedPersonsPair(testPersonAliceEdited, testPersonAlice);
+
+        //Make sure pair is added into editedPersons array list.
+        assertEquals(modelManager.getEditedPersonsSize(), 1);
+
+        modelManager.undoEdit();
+
+        //Make sure pair is removed from editedPersons array list.
+        assertEquals(modelManager.getEditedPersonsSize(), 0);
+
+    }
+
+
 }

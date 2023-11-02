@@ -1,14 +1,17 @@
 package seedu.address.logic.commands;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.logic.commands.CloneCommand.MESSAGE_CLONE_PERSON_SUCCESS;
+import static seedu.address.logic.commands.CloneCommand.clonePerson;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_NINTH_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_TENTH_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_TWELFTH_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import org.junit.jupiter.api.Test;
@@ -19,17 +22,17 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
+import seedu.address.testutil.PersonBuilder;
 
 public class CloneCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Person personToClone = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        CloneCommand cloneCommand = new CloneCommand(INDEX_FIRST_PERSON);
+    public void execute_validIndexUnfilteredListSpacesNoSuffix_success() throws CommandException {
+        Person personToClone = model.getFilteredPersonList().get(INDEX_SECOND_PERSON.getZeroBased());
+        CloneCommand cloneCommand = new CloneCommand(INDEX_SECOND_PERSON);
 
         // Creating the expected cloned person
         Person expectedClonedPerson = clonePerson(personToClone);
@@ -50,11 +53,63 @@ public class CloneCommandTest {
         expectedClonedPerson.getTags().forEach(builder::append);
         String expectedClonedPersonS = builder.toString();
 
-        String expectedMessage = String.format(CloneCommand.MESSAGE_CLONE_PERSON_SUCCESS,
+        String expectedMessage = String.format(MESSAGE_CLONE_PERSON_SUCCESS,
             expectedClonedPersonS); // Only compare the name
 
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addPerson(expectedClonedPerson);
+
+        assertCommandSuccess(cloneCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredListNoSpacesNoSuffix_success() throws CommandException {
+        Person personToClone = model.getFilteredPersonList().get(INDEX_NINTH_PERSON.getZeroBased());
+        CloneCommand cloneCommand = new CloneCommand(INDEX_NINTH_PERSON);
+
+        // Creating the expected cloned person
+        Person expectedClonedPerson = clonePerson(personToClone);
+
+        StringBuilder builder = new StringBuilder();
+        builder.append(personToClone.getName())
+                .append("; Phone: ")
+                .append(expectedClonedPerson.getPhone())
+                .append("; Email: ")
+                .append(expectedClonedPerson.getEmail())
+                .append("; Occupation: ")
+                .append(expectedClonedPerson.getOccupation())
+                .append("; Address: ")
+                .append(expectedClonedPerson.getAddress())
+                .append("; AppointmentDate: ")
+                .append(expectedClonedPerson.getApptDate())
+                .append("; Tags: ");
+        expectedClonedPerson.getTags().forEach(builder::append);
+        String expectedClonedPersonS = builder.toString();
+
+        String expectedMessage = String.format(MESSAGE_CLONE_PERSON_SUCCESS,
+                expectedClonedPersonS); // Only compare the name
+
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+        expectedModel.addPerson(expectedClonedPerson);
+
+        assertCommandSuccess(cloneCommand, model, expectedMessage, expectedModel);
+    }
+
+    @Test
+    public void execute_validIndexUnfilteredCloneInList_success() throws CommandException {
+        Person personToClone = model.getFilteredPersonList().get(INDEX_TENTH_PERSON.getZeroBased());
+        CloneCommand cloneCommand = new CloneCommand(INDEX_TENTH_PERSON);
+
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
+
+        Person expectedClonedPerson = new PersonBuilder().withName("Lenny David 2").withAddress("6th Street")
+            .withEmail("lenny@example.com").withPhone("94932143").withOccupation("Fisherman")
+            .withAppointmentDate("2023-12-21 08:30").withRiskProfile("").withTags("friends").build();
+
+        String expectedMessage = String.format(MESSAGE_CLONE_PERSON_SUCCESS, Messages.format(personToClone));
+
         expectedModel.addPerson(expectedClonedPerson);
 
         assertCommandSuccess(cloneCommand, model, expectedMessage, expectedModel);
@@ -100,20 +155,12 @@ public class CloneCommandTest {
     }
 
     @Test
-    public void execute_duplicateClone_throwsCommandException() {
-        // Choose an index that exists in the filtered list
-        Index targetIndex = Index.fromOneBased(1);
+    public void execute_validIndexUnfilteredListInvalidSuffix_throwsCommandException() {
+        // Create a scenario where the name has an invalid numeric suffix
+        Person personToClone = model.getFilteredPersonList().get(INDEX_TWELFTH_PERSON.getZeroBased());
+        CloneCommand cloneCommand = new CloneCommand(INDEX_TWELFTH_PERSON);
 
-        // Clone the person at the selected index
-        CloneCommand cloneCommand = new CloneCommand(targetIndex);
-
-        // Execute the first clone, it should succeed
-        assertDoesNotThrow(() -> cloneCommand.execute(model));
-
-        // Now, execute the clone again, it should throw a CommandException
-        CommandException thrownException = assertThrows(CommandException.class, () -> cloneCommand.execute(model));
-
-        assertEquals(CloneCommand.MESSAGE_CLONE_PERSON_DUPLICATE_FAILURE, thrownException.getMessage());
+        assertCommandFailure(cloneCommand, model, Messages.MESSAGE_PERSON_SUFFIX_OUT_OF_RANGE);
     }
 
 
@@ -123,27 +170,6 @@ public class CloneCommandTest {
         CloneCommand cloneCommand = new CloneCommand(targetIndex);
         String expected = CloneCommand.class.getCanonicalName() + "{targetIndex=" + targetIndex + "}";
         assertEquals(expected, cloneCommand.toString());
-    }
-
-    /**
-     * Creates a cloned person based on the given person.
-     */
-    private Person clonePerson(Person personToClone) {
-        int numericSuffix;
-        String numericSuffixStr = personToClone.getName().toString().replaceAll("[^0-9]", "");
-        String nameWithoutNumbers = personToClone.getName().toString().replaceAll("[0-9]", "");
-        if (numericSuffixStr.isEmpty()) {
-            numericSuffix = 0;
-        } else {
-            numericSuffix = Integer.parseInt(numericSuffixStr);
-        }
-        numericSuffix++;
-        String updatedNumericSuffixStr = String.valueOf(numericSuffix);
-        Name clonedName = new Name(nameWithoutNumbers + " " + updatedNumericSuffixStr);
-        Person clonedPerson = new Person(clonedName, personToClone.getPhone(), personToClone.getEmail(),
-                personToClone.getOccupation(), personToClone.getAddress(), personToClone.getApptDate(),
-                personToClone.getTags());
-        return clonedPerson;
     }
 
     /**
