@@ -238,33 +238,6 @@ Multiple values specified for the following single-valued field(s): n/
 
 ![add format](images/addduplicateparam.png)
 
-### Search by appointment day: `cal`
-
-Lists out all persons who have an appointment on the input date.
-
-Format: `cal KEYWORD`
-
-* The input date has to be the exact date in YYYY-MM-DD format.
-  e.g. `cal 2023-12-12` will not match `cal 12-12-2023` .
-* Only the appointment date is searched.
-
-Examples:
-* `cal 2023-12-12`
-
-![cal format](images/cal0.png)
-
-* Precise expected outputs on success:
-* Successful calendar message. “X persons listed!”, where X is the number of contacts who have the same
-  appointment date as the input date. The list of contacts whose appointment dates match the input is listed.
-
-![cal format](images/cal1.png)
-
-* Precise expected outputs on failure:
-* If no date is input after the cal command, an error message explaining the error will be shown,
-  reminding the user to follow the correct input format.
-
-![cal format](images/cal2.png)
-
 ### Cloning a person : `clone`
 
 Clones a contact from FAPro at the specified index.
@@ -428,60 +401,123 @@ Examples:
 
 ### Locating persons by name: `find`
 
-Finds persons whose names contain any of the given keywords.
+Finds persons based on the given keywords.
 
-Format: `find KEYWORD [MORE_KEYWORDS]`
+#### Format: 
 
-* The search is case-insensitive. e.g `hans` will match `Hans`.
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`.
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`.
+* `find n/NAME [MORE NAMES]`
 
-![edit format](images/find0.png)
+* `find a/ADDRESS [MORE ADDRESSES]` 
 
-* Precise expected outputs on success:
-* Successful find message. ‘X persons listed!’’, where X is the number of contacts listed.
-  The list of contacts whose names contain the input name is shown.
+* `find appt/APPOINTMENTDATE`
 
-![edit format](images/find1.png)
+#### Example commands:
+* `find n/John Alice`
+* `find a/Tokyo Geylang`
+* `find appt/2024-01-01`
 
-* Precise expected outputs on failure:
-* If no name is input after the find command, an error message explaining the error will be shown,
-  reminding the user to follow the correct input format.
+#### Acceptable values for each parameter:
+* Name: Valid string name
+* Address: Valid string address
+* Appointment date: Valid dates (after current date), in the format of `yyyy-mm-dd`
 
-![edit format](images/find2.png)
+#### _Name_
 
-### Locating persons by address: `find_add`
+![find_name format](images/find_n0.png)
 
-Finds persons whose address contain any of the given keywords.
+#### Precise expected outputs on success:
+* Message shown to the user: 
+```
+X persons listed!
+```
+where X is the number of contacts listed
+* The list of contacts whose names contain the input name is shown
 
-Format: `find_add KEYWORD [MORE_KEYWORDS]`
+![find_name format](images/find_n1.png)
 
-* The search is case-insensitive. e.g `tokyo` will match `Tokyo`.
-* The order of the keywords does not matter. e.g. `Little Tokyo` will match `Tokyo Little`.
-* Only the address is searched.
-* Only full words will be matched e.g. `Toky` will not match `Tokyo`.
-* Persons matching at least one keyword will be returned (i.e. `OR` search).
-  e.g. `Little Geylang` will return `Little Tokyo`, `Tokyo`.
+##### Precise expected outputs on failure:
+If no name is input after the find command, an error message explaining the error will be shown, 
+reminding the user to follow the correct input format
 
-Examples:
-* `find_add geylang` returns all users whose addresses contain `geylang`.
+* Error message shown to the user:
 
-![edit format](images/findadd0.png)
+```
+Invalid command format! find n/: Finds all persons whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+```
 
-* Precise expected outputs on success:
-* Successful find message. ‘X persons listed!’’, where X is the number of contacts listed.
-  The list of contacts whose address contains the input address is shown.
+![find_name format](images/find_n2.png)
 
-![edit format](images/findadd1.png)
+#### _Address_
 
-* Precise expected outputs on failure:
-* If no name is input after the find command, an error message explaining the error will be shown,
-  reminding the user to follow the correct input format.
+![find_add format](images/find_a0.png)
 
-![edit format](images/findadd2.png)
+#### Precise expected outputs on success:
+
+* Message shown to the user:
+```
+X persons listed!
+```
+where X is the number of contacts listed
+* The list of contacts whose address contain the input address is shown
+
+![find_add format](images/find_a1.png)
+
+##### Precise expected outputs on failure:
+If no address is input after the find command, an error message explaining the error will be shown,
+reminding the user to follow the correct input format
+
+* Error message shown to the user:
+
+```
+Invalid command format! find a/: Finds all persons whose address contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+```
+
+![find_add format](images/find_a2.png)
+
+#### _Appointment Date_
+
+![find_appt format](images/find_appt0.png)
+
+#### Precise expected outputs on success:
+* Message shown to the user:
+```
+X persons listed!
+```
+where X is the number of contacts listed
+* The list of contacts whose appointment date matches the input date is shown
+
+![find_appt format](images/find_appt1.png)
+
+##### Precise expected outputs on failure:
+If no date is input after the find command, an error message explaining the error will be shown,
+reminding the user to follow the correct input format
+
+* Error message shown to the user:
+```
+Invalid command format! find_appt: Finds all persons whose appointment date matches the specified input date and displays them as a list with index numbers.
+```
+
+![find_appt format](images/find_appt2.png)
+
+If an input date does not follow the accepted format, an error message explaining the error will be shown,
+reminding the user to follow the correct input format
+
+* Error message shown to the user:
+```
+Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd].
+```
+
+![find_appt format](images/find_appt3.png)
+
+If an input date is a past date (a date before the current date), an error message explaining the error will be shown, 
+reminding the user to input a valid date
+
+* Error message shown to the user:
+```
+Appointment Date should be after the current date.
+```
+
+![find_appt format](images/find_appt4.png)
 
 ### Undoing a command : `undo`
 
