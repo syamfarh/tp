@@ -65,35 +65,41 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 ### Viewing help: `help`
 
-Shows a message listing all the main commands and explaining how to access the user guide.
+Shows a message listing all the main commands and explaining how to access the user guide
 
 #### Format: `help`
 
 ![help format](images/helpFormat.png)
 
 #### Precise expected outcome on success:
-* Successful message: Opened help window
+* Message shown to the user:
+```
+Opened help window.
+```
 * A pop-up window lists all the main commands and displays a link to FAPro's user guide
 
 ![help window](images/helpWindow.png)
 
 ### Viewing risk assessment questionnaire: `questionnaire`
 
-Displays questions that are going to be used for generating client risk profile levels.
+Displays questions that are used for generating client risk profile levels
 
 #### Format: `questionnaire`
 
 ![questionnaire format](images/questionnaireFormat.png)
 
 #### Precise expected outcome on success:
-* Successful message: Opened questionnaire window
+* Message shown to the user:
+```
+Opened questionnaire window.
+```
 * A pop-up window shows the risk assessment multiple choice questions, including the grading and risk profile categories criteria
 
 ![questionnaire window](images/questionnaireWindow.png)
 
 ### Adds risk profile level to a contact:`riskprofile`
 
-Generates the client risk profile level based on their response of risk assessment questionnaire provided in Questionnaire tab and adds it to their contact.
+Generates the client risk profile level based on their response of risk assessment questionnaire provided in Questionnaire tab and adds it to their contact
 
 #### Format:
 * `riskprofile INDEX res/RESULT`
@@ -112,7 +118,11 @@ This command can also be used to update the client risk profile
 * RESULT: Valid result format, 8 comma-separated characters from 'a' - 'e' (e,b,a,c,b,b,a,e)
 
 #### Precise expected outcome on success:
-* Successful message: "Added risk profile to Person: X", where X are the details of the person edited
+* Message shown to the user:
+```
+Added risk profile to Person: X
+```
+where X are the details of the person edited
 * A risk profile label with a specified color will be added to the contact.
   There are 5 categories:
   <span style="background-color:#4CAF50; color:white;">**Low**</span>,
@@ -130,7 +140,7 @@ Once the risk profile label is added to the contact, it cannot be removed
 
 #### Precise expected outputs on failure:
 If the RESULT is empty
-* Error message:
+* Error message shown to the user:
 ```
 Invalid command format! 
 riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
@@ -141,7 +151,7 @@ Example: riskprofile 1 res/a,e,b,d,c,a,d,e
 ![invalid risk profile 1](images/invalidRiskProfile1.png)
 
 If the RESULT is not separated by commas or not in the range of 'a' - 'e'
-* Error message:
+* Error message shown to the user:
 ```
 Result must have 8 comma-separated characters from 'a' to 'e'!
 riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
@@ -356,7 +366,7 @@ Precise expected outputs on failure:
 
 ### List out all contacts : `list`
 
-Shows a list of all contacts.
+Shows a list of all contacts
 
 #### Format: 
 * `list`
@@ -364,7 +374,11 @@ Shows a list of all contacts.
 ![list format](images/listFormat.png)
 
 #### Precise expected outputs on success:
-* Successful message: Listed all persons
+* Message shown to the user:
+```
+Listed all persons
+```
+
 * List all contacts with their details
 
 ![list result](images/listResult.png)
@@ -633,7 +647,7 @@ Precise expected outputs on failure:
 
 ### Exiting the program : `exit`
 
-Exits the application.
+Exits the application
 
 #### Format: 
 * `exit`
