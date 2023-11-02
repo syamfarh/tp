@@ -484,6 +484,12 @@ Open a new calendar window.
 #### Example commands:
 * `calendar`
 
+<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+<li>You can open calendar window by pressing f3 key.
+<li>Arrow key navigate you to different months.
+<li>Enter key navigate you back to the current month.
+</div>
+
 #### Precise expected outputs on success:
 * A pop-up of a new calendar window of the current month that indicate client's appointments in the date.
 
