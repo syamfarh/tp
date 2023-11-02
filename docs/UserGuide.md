@@ -83,7 +83,7 @@ Adds a new entry to their address book for financial advisors, including persona
 
 #### Example commands:
 * `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01 appt/12-12-2023 08:30`
-* `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567 t/Friend`
+* `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567`
 
 #### Acceptable values for each parameter:
 * Name: Valid string name
@@ -102,7 +102,7 @@ A person can have any number of tags (including 0)
 
 #### Precise expected outputs on success:
 * Successful addition message. ‘New Person added: X ’, where X are the details of the person added
-* For example, for Robert Johnson (the example command), it would be: “New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: “. Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person.
+* For example, for Robert Johnson (the example command), it would be: “New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: “. Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
 * The new entry is displayed in the address book GUI
 
 ![edit format](images/addresult.png)
