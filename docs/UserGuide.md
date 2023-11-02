@@ -236,10 +236,12 @@ Deletes a contact from FAPro at the specified indexes.
 
 #### Precise expected outputs on success:
 
-* Message shown to user:
+* Message shown to the user:
+
 ```
 Deleted Person(s): X
 ```
+
 where X are the details of the deleted persons
 * Size of address book is reduced by however many indexes were entered. (i.e if you entered delete 2 3 4, as you entered 3 indexes, the size of the address book decreases by 3) 
 * GUI reflects that deleted contacts are now no longer there
@@ -260,13 +262,15 @@ The person index provided is invalid.
 ![edit format](images/delete-UG/deletewrongindex.png)
 
 If no index is placed after the delete command:
-* Error message shown to user:
+* Error message shown to the user:
+
 ```
 Invalid command format! 
 delete: Deletes the person(s) identified by the index number used in the displayed person list. 
 Parameters: INDEXES (must be positive integers, separated by spaces)
 Example: delete 1 3 5"
 ```
+
 * GUI reflects that delete is in red font
 
 ![delete format](images/delete-UG/deletenoindex.png)
