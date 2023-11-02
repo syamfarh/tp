@@ -474,6 +474,21 @@ Example: sort n/
 
 ![sort format](images/sort-UG/sortfailuremissing.png)
 
+### Opening calendar window : `calendar`
+
+Open a new calendar window.
+
+#### Format:
+* `calendar`
+
+#### Example commands:
+* `calendar`
+
+#### Precise expected outputs on success:
+* A pop-up of a new calendar window of the current month that indicate client's appointments in the date.
+
+![calendar format](images/calendarWindow.png)
+
 ### Clearing all entries : `clear`
 
 Clears all contacts in the address book.
@@ -536,16 +551,16 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 ## Command summary
 
-| Action           | Format, Examples                                                                                                                                                                      |
-|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action           | Format, Examples                                                                                                                                                                         |
+|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**          | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Calendar**     | `cal KEYWORD`<br> e.g., `cal 2023-12-12`                                                                                                                                              |
-| **Clone**        | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                     |
-| **Clear**        | `clear`                                                                                                                                                                               |
-| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                   |
-| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                            |
-| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                            |
-| **Find Address** | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                    |
-| **List**         | `list`                                                                                                                                                                                |
-| **Help**         | `help`                                                                                                                                                                                |
-| **Sort** | `sort PREFIX` <br> e.g. `sort appt/` `sort n/` |
+| **Calendar**     | `calendar`                                                                                                                                                                                |
+| **Clone**        | `clone INDEX`<br> e.g., `clone 3`                                                                                                                                                        |
+| **Clear**        | `clear`                                                                                                                                                                                  |
+| **Delete**       | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                      |
+| **Edit**         | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                               |
+| **Find**         | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                               |
+| **Find Address** | `find_add KEYWORD [MORE_KEYWORDS]` <br> e.g., `find_add Serangoon`                                                                                                                       |
+| **List**         | `list`                                                                                                                                                                                   |
+| **Help**         | `help`                                                                                                                                                                                   |
+| **Sort** | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                           |
