@@ -424,7 +424,8 @@ Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], Occupation:[OC
 
 #### Precise expected outputs on failure:
 
-If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing. 
+If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
+* Message shown to the user:
 ```
 Invalid command format! 
 edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
