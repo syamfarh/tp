@@ -839,8 +839,8 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 | **Exit**            | `exit`                                                                                                                                                                                  |
 
 ## Glossary
-| Word          | Meaning                                                         |
-|---------------|-----------------------------------------------------------------|
-| **Parameter** | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS |
-| **Prefix**    | word that is added in front of parameter.<br/>e.g. n/, o/, a/   |
+| Word                | Meaning                                                                                                                                                                                 |
+|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Parameter**       | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                                                                         |
+| **Prefix**          | word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                                                                           |
 
