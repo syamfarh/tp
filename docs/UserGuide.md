@@ -384,17 +384,17 @@ Undoes the most recent undoable command. Undoable commands include: add, clone, 
 
 #### Example commands:
 * `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` followed by `undo` will
-  delete the added contact.
-* `clone 1`, assuming there is a contact to clone, followed by `undo` will delete the cloned contact.
-* `delete 1`, assuming there is a contact to delete, followed by `undo` will add the contact back.
-* `clear`, assuming there is at least one contact to clear, followed by `undo` will add all cleared contacts back.
-* `edit 1 p/91234567`, assuming there is a contact to edit, followed by `undo` will revert the edit of the contact.
+  delete the added contact
+* `clone 1`, assuming there is a contact to clone, followed by `undo` will delete the cloned contact
+* `delete 1`, assuming there is a contact to delete, followed by `undo` will add the contact back
+* `clear`, assuming there is at least one contact to clear, followed by `undo` will add all cleared contacts back
+* `edit 1 p/91234567`, assuming there is a contact to edit, followed by `undo` will revert the edit of the contact
 * Assuming there are 3 contacts, `delete 1`, which deletes the first contact, followed by `clear`, which clears the
   remaining 2 contacts, followed by `undo` will only add the 2 cleared contacts back. A subsequent `undo` will add
-  back the contact deleted at the beginning.
+  the contact deleted at the beginning back
 * `edit 1 p/91234567`, assuming there is a contact to edit, edits the first contact, followed by `delete 1`, deletes
   the first contact. Then, `undo` will add back the deleted contact, and the next `undo` will revert the edit of the
-  contact (which was also just added back).
+  contact (which was also just added back)
 
 #### Precise expected outputs on success:
 
@@ -496,8 +496,7 @@ For undoing an edit command:
 Undo Successful! Reverted back to: X
 ```
 
-where X are the details of the person before
-  the edit
+where X are the details of the person before the edit
 * GUI reflects that the edited contact has been reverted
 
 ![undo format](images/undo-UG/after_edit_undo.png)
