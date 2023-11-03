@@ -301,6 +301,53 @@ public class AddCommandTest {
         public int getAddedPersonsSize() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void addToRedoableStateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getRedoableStateListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetRedoableStateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void restoreRedoableState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void addToUndoableStateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public int getUndoableStateListSize() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void resetUndoableStateList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void restoreUndoableState() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeRedoCommands() {
+            throw new AssertionError("This method should not be called.");
+
+        }
+
     }
 
     /**
@@ -344,6 +391,16 @@ public class AddCommandTest {
         public void storePreviousUndoableCommand(String command) {
             previousUndoableCommands.add(command);
         }
+
+        //Blank override methods since redo is not being tested.
+        @Override
+        public void resetRedoableStateList() {}
+
+        @Override
+        public void resetUndoableStateList() {}
+
+        @Override
+        public void removeRedoCommands() {}
 
         @Override
         public ReadOnlyAddressBook getAddressBook() {

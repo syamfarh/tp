@@ -14,15 +14,15 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `fapro.jar` from [here](https://github.com/AY2324S1-CS2103T-W09-1/tp/releases).
+2. Download the latest `fapro.jar` from [here](https://github.com/AY2324S1-CS2103T-W09-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for FAPro
+3. Copy the file to the folder you want to use as the _home folder_ for FAPro
 
-1. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fapro.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fapro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
   * `list` : Lists all contacts.
@@ -35,7 +35,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
   * `exit` : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+6. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -394,8 +394,8 @@ Listed all persons
 
 Edits an existing client's parameter in FAPro.
 
-#### Format: 
-* `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…`
+#### Format:
+* `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [appt/APPOINTMENTDATE] [a/ADDRESS] [t/TAG]…`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided
@@ -405,31 +405,35 @@ Edits an existing client's parameter in FAPro.
   specifying any tags after it
 
 #### Acceptable values for each parameter:
-* Refer to `add` command 
+* Refer to `add` command
 
 #### Example commands:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags
 
-![edit format](images/editformat.png)
+![edit format](images/edit-UG/editformat.png)
 
-* Precise expected outputs on success:
+#### Precise expected outputs on success:
 * Message shown to the user:
 ```
 Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], Occupation:[OCCUPATION], Address:[ADDRESS]…
 ```
 * The new entry is displayed in the address book GUI.
 
-![edit format](images/editresult.png)
+![edit format](images/edit-UG/editresult.png)
 
-* Precise expected outputs on failure:
+#### Precise expected outputs on failure:
+
+If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
+* Message shown to the user:
 ```
-// copy paste error message
+Invalid command format! 
+edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
+Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [appt/APPOINTMENTDATE] [t/TAG]...
+Example: edit 1 p/91234567 e/johndoe@example.com
 ```
 
-* If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
-* If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
-* If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+![edit format](images/edit-UG/editfailure.png)
 
 ### Locating persons by name: `find`
 
@@ -689,6 +693,86 @@ There is no command to undo!
 
 ![undo format](images/undo-UG/undo_fail.png)
 
+### Redoing an undo command : `redo`
+
+Redoes the most recent undo command. 
+
+
+#### Format:
+* `redo`
+
+
+#### Example commands:
+
+* `delete 1` will delete the first contact in the address book
+
+  `undo` will then reverse the `delete 1` command
+
+  `redo` will then reapply the `delete 1` command
+
+
+* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` will add this contact in 
+  the address book
+
+  `undo` will then reverse the `add` command (i.e. John Doe is no longer in the address book)
+
+  `redo` will then reapply the `add` command (i.e. John Doe is back in the address book)
+
+  `undo` will then reverse the `redo` command (i.e. John Doe is no longer in the address book)
+
+  #### Note: while it is possible to `undo` `redo` commands, this is only possible before any other `add`, `clone`, `edit`, `delete`, `clear` command is executed.
+
+  Now, `redo` will reapply the `add` command (i.e John Doe is back in the address book) 
+
+  `delete 1` will delete the first contact in the address book
+
+  `undo` will reverse the `delete 1` command
+
+  `undo` once again will not reverse the `redo` command
+
+
+#### Precise expected outputs on success:
+
+For example, `add` a contact, then `undo`, then `redo`
+
+* Add a contact
+
+![redo_format](images/redo-UG/add_person.png)
+
+* Undo 
+
+![redo_format](images/redo-UG/undo_success.png)
+
+* Redo
+* Message shown to the user: 
+
+```
+Redo successful!
+```
+
+![redo_format](images/redo-UG/redo_success.png)
+
+* If wanted, undo again
+* Message shown to the user: 
+
+```
+Undo successful!
+```
+
+![redo_format](images/redo-UG/undo_after_redo.png)
+
+#### Precise expected outputs on failure:
+
+When there is no command to redo, i.e. no previous `undo` command
+
+* Error message shown to the user:
+
+```
+Redo unsuccessful! There is nothing to redo!
+```
+![redo_format](images/redo-UG/redo_failure.png)
+
+
 ### Sorting contacts : `sort`
 
 Sort contact lists by prefix name or appointment date.
@@ -821,24 +905,26 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 ## Command summary
                                                                                                                                          
-| Action              | Format, Examples                                                                                                                                                                        |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Action              | Format, Examples                                                                                                                                                                         |
+|---------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…​` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague` |
-| **Calendar**        | `calendar`                                                                                                                                                                              |
-| **Clone**           | `clone INDEX`<br> e.g. `clone 3`                                                                                                                                                        |
-| **Clear**           | `clear`                                                                                                                                                                                 |
-| **Delete**          | `delete INDEXES`<br> e.g., `delete 1 2 3`                                                                                                                                               |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                               |
-| **Undo**            | `undo`                                                                                                                                                                                  |
-| **Find**            | `find PREFIX KEYWORD` <br> e.g. `find n/ James Jake`, `find a/Tokyo Geylang`, `find appt/2040-01-01`                                                                                    |
-| **List**            | `list`                                                                                                                                                                                  |
-| **Help**            | `help`                                                                                                                                                                                  |
-| **Questionnaire**   | `questionnaire`                                                                                                                                                                         |
-| **Sort**            | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                          |
-| **Risk Profile**    | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                     |
-| **Exit**            | `exit`                                                                                                                                                                                  |
+| **Calendar**        | `calendar`                                                                                                                                                                               |
+| **Clone**           | `clone INDEX`<br> e.g. `clone 3`                                                                                                                                                         |
+| **Clear**           | `clear`                                                                                                                                                                                  |
+| **Delete**          | `delete INDEXES`<br> e.g., `delete 1 2 3`                                                                                                                                                |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]…​`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                |
+| **Undo**            | `undo`                                                                                                                                                                                   |
+| **Redo**            | `redo`                                                                                                                                                                                   |
+| **Find**            | `find PREFIX KEYWORD` <br> e.g. `find n/ James Jake`, `find a/Tokyo Geylang`, `find appt/2040-01-01`                                                                                     |
+| **List**            | `list`                                                                                                                                                                                   |
+| **Help**            | `help`                                                                                                                                                                                   |
+| **Questionnaire**   | `questionnaire`                                                                                                                                                                          |
+| **Sort**            | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                           |
+| **Risk Profile**    | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                      |
+| **Exit**            | `exit`                                                                                                                                                                                   |
 
 ## Glossary
+
 | Word                | Meaning                                                                                                                                                                                 |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Parameter**       | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                                                                         |
