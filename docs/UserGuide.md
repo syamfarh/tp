@@ -378,8 +378,6 @@ Shows a list of all contacts.
 #### Format: 
 * `list`
 
-![list format](images/listFormat.png)
-
 #### Precise expected outputs on success:
 * Message shown to the user:
 ```
