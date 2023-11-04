@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Iterator;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -24,7 +25,7 @@ import seedu.address.model.person.Person;
 public class ModelManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
 
-    private final AddressBook addressBook;
+    private AddressBook addressBook;
     private final UserPrefs userPrefs;
     private final FilteredList<Person> filteredPersons;
     private final ArrayList<Person> addedPersons;
@@ -32,6 +33,10 @@ public class ModelManager implements Model {
     private final ArrayList<Pair<Person, Person>> editedPersons;
     private ArrayList<String> previousUndoableCommands;
     private ArrayList<Integer> deletedNumberList;
+    private ArrayList<ReadOnlyAddressBook> redoableStateList;
+    private ArrayList<ReadOnlyAddressBook> undoableStateList;
+
+
     private Comparator<Person> sortComparator;
 
     /**
@@ -50,6 +55,8 @@ public class ModelManager implements Model {
         editedPersons = new ArrayList<>();
         previousUndoableCommands = new ArrayList<>();
         deletedNumberList = new ArrayList<>();
+        redoableStateList = new ArrayList<>();
+        undoableStateList = new ArrayList<>();
         sortComparator = APPTCOMPARATOR;
     }
 
@@ -180,8 +187,63 @@ public class ModelManager implements Model {
         this.deletedNumberList.remove(this.deletedNumberList.size() - 1);
     }
 
+    @Override
+    public void addToRedoableStateList() {
+        this.redoableStateList.add(new AddressBook(this.addressBook));
+    }
 
+    @Override
+    public int getRedoableStateListSize() {
+        return this.redoableStateList.size();
+    }
 
+    @Override
+    public void resetRedoableStateList() {
+        this.redoableStateList = new ArrayList<>();
+    }
+
+    @Override
+    public void restoreRedoableState() {
+        int lastIndex = getRedoableStateListSize() - 1;
+        ReadOnlyAddressBook addressBookToRestore = this.redoableStateList.get(lastIndex);
+        addressBook.resetData(addressBookToRestore);
+        this.redoableStateList.remove(lastIndex);
+    }
+
+    @Override
+    public void addToUndoableStateList() {
+        this.undoableStateList.add(new AddressBook(this.addressBook));
+    }
+
+    @Override
+    public int getUndoableStateListSize() {
+        return this.undoableStateList.size();
+    }
+
+    @Override
+    public void resetUndoableStateList() {
+        this.undoableStateList = new ArrayList<>();
+    }
+
+    @Override
+    public void restoreUndoableState() {
+        int lastIndex = getUndoableStateListSize() - 1;
+        ReadOnlyAddressBook addressBookToRestore = this.undoableStateList.get(lastIndex);
+        addressBook.resetData(addressBookToRestore);
+        this.undoableStateList.remove(lastIndex);
+    }
+
+    @Override
+    public void removeRedoCommands() {
+
+        Iterator<String> itr = previousUndoableCommands.iterator();
+        while (itr.hasNext()) {
+            String command = itr.next();
+            if (command.equals("redo")) {
+                itr.remove();
+            }
+        }
+    }
 
 
     //=========== UserPrefs ==================================================================================
@@ -286,9 +348,6 @@ public class ModelManager implements Model {
         this.setPerson(editedPerson, originalPerson);
         this.removeEditedPersonsPair();
     }
-
-
-
 
 
     //=========== Filtered Person List Accessors =============================================================

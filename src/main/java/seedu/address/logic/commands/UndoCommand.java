@@ -32,12 +32,14 @@ public class UndoCommand extends Command {
     public static final String MESSAGE_UNDO_ADD_SUCCESS = "Undo Successful! Deleted Person: %1$s";
     public static final String MESSAGE_UNDO_EDIT_SUCCESS = "Undo Successful! Reverted back to: %1$s";
 
+    public static final String MESSAGE_UNDO_REDO_SUCCESS = "Undo Successful!";
+
     private static Logger logger = Logger.getLogger("UndoCommand");
 
     /**
      * Constructor for UndoCommand is empty.
      */
-    public UndoCommand() {};
+    public UndoCommand() {}
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
@@ -61,6 +63,8 @@ public class UndoCommand extends Command {
         case "edit":
             logger.log(Level.INFO, "case: edit");
             return executeUndoEdit(model);
+        case "redo":
+            return executeUndoRedo(model);
         default:
             throw new AssertionError("Not an undoable command! There is an error!");
         }
@@ -78,7 +82,7 @@ public class UndoCommand extends Command {
         // Make a new list containing only the persons deleted from the previous delete command.
         List<Person> undoDeletedPersons = new ArrayList<>(deletedPersons.subList(deletedPersons.size()
             - numberOfDeletes, deletedPersons.size()));
-        //can catch errors here. should assert first that deletedPersons is not empty.
+        // can catch errors here. should assert first that deletedPersons is not empty.
         // also possible to check if deletedPersons.size() == sum of model.getLastdeletednumber()
 
         String deletedPersonsDetails = Messages.formatPersons(undoDeletedPersons);
@@ -87,7 +91,9 @@ public class UndoCommand extends Command {
             return new CommandResult(MESSAGE_UNDO_DELETE_FAILURE);
         }
 
-        // Undo the deletion of each person deleted from a single command.
+        model.addToRedoableStateList();
+
+        /* Undo the deletion of each person deleted from a single command. */
         for (Person deletedPerson : undoDeletedPersons) {
             model.undoDelete(deletedPerson);
             model.removePreviousUndoableCommand();
@@ -107,15 +113,17 @@ public class UndoCommand extends Command {
      */
     public CommandResult executeUndoClear(Model model) {
 
+        model.addToRedoableStateList();
         int numberOfPreviousDeleteCommands = model.getNumberOfPreviousDeleteCommands();
 
-        // Undo each individual delete command
+        /* Undo each individual delete command */
         while (model.getDeletedPersonsSize() > numberOfPreviousDeleteCommands) {
             model.undoDelete();
         }
 
         // Remove 'clear' from the list of previous undoable commands.
         model.removePreviousUndoableCommand();
+
         return new CommandResult(String.format(MESSAGE_UNDO_CLEAR_SUCCESS));
     }
 
@@ -124,6 +132,8 @@ public class UndoCommand extends Command {
      * @return returns CommandResult of the message when the undo is a success.
      */
     public CommandResult executeUndoAdd(Model model) {
+
+        model.addToRedoableStateList();
 
         Person personToDelete = model.getAddedPerson();
         model.undoAdd();
@@ -138,6 +148,8 @@ public class UndoCommand extends Command {
      */
     public CommandResult executeUndoEdit(Model model) {
 
+        model.addToRedoableStateList();
+
         Pair<Person, Person> pairToRestore = model.getEditedPersonsPair();
         Person originalPerson = pairToRestore.getValue();
 
@@ -146,5 +158,18 @@ public class UndoCommand extends Command {
         model.removePreviousUndoableCommand();
 
         return new CommandResult(String.format(MESSAGE_UNDO_EDIT_SUCCESS, Messages.format(originalPerson)));
+    }
+
+    /**
+     * Undoes a redo command.
+     * @return returns CommandResult of the message when the undo is a success.
+     */
+    public CommandResult executeUndoRedo(Model model) {
+
+        model.addToRedoableStateList();
+        model.removePreviousUndoableCommand();
+        model.restoreUndoableState();
+
+        return new CommandResult(MESSAGE_UNDO_REDO_SUCCESS);
     }
 }

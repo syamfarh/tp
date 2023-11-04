@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Deletes the person(s) identified by the index number used in the displayed person list.\n"
-            + "Parameters: INDEXES (must be positive integers, separated by spaces)\n"
+            + "Parameters: INDEXES (must be positive integers, separated by spaces, no duplicates)\n"
             + "Example: " + COMMAND_WORD + " 1 3 5";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS = "Deleted Person(s): %1$s";
@@ -57,6 +57,11 @@ public class DeleteCommand extends Command {
         }
 
         model.storeDeletedNumberList(targetIndexes.size());
+
+        model.resetRedoableStateList();
+        model.resetUndoableStateList();
+        model.removeRedoCommands();
+
         String resultMessage = String.format(MESSAGE_DELETE_PERSON_SUCCESS, Messages.formatPersons(deletedPersons));
 
         return new CommandResult(resultMessage);
