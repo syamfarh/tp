@@ -34,5 +34,10 @@ public class DeleteCommandParserTest {
     public void parse_emptyArgs_throwsParseException() {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
     }
+
+    @Test
+    public void parse_duplicateArgs_throwsParseException() {
+        assertParseFailure(parser, "1 1 2", String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteCommand.MESSAGE_USAGE));
+    }
 }
 
