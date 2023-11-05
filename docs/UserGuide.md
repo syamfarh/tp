@@ -242,7 +242,7 @@ Multiple values specified for the following single-valued field(s): n/
 
 ### Cloning a person : `clone`
 
-Clones a contact from FAPro at the specified index.
+Clones a contact from FAPro at the specified index. Saves time when adding a contact with very similar details (i.e from the same household)
 
 #### Format:
 * `clone INDEX`
@@ -925,8 +925,8 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 ## Glossary
 
-| Word                | Meaning                                                                                                                                                                                 |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Parameter**       | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                                                                         |
-| **Prefix**          | word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                                                                           |
-
+| Word          | Meaning                                                                                                                         |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------|
+| **Parameter** | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                 |
+| **Prefix**    | word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
+| **Suffix**    | number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
