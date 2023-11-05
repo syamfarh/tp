@@ -174,7 +174,7 @@ Adds a new entry to their address book for financial advisors, including persona
 * `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567`
 
 #### Acceptable values for each parameter:
-* NAME: Valid string name (That does not already exist in the list)
+* NAME: Valid string name
 * ADDRESS: Valid string address (8 College Ave West)
 * PHONE NUMBER: Valid string (Numbers only) (81234567)
 * EMAIL ADDRESS: Valid string and email address format (johnd@example.com)
