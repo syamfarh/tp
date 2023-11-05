@@ -470,9 +470,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. One of the indexes provided does not adhere to the restrictions (must be positive integers, separated by spaces, no duplicates)
 
-    * 3b1. FAPro shows and error message:  "Invalid command format!
-      delete: Deletes the person(s) identified by the index number used in the displayed person list.
-      Parameters: INDEXES (must be positive integers, separated by spaces, no duplicates)"
+    * 3b1. FAPro shows and error message:  "Invalid command format!", along with instructions on how to
+      properly use the command.
         
         Use case resumes at step 2.
 
