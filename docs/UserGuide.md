@@ -204,7 +204,7 @@ where X are the details of the person added
 
 #### Precise expected outputs on failure:
 
-If a required parameter is missing (e.g., NAME, EMAIL), an error message should specify which parameter is missing.
+If a required parameter is missing (e.g., NAME, EMAIL)
 
 * Error message shown to the user:
 
