@@ -242,7 +242,7 @@ Multiple values specified for the following single-valued field(s): n/
 
 ### Cloning a person : `clone`
 
-Clones a contact from FAPro at the specified index.
+Clones a contact from FAPro at the specified index. Makes it easier for the user when adding a contact with very similar details (i.e from the same household)
 
 #### Format:
 * `clone INDEX`
@@ -938,9 +938,10 @@ To circumvent this, you can add additional details to the name to differentiate 
 
 ## Glossary
 
-| Word          | Meaning                                                         |
-|---------------|-----------------------------------------------------------------|
-| **FA**        | short form for financial advisor                                |
-| **Parameter** | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS |
-| **Prefix**    | word that is added in front of parameter.<br/>e.g. n/, o/, a/   |
-
+| Word                 | Meaning                                                                                                                         |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| **FA**               | short form for financial advisor                                                                                                |
+| **Parameter**        | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                 |
+| **Positive Integer** | An integer that is positive (i.e greater than 0). Please note that we are excluding 0 as a positive integer.                    |
+| **Prefix**           | word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
+| **Suffix**           | number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
