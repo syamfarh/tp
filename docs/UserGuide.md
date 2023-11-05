@@ -180,7 +180,7 @@ Adds a new entry to their address book for financial advisors, including persona
 * EMAIL ADDRESS: Valid email address format. Accepts any alphanumeric characters other than underscore (johnd@example.com)
 * OCCUPATION: Must be alphanumeric characters only
 * TAG: Must be alphanumeric characters only
-* APPOINTMENT DATE: Only accepted in yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm format
+* APPOINTMENT DATE: Valid string appointment date format (yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm) (date and time must be after the current date and time) 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -377,8 +377,6 @@ Shows a list of all contacts.
 
 #### Format: 
 * `list`
-
-![list format](images/listFormat.png)
 
 #### Precise expected outputs on success:
 * Message shown to the user:
