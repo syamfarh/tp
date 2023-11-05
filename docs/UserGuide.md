@@ -57,7 +57,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 * Parameters can be in any order<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable
 
-* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored<br>
+* Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit`, `clear`, `questionnaire`, `calendar`) will be ignored<br>
   e.g. if the command specifies `help 123`, it will be interpreted as `help`
 
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application
@@ -180,7 +180,7 @@ Adds a new entry to their address book for financial advisors, including persona
 * EMAIL ADDRESS: Valid string and email address format (johnd@example.com)
 * OCCUPATION: Valid string occupation
 * TAG: Valid string
-* APPOINTMENT DATE: Only accepted in yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm format
+* APPOINTMENT DATE: Valid string appointment date format (yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm) (date and time must be after the current date and time) 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -377,8 +377,6 @@ Shows a list of all contacts.
 
 #### Format: 
 * `list`
-
-![list format](images/listFormat.png)
 
 #### Precise expected outputs on success:
 * Message shown to the user:
@@ -897,6 +895,21 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Common Questions
+
+**Q**: Why can't I add clients with the same name? <br>
+**A**:
+As financial advisors, while you might deal with clients with the same name, as the name is the primary identifier for a person in the address book, the app was designed so as to prevent duplicate names. <br>
+
+To circumvent this, you can add additional details to the name to differentiate contacts. For example, if you have two contacts names John Tan, one could be John Tan (Google) and John Tan (Facebook) (if they work at the respective companies).
+
+**Q**: Using that logic, why not use another field as the unique identifying field (such as email or phone number)? <br>
+**A**: Other fields might be shared among individuals. For example, those from the same household might have the same landline. And some married couples share the same email. As such, using the name of an individual was the ideal choice in terms of an identifier for a contact.
+
+**Q**: Is adding the same appointment date and time for different clients allowed? <br>
+**A**: Yes! Our thinking is that if an FA wants to host a group session with several clients, FAPro allows them to schedule multiple clients for the same appointment date and time, making it convenient for FA to manage group meetings.
+--------------------------------------------------------------------------------------------------------------------
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
@@ -927,6 +940,7 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 | Word                 | Meaning                                                                                                                         |
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------|
+| **FA**               | short form for financial advisor                                                                                                |
 | **Parameter**        | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                 |
 | **Positive Integer** | An integer that is positive (i.e greater than 0). Please note that we are excluding 0 as a positive integer.                    |
 | **Prefix**           | word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
