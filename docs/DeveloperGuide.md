@@ -266,7 +266,37 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Fast, allows for as many copies of a person as the user desires
   * Cons: Will be difficult to keep track of contacts, defeating the purpose of FAPro as a comprehensive yet focused contact organiserr
 
-_{more aspects and alternatives to be added}_
+### Delete feature
+
+#### Implementation
+
+The delete feature deletes the person(s) at the specified index(es) in the address book
+
+Given below is an example usage scenario and how the delete mechanism behaves at each step.
+
+Step 1. The user executes "list" to see what Persons are available in the address book
+
+![Delete0](images/Delete0.png)
+
+Step 2. The user executes "delete 1 4" to delete the persons at index 1 and index 4 of the address book, John and Peter, respectively
+
+![Delete1](images/Delete1.png)
+
+The following activity diagram summarizes what happens when a user executes a new command:
+
+![DeleteActivityDiagram](images/DeleteActivityDiagram.png)
+
+#### Design considerations:
+
+**Aspect: How delete executes:**
+
+* **Alternative 1 (current choice):** Deletes the person(s) at the index(es) provided by removing from list of contacts
+    * Pros: Fast, most straightforward way to remove contacts from a list
+    * Cons: 
+
+* **Alternative 2:** 
+    * Pros: 
+    * Cons: 
 
 ### Undo feature
 
