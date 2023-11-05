@@ -895,6 +895,19 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 --------------------------------------------------------------------------------------------------------------------
 
+## Common Questions
+
+**Q**: Why can't I add clients with the same name? <br>
+**A**:
+As financial advisors, while you might deal with clients with the same name, as the name is the primary identifier for a person in the address book, the app was designed so as to prevent duplicate names. <br>
+
+To circumvent this, you can add additional details to the name to differentiate contacts. For example, if you have two contacts names John Tan, one could be John Tan (Google) and John Tan (Facebook) (if they work at the respective companies).
+
+**Q**: Using that logic, why not use another field as the unique identifying field (such as email or phone number)? <br>
+**A**: Other fields might be shared among individuals. For example, those from the same household might have the same landline. And some married couples share the same email. As such, using the name of an individual was the ideal choice in terms of an identifier for a contact.
+
+--------------------------------------------------------------------------------------------------------------------
+
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
