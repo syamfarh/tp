@@ -831,7 +831,7 @@ Open a new calendar window.
 #### Precise expected outputs on success:
 * A pop-up of a new calendar window of the current month that indicate client's appointments in the date
 
-![calendar format](images/calendarWindow.png)
+![calendar format](images/calendar-UG/calendarWindow.png)
 
 ### Clearing all entries : `clear`
 
