@@ -246,7 +246,7 @@ Step 1. The user executes "list" to see what Persons are available in the addres
 
 ![Clone0](images/Clone0.png)
 
-Step 2. The user executes "clone 1" to clone the person at index 1 of the addressbook, John
+Step 2. The user executes "clone 1" to clone the person at index 1 of the address book, John
 
 ![Clone1](images/Clone1.png)
 
@@ -264,7 +264,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 2:** Copies the person exactly as is while allowing for duplicates
   * Pros: Fast, allows for as many copies of a person as the user desires
-  * Cons: Will be difficult to keep track of contacts, defeating the purpose of FAPro as a comprehensive yet focused contact organiserr
+  * Cons: Will be difficult to keep track of contacts, defeating the purpose of FAPro as a comprehensive yet focused contact organiser
 
 _{more aspects and alternatives to be added}_
 
