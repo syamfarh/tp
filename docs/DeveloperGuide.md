@@ -482,20 +482,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The parameter is provided in an invalid format.
+* 3a. The parameter is provided in an invalid format.
 
-    * 1a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
+    * 3a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
       properly use the command.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 2.
 
-    * 3a1. FAPro shows an error message:  “Sorry, that value is not accepted! Please specify the index of the person you would like to clone! It should be non-negative and within the address book!”
+* 3b. The given index is invalid (i.e Not a positive integer and part of the address book.
 
-        Use case resumes at step 2.
-
-* 3b. The given person has already been cloned.
-
-    * 3b1. FAPro shows an error message:  “A clone of this person already exists. To clone again, please edit the previous clone first or alternatively, clone the previous clone."
+    * 3b1. FAPro shows an error message:  “The person index provided is invalid.”
 
         Use case resumes at step 2.
 
