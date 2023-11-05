@@ -167,7 +167,7 @@ Example: riskprofile 1 res/a,e,b,d,c,a,d,e
 Adds a new entry to their address book for financial advisors, including personal details such as name, address, occupation, phone number and email.
 
 #### Format:
-* `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]... [appt/APPOINTMENT_DATE]`
+* `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]… [appt/APPOINTMENT_DATE]`
 
 #### Example commands:
 * `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01 appt/12-12-2023 08:30`
