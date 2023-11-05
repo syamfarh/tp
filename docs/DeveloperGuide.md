@@ -259,8 +259,8 @@ The following activity diagram summarizes what happens when a user executes a ne
 **Aspect: How clone executes:**
 
 * **Alternative 1 (current choice):** Copies the person at the index provided and returns a person with a number next to their name
-  * Pros: Fast, prevents excessive copying of a person while ensuring that there are no struct duplicates
-  * Cons: Can be restrictive and time consuming, as you have to keep copying the clone if you wish to make a clone of a person
+  * Pros: Fast,  while ensuring that there are no strict duplicates
+  * Cons: Can be restrictive as you might have contacts that are similar and have the same name.
 
 * **Alternative 2:** Copies the person exactly as is while allowing for duplicates
   * Pros: Fast, allows for as many copies of a person as the user desires

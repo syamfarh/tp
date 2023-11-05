@@ -8,7 +8,7 @@ start
 'Since the beta syntax does not support placing the condition outside the
 'diamond we place it as the true branch instead.
 
-if () then ([index is valid] && [person has not been cloned before])
+if () then ([index is valid] && [suffix is valid])
     :Clone person;
 else ([else])
 endif
