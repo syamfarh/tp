@@ -906,6 +906,8 @@ To circumvent this, you can add additional details to the name to differentiate 
 **Q**: Using that logic, why not use another field as the unique identifying field (such as email or phone number)? <br>
 **A**: Other fields might be shared among individuals. For example, those from the same household might have the same landline. And some married couples share the same email. As such, using the name of an individual was the ideal choice in terms of an identifier for a contact.
 
+**Q**: Is adding the same appointment date and time for different clients allowed? <br>
+**A**: Yes! Our thinking is that if an FA wants to host a group session with several clients, FAPro allows them to schedule multiple clients for the same appointment date and time, making it convenient for FA to manage group meetings.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Known issues
@@ -936,8 +938,9 @@ To circumvent this, you can add additional details to the name to differentiate 
 
 ## Glossary
 
-| Word                | Meaning                                                                                                                                                                                 |
-|---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Parameter**       | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                                                                         |
-| **Prefix**          | word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                                                                           |
+| Word          | Meaning                                                         |
+|---------------|-----------------------------------------------------------------|
+| **FA**        | short form for financial advisor                                |
+| **Parameter** | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS |
+| **Prefix**    | word that is added in front of parameter.<br/>e.g. n/, o/, a/   |
 
