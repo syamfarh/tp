@@ -451,8 +451,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1.  Financial Advisor requests to list persons
 2.  FAPro shows a list of persons
-3.  Financial Advisor requests to delete a specific person in the list
-4.  FAPro deletes the person
+3.  Financial Advisor requests to delete at least one person
+4.  FAPro deletes the person(s)
 
     Use case ends.
 
@@ -462,12 +462,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. One of the indexes provided is a positive integer but out of the range of the address book
 
-    * 3a1. FAPro shows an error message:  “Sorry, that value is not accepted! Please specify the index of the person you would like to delete! It should be non-negative and within the address book!”
+    * 3a1. FAPro shows an error message:  “The person index provided is invalid.”
 
         Use case resumes at step 2.
 
+* 3b. One of the indexes provided does not adhere to the restrictions (must be positive integers, separated by spaces, no duplicates)
+
+    * 3b1. FAPro shows and error message:  "Invalid command format!
+      delete: Deletes the person(s) identified by the index number used in the displayed person list.
+      Parameters: INDEXES (must be positive integers, separated by spaces, no duplicates)"
+        
+        Use case resumes at step 2.
 
 **Use case: Clone a person**
 
