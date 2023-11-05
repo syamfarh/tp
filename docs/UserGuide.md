@@ -242,7 +242,7 @@ Multiple values specified for the following single-valued field(s): n/
 
 ### Cloning a person : `clone`
 
-Clones a contact from FAPro at the specified index. Saves time when adding a contact with very similar details (i.e from the same household)
+Clones a contact from FAPro at the specified index. Makes it easier for the user when adding a contact with very similar details (i.e from the same household)
 
 #### Format:
 * `clone INDEX`
