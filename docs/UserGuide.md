@@ -911,6 +911,10 @@ To circumvent this, you can add additional details to the name to differentiate 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
+2. **In calendar window**:
+   * the default size only show a maximum of 2 clients per day
+   * the default size does not show time of the appointment
+   * The calendar window issues can be fixed by adjusting the calendar window to be larger to show more information
 
 --------------------------------------------------------------------------------------------------------------------
 
