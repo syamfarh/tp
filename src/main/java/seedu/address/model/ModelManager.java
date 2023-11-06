@@ -205,7 +205,6 @@ public class ModelManager implements Model {
     }
 
 
-
     @Override
     public void addToRedoableStateList() {
         this.redoableStateList.add(new AddressBook(this.addressBook));
