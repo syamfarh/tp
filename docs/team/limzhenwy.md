@@ -36,9 +36,15 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * To be added soon.
+    * ~~Added portions relevant to `find_add`~~
+    * ~~Added portions relevant to `cal`~~
+    * ~~Added portions relevant to `ufind`~~
+    * Altered and added portions relevant to `find`
   * Developer Guide:
-    * To be added soon.
+    * ~~Added portions relevant to `find_add`~~
+    * ~~Added portions relevant to `cal`~~
+    * ~~Added portions relevant to `ufind`~~
+    * Altered and added portions relevant to `find`
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): To be added soon.
