@@ -15,7 +15,10 @@ Given below are my contributions to the project.
   * Highlights: To be added soon.
   * Credits: To be added soon.
 
-* **New Feature**: To be added soon.
+* **New Feature**: 
+* Added functionality to be able to search by client's address (Pull request [\#51](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/51))
+* Added functionality to be able to search by client's appointment date (Pull request [\#66](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/66))
+* Added new command `ufind` to unify all different "find" type commands such that users can input a specific prefix to search by different fields (Pull request [\#110](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/110))
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=limzhenwy&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
@@ -23,9 +26,6 @@ Given below are my contributions to the project.
   * To be added soon.
 
 * **Enhancements to existing features**:
-  * Added functionality to be able to search by client's address (Pull request [\#51](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/51))
-  * Added functionality to be able to search by client's appointment date (Pull request [\#66](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/66))
-  * Added new command `ufind` to unify all different "find" type commands such that users can input a specific prefix to search by different fields (Pull request [\#110](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/110))
   * Modified existing `find` function to replace previous `ufind` command (Pull request [\#115](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/115))
 
 * **Documentation**:
