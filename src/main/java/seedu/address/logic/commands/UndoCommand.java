@@ -117,7 +117,7 @@ public class UndoCommand extends Command {
         //int numberOfPreviousDeleteCommands = model.getNumberOfPreviousDeleteCommands();
 
         /* Undo each individual delete command */
-        for (int i = 0;  i < model.getLastClearedNumber(); i++) {
+        for (int i = 0; i < model.getLastClearedNumber(); i++) {
             model.undoDelete();
         }
 
