@@ -14,11 +14,11 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `fapro.jar` from [here](https://github.com/AY2324S1-CS2103T-W09-1/tp/releases).
+2. Download the latest `[CS2103T-W09-1][FAPro].jar` from [here](https://github.com/AY2324S1-CS2103T-W09-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for FAPro
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fapro.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar [CS2103T-W09-1][FAPro].jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
