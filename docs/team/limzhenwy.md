@@ -47,9 +47,13 @@ Given below are my contributions to the project.
     * Altered and added portions relevant to `find`
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): To be added soon.
+  * PRs reviewed (with non-trivial review comments): Pull request [\#63](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/63),
+  Pull request [\#101](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/101),
+  Pull request [\#142](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/142)
   * Contributed to forum discussions: To be added soon.
-  * Reported bugs and suggestions for other teams in the class: To be added soon. 
+  * Reported bugs and suggestions for other teams in the class: Pull request [\#176](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/176), 
+  Pull request [\#170](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/170), 
+  Pull request [\#153](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/153)
   * Some parts of the history feature I added was adopted by several other class mates: To be added soon.
 
 * **Tools**:
