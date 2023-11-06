@@ -35,7 +35,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
   * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+* Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
