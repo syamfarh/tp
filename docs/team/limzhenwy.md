@@ -23,7 +23,10 @@ Given below are my contributions to the project.
   * To be added soon.
 
 * **Enhancements to existing features**:
-  * To be added soon.
+  * Added functionality to be able to search by client's address (Pull request [\#51](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/51))
+  * Added functionality to be able to search by client's appointment date (Pull request [\#66](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/66))
+  * Added new command `ufind` to unify all different "find" type commands such that users can input a specific prefix to search by different fields (Pull request [\#110](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/110))
+  * Modified existing `find` function to replace previous `ufind` command (Pull request [\#115](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/115))
 
 * **Documentation**:
   * User Guide:
