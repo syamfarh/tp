@@ -9,16 +9,22 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 Given below are my contributions to the project.
 
-* **New Feature**: To be added soon.
-  * What it does: To be added soon.
-  * Justification: To be added soon.
-  * Highlights: To be added soon.
-  * Credits: To be added soon.
+* **New Feature**: find_add 
+  * What it does: Adds functionality to be able to search by client's address
+  * Justification: As a Financial Advisor, I want to find my clients by address, so that I can line up appointments without having to go through the entire list.
+  * Highlights: This was the first time I did any non-trivial changes to existing code. It was a great experience to put what I learnt in the adding command tutorial to practical use.
+  
 
-* **New Feature**: 
-* Added functionality to be able to search by client's address (Pull request [\#51](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/51))
-* Added functionality to be able to search by client's appointment date (Pull request [\#66](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/66))
-* Added new command `ufind` to unify all different "find" type commands such that users can input a specific prefix to search by different fields (Pull request [\#110](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/110))
+* **New Feature**: cal
+* What it does: Adds functionality to be able to search by client's appointment date
+* Justification: As a Financial Advisor, I want to be able to search a date, so that I can see all the appointments I have for that day.
+* Highlights: This was an interesting addition because I am now searching for a parameter that was newly created by a teammate. While using the debugging tool, it allowed me to get a good understanding of my teammate's implementation of the parameter.
+
+
+* **New Feature**: ufind
+* What it does: Adds functionality to be able to search by name, address, or appointment date in one "unified find" command
+* Justification: As a busy financial advisor, I want an easier way to find for address, name, and appointment dates.
+
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=limzhenwy&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
