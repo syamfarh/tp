@@ -918,7 +918,8 @@ To circumvent this, you can add additional details to the name to differentiate 
    * 2. The default size does not show time of the appointment
    * The above 2 issues can be fixed by adjusting the calendar window to be larger to show more information
    * While the calendar window is open, any changes made to clients' appointment dates and times won't be dynamically updated. You will need to close and reopen the calendar window to see the latest changes.
-
+3. When searching by address, i.e. `find a/ KEYWORD [MORE_KEYWORDS]`, searching for "XXX Street" for instance, would return all clients that contain "XXX" and "Street" in their address. This may lead to a pollution of the results being returned from the `find` command. This is a known limitation that is a by-product of the feature of being able to search for multiple addresses at once. 
+    * One simple way to circumvent this issue is to use more specific keywords as your input, instead of using broad keywords that are very common in addresses, such as (but not limited to) "Block" or "Street" or "Road".
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
