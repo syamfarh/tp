@@ -177,7 +177,7 @@ Adds a new entry to their address book for financial advisors, including persona
 * NAME: Must be alphanumeric characters only. Name must be unique. (John Doe)
 * ADDRESS: Can take any values except blank (8 College Ave West)
 * PHONE NUMBER: Numbers only. Must be at least 3 digits long. (81234567)
-* EMAIL ADDRESS: Valid email address format. Accepts any alphanumeric characters other than underscore (johnd@example.com)
+* EMAIL ADDRESS: Accepts **all** types of characters.
 * OCCUPATION: Must be alphanumeric characters only
 * TAG: Must be alphanumeric characters only
 * APPOINTMENT DATE: Valid string appointment date format (yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm) (date and time must be after the current date and time) 
@@ -918,7 +918,7 @@ To circumvent this, you can add additional details to the name to differentiate 
    * 2. The default size does not show time of the appointment
    * The above 2 issues can be fixed by adjusting the calendar window to be larger to show more information
    * While the calendar window is open, any changes made to clients' appointment dates and times won't be dynamically updated. You will need to close and reopen the calendar window to see the latest changes.
-
+3. Due to the versatility of email addresses, due to different requirements depending on the domain provider, it is unrealistic to check for "acceptable" email formats, so please do be careful when inputting the email parameter for your clients.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
