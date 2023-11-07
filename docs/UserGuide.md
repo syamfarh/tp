@@ -103,7 +103,7 @@ Shows a message listing the basic commands and explaining how to access the user
 
 * A pop-up window lists all the main commands and displays a link to FAPro's user guide
 
-  ![help window](images/help-UG/helpWindow.png)
+  ![help_window](images/help-UG/helpWindow.png)
 
 ### Viewing risk assessment questionnaire: `questionnaire`
 
@@ -307,8 +307,8 @@ After cloning, the clone is the exact same as the original, other than a suffix 
   ```
   Cloned Person: X
   ```
-
   where X are the details of the person the clone is based off
+
 
 * For example, if
 
@@ -390,8 +390,8 @@ Deletes a contact from FAPro at the specified indexes.
   ```
 
   where X are the details of the deleted persons
-  * Size of address book is reduced by however many indexes were entered (i.e if you entered delete 1 2 3, as you entered 3 indexes, the size of the address book decreases by 3) 
-  * GUI reflects that deleted contacts are now no longer there
+* Size of address book is reduced by however many indexes were entered (i.e if you entered delete 1 2 3, as you entered 3 indexes, the size of the address book decreases by 3) 
+* GUI reflects that deleted contacts are now no longer there
 
   ![delete format](images/delete-UG/deleteafter.png)
 
