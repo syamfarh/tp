@@ -9,16 +9,38 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
   {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+1. [Quick start](#quick-start)
+2. [Features](#features)
+   * [help](#viewing-help-help)
+   * [questionnaire](#viewing-risk-assessment-questionnaire-questionnaire)
+   * [riskprofile](#adds-risk-profile-level-to-a-contactriskprofile)
+   * [add](#adding-a-person-add)
+   * [clone](#cloning-a-person--clone)
+   * [delete](#deleting-a-person--delete)
+   * [list](#list-out-all-contacts--list)
+   * [edit](#editing-a-person--edit)
+   * [find](#locating-persons-by-name-find)
+   * [undo](#undoing-a-command--undo)
+   * [redo](#redoing-an-undo-command--redo)
+   * [sort](#sorting-contacts--sort)
+   * [calendar](#opening-calendar-window--calendar)
+   * [clear](#clearing-all-entries--clear)
+   * [exit](#exiting-the-program--exit)
+3. [FAQ](#faq)
+4. [Common Questions](#common-questions)
+5. [Known issues](#known-issues)
+6. [Command summary](#command-summary)
+7. [Glossary](#glossary)
 
 ## Quick start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `fapro.jar` from [here](https://github.com/AY2324S1-CS2103T-W09-1/tp/releases).
+2. Download the latest `[CS2103T-W09-1][FAPro].jar` from [here](https://github.com/AY2324S1-CS2103T-W09-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for FAPro
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar fapro.jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar [CS2103T-W09-1][FAPro].jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
@@ -35,7 +57,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
   * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+* Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -177,7 +199,7 @@ Adds a new entry to their address book for financial advisors, including persona
 * NAME: Must be alphanumeric characters only. Name must be unique. (John Doe)
 * ADDRESS: Can take any values except blank (8 College Ave West)
 * PHONE NUMBER: Numbers only. Must be at least 3 digits long. (81234567)
-* EMAIL ADDRESS: Valid email address format. Accepts any alphanumeric characters other than underscore (johnd@example.com)
+* EMAIL ADDRESS: Accepts **all** types of characters.
 * OCCUPATION: Must be alphanumeric characters only
 * TAG: Must be alphanumeric characters only
 * APPOINTMENT DATE: Valid string appointment date format (yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm) (date and time must be after the current date and time) 
@@ -433,7 +455,7 @@ Example: edit 1 p/91234567 e/johndoe@example.com
 
 ![edit format](images/edit-UG/editfailure.png)
 
-### Locating persons by name: `find`
+### Searching persons: `find`
 
 Finds persons based on the given keywords.
 
@@ -447,8 +469,10 @@ Finds persons based on the given keywords.
 
 #### Example commands:
 * `find n/John Alice`, finds all contacts whose names include "John" and "Alice"
-* `find a/Tokyo Geylang`, finds all contacts whose address include "Tokyo" and "Geylang"
-* `find appt/2024-01-01`, finds all contacts whose appointment date matches "2024-01-01"
+* `find a/Tokyo Geylang`, finds all contacts whose address include "Tokyo" and "Geylang" , followed by `delete 2`, 
+  will delete the contact at index 2 after find
+* `find appt/2024-01-01`, finds all contacts whose appointment date matches "2024-01-01", followed by `edit 1`, will 
+  edit the contact at index 1 after find
 
 #### Acceptable values for each parameter:
 * NAME: Valid string name
@@ -679,6 +703,21 @@ where X are the details of the person before the edit
 
 ![undo format](images/undo-UG/after_edit_undo.png)
 
+For undoing a redo command:
+
+* Redo
+* Undo
+* Message shown to the user:
+
+```
+Undo Successful!
+```
+
+* Note that the message shown is generic and is the same regardless of what command was undone.
+
+![undo_format](images/undo-UG/undo_redo_successful.png)
+
+
 #### Precise expected outputs on failure:
 
 When there is no command to undo, i.e. no previous `add`, `clone`, `delete`, `clear`, or `edit` command
@@ -748,6 +787,8 @@ For example, `add` a contact, then `undo`, then `redo`
 Redo successful!
 ```
 
+* Note that the message shown is generic and is the same regardless of what command was redone.
+
 ![redo_format](images/redo-UG/redo_success.png)
 
 * If wanted, undo again
@@ -756,6 +797,9 @@ Redo successful!
 ```
 Undo successful!
 ```
+
+* Note that the message shown is generic and is the same regardless of what command was undone.
+
 
 ![redo_format](images/redo-UG/undo_after_redo.png)
 
@@ -919,6 +963,9 @@ To circumvent this, you can add additional details to the name to differentiate 
    * The above 2 issues can be fixed by adjusting the calendar window to be larger to show more information
    * While the calendar window is open, any changes made to clients' appointment dates and times won't be dynamically updated. You will need to close and reopen the calendar window to see the latest changes.
 3. It is possible to add phone numbers that have indefinite length for clients, so please be aware that there is no built-in checks for "valid" phone numbers when editing phone numbers.
+4. Due to the versatility of the nature of addresses, it is unrealistic to check for whether an address input is "valid" or not. So please be careful when editing addresses for your clients.
+5. When using the `find` command, 0 and 1 contact will still show "X persons listed!", where X can be 0 or 1. This issue is purely cosmetic and won't affect any functionality.
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
