@@ -57,7 +57,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
   * `exit` : Exits the app.
 
-6. Refer to the [Features](#features) below for details of each command.
+* Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -469,8 +469,10 @@ Finds persons based on the given keywords.
 
 #### Example commands:
 * `find n/John Alice`, finds all contacts whose names include "John" and "Alice"
-* `find a/Tokyo Geylang`, finds all contacts whose address include "Tokyo" and "Geylang"
-* `find appt/2024-01-01`, finds all contacts whose appointment date matches "2024-01-01"
+* `find a/Tokyo Geylang`, finds all contacts whose address include "Tokyo" and "Geylang" , followed by `delete 2`, 
+  will delete the contact at index 2 after find
+* `find appt/2024-01-01`, finds all contacts whose appointment date matches "2024-01-01", followed by `edit 1`, will 
+  edit the contact at index 1 after find
 
 #### Acceptable values for each parameter:
 * NAME: Valid string name
@@ -701,6 +703,21 @@ where X are the details of the person before the edit
 
 ![undo format](images/undo-UG/after_edit_undo.png)
 
+For undoing a redo command:
+
+* Redo
+* Undo
+* Message shown to the user:
+
+```
+Undo Successful!
+```
+
+* Note that the message shown is generic and is the same regardless of what command was undone.
+
+![undo_format](images/undo-UG/undo_redo_successful.png)
+
+
 #### Precise expected outputs on failure:
 
 When there is no command to undo, i.e. no previous `add`, `clone`, `delete`, `clear`, or `edit` command
@@ -770,6 +787,8 @@ For example, `add` a contact, then `undo`, then `redo`
 Redo successful!
 ```
 
+* Note that the message shown is generic and is the same regardless of what command was redone.
+
 ![redo_format](images/redo-UG/redo_success.png)
 
 * If wanted, undo again
@@ -778,6 +797,9 @@ Redo successful!
 ```
 Undo successful!
 ```
+
+* Note that the message shown is generic and is the same regardless of what command was undone.
+
 
 ![redo_format](images/redo-UG/undo_after_redo.png)
 
