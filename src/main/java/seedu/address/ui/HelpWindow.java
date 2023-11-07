@@ -67,7 +67,7 @@ public class HelpWindow extends UiPart<Stage> {
             + UNDO_COMMAND_GUIDE + DOUBLE_NEWLINE
             + FIND_COMMAND_GUIDE + DOUBLE_NEWLINE
             + EDIT_COMMAND_GUIDE + DOUBLE_NEWLINE
-            + "For more advanced commands, please visit our user guide: " + USERGUIDE_URL;
+            + "For other commands, please visit our user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
