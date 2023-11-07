@@ -87,7 +87,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 ### Viewing help: `help`
 
-Shows a message listing all the main commands and explaining how to access the user guide.
+Shows a message listing the basic commands and explaining how to access the user guide for advanced commands.
 
 #### Format: 
 * `help`
@@ -96,12 +96,12 @@ Shows a message listing all the main commands and explaining how to access the u
 
 #### Precise expected outcome on success:
 * Message shown to the user:
-```
-Opened help window.
-```
+  ```
+  Opened help window.
+  ```
 * A pop-up window lists all the main commands and displays a link to FAPro's user guide
 
-![help window](images/helpWindow.png)
+  ![help window](images/helpWindow.png)
 
 ### Viewing risk assessment questionnaire: `questionnaire`
 
@@ -114,16 +114,16 @@ Displays questions that are used for generating client risk profile levels.
 
 #### Precise expected outcome on success:
 * Message shown to the user:
-```
-Opened questionnaire window.
-```
+   ```
+   Opened questionnaire window.
+   ```
 * A pop-up window shows the risk assessment multiple choice questions, including the grading and risk profile categories criteria
 
-![questionnaire window](images/questionnaireWindow.png)
+  ![questionnaire window](images/questionnaireWindow.png)
 
-### Adds risk profile level to a contact:`riskprofile`
+### Adds risk profile level to a contact: `riskprofile`
 
-Generates the client risk profile level based on their response of risk assessment questionnaire provided in Questionnaire tab and adds it to their contact.
+Generates the client risk profile level based on their response of risk assessment questionnaire provided in Questionnaire tab and adds it to their contact
 
 #### Format:
 * `riskprofile INDEX res/RESULT`
@@ -137,52 +137,65 @@ Generates the client risk profile level based on their response of risk assessme
 This command can also be used to update the client risk profile
 </div>
 
+<div markdown="span" class="alert alert-info">
+ℹ️ **Note:**
+<br> When multiple prefixes <b>res/</b> are inputted along with the RESULT,
+<br> Previous <b>res/</b> entries with its RESULT will be <span style="color: red;">ignored</span>
+<br> The risk profile label displayed will be based on the <u>last one entered</u>
+</div>
+
 #### Acceptable values for each parameter:
 * INDEX: Only accept positive integers less than the size of the contacts displayed
-* RESULT: Valid result format, 8 comma-separated characters from 'a' - 'e' (e,b,a,c,b,b,a,e)
+* RESULT: Valid result format, 8 comma-separated characters without whitespace from 'a' - 'e' (e,b,a,c,b,b,a,e)
 
 #### Precise expected outcome on success:
 * Message shown to the user:
-```
-Added risk profile to Person: X
-```
-where X are the details of the person edited
+  ```
+  Added risk profile to Person: X
+  ```
+  where X are the details of the person edited
 * A risk profile label with a specified color will be added to the contact which has 5 categories:
   <span style="background-color:#4CAF50; color:white;">**Low**</span>,
-  <span style="background-color:#2196F3; color:white;">**Moderately Low**</span>,
+  <span style="background-color:#2196F3; color:white;">**Moderately Low**</span>.
   <span style="background-color:#FFC107; color:white;">**Moderate**</span>,
   <span style="background-color:#FF6600; color:white;">**Moderately High**</span>,
   <span style="background-color:#F44336; color:white;">**High**</span>
 
-![riskprofile result](images/riskProfileResult.png)
+  ![riskprofile result](images/riskProfileResult.png)
 
-<div markdown="span" class="alert alert-warning">
-:warning: **Warning:**
-Once the risk profile label is added to the contact, it cannot be removed
-</div>
+  <div markdown="span" class="alert alert-warning">
+  :warning: **Warning:**
+  Once the risk profile label is added to the contact, it cannot be removed
+  </div>
+
+<details>
+
+  <summary><strong style="color: red;">Common Errors</strong></summary>
 
 #### Precise expected outputs on failure:
-If the RESULT is empty
+If the RESULT is empty or the INDEX is negative integers
 * Error message shown to the user:
-```
-Invalid command format! 
-riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
-Existing risk profile will be overwritten by the input.
-Parameters: INDEX (must be a positive integer) res/[RESULT]
-Example: riskprofile 1 res/a,e,b,d,c,a,d,e
-```
-![invalid risk profile 1](images/invalidRiskProfile1.png)
+  ```
+  Invalid command format! 
+  riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
+  Existing risk profile will be overwritten by the input.
+  Parameters: INDEX (must be a positive integer) res/[RESULT]
+  Example: riskprofile 1 res/a,e,b,d,c,a,d,e
+  ```
+  ![invalid risk profile 1](images/invalidRiskProfile1.png)
 
-If the RESULT is not separated by commas or not in the range of 'a' - 'e'
+If the RESULT is not separated by commas, with any whitespace or not in the range of 'a' - 'e'
 * Error message shown to the user:
-```
-Result must have 8 comma-separated characters from 'a' to 'e'!
-riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
-Existing risk profile will be overwritten by the input.
-Parameters: INDEX (must be a positive integer) res/[RESULT]
-Example: riskprofile 1 res/a,e,b,d,c,a,d,e
-```
-![invalid risk profile 2](images/invalidRiskProfile2.png)
+  ```
+  Result must have 8 comma-separated characters from 'a' to 'e'!
+  riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
+  Existing risk profile will be overwritten by the input.
+  Parameters: INDEX (must be a positive integer) res/[RESULT]
+  Example: riskprofile 1 res/a,e,b,d,c,a,d,e
+  ```
+  ![invalid risk profile 2](images/invalidRiskProfile2.png)
+
+</details>
 
 ### Adding a person: `add`
 
@@ -213,16 +226,20 @@ A person can have any number of tags (including 0)
 #### Precise expected outputs on success:
 * Message shown to the user:
 
-```
-New Person added: X
-```
+  ```
+  New Person added: X
+  ```
 
-where X are the details of the person added
+  where X are the details of the person added
 
 * For example, for Robert Johnson (the example command), it would be:<br> `New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: `<br> Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
 * The new entry is displayed in the address book GUI
 
-![add format](images/addresult.png)
+  ![add format](images/addresult.png)
+
+<details>
+
+  <summary><strong style="color: red;">Common Errors</strong></summary>
 
 #### Precise expected outputs on failure:
 
@@ -230,37 +247,39 @@ If a required parameter is missing (e.g., NAME, EMAIL)
 
 * Error message shown to the user:
 
-```
-Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
-```
+  ```
+  Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
+  ```
 
-![add format](images/addmissingparam.png)
+  ![add format](images/addmissingparam.png)
 
 If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 
 * Error message shown to the user:
 
-```
-Emails should be of the format local-part@domain and adhere to the following constraints:
-1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
-The domain name must:
+  ```
+  Emails should be of the format local-part@domain and adhere to the following constraints:
+  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
+  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+  The domain name must:
     - end with a domain label at least 2 characters long
     - have each domain label start and end with alphanumeric characters
     - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
-```
+  ```
 
-![add format](images/addinvalidemail.png)
+  ![add format](images/addinvalidemail.png)
 
 If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
 
 * Error message shown to the user:
 
-```
-Multiple values specified for the following single-valued field(s): n/
-```
+  ```
+  Multiple values specified for the following single-valued field(s): n/
+  ```
 
-![add format](images/addduplicateparam.png)
+  ![add format](images/addduplicateparam.png)
+
+</details>
 
 ### Cloning a person : `clone`
 
@@ -285,25 +304,29 @@ After cloning, the clone is the exact same as the original, other than a suffix 
 #### Precise expected outputs on success:
 * Message shown to the user:
 
-```
-Cloned Person: X
-```
+  ```
+  Cloned Person: X
+  ```
 
-where X are the details of the person the clone is based off
+  where X are the details of the person the clone is based off
 
 * For example, if
 
-```
-Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:
-```
+  ```
+  Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:
+  ```
 
-is the person being cloned, then the output is:
+  is the person being cloned, then the output is:
 
-```
-Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:
-```
+  ```
+  Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:
+  ```
 
-![clone format](images/cloneresult.png)
+  ![clone format](images/cloneresult.png)
+
+<details>
+
+  <summary><strong style="color: red;">Common Errors</strong></summary>
 
 #### Precise expected outputs on failure:
 
@@ -311,31 +334,33 @@ If no index, 0 or a negative index is entered next to the clone command
 
 * Error message shown to the user:
 
-```
-Invalid command format! clone: Clones the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer).
-```
+  ```
+  Invalid command format! clone: Clones the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer).
+  ```
 
-![clone format](images/cloneinvalidindex.png)
+  ![clone format](images/cloneinvalidindex.png)
 
 If the index entered is greater than the current number of contacts in the address book
 
 * Error message shown to the user:
 
-```
-The person index provided is invalid.
-```
+  ```
+  The person index provided is invalid.
+  ```
 
-![clone format](images/clonelargeindex.png)
+  ![clone format](images/clonelargeindex.png)
 
 If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
 
 * Error message shown to the user:
 
-```
-The integer suffix of the person being cloned is out of range. Please note that the smallest possible suffix that a person can have is 1 and the largest possible suffix that a person can have is 2147483647. As such, if your suffix is 0 or 2147483647, please consider editing the names of your contacts first.
-```
+  ```
+  The integer suffix of the person being cloned is out of range. Please note that the smallest possible suffix that a person can have is 1 and the largest possible suffix that a person can have is 2147483647. As such, if your suffix is 0 or 2147483647, please consider editing the names of your contacts first.
+  ```
 
-![clone format](images/clonesuffixerror.png)
+  ![clone format](images/clonesuffixerror.png)
+
+</details>
 
 ### Deleting a person : `delete`
 
@@ -360,38 +385,44 @@ Deletes a contact from FAPro at the specified indexes.
 
 * Message shown to the user:
 
-```
-Deleted Person(s): X
-```
+  ```
+  Deleted Person(s): X
+  ```
 
-where X are the details of the deleted persons
-* Size of address book is reduced by however many indexes were entered (i.e if you entered delete 2 3 4, as you entered 3 indexes, the size of the address book decreases by 3) 
-* GUI reflects that deleted contacts are now no longer there
+  where X are the details of the deleted persons
+  * Size of address book is reduced by however many indexes were entered (i.e if you entered delete 2 3 4, as you entered 3 indexes, the size of the address book decreases by 3) 
+  * GUI reflects that deleted contacts are now no longer there
 
-![delete format](images/delete-UG/deleteafter.png)
+  ![delete format](images/delete-UG/deleteafter.png)
+
+<details>
+
+  <summary><strong style="color: red;">Common Errors</strong></summary>
 
 #### Precise expected outputs on failure:
 
 If any of the entered indexes are invalid:
 * Error message shown to the user:
 
-```
-The person index provided is invalid.
-```
+  ```
+  The person index provided is invalid.
+  ```
 
-![edit format](images/delete-UG/deletewrongindex.png)
+  ![edit format](images/delete-UG/deletewrongindex.png)
 
 If no index is placed after the delete command:
 * Error message shown to the user:
 
-```
-Invalid command format! 
-delete: Deletes the person(s) identified by the index number used in the displayed person list. 
-Parameters: INDEXES (must be positive integers, separated by spaces)
-Example: delete 1 3 5"
-```
+  ```
+  Invalid command format! 
+  delete: Deletes the person(s) identified by the index number used in the displayed person list. 
+  Parameters: INDEXES (must be positive integers, separated by spaces)
+  Example: delete 1 3 5"
+  ```
 
-![delete format](images/delete-UG/deletenoindex.png)
+  ![delete format](images/delete-UG/deletenoindex.png)
+
+</details>
 
 ### List out all contacts : `list`
 
@@ -402,13 +433,13 @@ Shows a list of all contacts.
 
 #### Precise expected outputs on success:
 * Message shown to the user:
-```
-Listed all persons
-```
+  ```
+  Listed all persons
+  ```
 
 * List all contacts with their details
 
-![list result](images/listResult.png)
+  ![list result](images/listResult.png)
 
 ### Editing a person : `edit`
 
@@ -435,25 +466,31 @@ Edits an existing client's parameter in FAPro.
 
 #### Precise expected outputs on success:
 * Message shown to the user:
-```
-Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], Occupation:[OCCUPATION], Address:[ADDRESS]…
-```
+  ```
+  Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], Occupation:[OCCUPATION], Address:[ADDRESS]…
+  ```
 * The new entry is displayed in the address book GUI.
 
-![edit format](images/edit-UG/editresult.png)
+  ![edit format](images/edit-UG/editresult.png)
+
+<details>
+
+  <summary><strong style="color: red;">Common Errors</strong></summary>
 
 #### Precise expected outputs on failure:
 
 If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
 * Message shown to the user:
-```
-Invalid command format! 
-edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
-Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [appt/APPOINTMENTDATE] [t/TAG]...
-Example: edit 1 p/91234567 e/johndoe@example.com
-```
+  ```
+  Invalid command format! 
+  edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
+  Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [appt/APPOINTMENTDATE] [t/TAG]...
+  Example: edit 1 p/91234567 e/johndoe@example.com
+  ```
 
-![edit format](images/edit-UG/editfailure.png)
+  ![edit format](images/edit-UG/editfailure.png)
+
+</details>
 
 ### Searching persons: `find`
 
@@ -485,13 +522,17 @@ Finds persons based on the given keywords.
 
 #### Precise expected outputs on success:
 * Message shown to the user: 
-```
-X persons listed!
-```
-where X is the number of contacts listed
+  ```
+  X persons listed!
+  ```
+  where X is the number of contacts listed
 * The list of contacts whose names contain the input name is shown
 
-![find_name format](images/find_n1.png)
+  ![find_name format](images/find_n1.png)
+
+<details>
+
+  <summary><strong style="color: red;">Common Errors</strong></summary>
 
 #### Precise expected outputs on failure:
 If no name is input after the find command, an error message explaining the error will be shown, 
@@ -499,11 +540,13 @@ reminding the user to follow the correct input format
 
 * Error message shown to the user:
 
-```
-Invalid command format! find n/: Finds all persons whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
-```
+  ```
+  Invalid command format! find n/: Finds all persons whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+  ```
 
-![find_name format](images/find_n2.png)
+  ![find_name format](images/find_n2.png)
+
+</details>
 
 #### _Address_
 
@@ -512,13 +555,17 @@ Invalid command format! find n/: Finds all persons whose names contain any of th
 #### Precise expected outputs on success:
 
 * Message shown to the user:
-```
-X persons listed!
-```
-where X is the number of contacts listed
+  ```
+  X persons listed!
+  ```
+  where X is the number of contacts listed
 * The list of contacts whose address contain the input address is shown
 
-![find_add format](images/find_a1.png)
+  ![find_add format](images/find_a1.png)
+
+<details>
+
+  <summary><strong style="color: red;">Common Errors</strong></summary>
 
 #### Precise expected outputs on failure:
 If no address is input after the find command, an error message explaining the error will be shown,
@@ -526,11 +573,13 @@ reminding the user to follow the correct input format
 
 * Error message shown to the user:
 
-```
-Invalid command format! find a/: Finds all persons whose address contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
-```
+  ```
+  Invalid command format! find a/: Finds all persons whose address contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+  ```
 
-![find_add format](images/find_a2.png)
+  ![find_add format](images/find_a2.png)
+
+</details>
 
 #### _Appointment Date_
 
@@ -538,44 +587,50 @@ Invalid command format! find a/: Finds all persons whose address contain any of 
 
 #### Precise expected outputs on success:
 * Message shown to the user:
-```
-X persons listed!
-```
-where X is the number of contacts listed
+  ```
+  X persons listed!
+  ```
+  where X is the number of contacts listed
 * The list of contacts whose appointment date matches the input date is shown
 
-![find_appt format](images/find_appt1.png)
+  ![find_appt format](images/find_appt1.png)
+
+<details>
+
+  <summary><strong style="color: red;">Common Errors</strong></summary>
 
 #### Precise expected outputs on failure:
 If no date is input after the find command, an error message explaining the error will be shown,
 reminding the user to follow the correct input format
 
 * Error message shown to the user:
-```
-Invalid command format! find_appt: Finds all persons whose appointment date matches the specified input date and displays them as a list with index numbers.
-```
+  ```
+  Invalid command format! find_appt: Finds all persons whose appointment date matches the specified input date and displays them as a list with index numbers.
+  ```
 
-![find_appt format](images/find_appt2.png)
+  ![find_appt format](images/find_appt2.png)
 
 If an input date does not follow the accepted format, an error message explaining the error will be shown,
 reminding the user to follow the correct input format
 
 * Error message shown to the user:
-```
-Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd].
-```
+  ```
+  Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd].
+  ```
 
-![find_appt format](images/find_appt3.png)
+  ![find_appt format](images/find_appt3.png)
 
 If an input date is a past date (a date before the current date), an error message explaining the error will be shown, 
 reminding the user to input a valid date
 
 * Error message shown to the user:
-```
-Appointment Date should be after the current date.
-```
+  ```
+  Appointment Date should be after the current date.
+  ```
 
-![find_appt format](images/find_appt4.png)
+  ![find_appt format](images/find_appt4.png)
+
+</details>
 
 ### Undoing a command : `undo`
 
@@ -604,104 +659,106 @@ For undoing an add command:
 
 * Add a contact
 
-![undo format](images/undo-UG/after_add.png)
+  ![undo format](images/undo-UG/after_add.png)
 
 * Undo
 * Message shown to the user:
 
-```
-Undo Successful! Deleted Person: X
-```
-where X are the details of the person who was just added, and now deleted
+  ```
+  Undo Successful! Deleted Person: X
+  ```
+  where X are the details of the person who was just added, and now deleted
 * GUI reflects that the most recently added contact is deleted
 
-![undo format](images/undo-UG/after_add_undo.png)
+  ![undo format](images/undo-UG/after_add_undo.png)
 
 For undoing a clone command:
 
 * Clone a contact
 
-![undo format](images/undo-UG/after_clone_1.png)
+  ![undo format](images/undo-UG/after_clone_1.png)
 
 * Undo
 * Message shown to the user: 
 
-```
-Undo Successful! Deleted Person: X
-```
-where X are the details of the person who was just cloned, and now deleted
+  ```
+  Undo Successful! Deleted Person: X
+  ```
+  where X are the details of the person who was just cloned, and now deleted
 * GUI reflects that the most recently cloned contact is deleted
 
-![undo format](images/undo-UG/after_clone_undo.png)
+  ![undo format](images/undo-UG/after_clone_undo.png)
 
 For undoing a delete command:
 
 * Delete a contact
 
-![undo format](images/undo-UG/after_delete_1.png)
+  ![undo format](images/undo-UG/after_delete_1.png)
 
 * Undo
 * Message shown to the user: 
 
-```
-Undo Successful! Contact(s) added back: X
-```
-where X are the details of the person who was just deleted, and now added back
+  ```
+  Undo Successful! Contact(s) added back: X
+  ```
+  where X are the details of the person who was just deleted, and now added back
 * GUI reflects that the most recently deleted contact is added back
 
-![undo format](images/undo-UG/after_delete_undo.png)
+  ![undo format](images/undo-UG/after_delete_undo.png)
 
 * Delete multiple contacts (In this case, 2 contacts)
 
-![undo format](images/undo-UG/after_delete_multiple.png)
+  ![undo format](images/undo-UG/after_delete_multiple.png)
 
 * Undo
 * Message shown to the user: 
 
-```
-Undo Successful! Contact(s) added back: X
-```
-where X are the details of the persons who were just deleted, and now added back
+  ```
+  Undo Successful! Contact(s) added back: X
+  ```
+  where X are the details of the persons who were just deleted, and now added back
 * GUI reflects that the most recently deleted contacts are added back
 
-![undo_format](images/undo-UG/after_delete_multiple_undo.png)
+  ![undo_format](images/undo-UG/after_delete_multiple_undo.png)
 
 For undoing a clear command:
 
 * Clear all contacts
 
-![undo format](images/undo-UG/after_clear.png)
+  ![undo format](images/undo-UG/after_clear.png)
 
 * Undo
 * Message shown to the user: 
 
-```
-Undo Successful! All contacts have been added back!
-```
+  ```
+  Undo Successful! All contacts have been added back!
+  ```
 
 * GUI reflects that all cleared contacts are added back
 
-![undo format](images/undo-UG/after_clear_undo.png)
+  ![undo format](images/undo-UG/after_clear_undo.png)
 
 For undoing an edit command:
 
 * Edit a contact
 
-
-![undo format](images/undo-UG/after_edit.png)
-
+  ![undo format](images/undo-UG/after_edit.png)
 
 * Undo
 * Message shown to the user: 
 
-```
-Undo Successful! Reverted back to: X
-```
+  ```
+  Undo Successful! Reverted back to: X
+  ```
 
-where X are the details of the person before the edit
+  where X are the details of the person before the edit
 * GUI reflects that the edited contact has been reverted
 
-![undo format](images/undo-UG/after_edit_undo.png)
+  ![undo format](images/undo-UG/after_edit_undo.png)
+
+<details>
+
+  <summary><strong style="color: red;">Common Errors</strong></summary>
 
 For undoing a redo command:
 
@@ -724,11 +781,13 @@ When there is no command to undo, i.e. no previous `add`, `clone`, `delete`, `cl
 
 * Error message shown to the user:
 
-```
-There is no command to undo!
-```
+  ```
+  There is no command to undo!
+  ```
 
-![undo format](images/undo-UG/undo_fail.png)
+  ![undo format](images/undo-UG/undo_fail.png)
+
+</details>
 
 ### Redoing an undo command : `redo`
 
@@ -774,34 +833,40 @@ For example, `add` a contact, then `undo`, then `redo`
 
 * Add a contact
 
-![redo_format](images/redo-UG/add_person.png)
+  ![redo_format](images/redo-UG/add_person.png)
 
 * Undo 
 
-![redo_format](images/redo-UG/undo_success.png)
+  ![redo_format](images/redo-UG/undo_success.png)
 
 * Redo
 * Message shown to the user: 
 
-```
-Redo successful!
-```
+  ```
+  Redo successful!
+  ```
 
-* Note that the message shown is generic and is the same regardless of what command was redone.
 
-![redo_format](images/redo-UG/redo_success.png)
+  ![redo_format](images/redo-UG/redo_success.png)
+  
+  * Note that the message shown is generic and is the same regardless of what command was redone.
+
 
 * If wanted, undo again
 * Message shown to the user: 
 
-```
-Undo successful!
-```
+  ```
+  Undo successful!
+  ```
 
-* Note that the message shown is generic and is the same regardless of what command was undone.
+  ![redo_format](images/redo-UG/undo_after_redo.png)
+  
+  * Note that the message shown is generic and is the same regardless of what command was redone.
 
+<details>
 
-![redo_format](images/redo-UG/undo_after_redo.png)
+  <summary><strong style="color: red;">Common Errors</strong></summary>
+
 
 #### Precise expected outputs on failure:
 
@@ -809,11 +874,12 @@ When there is no command to redo, i.e. no previous `undo` command
 
 * Error message shown to the user:
 
-```
-Redo unsuccessful! There is nothing to redo!
-```
-![redo_format](images/redo-UG/redo_failure.png)
+  ```
+  Redo unsuccessful! There is nothing to redo!
+  ```
+  ![redo_format](images/redo-UG/redo_failure.png)
 
+</details>
 
 ### Sorting contacts : `sort`
 
@@ -834,27 +900,33 @@ Sort contact lists by prefix name or appointment date.
 
 #### Precise expected output on success:
 * Message shown to the user:
-```
-'X person listed!'
-```
-where X is the number of clients in the address book.
+  ```
+  'X person listed!'
+  ```
+  where X is the number of clients in the address book.
 * The sorted entry is displayed in the address book GUI.
 
-![sort format](images/sort-UG/sortresult.png)
+  ![sort format](images/sort-UG/sortresult.png)
 
-Precise expected outputs on failure:
-<br> If either a required parameter is missing or a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
+<details>
+
+  <summary><strong style="color: red;">Common Errors</strong></summary>
+
+#### Precise expected outputs on failure:
+If either a required parameter is missing or a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
 
 * Error message shown to the user:
 
-```
-Invalid command format!
-sort: Sort all persons by name or appointmnet date.
-Parameters: KEYWORD [PREFIX n/ or appt/]
-Example: sort n/
-```
+  ```
+  Invalid command format!
+  sort: Sort all persons by name or appointmnet date.
+  Parameters: KEYWORD [PREFIX n/ or appt/]
+  Example: sort n/
+  ```
 
-![sort format](images/sort-UG/sortfailuremissing.png)
+  ![sort format](images/sort-UG/sortfailuremissing.png)
+
+</details>
 
 ### Opening calendar window : `calendar`
 
@@ -867,15 +939,15 @@ Open a new calendar window.
 * `calendar`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-<li>You can open calendar window by pressing f3 key
-<li>Arrow key navigate you to different months
-<li>Enter key navigate you back to the current month
+<br>You can open calendar window by pressing F3 key
+<br>Arrow key navigate you to different months
+<br>Enter key navigate you back to the current month
 </div>
 
 #### Precise expected outputs on success:
 * A pop-up of a new calendar window of the current month that indicate client's appointments in the date
 
-![calendar format](images/calendar-UG/calendarWindow.png)
+  ![calendar format](images/calendar-UG/calendarWindow.png)
 
 ### Clearing all entries : `clear`
 
@@ -889,21 +961,27 @@ Example:
 Precise expected outputs on success:
 
 * Message shown to the user: 
-```
-Address book has been cleared!
-```
+  ```
+  Address book has been cleared!
+  ```
 * GUI reflects that there are 0 contacts left
 
-![clear format](images/clear-UG/clear_success.png)
+  ![clear format](images/clear-UG/clear_success.png)
+
+<details>
+
+  <summary><strong style="color: red;">Common Errors</strong></summary>
 
 Precise expected outputs on failure:
 
 * Error message shown to the user:
-```
-Address book is empty. There is nothing to clear.
-```
+  ```
+  Address book is empty. There is nothing to clear.
+  ```
 
-![clear format](images/clear-UG/clear_failure.png)
+  ![clear format](images/clear-UG/clear_failure.png)
+
+</details>
 
 ### Exiting the program : `exit`
 
@@ -994,8 +1072,8 @@ To circumvent this, you can add additional details to the name to differentiate 
 
 | Word                 | Meaning                                                                                                                         |
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| **FA**               | short form for financial advisor                                                                                                |
-| **Parameter**        | values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                 |
+| **FA**               | Short form for financial advisor                                                                                                |
+| **Parameter**        | Values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                 |
 | **Positive Integer** | An integer that is positive (i.e greater than 0). Please note that we are excluding 0 as a positive integer.                    |
-| **Prefix**           | word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
-| **Suffix**           | number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
+| **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
+| **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
