@@ -1012,7 +1012,7 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAPro home folder.
 
-**Q**: How do I view the main commands and refer to the FAPro’s User Guide?<br>
+**Q**: How do I view the basic commands and refer to the others in the FAPro’s User Guide?<br>
 **A**: Click the Help tab or type the `help` in the command box.
 
 --------------------------------------------------------------------------------------------------------------------
