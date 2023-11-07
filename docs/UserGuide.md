@@ -199,7 +199,7 @@ Adds a new entry to their address book for financial advisors, including persona
 * NAME: Must be alphanumeric characters only. Name must be unique. (John Doe)
 * ADDRESS: Can take any values except blank (8 College Ave West)
 * PHONE NUMBER: Numbers only. Must be at least 3 digits long. (81234567)
-* EMAIL ADDRESS: Valid email address format. Accepts any alphanumeric characters other than underscore (johnd@example.com)
+* EMAIL ADDRESS: Accepts **all** types of characters.
 * OCCUPATION: Must be alphanumeric characters only
 * TAG: Must be alphanumeric characters only
 * APPOINTMENT DATE: Valid string appointment date format (yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm) (date and time must be after the current date and time) 
