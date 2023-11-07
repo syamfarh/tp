@@ -80,6 +80,22 @@ public interface Model {
     void setPerson(Person target, Person editedPerson);
 
     /**
+     * Stores the number of cleared persons from the previous clear command.
+     * @param clearedNumber the number of cleared persons from the previous clear command.
+     */
+    void storeClearedNumberList(int clearedNumber);
+
+    /**
+     * Returns the number of cleared persons from the previous clear command.
+     */
+    Integer getLastClearedNumber();
+
+    /**
+     * Removes the last number of cleared persons from the ArrayList, only after undoing the clear command.
+     */
+    void removeLastClearedNumber();
+
+    /**
      * Adds the state of the address book before the undo to the redoableStateList ArrayList.
      */
     void addToRedoableStateList();

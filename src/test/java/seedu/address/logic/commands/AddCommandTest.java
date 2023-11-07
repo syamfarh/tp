@@ -223,6 +223,21 @@ public class AddCommandTest {
         }
 
         @Override
+        public void storeClearedNumberList(int clearedNumber) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Integer getLastClearedNumber() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void removeLastClearedNumber() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void undoDelete() {
             throw new AssertionError("This method should not be called.");
         }
@@ -345,7 +360,6 @@ public class AddCommandTest {
         @Override
         public void removeRedoCommands() {
             throw new AssertionError("This method should not be called.");
-
         }
 
     }
