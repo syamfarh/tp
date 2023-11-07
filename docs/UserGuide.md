@@ -65,7 +65,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 ### Viewing help: `help`
 
-Shows a message listing all the main commands and explaining how to access the user guide.
+Shows a message listing the basic commands and explaining how to access the user guide for advanced commands.
 
 #### Format: 
 * `help`
