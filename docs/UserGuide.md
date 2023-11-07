@@ -87,7 +87,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 ### Viewing help: `help`
 
-Shows a message listing the basic commands and explaining how to access the user guide for advanced commands.
+Shows a message listing the basic commands and explaining how to access the user guide for other commands.
 
 #### Format: 
 * `help`
@@ -99,7 +99,7 @@ Shows a message listing the basic commands and explaining how to access the user
   ```
   Opened help window.
   ```
-* A pop-up window lists all the main commands and displays a link to FAPro's user guide
+* A pop-up window lists all the basic commands and displays a link to FAPro's user guide
 
   ![help window](images/helpWindow.png)
 
