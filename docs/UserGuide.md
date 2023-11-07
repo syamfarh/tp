@@ -918,6 +918,7 @@ To circumvent this, you can add additional details to the name to differentiate 
    * 2. The default size does not show time of the appointment
    * The above 2 issues can be fixed by adjusting the calendar window to be larger to show more information
    * While the calendar window is open, any changes made to clients' appointment dates and times won't be dynamically updated. You will need to close and reopen the calendar window to see the latest changes.
+3. When using the `find` command, 0 and 1 contact will still show "X persons listed!", where X can be 0 or 1. This issue is purely cosmetic and won't affect any functionality.
 
 --------------------------------------------------------------------------------------------------------------------
 
