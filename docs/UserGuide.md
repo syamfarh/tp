@@ -1045,6 +1045,7 @@ To circumvent this, you can add additional details to the name to differentiate 
 4. It is possible to add phone numbers that have indefinite length for clients, so please be aware that there is no built-in checks for "valid" phone numbers when editing phone numbers.
 5. Due to the versatility of the nature of addresses, it is unrealistic to check for whether an address input is "valid" or not. So please be careful when editing addresses for your clients.
 6. When using the `find` command, 0 and 1 contact will still show "X persons listed!", where X can be 0 or 1. This issue is purely cosmetic and won't affect any functionality.
+7. After using FAPro for a while, users might notice the application slowing down. To fix the issue, simply close and open the app again.
 
 --------------------------------------------------------------------------------------------------------------------
 
