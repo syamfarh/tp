@@ -26,6 +26,9 @@ public class ClearCommand extends Command {
         if (model.getAddressBookSize() == 0) {
             throw new CommandException(MESSAGE_FAILURE);
         }
+
+        model.storeClearedNumberList(model.getAddressBookSize());
+
         while (model.getAddressBookSize() > 0) {
             int targetIndex = model.getAddressBookSize() - 1;
             Person personToDelete = lastShownList.get(targetIndex);
