@@ -87,7 +87,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 ### Viewing help: `help`
 
-Shows a message listing the basic commands and explaining how to access the user guide for advanced commands.
+Shows a message listing the basic commands and explaining how to access the user guide for other commands.
 
 #### Format: 
 * `help`
@@ -99,9 +99,10 @@ Shows a message listing the basic commands and explaining how to access the user
   ```
   Opened help window.
   ```
-* A pop-up window lists all the main commands and displays a link to FAPro's user guide
+* A pop-up window lists all the basic commands and displays a link to FAPro's user guide
 
   ![help window](images/helpWindow.png)
+
 
 ### Viewing risk assessment questionnaire: `questionnaire`
 
@@ -121,6 +122,7 @@ Displays questions that are used for generating client risk profile levels.
 
   ![questionnaire window](images/questionnaireWindow.png)
 
+
 ### Adds risk profile level to a contact: `riskprofile`
 
 Generates the client risk profile level based on their response of risk assessment questionnaire provided in Questionnaire tab and adds it to their contact
@@ -134,14 +136,16 @@ Generates the client risk profile level based on their response of risk assessme
 ![riskprofile format](images/riskProfileFormat.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-This command can also be used to update the client risk profile
+
+The risk profile label cannot be removed once is added, but this command can be used to update the client risk profile
 </div>
 
-<div markdown="span" class="alert alert-info">
-ℹ️ **Note:**
-<br> When multiple prefixes <b>res/</b> are inputted along with the RESULT,
-<br> Previous <b>res/</b> entries with its RESULT will be <span style="color: red;">ignored</span>
-<br> The risk profile label displayed will be based on the <u>last one entered</u>
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note**<br>
+When multiple prefixes <b>res/</b> are inputted along with the RESULT:
+* Previous <b>res/</b> entries with its RESULT will be <span style="color: red;">ignored</span>
+* The risk profile label displayed will be based on the <u>last one entered</u>
 </div>
 
 #### Acceptable values for each parameter:
@@ -162,15 +166,6 @@ This command can also be used to update the client risk profile
   <span style="background-color:#F44336; color:white;">**High**</span>
 
   ![riskprofile result](images/riskProfileResult.png)
-
-  <div markdown="span" class="alert alert-warning">
-  :warning: **Warning:**
-  Once the risk profile label is added to the contact, it cannot be removed
-  </div>
-
-<details>
-
-  <summary><strong style="color: red;">Common Errors</strong></summary>
 
 #### Precise expected outputs on failure:
 If the RESULT is empty or the INDEX is negative integers
@@ -195,7 +190,6 @@ If the RESULT is not separated by commas, with any whitespace or not in the rang
   ```
   ![invalid risk profile 2](images/invalidRiskProfile2.png)
 
-</details>
 
 ### Adding a person: `add`
 
@@ -237,10 +231,6 @@ A person can have any number of tags (including 0)
 
   ![add format](images/addresult.png)
 
-<details>
-
-  <summary><strong style="color: red;">Common Errors</strong></summary>
-
 #### Precise expected outputs on failure:
 
 If a required parameter is missing (e.g., NAME, EMAIL)
@@ -279,7 +269,6 @@ If a parameter is specified multiple times (e.g., --name John --name Doe), an er
 
   ![add format](images/addduplicateparam.png)
 
-</details>
 
 ### Cloning a person : `clone`
 
@@ -324,10 +313,6 @@ After cloning, the clone is the exact same as the original, other than a suffix 
 
   ![clone format](images/cloneresult.png)
 
-<details>
-
-  <summary><strong style="color: red;">Common Errors</strong></summary>
-
 #### Precise expected outputs on failure:
 
 If no index, 0 or a negative index is entered next to the clone command
@@ -360,7 +345,6 @@ If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
 
   ![clone format](images/clonesuffixerror.png)
 
-</details>
 
 ### Deleting a person : `delete`
 
@@ -395,10 +379,6 @@ Deletes a contact from FAPro at the specified indexes.
 
   ![delete format](images/delete-UG/deleteafter.png)
 
-<details>
-
-  <summary><strong style="color: red;">Common Errors</strong></summary>
-
 #### Precise expected outputs on failure:
 
 If any of the entered indexes are invalid:
@@ -422,7 +402,6 @@ If no index is placed after the delete command:
 
   ![delete format](images/delete-UG/deletenoindex.png)
 
-</details>
 
 ### List out all contacts : `list`
 
@@ -473,10 +452,6 @@ Edits an existing client's parameter in FAPro.
 
   ![edit format](images/edit-UG/editresult.png)
 
-<details>
-
-  <summary><strong style="color: red;">Common Errors</strong></summary>
-
 #### Precise expected outputs on failure:
 
 If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
@@ -490,7 +465,6 @@ If a required parameter is missing (e.g., name, email), an error message should 
 
   ![edit format](images/edit-UG/editfailure.png)
 
-</details>
 
 ### Searching persons: `find`
 
@@ -530,10 +504,6 @@ Finds persons based on the given keywords.
 
   ![find_name format](images/find_n1.png)
 
-<details>
-
-  <summary><strong style="color: red;">Common Errors</strong></summary>
-
 #### Precise expected outputs on failure:
 If no name is input after the find command, an error message explaining the error will be shown, 
 reminding the user to follow the correct input format
@@ -545,8 +515,6 @@ reminding the user to follow the correct input format
   ```
 
   ![find_name format](images/find_n2.png)
-
-</details>
 
 #### _Address_
 
@@ -563,10 +531,6 @@ reminding the user to follow the correct input format
 
   ![find_add format](images/find_a1.png)
 
-<details>
-
-  <summary><strong style="color: red;">Common Errors</strong></summary>
-
 #### Precise expected outputs on failure:
 If no address is input after the find command, an error message explaining the error will be shown,
 reminding the user to follow the correct input format
@@ -578,8 +542,6 @@ reminding the user to follow the correct input format
   ```
 
   ![find_add format](images/find_a2.png)
-
-</details>
 
 #### _Appointment Date_
 
@@ -594,10 +556,6 @@ reminding the user to follow the correct input format
 * The list of contacts whose appointment date matches the input date is shown
 
   ![find_appt format](images/find_appt1.png)
-
-<details>
-
-  <summary><strong style="color: red;">Common Errors</strong></summary>
 
 #### Precise expected outputs on failure:
 If no date is input after the find command, an error message explaining the error will be shown,
@@ -630,7 +588,6 @@ reminding the user to input a valid date
 
   ![find_appt format](images/find_appt4.png)
 
-</details>
 
 ### Undoing a command : `undo`
 
@@ -756,10 +713,6 @@ For undoing an edit command:
 
   ![undo format](images/undo-UG/after_edit_undo.png)
 
-<details>
-
-  <summary><strong style="color: red;">Common Errors</strong></summary>
-
 For undoing a redo command:
 
 * Redo
@@ -774,7 +727,6 @@ Undo Successful!
 
 ![undo_format](images/undo-UG/undo_redo_successful.png)
 
-
 #### Precise expected outputs on failure:
 
 When there is no command to undo, i.e. no previous `add`, `clone`, `delete`, `clear`, or `edit` command
@@ -787,7 +739,6 @@ When there is no command to undo, i.e. no previous `add`, `clone`, `delete`, `cl
 
   ![undo format](images/undo-UG/undo_fail.png)
 
-</details>
 
 ### Redoing an undo command : `redo`
 
@@ -863,11 +814,6 @@ For example, `add` a contact, then `undo`, then `redo`
   
   * Note that the message shown is generic and is the same regardless of what command was redone.
 
-<details>
-
-  <summary><strong style="color: red;">Common Errors</strong></summary>
-
-
 #### Precise expected outputs on failure:
 
 When there is no command to redo, i.e. no previous `undo` command
@@ -879,7 +825,6 @@ When there is no command to redo, i.e. no previous `undo` command
   ```
   ![redo_format](images/redo-UG/redo_failure.png)
 
-</details>
 
 ### Sorting contacts : `sort`
 
@@ -908,10 +853,6 @@ Sort contact lists by prefix name or appointment date.
 
   ![sort format](images/sort-UG/sortresult.png)
 
-<details>
-
-  <summary><strong style="color: red;">Common Errors</strong></summary>
-
 #### Precise expected outputs on failure:
 If either a required parameter is missing or a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
 
@@ -926,7 +867,6 @@ If either a required parameter is missing or a parameter provided is invalid (e.
 
   ![sort format](images/sort-UG/sortfailuremissing.png)
 
-</details>
 
 ### Opening calendar window : `calendar`
 
@@ -939,9 +879,10 @@ Open a new calendar window.
 * `calendar`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-<br>You can open calendar window by pressing F3 key
-<br>Arrow key navigate you to different months
-<br>Enter key navigate you back to the current month
+
+* You can open calendar window by pressing F3 key
+* Arrow key navigate you to different months
+* Enter key navigate you back to the current month
 </div>
 
 #### Precise expected outputs on success:
@@ -968,10 +909,6 @@ Precise expected outputs on success:
 
   ![clear format](images/clear-UG/clear_success.png)
 
-<details>
-
-  <summary><strong style="color: red;">Common Errors</strong></summary>
-
 Precise expected outputs on failure:
 
 * Error message shown to the user:
@@ -981,7 +918,7 @@ Precise expected outputs on failure:
 
   ![clear format](images/clear-UG/clear_failure.png)
 
-</details>
+
 
 ### Exiting the program : `exit`
 
@@ -1012,7 +949,7 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAPro home folder.
 
-**Q**: How do I view the main commands and refer to the FAPro’s User Guide?<br>
+**Q**: How do I view the basic commands and refer to the others in the FAPro’s User Guide?<br>
 **A**: Click the Help tab or type the `help` in the command box.
 
 --------------------------------------------------------------------------------------------------------------------
