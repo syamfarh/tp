@@ -114,15 +114,16 @@ public class UndoCommand extends Command {
     public CommandResult executeUndoClear(Model model) {
 
         model.addToRedoableStateList();
-        int numberOfPreviousDeleteCommands = model.getNumberOfPreviousDeleteCommands();
+        //int numberOfPreviousDeleteCommands = model.getNumberOfPreviousDeleteCommands();
 
         /* Undo each individual delete command */
-        while (model.getDeletedPersonsSize() > numberOfPreviousDeleteCommands) {
+        for (int i = 0; i < model.getLastClearedNumber(); i++) {
             model.undoDelete();
         }
 
         // Remove 'clear' from the list of previous undoable commands.
         model.removePreviousUndoableCommand();
+        model.removeLastClearedNumber();
 
         return new CommandResult(String.format(MESSAGE_UNDO_CLEAR_SUCCESS));
     }
