@@ -136,14 +136,16 @@ Generates the client risk profile level based on their response of risk assessme
 ![riskprofile format](images/riskProfileFormat.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+
 The risk profile label cannot be removed once is added, but this command can be used to update the client risk profile
 </div>
 
-<div markdown="span" class="alert alert-info">
-ℹ️ **Note:**
-<br> When multiple prefixes <b>res/</b> are inputted along with the RESULT,
-<br> Previous <b>res/</b> entries with its RESULT will be <span style="color: red;">ignored</span>
-<br> The risk profile label displayed will be based on the <u>last one entered</u>
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note**<br>
+When multiple prefixes <b>res/</b> are inputted along with the RESULT:
+* Previous <b>res/</b> entries with its RESULT will be <span style="color: red;">ignored</span>
+* The risk profile label displayed will be based on the <u>last one entered</u>
 </div>
 
 #### Acceptable values for each parameter:
@@ -877,9 +879,10 @@ Open a new calendar window.
 * `calendar`
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-<br>You can open calendar window by pressing F3 key
-<br>Arrow key navigate you to different months
-<br>Enter key navigate you back to the current month
+
+* You can open calendar window by pressing F3 key
+* Arrow key navigate you to different months
+* Enter key navigate you back to the current month
 </div>
 
 #### Precise expected outputs on success:
