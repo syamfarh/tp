@@ -272,6 +272,8 @@ calls `CloneCommand#execute`, which in turn checks to see if the index provided 
 calling `ParserUtil#parseIndex`. If the index is valid, `Index#getZeroBased` is then called to ensure that it is
 smaller than the size of the list. In this case, the index 1 provided is valid.
 
+![CloneActivityDiagram0](images/CloneActivityDiagram0.png)
+
 After all the checks on the index have been done, cloneCommand then calls `CloneCommand#clonePerson`, which separates
 the Person name (as a string) into two substrings using `CloneCommand#splitStringAtLastSpace`, the name and the possible
 suffix, respectfully.
@@ -286,20 +288,20 @@ two cases, then they have a suffix of one added to the back of the person name. 
 then this suffix is incremented. The newly cloned person with their new name is now returned to `CloneCommand#execute`.
 As John has no suffix, a suffix of one is added to the back of his name and John 1 is returned. 
 
+![CloneActivityDiagram1](images/CloneActivityDiagram1.png)
+
 Once returned, the command then attempts to add the cloned person into the list through `Model#addPerson`. However, if
 it throws a duplicate exception (implying that a person with that name already exists in the contact book), then this
 cloned person is cloned yet again via `CloneCommand#clonePerson` until the suffix of the cloned person returned is
 unique. As the only other person in the list prior was James, John 1 is added to the list successfully on the first
 attempt to add him.
 
+![CloneActivityDiagram2](images/CloneActivityDiagram2.png)
+
 ![Clone1](images/Clone1.png)
 
 Should the person be added successfully to the address book, the clone success message will be returned to the user, as 
 depicted in the User Guide.
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![CloneActivityDiagram](images/CloneActivityDiagram.png)
 
 #### Design considerations:
 
