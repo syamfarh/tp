@@ -9,6 +9,28 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
   {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+1. [Quick start](#quick-start)
+2. [Features](#features)
+   * [help](#viewing-help-help)
+   * [questionnaire](#viewing-risk-assessment-questionnaire-questionnaire)
+   * [riskprofile](#adds-risk-profile-level-to-a-contactriskprofile)
+   * [add](#adding-a-person-add)
+   * [clone](#cloning-a-person--clone)
+   * [delete](#deleting-a-person--delete)
+   * [list](#list-out-all-contacts--list)
+   * [edit](#editing-a-person--edit)
+   * [find](#locating-persons-by-name-find)
+   * [undo](#undoing-a-command--undo)
+   * [redo](#redoing-an-undo-command--redo)
+   * [sort](#sorting-contacts--sort)
+   * [calendar](#opening-calendar-window--calendar)
+   * [clear](#clearing-all-entries--clear)
+   * [exit](#exiting-the-program--exit)
+3. [FAQ](#faq)
+4. [Common Questions](#common-questions)
+5. [Known issues](#known-issues)
+6. [Command summary](#command-summary)
+7. [Glossary](#glossary)
 
 ## Quick start
 
@@ -433,7 +455,7 @@ Example: edit 1 p/91234567 e/johndoe@example.com
 
 ![edit format](images/edit-UG/editfailure.png)
 
-### Locating persons by name: `find`
+### Searching persons: `find`
 
 Finds persons based on the given keywords.
 
