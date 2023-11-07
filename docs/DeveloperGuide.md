@@ -238,17 +238,64 @@ _{more aspects and alternatives to be added}_
 
 #### Implementation
 
-The clone feature creates a copy of a person in the addressbook while only adding a number at the end of the name and maintaining all other variables. 
+The `clone` feature creates a copy of a person in the address book while either adding a suffix at the end of the name 
+of the cloned contact or, if the contact name has a pre-existing suffix, it increments that suffix by one.
+
+The clone mechanism first checks to see if the index provided is valid. If a person exists at the index, it then checks
+the suffix of the person in question.
+
+Clone implements the following operations:
+* `CloneCommand#execute`
+* `CloneCommand#equals`
+* `CloneCommand#toString`
+* `CloneCommand#clonePerson`
+* `CloneCommand#splitStringAtLastSpace`
+
+These operations make use of other operations exposed in the `Model` interface, which are:
+* `Model#getFIlteredPersonList()`
+* `Model#addPerson(Person)`
+* `Model#storePreviousUndoableCommand(String)`
+* `Model#resetRedoableStateList()`
+* `Model#resetUndoableStateList()`
+* `Model#removeRedoCommands()`
 
 Given below is an example usage scenario and how the clone mechanism behaves at each step.
 
-Step 1. The user executes "list" to see what Persons are available in the address book
+Step 1. The user launches the application for the first time. 
+
+Step 2. The user executes `list` to see what Persons are available in the address book
 
 ![Clone0](images/Clone0.png)
 
-Step 2. The user executes "clone 1" to clone the person at index 1 of the address book, John
+Step 3. The user executes `clone 1` to clone the person at index 1 of the address book, John. The `clone` command first
+calls `CloneCommand#execute`, which in turn checks to see if the index provided is valid in CloneCommandParser by
+calling `ParserUtil#parseIndex`. If the index is valid, `Index#getZeroBased` is then called to ensure that it is
+smaller than the size of the list. In this case, the index 1 provided is valid.
+
+After all the checks on the index have been done, cloneCommand then calls `CloneCommand#clonePerson`, which separates
+the Person name (as a string) into two substrings using `CloneCommand#splitStringAtLastSpace`, the name and the possible
+suffix, respectfully.
+
+After being separated into two substrings, `CloneCommand#clonePerson` then separates the person name into three cases:
+Firstly, if the name has no spaces and no suffix. Secondly, if the name has spaces but the suffix does not consist of
+only an integer. And lastly, if the name has spaces and the suffix consists of only an integer. As John has no spaces
+and no suffix, this would be the first case highlighted.
+
+Based on these three cases, either than have a suffix or they do not. If they do not have a suffix, such as in the first
+two cases, then they have a suffix of one added to the back of the person name. If they name already possesses a suffix,
+then this suffix is incremented. The newly cloned person with their new name is now returned to `CloneCommand#execute`.
+As John has no suffix, a suffix of one is added to the back of his name and John 1 is returned. 
+
+Once returned, the command then attempts to add the cloned person into the list through `Model#addPerson`. However, if
+it throws a duplicate exception (implying that a person with that name already exists in the contact book), then this
+cloned person is cloned yet again via `CloneCommand#clonePerson` until the suffix of the cloned person returned is
+unique. As the only other person in the list prior was James, John 1 is added to the list successfully on the first
+attempt to add him.
 
 ![Clone1](images/Clone1.png)
+
+Should the person be added successfully to the address book, the clone success message will be returned to the user, as 
+depicted in the User Guide.
 
 The following activity diagram summarizes what happens when a user executes a new command:
 
@@ -258,13 +305,15 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 **Aspect: How clone executes:**
 
-* **Alternative 1 (current choice):** Copies the person at the index provided and returns a person with a number next to their name
+* **Alternative 1 (current choice):** Copies the person at the index provided and returns a person with a number 
+    next to their name
   * Pros: Fast,  while ensuring that there are no strict duplicates
   * Cons: Can be restrictive as you might have contacts that are similar and have the same name.
 
 * **Alternative 2:** Copies the person exactly as is while allowing for duplicates
   * Pros: Fast, allows for as many copies of a person as the user desires
-  * Cons: Will be difficult to keep track of contacts, defeating the purpose of FAPro as a comprehensive yet focused contact organiser
+  * Cons: Will be difficult to keep track of contacts, defeating the purpose of FAPro as a comprehensive yet focused
+    contact organiser
 
 _{more aspects and alternatives to be added}_
 
@@ -670,32 +719,18 @@ testers are expected to do more *exploratory* testing.
 
 ### Cloning a person
 
-1. Cloning a person whohas not been cloned while all persons are being shown
+1. Cloning a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    1. Test case: `clone 1`<br>
-      Expected: First contact is cloned from the list. Details of the cloned contact shown in the status message. Timestamp in the status bar is updated.
+      Expected: First contact is cloned from the list. Details of the cloned contact shown in the status message.
 
    1. Test case: `clone 0`<br>
-      Expected: No person is cloned. Error details shown in the status message. Status bar remains the same.
+      Expected: No person is cloned. Error details shown in the status message.
 
    1. Other incorrect clone commands to try: `clone`, `clone x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-2. Cloning a person who has already been cloned while all persons are being shown
-
-   2. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   2. Test case: `clone 1`<br>
-      Expected: First contact has already been cloned. Error message is returned.
-
-3. Cloning a clone while all persons are being shown
-
-   2. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   2. Test case: `clone 1`<br>
-      Expected: The clone is cloned from the list and the number next to its name it incremented. Details of the cloned contact shown in the status message. Timestamp in the status bar is updated.
 
 
 ### Saving data
