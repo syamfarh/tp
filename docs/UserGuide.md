@@ -313,13 +313,13 @@ After cloning, the clone is the exact same as the original, other than a suffix 
 * For example, if
 
   ```
-  Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:
+  Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: ; Tags:
   ```
 
   is the person being cloned, then the output is:
 
   ```
-  Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: 2024-02-02; Tags:
+  Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: ; Tags:
   ```
 
   ![clone format](images/cloneresult.png)
@@ -390,7 +390,7 @@ Deletes a contact from FAPro at the specified indexes.
   ```
 
   where X are the details of the deleted persons
-  * Size of address book is reduced by however many indexes were entered (i.e if you entered delete 2 3 4, as you entered 3 indexes, the size of the address book decreases by 3) 
+  * Size of address book is reduced by however many indexes were entered (i.e if you entered delete 1 2 3, as you entered 3 indexes, the size of the address book decreases by 3) 
   * GUI reflects that deleted contacts are now no longer there
 
   ![delete format](images/delete-UG/deleteafter.png)
@@ -1032,24 +1032,24 @@ To circumvent this, you can add additional details to the name to differentiate 
 **A**: Yes! Our thinking is that if an FA wants to host a group session with several clients, FAPro allows them to schedule multiple clients for the same appointment date and time, making it convenient for FA to manage group meetings.
 --------------------------------------------------------------------------------------------------------------------
 
-## Known issues
+## Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **In calendar window**:
-   * 1. The default size only shows a maximum of 2 clients per day
-   * 2. The default size does not show time of the appointment
+   1. The default size only shows a maximum of 2 clients per day
+   2. The default size does not show time of the appointment
    * The above 2 issues can be fixed by adjusting the calendar window to be larger to show more information
-   * While the calendar window is open, any changes made to clients' appointment dates and times won't be dynamically updated. You will need to close and reopen the calendar window to see the latest changes.
-3. When searching by address, i.e. `find a/ KEYWORD [MORE_KEYWORDS]`, searching for "XXX Street" for instance, would return all clients that contain "XXX" and "Street" in their address. This may lead to a pollution of the results being returned from the `find` command. This is a known limitation that is a by-product of the feature of being able to search for multiple addresses at once. 
-    * One simple way to circumvent this issue is to use more specific keywords as your input, instead of using broad keywords that are very common in addresses, such as (but not limited to) "Block" or "Street" or "Road".
-4. It is possible to add phone numbers that have indefinite length for clients, so please be aware that there is no built-in checks for "valid" phone numbers when editing phone numbers.
-5. Due to the versatility of the nature of addresses, it is unrealistic to check for whether an address input is "valid" or not. So please be careful when editing addresses for your clients.
-6. When using the `find` command, 0 and 1 contact will still show "X persons listed!", where X can be 0 or 1. This issue is purely cosmetic and won't affect any functionality.
-7. After using FAPro for a while, users might notice the application slowing down. To fix the issue, simply close and open the app again.
+   * While the calendar window is open, any changes made to clients' appointment dates and times won't be dynamically updated. You will need to close and reopen the calendar window to see the latest changes
+3. When searching by address, i.e. `find a/ KEYWORD [MORE_KEYWORDS]`, searching for "XXX Street" for instance, would return all clients that contain "XXX" and "Street" in their address. This may lead to a pollution of the results being returned from the `find` command. This is a known limitation that is a by-product of the feature of being able to search for multiple addresses at once
+    * One simple way to circumvent this issue is to use more specific keywords as your input, instead of using broad keywords that are very common in addresses, such as (but not limited to) "Block" or "Street" or "Road"
+4. It is possible to add phone numbers that have indefinite length for clients, so please be aware that there is no built-in checks for "valid" phone numbers when editing phone numbers
+5. Due to the versatility of the nature of addresses, it is unrealistic to check for whether an address input is "valid" or not. So please be careful when editing addresses for your clients
+6. When using the `find` command, 0 and 1 contact will still show "X persons listed!", where X can be 0 or 1. This issue is purely cosmetic and won't affect any functionality
+7. After using FAPro for a while, users might notice the application slowing down. To fix the issue, simply close and open the app again
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Command summary
+## Command Summary
                                                                                                                                          
 | Action              | Format, Examples                                                                                                                                                                                                                      |
 |---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
