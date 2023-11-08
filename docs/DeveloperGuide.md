@@ -708,17 +708,23 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-## **Appendix G: Effort**
+## **Appendix G: Future Implementations**
+
+* Contacts list are only allowed to be sorted in ascending order for NAME and APPOINTMENT_DATE prefix only. We plan to allow users to sort by descending order in the future as well.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. We plan to allow tags to be added of the existing tags or remove the tags individually.
+* 
+
+## **Appendix H: Effort**
 
 {to be added}
 
-## **Appendix H: Planned Enhancements**
+## **Appendix I: Planned Enhancements**
 
 * The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
 * The application will start to experience lag after prolonged usage. This is most likely due to the application keeping the state of the database after every commands to be able revert to previous state if need be. In the future, we might plan to limit the amount of states that is kept to reduce the storage load of the application. 
 * {to be added}
 
-## **Appendix I: Acknowledgement**
+## **Appendix J: Acknowledgement**
 
 * The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)
 
