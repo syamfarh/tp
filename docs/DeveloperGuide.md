@@ -252,7 +252,7 @@ Clone implements the following operations:
 * `CloneCommand#splitStringAtLastSpace`
 
 These operations make use of other operations exposed in the `Model` interface, which are:
-* `Model#getFIlteredPersonList()`
+* `Model#getFilteredPersonList()`
 * `Model#addPerson(Person)`
 * `Model#storePreviousUndoableCommand(String)`
 * `Model#resetRedoableStateList()`
@@ -263,7 +263,8 @@ Given below is an example usage scenario and how the clone mechanism behaves at 
 
 Step 1. The user launches the application for the first time. 
 
-Step 2. The user executes `list` to see what Persons are available in the address book
+Step 2. The user executes `list` to see what Persons are available in the address book. Initially, only John and
+James are in the address book.
 
 ![Clone0](images/Clone0.png)
 
@@ -274,19 +275,19 @@ smaller than the size of the list. In this case, the index 1 provided is valid.
 
 ![CloneActivityDiagram0](images/CloneActivityDiagram0.png)
 
-After all the checks on the index have been done, cloneCommand then calls `CloneCommand#clonePerson`, which separates
+After all the checks on the index have been done, `CloneCommand#execute` then calls `CloneCommand#clonePerson`, which separates
 the Person name (as a string) into two substrings using `CloneCommand#splitStringAtLastSpace`, the name and the possible
-suffix, respectfully.
+suffix, respectively.
 
 After being separated into two substrings, `CloneCommand#clonePerson` then separates the person name into three cases:
 Firstly, if the name has no spaces and no suffix. Secondly, if the name has spaces but the suffix does not consist of
 only an integer. And lastly, if the name has spaces and the suffix consists of only an integer. As John has no spaces
 and no suffix, this would be the first case highlighted.
 
-Based on these three cases, either than have a suffix or they do not. If they do not have a suffix, such as in the first
-two cases, then they have a suffix of one added to the back of the person name. If they name already possesses a suffix,
+Based on these three cases, either they have a suffix or they do not. If they do not have a suffix, such as in the first
+two cases, then they have a suffix of one added to the back of the person name. If their name already possesses a suffix,
 then this suffix is incremented. The newly cloned person with their new name is now returned to `CloneCommand#execute`.
-As John has no suffix, a suffix of one is added to the back of his name and John 1 is returned. 
+As John has no suffix, a suffix of "1" is added to the back of his name and "John 1" is returned. 
 
 ![CloneActivityDiagram1](images/CloneActivityDiagram1.png)
 
@@ -310,7 +311,7 @@ depicted in the User Guide.
 * **Alternative 1 (current choice):** Copies the person at the index provided and returns a person with a number 
     next to their name
   * Pros: Fast,  while ensuring that there are no strict duplicates
-  * Cons: Can be restrictive as you might have contacts that are similar and have the same name.
+  * Cons: Can be restrictive as you might have contacts that are similar and have the same name
 
 * **Alternative 2:** Copies the person exactly as is while allowing for duplicates
   * Pros: Fast, allows for as many copies of a person as the user desires
@@ -540,7 +541,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 2.
 
-* 3b. The given index is invalid (i.e Not a positive integer and part of the address book.
+* 3b. The given index is invalid (i.e Not a positive integer and part of the address book.)
 
     * 3b1. FAPro shows an error message:  “The person index provided is invalid.”
 
@@ -721,7 +722,7 @@ testers are expected to do more *exploratory* testing.
 
 ### Cloning a person
 
-1. Cloning a person while all persons are being shown
+1. Cloning a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
