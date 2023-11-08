@@ -19,6 +19,11 @@ Given below are my contributions to the project.
   * Justification: Users may wish to have an organized contact lists to find the contacts easily or to find the earliest appointment date to remind them of their next appointment.
   * Highlights: Slightly difficult as the list is saved in an immutable list. Circumvented by returning a new sorted list each time the function is called. Overall,  manageable to implement.
 
+* **New Feature**: Added calendar window 
+  * What it does: Allows the user to view appointment date in a calendar month view.
+    * Justification: Users may want to quickly identify available dates, plan ahead, and avoid double-booking of clients appointments
+  * Highlights: Manageable as I used CalendarFX library which is available online. However, it was challenging to find ways to disable allowing users to add new appointment date directly into the calendar instead of using CLI. In the end, I was able to disable the feature and only allow user to navigate the window using left and right arrow key to go between month page. 
+  
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=syamfarh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
@@ -29,10 +34,13 @@ Given below are my contributions to the project.
   
 * **Documentation**:
     * User Guide:
-        * Added documentation on `edit` and `sort`
+        * Added documentation on `edit`, `sort` and `calendar`
+        * Added glossary section
+        * Added known issues for calendar window
+        * Added common questions for calendar window issues
     * Developer Guide:
         * Added use case for `sort`
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#11](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/11), [\#15](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/15), [\#65](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/65), [\#78](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/78), 
+    * PRs reviewed (with non-trivial review comments): [\#11](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/11), [\#15](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/15), [\#65](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/65), [\#78](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/78), [\#86](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/86), [\#87](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/87), [\#88](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/88), [\#90](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/90), [\#99](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/99), [\#100](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/100), [\#105](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/105), [\#116](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/116), [\#127] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/127), [\#153] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/153), [\#204] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/204), [\#205] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/205), [\#206] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/206), [\#221] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/221), [`#222] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/222),  
 
