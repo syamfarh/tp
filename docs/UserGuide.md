@@ -855,7 +855,7 @@ Sort contact lists by prefix name or appointment date.
 #### Precise expected output on success:
 * Message shown to the user:
   ```
-  'X person listed!'
+  X persons listed!
   ```
   where X is the number of clients in the address book.
 * The sorted entry is displayed in the address book GUI.
