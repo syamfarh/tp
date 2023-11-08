@@ -718,4 +718,8 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix I: Acknowledgement**
 
+* The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)
+
+{to be added}
+
 
