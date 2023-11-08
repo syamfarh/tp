@@ -22,51 +22,52 @@ public class HelpWindow extends UiPart<Stage> {
     public static final String ADD_COMMAND_GUIDE =
             "1. ADD" + SINGLE_NEWLINE
             + "Adds a contact to the address book." + SINGLE_NEWLINE
-            + "Format: add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]…\u200B" + SINGLE_NEWLINE
+            + "Format: add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION "
+            + "a/ADDRESS [t/TAG]…\u200B [appt/APPOINTMENT_DATE]" + SINGLE_NEWLINE
             + "Example: add n/John Doe, p/+65 98765432, e/johnd@example.com, o/Software Engineer, "
             + "a/John Street, Block 123, 138123, t/New Client";
 
     public static final String DELETE_COMMAND_GUIDE =
             "2. DELETE" + SINGLE_NEWLINE
             + "Deletes a contact from the address book." + SINGLE_NEWLINE
-            + "Format: delete INDEX" + SINGLE_NEWLINE
+            + "Format: delete INDEX [MORE INDEXES]" + SINGLE_NEWLINE
             + "⚫Deletes the contact at the specified INDEX, must be a positive integer" + SINGLE_NEWLINE
-            + "⚫The index refers to the index number shown in the displayed person list." + SINGLE_NEWLINE
-            + "Example: delete 3 -> deletes the 3rd contact in the address book.";
+            + "⚫The INDEX refers to the INDEX number shown in the displayed person list." + SINGLE_NEWLINE
+            + "Example: delete 2 5 -> deletes the 2nd and 5th contacts in the address book.";
     public static final String UNDO_COMMAND_GUIDE =
             "3. UNDO" + SINGLE_NEWLINE
-            + "Undoes a single delete done previously." + SINGLE_NEWLINE
+            + "Undoes the most recent undoable command. "
+            + "Undoable commands include: add, clone, delete, clear, edit." + SINGLE_NEWLINE
             + "Format: undo" + SINGLE_NEWLINE
-            + "Example: undo -> the contact has been deleted and undo it.";
-
-    public static final String FIND_NAME_COMMAND_GUIDE =
-            "4. FIND by NAME" + SINGLE_NEWLINE
-            + "Finds contacts whose names contain any of the given keywords." + SINGLE_NEWLINE
-            + "Format: find NAME" + SINGLE_NEWLINE
-            + "Example: find Jackson -> attempts to find a contact name containing 'Jackson'.";
-    public static final String FIND_ADDRESS_COMMAND_GUIDE =
-            "5. FIND by ADDRESS" + SINGLE_NEWLINE
-            + "Finds contacts whose address contain any of the given keywords." + SINGLE_NEWLINE
-            + "Format: find_add ADDRESS" + SINGLE_NEWLINE
-            + "Example: find_add geylang -> returns all contacts whose addresses contain 'geylang'.";
-
+            + "Example: delete 1 -> deletes the 1st contact, followed by undo -> add the contact back.";
+    public static final String FIND_COMMAND_GUIDE =
+            "4. FIND" + SINGLE_NEWLINE
+            + "Finds persons based on the given keywords." + SINGLE_NEWLINE
+            + "Format: find n/NAME [MORE NAMES]" + SINGLE_NEWLINE
+            + "             find a/ADDRESS [MORE ADDRESSES]" + SINGLE_NEWLINE
+            + "             find appt/APPOINTMENT DATE" + SINGLE_NEWLINE
+            + "Example: find n/John Alice -> finds all contacts whose names include 'John' and 'Alice'."
+            + SINGLE_NEWLINE
+            + "               find a/Tokyo Geylang -> finds all contacts whose address include 'Tokyo' and 'Geylang'."
+            + SINGLE_NEWLINE
+            + "               find appt/2024-01-01 -> finds all contacts whose appointment date matches '2024-01-01'.";
     public static final String EDIT_COMMAND_GUIDE =
-            "6. EDIT" + SINGLE_NEWLINE
+            "5. EDIT" + SINGLE_NEWLINE
             + "Edits an existing contact in the address book." + SINGLE_NEWLINE
             + "Format: edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] "
-            + "[a/ADDRESS] [t/TAG]…\u200B [appt/APPOINTMENTDATE]" + SINGLE_NEWLINE
+            + "[appt/APPOINTMENT_DATE] [a/ADDRESS] [t/TAG]…\u200B" + SINGLE_NEWLINE
             + "⚫Edits the person at the specified INDEX. " + SINGLE_NEWLINE
             + "⚫At least one of the optional fields must be provided." + SINGLE_NEWLINE
-            + "Example: edit 1 appt/ 2023-11-15 -> Edits the appointment date of the 1st person to be 2023-11-15.";
+            + "Example: edit 2 n/Betsy t/ -> Edits the name of the 2nd person to be 'Betsy' "
+            + "and clears all existing tags.";
 
     public static final String HELP_MESSAGE =
             ADD_COMMAND_GUIDE + DOUBLE_NEWLINE
             + DELETE_COMMAND_GUIDE + DOUBLE_NEWLINE
             + UNDO_COMMAND_GUIDE + DOUBLE_NEWLINE
-            + FIND_NAME_COMMAND_GUIDE + DOUBLE_NEWLINE
-            + FIND_ADDRESS_COMMAND_GUIDE + DOUBLE_NEWLINE
+            + FIND_COMMAND_GUIDE + DOUBLE_NEWLINE
             + EDIT_COMMAND_GUIDE + DOUBLE_NEWLINE
-            + "For more details, please visit our website: " + USERGUIDE_URL;
+            + "For other commands, please visit our user guide: " + USERGUIDE_URL;
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
