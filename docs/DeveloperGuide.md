@@ -426,8 +426,21 @@ Step 1. The financial adviser wants to find the details of "John" and "Alice" in
 
 Step 2. The financial adviser enters `find n/John Alice` into the command box and presses enter.
 
-Step 3. A list of all contacts who have `John` and `Alice` in their name is listed.
+Step 3. The input `find n/John Alice` is passed into `FindCommandParser#parse`, and the string is parsed into two portions:
+1. Prefix
+2. Argument
 
+Step 4. Since the prefix specified by the financial adviser is `n/`, the `FindCommandParser` knows that it should call
+`find_name`, and thus, the argument is passed into `FindNameCommandParser#parse` for execution.
+
+Step 5. `FindNameCommandParser#parse` parses the argument input, and separates `John` and `Alice`, and places both names into
+a String array. Then, a new `FindNameCommand` is returned.
+
+Step 6. Then, `FindNameCommand#execute` is called, which uses the keywords in the String array to filter the address book.
+
+Step 7. A list of all contacts who have `John` and `Alice` in their name is listed.
+
+![FindNameActivityDiagram](images/FindNameActivityDiagram.png)
 
 _Address_
 
@@ -436,7 +449,21 @@ Step 1. The financial adviser wants to find out all their clients living in Sera
 
 Step 2. The financial adviser enters `find a/Serangoon` into the command box and presses enter.
 
-Step 3. A list of all contacts who have `Serangoon` in their address is listed.
+Step 3. The input `find a/Serangoon` is passed into `FindCommandParser#parse`, and the string is parsed into two portions:
+1. Prefix
+2. Argument
+
+Step 4. Since the prefix specified by the financial adviser is `a/`, the `FindCommandParser` knows that it should call
+`find_add`, and thus, the argument is passed into `FindAddCommandParser#parse` for execution.
+
+Step 5. `FindAddCommandParser#parse` parses the argument input, and separates extracts `Serangoon`, and places it into
+a String array. Then, a new `FindAddCommand` is returned.
+
+Step 6. Then, `FindAddCommand#execute` is called, which uses the keyword in the String array to filter the address book.
+
+Step 7. A list of all contacts who have `Serangoon` in their address is listed.
+
+![FindAddActivityDiagram](images/FindAddActivityDiagram.png)
 
 _Appointment Date_
 
@@ -444,7 +471,21 @@ Step 1. The financial adviser wants to check all the appointments he has that da
 
 Step 2. The financial adviser enters `find appt/2023-12-12` into the command box and presses enter.
 
-Step 3. A list of all contacts who have `2023-12-12` in their appointment date field is listed.
+Step 3. The input `find appt/2023-12-12` is passed into `FindCommandParser#parse`, and the string is parsed into two portions:
+1. Prefix
+2. Argument
+
+Step 4. Since the prefix specified by the financial adviser is `appt/`, the `FindCommandParser` knows that it should call
+`find_appt`, and thus, the argument is passed into `FindApptCommandParser#parse` for execution.
+
+Step 5. `FindApptCommandParser#parse` parses the argument input, and extracts `2023-12-12`, and places it into
+a String array. Then, a new `FindApptCommand` is returned.
+
+Step 6. Then, `FindApptCommand#execute` is called, which uses the keyword in the String array to filter the address book.
+
+Step 7. A list of all contacts who have `2023-12-12` matching their appointment date is listed.
+
+![FindApptActivityDiagram](images/FindApptActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
