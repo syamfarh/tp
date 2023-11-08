@@ -343,20 +343,56 @@ unchanged.
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Find by address feature
+### Find feature
 
 #### Implementation
 
-The find by address/find_add feature filters the list of contacts in the address book based on their address.
+The `find` feature allows the user to search for contacts in their address book. It allows users to find contacts based on
+name, address, and appointment date. The type of search is determined by the input prefix specified by the user:
+1. `n/` for find by name
+2. `a/` for find by address
+3. `appt/` for find by appointment date
 
-Given below is an example usage scenario and how the find_add feature works.
+The actual `find` operation acts as a "facilitator" for `find_name`, `find_add` and `find_appt`, all three of which 
+are abstracted out of the user's sight, i.e. they do not know that these operations exist, and they are not allowed to 
+directly call these functions. The parser for the `find` command will identify the prefix specified by the user and 
+pass on the operation to the relevant class for execution. As such, there is no meaningful methods implemented directly
+in the `find` class. The parser for the `find` class parse the (valid) user input, and call on one of the three operations:
+1. `FindNameCommandParser#parse(String)`
+2. `FindAddCommandParser#parse(String)`
+3. `FindApptCommandParser#parse(String)`
+
+From there on, the operation will be handled by the separate classes.
+
+Should the user input be invalid, an exception specific to the error type will be returned to the user.
+
+Given below is an example usage scenario and how the find feature works for every possible prefix.
+
+_Name_
+
+Step 1. The financial adviser wants to find the details of "John" and "Alice" in his address book.
+
+Step 2. The financial adviser enters `find n/John Alice` into the command box and presses enter.
+
+Step 3. A list of all contacts who have `John` and `Alice` in their name is listed.
+
+
+_Address_
 
 Step 1. The financial adviser wants to find out all their clients living in Serangoon so that they can 
         line up client appointments efficiently.
 
-Step 2. The financial adviser enters `find_add Serangoon` into the command box and presses enter.
+Step 2. The financial adviser enters `find a/Serangoon` into the command box and presses enter.
 
 Step 3. A list of all contacts who have `Serangoon` in their address is listed.
+
+_Appointment Date_
+
+Step 1. The financial adviser wants to check all the appointments he has that day (assuming the date is `2023-12-12`).
+
+Step 2. The financial adviser enters `find appt/2023-12-12` into the command box and presses enter.
+
+Step 3. A list of all contacts who have `2023-12-12` in their appointment date field is listed.
 
 --------------------------------------------------------------------------------------------------------------------
 
