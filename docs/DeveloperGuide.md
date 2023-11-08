@@ -651,8 +651,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -667,8 +665,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
-
-1. _{ more test cases …​ }_
 
 ### Cloning a person
 
@@ -699,6 +695,12 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `clone 1`<br>
       Expected: The clone is cloned from the list and the number next to its name it incremented. Details of the cloned contact shown in the status message. Timestamp in the status bar is updated.
 
+### Sorting contact list
+
+1. Sorting contact list by NAME or APPOINTMENT_DATE prefix in ascending order
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The default order of contact list is by APPOINTMENT_DATE prefix.
+   2. Test case: `sort n/` <br>
+      Expected: The contact list is ordered by alphabetical order of the NAME prefix. Details of the number of contacts listed is shown in the result box. 
 
 ### Saving data
 
