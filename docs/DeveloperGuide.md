@@ -695,6 +695,18 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `clone 1`<br>
       Expected: The clone is cloned from the list and the number next to its name it incremented. Details of the cloned contact shown in the status message. Timestamp in the status bar is updated.
 
+### Editing a person
+
+1.  Edit a person while all persons are being shown
+    1. Prerequisites: Lists all persons using the `list` command. Multiple persons in the list.
+
+    2. Test case: `edit 1 n/ John Doe`<br>
+       Expected: The first contact name is changed to John Doe. Timestamp in the status bar is updated.
+    3. Test case: `edit 1`<br>
+       Expected: No person is edited. Error details shown in the status message. Status bar remains the same.
+    4. Other incorrect edit commands to try: `edit 1 n/`, `edit 0 n/ John Doe`, `edit 1 n/ John-Doe`
+       Expected: Similar to previous
+
 ### Sorting contact list
 
 1. Sorting contact list by NAME or APPOINTMENT_DATE prefix in ascending order
