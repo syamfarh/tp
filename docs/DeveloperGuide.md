@@ -714,12 +714,14 @@ testers are expected to do more *exploratory* testing.
 
 ## **Appendix H: Planned Enhancements**
 
-{to be added}
+* The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
+* The application will start to experience lag after prolonged usage. This is most likely due to the application keeping the state of the database after every commands to be able revert to previous state if need be. In the future, we might plan to limit the amount of states that is kept to reduce the storage load of the application. 
+* {to be added}
 
 ## **Appendix I: Acknowledgement**
 
 * The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)
 
-{to be added}
+* {to be added}
 
 
