@@ -286,35 +286,51 @@ These operations make use of other operations exposed in the `Model` interface, 
 * `Model#storeDeletedNumberList(int)`
 * `Model#resetRedoableStateList()`
 * `Model#reserUndoableStateList()`
-* `Model#removeRedoCoomands()`
+* `Model#removeRedoCommands()`
 
 Given below is an example usage scenario and how the delete mechanism behaves at each step.
 
 Step 1: The user launches the application. The application initializes various lists and data structures,
-including deletedPersons.
+including `deletedPersons`.
+
+Step 2. The user executes `list` to view the persons available in the address book.
 
 ![Delete0](images/Delete0.png)
 
-Step 2. The user executes the delete command, e.g., delete 1 3 5, to delete persons at indexes 1, 3, and 5.
-The delete command processes each index,
+In this example, we will take John to be at index 1, James to be at index 2, Peter to be at index 3, Luke to be at index
+4 and Simon to be at index 5.
+
+Step 3. The user executes `delete 1 3 5` to delete the persons at indexes 1, 3, and 5 from the address book.
+The delete command first calls `DeleteCommandParser`, to ensure that there are no duplicate indexes, to
+perform regular index validation and to sort indexes ascendingly and return the indexes.
+
+`DeleteCommand#execute`, which checks the validity of the provided indexes. It ensures that the indexes are
+positive integers and within the range of the displayed list. 
+
+![DeleteActivityDiagram0](images/DeleteActivityDiagram0.png)
+
+After validating the indexes, the command iterates through the target indexes and deletes the corresponding
+persons from the address book using `Model#deletePerson`. The deleted persons are stored in `deletedPersons`,
+and the command records the execution for potential undo operations.
+
+![DeleteActivityDiagram1](images/DeleteActivityDiagram1.png)
 
 ![Delete1](images/Delete1.png)
 
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![DeleteActivityDiagram](images/DeleteActivityDiagram.png)
+Upon successfully deleting the persons, the delete success message is returned to the user, as depicted in the
+User Guide.
 
 #### Design considerations:
 
 **Aspect: How delete executes:**
 
-* **Alternative 1 (current choice):** Deletes the person(s) at the index(es) provided by removing from list of contacts
-    * Pros: Fast, most straightforward way to remove contacts from a list
-    * Cons: 
+* **Alternative 1 (current choice):**  Deletes persons at the specified indexes and provides a feedback message.
+    * Pros: Ensures controlled deletion and provides feedback to the user.
+    * Cons: Can be tedious.
 
-* **Alternative 2:** 
-    * Pros: 
-    * Cons: 
+* **Alternative 2:** Deletes persons at the specified indexes and allows for multiple deletions without feedback.
+    * Pros: Fast and straightforward for multiple deletions.
+    * Cons: Lacks feedback on deleted persons, which may be useful for confirmation.
 
 ### Undo feature
 
@@ -442,18 +458,19 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​                          | I want to …​                          | So that I can…​                                                        |
-|----------|----------------------------------|---------------------------------------|------------------------------------------------------------------------|
-| `* * *`  | user                             | add a new person                      | add entries that I need                                                |
-| `* * *`  | user                             | delete a person                       | remove entries that I no longer need                                   |
-| `* * *`  | user                             | find a person by name                 | locate details of persons without having to go through the entire list |
-| `* * *`  | financial advisor                | find a person by address              | line-up all my client meetings efficiently                             |
-| `* * *`  | financial advisor                | find all contacts by appointment date | see what appointments I have for that date                             |
-| `* * *`  | financial advisor                | edit contact details of clients       | client details are up to date                                          |
-| `* * *`  | financial advisor                | be able to view the help page         | quickly troubleshoot and learn how to operate the program              |
-| `* *`    | lazy financial advisor           | be able to clone a person             | I can easily replicate contacts that are similar                       |
-| `* *`    | financial advisor                | be able to sort clients contact list  | easier to find client contact that I am looking for                    |
-| `* *`    | clumsy financial advisor         | be able to undo commands done previously such as delete, clear, edit, add    | undo my mistakes made with a simple command, rather than having to do multiple commands  | 
+| Priority | As a …​                          | I want to …​                                                              | So that I can…​                                                                         |
+|----------|----------------------------------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
+| `* * *`  | user                             | add a new person                                                          | add entries that I need                                                                 |
+| `* * *`  | user                             | delete a person                                                           | remove entries that I no longer need                                                    |
+| `* * *`  | user                             | delete a few persons                                                      | remove multiple entries that I no longer need                                           |
+| `* * *`  | user                             | find a person by name                                                     | locate details of persons without having to go through the entire list                  |
+| `* * *`  | financial advisor                | find a person by address                                                  | line-up all my client meetings efficiently                                              |
+| `* * *`  | financial advisor                | find all contacts by appointment date                                     | see what appointments I have for that date                                              |
+| `* * *`  | financial advisor                | edit contact details of clients                                           | client details are up to date                                                           |
+| `* * *`  | financial advisor                | be able to view the help page                                             | quickly troubleshoot and learn how to operate the program                               |
+| `* *`    | lazy financial advisor           | be able to clone a person                                                 | I can easily replicate contacts that are similar                                        |
+| `* *`    | financial advisor                | be able to sort clients contact list                                      | easier to find client contact that I am looking for                                     |
+| `* *`    | clumsy financial advisor         | be able to undo commands done previously such as delete, clear, edit, add | undo my mistakes made with a simple command, rather than having to do multiple commands | 
 
 *{More to be added}*
 
@@ -715,16 +732,33 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a few persons while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `delete 1 2 3` <br>
+      Expected: Contacts at indexes 1, 2 and 3 are deleted from the list. Details of the deleted contact shown in the 
+      status message.
+   
+   3. Test case: `delete 3 2 1` <br>
+      Expected: Contacts at indexes 1, 2 and 3 are deleted from the list. Details of the deleted contact shown in the
+      status message.
+
+   4. Test case: `delete 1 2 x` (where x is larger than the list size) <br>
+      Expected: No person is deleted. Error details shown in the status message.
+
+   5. Test case: `delete 1 2 y`, (where y is anything that is not an integer) <br>
+      Expected: No person is deleted. Error details shown in the status message.
+
 
 ### Cloning a person
 
