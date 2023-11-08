@@ -270,15 +270,33 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Implementation
 
-The delete feature deletes the person(s) at the specified index(es) in the address book
+The `delete` feature allows users to remove one or more persons from the address book. Users can specify one or
+more indexes to identify the persons to be deleted. The `delete` command is implemented by the `DeleteCommand`
+class.
+
+Delete implements the following operations:
+* `DeleteCommand#execute`
+* `DeleteCommand#equals`
+* `DeleteCommand#toString`
+
+These operations make use of other operations exposed in the `Model` interface, which are:
+* `Model#getFilteredPersonList()`
+* `Model#deletePerson(Person)`
+* `Model#storePreviousUndoableCommand(String)`
+* `Model#storeDeletedNumberList(int)`
+* `Model#resetRedoableStateList()`
+* `Model#reserUndoableStateList()`
+* `Model#removeRedoCoomands()`
 
 Given below is an example usage scenario and how the delete mechanism behaves at each step.
 
-Step 1. The user executes "list" to see what Persons are available in the address book
+Step 1: The user launches the application. The application initializes various lists and data structures,
+including deletedPersons.
 
 ![Delete0](images/Delete0.png)
 
-Step 2. The user executes "delete 1 4" to delete the persons at index 1 and index 4 of the address book, John and Peter, respectively
+Step 2. The user executes the delete command, e.g., delete 1 3 5, to delete persons at indexes 1, 3, and 5.
+The delete command processes each index,
 
 ![Delete1](images/Delete1.png)
 
