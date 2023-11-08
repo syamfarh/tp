@@ -370,9 +370,7 @@ Step 3. A list of all contacts who have `Serangoon` in their address is listed.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
-
-### Product scope
+## **Appendix A: Product Scope**
 
 **Target user profile**:
 
@@ -390,7 +388,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 
 
-### User stories
+## **Appendix B: User stories**
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -409,7 +407,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+## **Appendix C: Use cases**
 
 (For all use cases below, the **System** is the `FAPro` and the **Actor** is the `Financial Advisor`, unless specified otherwise)
 
@@ -604,7 +602,7 @@ Preconditions:
 
       Use case resumes at step 2.
 
-### Non-Functional Requirements
+## **Appendix D: Non-Functional Requirements**
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -622,14 +620,14 @@ Preconditions:
 
 *{More to be added}*
 
-### Glossary
+## **Appendix E: Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix F: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -709,3 +707,15 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix G: Effort**
+
+{to be added}
+
+## **Appendix H: Planned Enhancements**
+
+{to be added}
+
+## **Appendix I: Acknowledgement**
+
+
