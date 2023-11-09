@@ -105,7 +105,7 @@ Shows a message listing the basic commands and explaining how to access the user
 
 #### Precise expected outcome on success:
 
-* Message shown to the user:
+* You should see this message:
   ```
   Opened help window.
   ```
@@ -126,7 +126,7 @@ Displays questions that are used for generating client risk profile levels.
 * `questionnaire`
 
 #### Precise expected outcome on success:
-* Message shown to the user:
+* You should see this message:
    ```
    Opened questionnaire window.
    ```
@@ -167,7 +167,7 @@ When multiple prefixes <b>res/</b> are inputted along with the RESULT:
 * RESULT: Valid result format, 8 comma-separated characters without whitespace from 'a' - 'e' (e,b,a,c,b,b,a,e)
 
 #### Precise expected outcome on success:
-* Message shown to the user:
+* You should see this message:
   ```
   Added risk profile to Person: X
   ```
@@ -231,7 +231,7 @@ A person can have any number of tags (including 0)
 
 
 #### Precise expected outputs on success:
-* Message shown to the user:
+* You should see this message:
 
   ```
   New Person added: X
@@ -285,7 +285,7 @@ If a parameter is specified multiple times (e.g., --name John --name Doe), an er
 
 ### Cloning a person : `clone`
 
-Clones a contact from FAPro at the specified index. Makes it easier for the user when adding a contact with very similar details (i.e from the same household)
+Clones a contact from FAPro at the specified index. Makes it easier for you to add a contact with very similar details (i.e from the same household)
 
 #### Format:
 * `clone INDEX`
@@ -303,7 +303,7 @@ After cloning, the clone is the exact same as the original, other than a suffix 
 
 
 #### Precise expected outputs on success:
-* Message shown to the user:
+* You should see this message:
 
   ```
   Cloned Person: X
@@ -379,7 +379,7 @@ Deletes a contact from FAPro at the specified indexes.
 
 #### Precise expected outputs on success:
 
-* Message shown to the user:
+* You should see this message:
 
   ```
   Deleted Person(s): X
@@ -423,7 +423,7 @@ Shows a list of all contacts.
 * `list`
 
 #### Precise expected outputs on success:
-* Message shown to the user:
+* You should see this message:
   ```
   Listed all persons
   ```
@@ -456,7 +456,7 @@ Edits an existing client's parameter in FAPro.
   ![edit format](images/edit-UG/editformat.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user:
+* You should see this message:
   ```
   Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], Occupation:[OCCUPATION], Address:[ADDRESS]…
   ```
@@ -510,7 +510,7 @@ Finds persons based on the given keywords.
 ![find_name format](images/find-UG/find_n0.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user: 
+* You should see this message: 
   ```
   X persons listed!
   ```
@@ -521,7 +521,7 @@ Finds persons based on the given keywords.
 
 #### Precise expected outputs on failure:
 If no name is input after the find command, an error message explaining the error will be shown, 
-reminding the user to follow the correct input format
+reminding you to follow the correct input format
 
 * You should see this error message:
 
@@ -539,7 +539,7 @@ reminding the user to follow the correct input format
 
 #### Precise expected outputs on success:
 
-* Message shown to the user:
+* You should see this message:
   ```
   X persons listed!
   ```
@@ -550,7 +550,7 @@ reminding the user to follow the correct input format
 
 #### Precise expected outputs on failure:
 If no address is input after the find command, an error message explaining the error will be shown,
-reminding the user to follow the correct input format
+reminding you to follow the correct input format
 
 * You should see this error message:
 
@@ -567,7 +567,7 @@ reminding the user to follow the correct input format
 ![find_appt format](images/find-UG/find_appt0.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user:
+* You should see this message:
   ```
   X persons listed!
   ```
@@ -578,7 +578,7 @@ reminding the user to follow the correct input format
 
 #### Precise expected outputs on failure:
 If no date is input after the find command, an error message explaining the error will be shown,
-reminding the user to follow the correct input format
+reminding you to follow the correct input format
 
 * You should see this error message:
   ```
@@ -588,7 +588,7 @@ reminding the user to follow the correct input format
   ![find_appt format](images/find-UG/find_appt2.png)
 
 If an input date does not follow the accepted format, an error message explaining the error will be shown,
-reminding the user to follow the correct input format
+reminding you to follow the correct input format
 
 * You should see this error message:
   ```
@@ -598,7 +598,7 @@ reminding the user to follow the correct input format
   ![find_appt format](images/find-UG/find_appt3.png)
 
 If an input date is a past date (a date before the current date), an error message explaining the error will be shown, 
-reminding the user to input a valid date
+reminding you to input a valid date
 
 * You should see this error message:
   ```
@@ -639,7 +639,7 @@ For undoing an add command:
   ![undo format](images/undo-UG/after_add.png)
 
 * Undo
-* Message shown to the user:
+* You should see this message:
 
   ```
   Undo Successful! Deleted Person: X
@@ -656,7 +656,7 @@ For undoing a clone command:
   ![undo format](images/undo-UG/after_clone_1.png)
 
 * Undo
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Undo Successful! Deleted Person: X
@@ -673,7 +673,7 @@ For undoing a delete command:
   ![undo format](images/undo-UG/after_delete_1.png)
 
 * Undo
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Undo Successful! Contact(s) added back: X
@@ -688,7 +688,7 @@ For undoing a delete command:
   ![undo format](images/undo-UG/after_delete_multiple.png)
 
 * Undo
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Undo Successful! Contact(s) added back: X
@@ -705,7 +705,7 @@ For undoing a clear command:
   ![undo format](images/undo-UG/after_clear.png)
 
 * Undo
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Undo Successful! All contacts have been added back!
@@ -722,7 +722,7 @@ For undoing an edit command:
   ![undo format](images/undo-UG/after_edit.png)
 
 * Undo
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Undo Successful! Reverted back to: X
@@ -737,7 +737,7 @@ For undoing a redo command:
 
 * Redo
 * Undo
-* Message shown to the user:
+* You should see this message:
 
 ```
 Undo Successful!
@@ -811,7 +811,7 @@ For example, `add` a contact, then `undo`, then `redo`
   ![redo_format](images/redo-UG/undo_success.png)
 
 * Redo
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Redo successful!
@@ -824,7 +824,7 @@ For example, `add` a contact, then `undo`, then `redo`
 
 
 * If wanted, undo again
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Undo successful!
@@ -838,7 +838,7 @@ For example, `add` a contact, then `undo`, then `redo`
 
 When there is no command to redo, i.e. no previous `undo` command
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Redo unsuccessful! There is nothing to redo!
@@ -864,7 +864,7 @@ Sort contact lists by prefix name or appointment date.
 ![sort format](images/sort-UG/sortformat.png)
 
 #### Precise expected output on success:
-* Message shown to the user:
+* You should see this message:
   ```
   'X person listed!'
   ```
@@ -921,7 +921,7 @@ Example:
 
 Precise expected outputs on success:
 
-* Message shown to the user: 
+* You should see this message: 
   ```
   Address book has been cleared!
   ```
@@ -1002,7 +1002,7 @@ To circumvent this, you can add additional details to the name to differentiate 
 4. It is possible to add phone numbers that have indefinite length for clients, so please be aware that there is no built-in checks for "valid" phone numbers when editing phone numbers
 5. Due to the versatility of the nature of addresses, it is unrealistic to check for whether an address input is "valid" or not. So please be careful when editing addresses for your clients
 6. When using the `find` command, 0 and 1 contact will still show "X persons listed!", where X can be 0 or 1. This issue is purely cosmetic and won't affect any functionality
-7. After using FAPro for a while, users might notice the application slowing down. To fix the issue, simply close and open the app again
+7. After using FAPro for a while, you might notice the application slowing down. To fix the issue, simply close and open the app again
 
 --------------------------------------------------------------------------------------------------------------------
 
