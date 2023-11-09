@@ -1,0 +1,22 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User enters 'find a/Serangoon';
+:Input passed into AddressBookParser#parse;
+:Call FindCommandParser#parse;
+:Call FindAddCommandParser#parse;
+  if () then ([Argument is valid])
+    :Return new FindAddCommand object;
+    :Call FindAddCommand#execute;
+    :Call Model#updateFilteredPersonList;
+    :Success message + contacts listed;
+  else ([else])
+    :Invalid command format + error message shown;
+  endif
+
+stop
+@enduml
