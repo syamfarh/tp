@@ -58,7 +58,8 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API 
+  `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -101,9 +102,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -238,7 +239,8 @@ _{more aspects and alternatives to be added}_
 
 #### Implementation
 
-The clone feature creates a copy of a person in the addressbook while only adding a number at the end of the name and maintaining all other variables. 
+The clone feature creates a copy of a person in the address book while only adding a number at the end of the name 
+and maintaining all other variables.
 
 Given below is an example usage scenario and how the clone mechanism behaves at each step.
 
@@ -246,7 +248,7 @@ Step 1. The user executes "list" to see what Persons are available in the addres
 
 ![Clone0](images/Clone0.png)
 
-Step 2. The user executes "clone 1" to clone the person at index 1 of the addressbook, John
+Step 2. The user executes "clone 1" to clone the person at index 1 of the address book, John
 
 ![Clone1](images/Clone1.png)
 
@@ -260,7 +262,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 * **Alternative 1 (current choice):** Copies the person at the index provided and returns a person with a number next to their name
   * Pros: Fast, prevents excessive copying of a person while ensuring that there are no struct duplicates
-  * Cons: Can be restrictive and time consuming, as you have to keep copying the clone if you wish to make a clone of a person
+  * Cons: Can be restrictive and time-consuming, as you have to keep copying the clone if you wish to make a clone of a person
 
 * **Alternative 2:** Copies the person exactly as is while allowing for duplicates
   * Pros: Fast, allows for as many copies of a person as the user desires
@@ -287,7 +289,7 @@ The below diagram shows the instantiation of such empty `ArrayLists` in `ModelMa
 
 The undo mechanism also uses implementation of all the undoable commands. For all undoable commands, when they 
 are invoked, `ModelManager` will be called to store each command in `previousUndoableCommands`. 
-* Furthermore, for the `delete` and `clear` commands, each deleted person will be stored in `deletedPersons`. 
+* Furthermore, for the `delete` and `clear` commands, each deleted person will be stored in `deletedPersons`.
   * For `delete`, the number of deleted persons from a singular `delete` 
   command will be stored in `deletedNumberList`. I.e. `delete 1 2 3` deletes 3 persons, so 3 is stored in 
   `deletedNumberList`, `delete 1` deletes 1 person, so 1 is stored.
@@ -651,7 +653,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The given person has already been cloned.
 
-    * 3b1. FAPro shows an error message:  “A clone of this person already exists. To clone again, please edit the previous clone first or alternatively, clone the previous clone."
+    * 3b1. FAPro shows an error message:  "A clone of this person already exists. To clone again, please edit the previous clone first or alternatively, clone the previous clone."
 
         Use case resumes at step 2.
 
@@ -800,16 +802,16 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+3. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -817,42 +819,42 @@ testers are expected to do more *exploratory* testing.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
+   2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `delete 0`<br>
+   3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
 
 ### Cloning a person
 
-1. Cloning a person whohas not been cloned while all persons are being shown
+1. Cloning a person who has not been cloned while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `clone 1`<br>
+   2. Test case: `clone 1`<br>
       Expected: First contact is cloned from the list. Details of the cloned contact shown in the status message. Timestamp in the status bar is updated.
 
-   1. Test case: `clone 0`<br>
+   3. Test case: `clone 0`<br>
       Expected: No person is cloned. Error details shown in the status message. Status bar remains the same.
 
-   1. Other incorrect clone commands to try: `clone`, `clone x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect clone commands to try: `clone`, `clone x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 2. Cloning a person who has already been cloned while all persons are being shown
 
-   2. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `clone 1`<br>
       Expected: First contact has already been cloned. Error message is returned.
 
 3. Cloning a clone while all persons are being shown
 
-   2. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
    2. Test case: `clone 1`<br>
       Expected: The clone is cloned from the list and the number next to its name it incremented. Details of the cloned contact shown in the status message. Timestamp in the status bar is updated.
@@ -864,4 +866,4 @@ testers are expected to do more *exploratory* testing.
 
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
-1. _{ more test cases …​ }_
+2. _{ more test cases …​ }_
