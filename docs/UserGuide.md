@@ -25,11 +25,12 @@ title: FAPro User Guide
    * [calendar](#opening-calendar-window--calendar)
    * [clear](#clearing-all-entries--clear)
    * [exit](#exiting-the-program--exit)
-4. [FAQ](#faq)
-5. [Common Questions](#common-questions)
-6. [Known issues](#known-issues)
-7. [Command summary](#command-summary)
-8. [Glossary](#glossary)
+4. [Troubleshooting](#troubleshooting)
+   * [FAQ](#faq)
+   * [Common Questions](#common-questions)
+   * [Known issues](#known-issues)
+5. [Command summary](#command-summary)
+6. [Glossary](#glossary)
 
 ## Product Overview
 
@@ -964,7 +965,9 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## Troubleshooting
+
+### FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAPro home folder.
@@ -974,7 +977,7 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Common Questions
+### Common Questions
 
 **Q**: Why can't I add clients with the same name? <br>
 **A**:
@@ -989,7 +992,7 @@ To circumvent this, you can add additional details to the name to differentiate 
 **A**: Yes! Our thinking is that if an FA wants to host a group session with several clients, FAPro allows them to schedule multiple clients for the same appointment date and time, making it convenient for FA to manage group meetings.
 --------------------------------------------------------------------------------------------------------------------
 
-## Known Issues
+### Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **In calendar window**:
