@@ -208,7 +208,9 @@ If the RESULT is not separated by commas, with any whitespace or not in the rang
 
 ### Adding a person: `add`
 
-Adds a new entry to their address book for financial advisors, including personal details such as name, address, occupation, phone number and email.
+Allows you to add a new entry to your address book, including personal details such as your clients name, address, occupation, phone number and email.
+
+The main method you will be using to add contacts in typical situations.
 
 #### Format:
 * `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]… [appt/APPOINTMENT_DATE]`
@@ -216,6 +218,7 @@ Adds a new entry to their address book for financial advisors, including persona
 #### Example commands:
 * `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01 appt/12-12-2023 08:30`
 * `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567`
+* `add n/Robert Johnson p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`
 
 #### Acceptable values for each parameter:
 * NAME: Must be alphanumeric characters only. Name must be unique. (John Doe)
@@ -241,6 +244,10 @@ A person can have any number of tags (including 0)
   where X are the details of the person added
 
 * For example, for Robert Johnson (the example command), it would be:<br> `New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: `<br> Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
+* This is the original empty address book
+
+  ![add format](images/add-UG/addbefore.png)
+  
 * The new entry is displayed in the address book GUI
 
   ![add format](images/add-UG/add_success.png)
@@ -252,7 +259,9 @@ If a required parameter is missing (e.g., NAME, EMAIL)
 * You should see this message:
 
   ```
-  Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
+  Invalid command format! add: Adds a person to the address book. Parameters: n/NAME
+  p/PHONE e/EMAIL a/ADDRESS [t/TAG]... Example: add n/John Doe p/98765432
+  e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
   ```
 
   ![add format](images/add-UG/addmissingparam.png)
@@ -263,12 +272,16 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
 
   ```
   Emails should be of the format local-part@domain and adhere to the following constraints:
-  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+  1. The local-part should only contain alphanumeric characters and these special
+  characters, excluding the parentheses, (+_.-). The local-part may not start or end with
+  any special characters.
+  2. This is followed by a '@' and then a domain name. The domain name is made up of domain
+  labels separated by periods.
   The domain name must:
     - end with a domain label at least 2 characters long
     - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    - have each domain label consist of alphanumeric characters, separated only by hyphens,
+      if any.
   ```
 
   ![add format](images/add-UG/addinvalidemail.png)
@@ -286,7 +299,9 @@ If a parameter is specified multiple times (e.g., --name John --name Doe), an er
 
 ### Cloning a person : `clone`
 
-Clones a contact from FAPro at the specified index. Makes it easier for you to add a contact with very similar details (i.e from the same household)
+Clones a contact from the address book at the specified index.
+
+Makes it easier for you to add a contact with very similar details (i.e from the same household)
 
 #### Format:
 * `clone INDEX`
@@ -315,14 +330,21 @@ After cloning, the clone is the exact same as the original, other than a suffix 
 * For example, if
 
   ```
-  Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: ; Tags:
+  Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber;
+  Address: Hougang Avenue 1; AppointmentDate: ; Tags:
   ```
 
   is the person being cloned, then the output is:
 
   ```
-  Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: ; Tags:
+  Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber;
+  Address: Hougang Avenue 1; AppointmentDate: ; Tags:
   ```
+* This is the original address book with just one contact (John)
+
+  ![add format](images/clone-UG/clonebefore.png)
+
+* The cloned entry is displayed in the address book GUI
 
   ![clone format](images/clone-UG/clone_success.png)
 
@@ -333,7 +355,8 @@ If no index, 0 or a negative index is entered next to the clone command
 * You should see this error message:
 
   ```
-  Invalid command format! clone: Clones the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer).
+  Invalid command format! clone: Clones the person identified by the index number used
+  in the displayed person list. Parameters: INDEX (must be a positive integer).
   ```
 
   ![clone format](images/clone-UG/cloneinvalidindex.png)
@@ -353,7 +376,10 @@ If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
 * You should see this error message:
 
   ```
-  The integer suffix of the person being cloned is out of range. Please note that the smallest possible suffix that a person can have is 1 and the largest possible suffix that a person can have is 2147483647. As such, if your suffix is 0 or 2147483647, please consider editing the names of your contacts first.
+  The integer suffix of the person being cloned is out of range. Please note that
+  the smallest possible suffix that a person can have is 1 and the largest possible
+  suffix that a person can have is 2147483647. As such, if your suffix is 0 or
+  2147483647, please consider editing the names of your contacts first.
   ```
 
   ![clone format](images/clone-UG/clonesuffixerror.png)
@@ -361,7 +387,9 @@ If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
 
 ### Deleting a person : `delete`
 
-Deletes a contact from FAPro at the specified indexes.
+Deletes a contact from your address book at the specified indexes.
+
+Useful in instances where you have no more need for a clients contact details.
 
 #### Format: 
 * `delete INDEX [MORE INDEXES]`
@@ -408,7 +436,8 @@ If no index is placed after the delete command:
 
   ```
   Invalid command format! 
-  delete: Deletes the person(s) identified by the index number used in the displayed person list. 
+  delete: Deletes the person(s) identified by the index number used in the displayed
+  person list. 
   Parameters: INDEXES (must be positive integers, separated by spaces)
   Example: delete 1 3 5"
   ```
@@ -1034,7 +1063,7 @@ To circumvent this, you can add additional details to the name to differentiate 
 | Word                 | Meaning                                                                                                                         |
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | **FA**               | Short form for financial advisor                                                                                                |
-| **Parameter**        | Values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                 |
+| **Parameter**        | Values inputted by the you.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                  |
 | **Positive Integer** | An integer that is positive (i.e greater than 0). Please note that we are excluding 0 as a positive integer.                    |
 | **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
 | **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
