@@ -340,7 +340,7 @@ After cloning, the clone is the exact same as the original, other than a suffix 
   Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber;
   Address: Hougang Avenue 1; AppointmentDate: ; Tags:
   ```
-* This is the original empty address book
+* This is the original address book with just one contact (John)
 
   ![add format](images/clone-UG/clonebefore.png)
 
