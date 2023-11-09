@@ -1,16 +1,15 @@
 ---
 layout: page
-title: User Guide
+title: FAPro User Guide
 ---
-
-FApro seeks to improve the quality of life of financial advisors (FAs). It allows FAs to **keep track of large numbers of contacts**. It allows FAs to have a one-stop platform to manage their contacts and conduct financial analytics while providing a big-picture view of their clientele as a whole.
 
 * Table of Contents
   {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-1. [Quick start](#quick-start)
-2. [Features](#features)
+1. [Product Overview](#product-overview)
+2. [Quick start](#quick-start)
+3. [Features](#features)
    * [help](#viewing-help-help)
    * [questionnaire](#viewing-risk-assessment-questionnaire-questionnaire)
    * [riskprofile](#adds-risk-profile-level-to-a-contact-riskprofile)
@@ -26,11 +25,23 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
    * [calendar](#opening-calendar-window--calendar)
    * [clear](#clearing-all-entries--clear)
    * [exit](#exiting-the-program--exit)
-3. [FAQ](#faq)
-4. [Common Questions](#common-questions)
-5. [Known issues](#known-issues)
-6. [Command summary](#command-summary)
-7. [Glossary](#glossary)
+4. [FAQ](#faq)
+5. [Common Questions](#common-questions)
+6. [Known issues](#known-issues)
+7. [Command summary](#command-summary)
+8. [Glossary](#glossary)
+
+## Product Overview
+
+The FAPro User Guide is designed to assist financial advisors (FAs) in optimising their client management. It aims to improve the quality of life for FAs by providing a comprehensive, user-centric resource that enables them to efficiently track large numbers of contacts and manage their clients in one central platform.
+
+This guide is intended to empower FAs, with the knowledge and skills needed to make the most out of FAPro, ultimately enhancing their ability to provide financial services effectively.
+
+FAPro allows FAs to effortlessly organise and maintain a large database of contacts. Keep detailed client profiles, track interactions, and categorise contacts for targeted engagement.
+
+This guide is organised into sections for easy reference. Use the table of contents to jump to specific topics, and utilise hyperlinks for quick access to related content.
+
+Throughout the guide, we'll provide tips and best practices to help you make the most of FAPro's features and optimise your workflow. A glossary of key terms is included to ensure you understand the technical jargon used in FAPro.
 
 ## Quick start
 
@@ -172,7 +183,7 @@ When multiple prefixes <b>res/</b> are inputted along with the RESULT:
 
 #### Precise expected outputs on failure:
 If the RESULT is empty or the INDEX is negative integers
-* Error message shown to the user:
+* You should see this error message:
   ```
   Invalid command format! 
   riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
@@ -183,7 +194,7 @@ If the RESULT is empty or the INDEX is negative integers
   ![invalid risk profile 1](images/questionnaire-UG/invalidRiskProfile1.png)
 
 If the RESULT is not separated by commas, with any whitespace or not in the range of 'a' - 'e'
-* Error message shown to the user:
+* You should see this error message:
   ```
   Result must have 8 comma-separated characters from 'a' to 'e'!
   riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
@@ -237,7 +248,7 @@ A person can have any number of tags (including 0)
 
 If a required parameter is missing (e.g., NAME, EMAIL)
 
-* Error message shown to the user:
+* You should see this message:
 
   ```
   Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
@@ -247,7 +258,7 @@ If a required parameter is missing (e.g., NAME, EMAIL)
 
 If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Emails should be of the format local-part@domain and adhere to the following constraints:
@@ -263,7 +274,7 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
 
 If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Multiple values specified for the following single-valued field(s): n/
@@ -318,7 +329,7 @@ After cloning, the clone is the exact same as the original, other than a suffix 
 
 If no index, 0 or a negative index is entered next to the clone command
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Invalid command format! clone: Clones the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer).
@@ -328,7 +339,7 @@ If no index, 0 or a negative index is entered next to the clone command
 
 If the index entered is greater than the current number of contacts in the address book
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   The person index provided is invalid.
@@ -338,7 +349,7 @@ If the index entered is greater than the current number of contacts in the addre
 
 If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   The integer suffix of the person being cloned is out of range. Please note that the smallest possible suffix that a person can have is 1 and the largest possible suffix that a person can have is 2147483647. As such, if your suffix is 0 or 2147483647, please consider editing the names of your contacts first.
@@ -383,7 +394,7 @@ Deletes a contact from FAPro at the specified indexes.
 #### Precise expected outputs on failure:
 
 If any of the entered indexes are invalid:
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   The person index provided is invalid.
@@ -392,7 +403,7 @@ If any of the entered indexes are invalid:
   ![edit format](images/delete-UG/deletewrongindex.png)
 
 If no index is placed after the delete command:
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Invalid command format! 
@@ -456,7 +467,7 @@ Edits an existing client's parameter in FAPro.
 #### Precise expected outputs on failure:
 
 If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
-* Message shown to the user:
+* You should see this error message:
   ```
   Invalid command format! 
   edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
@@ -512,7 +523,7 @@ Finds persons based on the given keywords.
 If no name is input after the find command, an error message explaining the error will be shown, 
 reminding the user to follow the correct input format
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Invalid command format! find n/: Finds all persons whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
@@ -541,7 +552,7 @@ reminding the user to follow the correct input format
 If no address is input after the find command, an error message explaining the error will be shown,
 reminding the user to follow the correct input format
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Invalid command format! find a/: Finds all persons whose address contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
@@ -569,7 +580,7 @@ reminding the user to follow the correct input format
 If no date is input after the find command, an error message explaining the error will be shown,
 reminding the user to follow the correct input format
 
-* Error message shown to the user:
+* You should see this error message:
   ```
   Invalid command format! find_appt: Finds all persons whose appointment date matches the specified input date and displays them as a list with index numbers.
   ```
@@ -579,7 +590,7 @@ reminding the user to follow the correct input format
 If an input date does not follow the accepted format, an error message explaining the error will be shown,
 reminding the user to follow the correct input format
 
-* Error message shown to the user:
+* You should see this error message:
   ```
   Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd].
   ```
@@ -589,7 +600,7 @@ reminding the user to follow the correct input format
 If an input date is a past date (a date before the current date), an error message explaining the error will be shown, 
 reminding the user to input a valid date
 
-* Error message shown to the user:
+* You should see this error message:
   ```
   Appointment Date should be after the current date.
   ```
@@ -740,7 +751,7 @@ Undo Successful!
 
 When there is no command to undo, i.e. no previous `add`, `clone`, `delete`, `clear`, or `edit` command
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   There is no command to undo!
@@ -865,7 +876,7 @@ Sort contact lists by prefix name or appointment date.
 #### Precise expected outputs on failure:
 If either a required parameter is missing or a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Invalid command format!
@@ -920,7 +931,7 @@ Precise expected outputs on success:
 
 Precise expected outputs on failure:
 
-* Error message shown to the user:
+* You should see this error message:
   ```
   Address book is empty. There is nothing to clear.
   ```
