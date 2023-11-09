@@ -1,0 +1,69 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title ArrayLists in ModelManager
+
+package deletedPersons as "<u>deletedPersons" {
+  class deleted1 as "<u>Person1:John</u>"
+  class deleted2 as "<u>Person2:hehe</u>"
+}
+
+deleted1 -[hidden]right-> deleted2
+hide deleted1
+hide deleted2
+
+package addedPersons as "<u>addedPersons"{
+    class added1 as "<u>Person1:John</u>"
+    class added2 as "<u>Person2:hehe</u>"
+}
+
+added1 -[hidden]right-> added2
+hide deleted1
+hide deleted2
+
+package editedPersons as "<u>editedPersons" {
+  class edited1 as "<u>Pair1:Edited,Original</u>"
+  class edited2 as "<u>Pair2:Edited,Original</u>"
+}
+
+edited1 -[hidden]right-> edited2
+editedPersons -[hidden]up-> deletedPersons
+hide edited1
+hide edited2
+
+package previousUndoableCommands as "<u>previousUndoableCommands" {
+  class command1 as "<u>String1: delete</u>"
+  class command2 as "<u>String2: Command</u>"
+}
+
+command1 -[hidden]right-> command2
+hide command1
+hide command2
+previousUndoableCommands -[hidden]up-> addedPersons
+
+
+package deletedNumberList as "<u>deletedNumberList" {
+  class deletedNumber1 as "<u>Integer1: Number</u>"
+  class deletedNumber2 as "<u>Integer2: Number</u>"
+}
+
+hide deletedNumber1
+hide deletedNumber2
+deletedNumber1 -[hidden]right-> deletedNumber2
+deletedNumberList -[hidden]up-> previousUndoableCommands
+
+package clearedNumberList as "<u>clearedNumberList" {
+  class clearedNumber1 as "<u>Integer1: Number</u>"
+  class clearedNumber2 as "<u>Integer2: Number</u>"
+}
+
+hide clearedNumber1
+hide clearedNumber2
+clearedNumber1 -[hidden]right-> clearedNumber2
+clearedNumberList -[hidden]up-> editedPersons
+
+
+@end

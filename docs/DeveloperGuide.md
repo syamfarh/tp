@@ -276,14 +276,24 @@ The `undo` feature undoes the most recent undoable command. The only undoable co
 `delete`, & `clear`. Commands that do not modify the address book, such as `list`, `find`, `sort` etc. are not 
 undoable commands.
 
-The undo mechanism is facilitated by the use of `ArrayLists` in `ModelManager` to store deleted persons, edited persons, 
-as well as the previous undoable commands. As such `ArrayLists` are instantiated every time the user starts the 
-program, undo does not store the commands from previous sessions and cannot undo changes made in previous sessions.
+The undo mechanism is facilitated by the use of `ArrayLists` in `ModelManager` to store deleted, added and edited 
+persons, as well as the previous undoable commands. The number of contacts deleted from a single delete command and 
+from a clear command are stored as well. As these `ArrayLists` are instantiated every time the user starts 
+the program, undo does not store the commands from previous sessions and cannot undo changes made in previous sessions.
 
-The undo mechanism also changes the implementation of all the undoable commands. For all undoable commands, when they 
-are invoked, `ModelManager` will be called to store each command in an `ArrayList` named `previousUndoableCommands`. 
-Furthermore, for the `delete` and `clear` commands, each deleted person will be stored in an `ArrayList` named 
-`deletedPersons`. For the `edit` command, a `pair` of the original `person` and the edited `person` will be stored in an 
+The below diagram shows the instantiation of such empty `ArrayLists` in `ModelManager`
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram0.png)
+
+The undo mechanism also uses implementation of all the undoable commands. For all undoable commands, when they 
+are invoked, `ModelManager` will be called to store each command in `previousUndoableCommands`. 
+* Furthermore, for the `delete` and `clear` commands, each deleted person will be stored in `deletedPersons`. 
+  * For `delete`, the number of deleted persons from a singular `delete` 
+  command will be stored in `deletedNumberList`. I.e. `delete 1 2 3` deletes 3 persons, so 3 is stored in 
+  `deletedNumberList`, `delete 1` deletes 1 person, so 1 is stored.
+  * For `clear`, the number of deleted persons will be stored in `clearedNumberList`. I.e. 
+  `clear` will store 5 in `clearedNumberList` if there were 5 contacts in the address book.
+* For the `edit` command, a `pair` of the original `person` and the edited `person` will be stored in an 
 `ArrayList` named `editedPersons`. 
 
 
@@ -295,29 +305,52 @@ most recent previous undoable command. The other undo operations are:
 * `UndoCommand#executeUndoEdit(Model)`
 
 These operations make use of other operations exposed in the `Model` interface, which are:
-* `Model#storeDeletedPerson(Person)`
-* `Model#getDeletedPerson()`
-* `Model#removeDeletedPerson()`
-* `Model#getDeletedPersonsSize()`
-* `Model#getPreviousUndoableCommandsSize()`
-* `Model#getNumberOfPreviousDeleteCommands()`
-* `Model#undoDelete()`
-* `Model#storePreviousUndoableCommand(String)`
-* `Model#getPreviousUndoableCommand()`
-* `Model#removePreviousUndoableCommand()`
-* `Model#getAddressBookSize()`
-* `Model#storeEditedPersonsPair(Person, Person)`
-* `Model#getEditedPersonsPair()`
-* `Model#removeEditedPersonsPair()`
+* For undoable commands:
+  * `Model#getPreviousUndoableCommandsSize()`
+  * `Model#getPreviousUndoableCommand()`
+  * `Model#removePreviousUndoableCommand()`
+* For undoing `delete` and `clear` commands:
+  * `Model#getDeletedPersons()`
+  * `Model#getDeletedPerson()`
+  * `Model#removeDeletedPerson()`
+  * `Model#getLastDeletedNumber()`
+  * `Model#getDeletedNumberList()`
+  * `Model#undoDelete()`
+  * `Model#getLastClearedNumber()`
+  * `Model#removeLastClearedNumber()`
+* For undoing `add` and `clone` commands:
+  * `Model#getAddedPerson()`
+  * `Model#undoAdd()`
+* For undoing `edit` commands
+  * `Model#getEditedPersonsPair()`
+  * `Model#removeEditedPersonsPair()`
+  * `Model#undoEdit()`
 
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `ArrayList`s `previousUndoableCommands`, 
 `deletedPersons`, and `editedPersons` are initialized as a blank `ArrayList`.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls 
-`Model#storePreviousUndoableCommand(String)`, adding the command as a String into `previousUndoableCommands`, and also 
-calls `Model#storeDeletedPerson(Person)`, adding the Person into `deletedPersons`.
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram1.png)
+
+Step 2. The user executes `delete 1 2` command to delete the 1st and 2nd person in the address book. The following 
+steps are repeated twice, since 2 persons are deleted.
+* The `delete` command calls `Model#storePreviousUndoableCommand(String)`, adding the command as a String into 
+`previousUndoableCommands`, and also calls `Model#storeDeletedPerson(Person)`, adding the Person into 
+`deletedPersons`.
+* Hence, there are 2 elements in `deletedPersons` and `previousUndoableCommands`.
+
+Then, the `delete` command also calls `Model#storeDeletedNumberList`, adding the number of persons deleted into 
+`deletedNumberList`.
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram2.png)
+
+The following sequence diagram shows how the `delete` operation works (only important parts related to undo).
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagramForUndo.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should 
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 :information_source: **Note:** If an undoable command fails its execution, it will not call 
 `Model#storePreviousUndoableCommand(String)` so nothing is stored in `previousUndoableCommands`, and `ModelManager` 
@@ -325,17 +358,35 @@ is unchanged.
 
 Step 3. The user now decides that deleting the person was a mistake, and decides to undo that action by executing 
 the `undo` command. The `undo` command will call `model#getPreviousUndoableCommand`, which gets the most recent 
-undoable command executed by the user. In this case, it is the `delete` command. Hence, `UndoCommand#executeUndoAdd
-(model)` is called, which adds back the deleted `Person` to the address book. 
+undoable command executed by the user. In this case, it is the `delete` command. Hence, `UndoCommand#UndoDelete
+(model)` is called, which adds back the deleted `Person`s to the address book. 
 
-In the process, `Model#removePreviousUndoableCommand` is called, removing the delete command (as a String) from the  
-`ArrayList` `previousUndoableCommands`.
+In the process, `Model#removePreviousUndoableCommand` and `Model#removeDeletedPerson()` is called twice, removing the 
+delete commands from `previousUndoableCommands` and deleted persons from `deletedPersons`. 
+`Model#removeLastDeletedNumber` is also called once, removing the deleted number from `deletedNumberList`.
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram1.png)
 
 The following sequence diagram shows how the `undo` operation and (mainly) `executeUndoAdd` operation works.
+
+![ModelManagerStateDiagram](images/UndoSequenceDiagramForDelete.png)
 
 Step 4. The user now decides to execute the command `list`. As this command is not an undoable command, 
 `Model#storePreviousUndoableCommand(String)` and other storing operations are not called, so `ModelManager` remains 
 unchanged.
+
+#### Design considerations:
+
+**Aspect: How undo executes:**
+
+* **Alternative 1 (current choice):** Individual command knows how to undo by
+  itself.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+* **Alternative 2 :** Save the entire address book.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
 
 
 
