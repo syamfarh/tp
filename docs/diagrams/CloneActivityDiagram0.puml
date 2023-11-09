@@ -1,0 +1,23 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User executes 'clone 1';
+:Call CloneCommand#execute;
+:Call CloneCommandParser#parseIndex;
+  if () then ([Index is valid])
+    :Call Index#getZeroBased;
+    if () then ([Index smaller than list size])
+      :Index is valid;
+    else ([else])
+      :Index is invalid;
+    endif
+  else ([else])
+    :Index is invalid;
+  endif
+
+stop
+@enduml

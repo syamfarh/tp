@@ -1,0 +1,26 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User enters 'find appt/2023-12-12';
+:Input passed into AddressBookParser#parse;
+:Call FindCommandParser#parse;
+:Call FindApptCommandParser#parse;
+  if () then ([Argument is valid])
+    :Return new FindApptCommand object;
+    :Call FindApptCommand#execute;
+    :Call Model#updateFilteredPersonList;
+    :Success message + contacts listed;
+  else ([else])
+    if() then ([Date format is invalid])
+    :Invalid command format + invalid date format error message shown;
+    else ([Invalid input date])
+    :Invalid command format + invalid input date error message shown;
+    endif
+  endif
+
+stop
+@enduml
