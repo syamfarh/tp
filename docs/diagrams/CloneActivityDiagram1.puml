@@ -1,0 +1,21 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:Separate input into substrings;
+:Call CloneCommand#clonePerson;
+if () then ([Name has no spaces and no suffix])
+  :Add suffix '1' to the person name;
+elseif () then ([Name has spaces and suffix is not integer])
+  :Add suffix '1' to the person name;
+else ([Name has spaces and the suffix consists of only an integer])
+  :Increment the suffix of the person name;
+endif
+
+:Return newly cloned person to CloneCommand#execute;
+
+stop
+@enduml

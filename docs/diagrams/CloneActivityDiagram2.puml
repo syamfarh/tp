@@ -1,0 +1,18 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:Attempt to add cloned person to list;
+
+while () is ([Duplicate Exception])
+  :Call CloneCommand#clonePerson;
+  :Attempt to add newly cloned person to list;
+endwhile
+
+:Add the person to the list;
+
+stop
+@enduml

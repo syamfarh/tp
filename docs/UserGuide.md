@@ -1,36 +1,48 @@
 ---
 layout: page
-title: User Guide
+title: FAPro User Guide
 ---
-
-FApro seeks to improve the quality of life of financial advisors (FAs). It allows FAs to **keep track of large numbers of contacts**. It allows FAs to have a one-stop platform to manage their contacts and conduct financial analytics while providing a big-picture view of their clientele as a whole.
 
 * Table of Contents
   {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
-1. [Quick start](#quick-start)
-2. [Features](#features)
+1. [Product Overview](#product-overview)
+2. [Quick start](#quick-start)
+3. [Features](#features)
    * [help](#viewing-help-help)
    * [questionnaire](#viewing-risk-assessment-questionnaire-questionnaire)
-   * [riskprofile](#adds-risk-profile-level-to-a-contactriskprofile)
+   * [riskprofile](#adds-risk-profile-level-to-a-contact-riskprofile)
    * [add](#adding-a-person-add)
    * [clone](#cloning-a-person--clone)
    * [delete](#deleting-a-person--delete)
    * [list](#list-out-all-contacts--list)
    * [edit](#editing-a-person--edit)
-   * [find](#locating-persons-by-name-find)
+   * [find](#searching-persons-find)
    * [undo](#undoing-a-command--undo)
    * [redo](#redoing-an-undo-command--redo)
    * [sort](#sorting-contacts--sort)
    * [calendar](#opening-calendar-window--calendar)
    * [clear](#clearing-all-entries--clear)
    * [exit](#exiting-the-program--exit)
-3. [FAQ](#faq)
-4. [Common Questions](#common-questions)
-5. [Known issues](#known-issues)
-6. [Command summary](#command-summary)
-7. [Glossary](#glossary)
+4. [Troubleshooting](#troubleshooting)
+   * [FAQ](#faq)
+   * [Common Questions](#common-questions)
+   * [Known issues](#known-issues)
+5. [Command summary](#command-summary)
+6. [Glossary](#glossary)
+
+## Product Overview
+
+The FAPro User Guide is designed to assist financial advisors (FAs) in optimising their client management. It aims to improve the quality of life for FAs by providing a comprehensive, user-centric resource that enables them to efficiently track large numbers of contacts and manage their clients in one central platform.
+
+This guide is intended to empower FAs, with the knowledge and skills needed to make the most out of FAPro, ultimately enhancing their ability to provide financial services effectively.
+
+FAPro allows FAs to effortlessly organise and maintain a large database of contacts. Keep detailed client profiles, track interactions, and categorise contacts for targeted engagement.
+
+This guide is organised into sections for easy reference. Use the table of contents to jump to specific topics, and utilise hyperlinks for quick access to related content.
+
+Throughout the guide, we'll provide tips and best practices to help you make the most of FAPro's features and optimise your workflow. A glossary of key terms is included to ensure you understand the technical jargon used in FAPro.
 
 ## Quick start
 
@@ -92,16 +104,19 @@ Shows a message listing the basic commands and explaining how to access the user
 #### Format: 
 * `help`
 
-![help format](images/helpFormat.png)
-
 #### Precise expected outcome on success:
-* Message shown to the user:
+
+* You should see this message:
   ```
   Opened help window.
   ```
-* A pop-up window lists all the basic commands and displays a link to FAPro's user guide
+  
+  ![help_format](images/help-UG/help_success.png)
 
-  ![help window](images/helpWindow.png)
+* A pop-up window lists all the main commands and displays a link to FAPro's user guide
+
+
+  ![help_window](images/help-UG/helpWindow.png)
 
 
 ### Viewing risk assessment questionnaire: `questionnaire`
@@ -111,16 +126,16 @@ Displays questions that are used for generating client risk profile levels.
 #### Format: 
 * `questionnaire`
 
-![questionnaire format](images/questionnaireFormat.png)
-
 #### Precise expected outcome on success:
-* Message shown to the user:
+* You should see this message:
    ```
    Opened questionnaire window.
    ```
+  ![questionnaire format](images/questionnaire-UG/questionnaire_success.png)
+
 * A pop-up window shows the risk assessment multiple choice questions, including the grading and risk profile categories criteria
 
-  ![questionnaire window](images/questionnaireWindow.png)
+  ![questionnaire window](images/questionnaire-UG/questionnaireWindow.png)
 
 
 ### Adds risk profile level to a contact: `riskprofile`
@@ -133,7 +148,7 @@ Generates the client risk profile level based on their response of risk assessme
 #### Example commands:
 * `riskprofile 3 res/a,b,c,d,e,e,b,c`
 
-![riskprofile format](images/riskProfileFormat.png)
+  ![riskprofile format](images/riskProfile-UG/riskProfileFormat.png)
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
@@ -153,7 +168,7 @@ When multiple prefixes <b>res/</b> are inputted along with the RESULT:
 * RESULT: Valid result format, 8 comma-separated characters without whitespace from 'a' - 'e' (e,b,a,c,b,b,a,e)
 
 #### Precise expected outcome on success:
-* Message shown to the user:
+* You should see this message:
   ```
   Added risk profile to Person: X
   ```
@@ -165,11 +180,11 @@ When multiple prefixes <b>res/</b> are inputted along with the RESULT:
   <span style="background-color:#FF6600; color:white;">**Moderately High**</span>,
   <span style="background-color:#F44336; color:white;">**High**</span>
 
-  ![riskprofile result](images/riskProfileResult.png)
+  ![riskprofile result](images/riskProfile-UG/riskProfileResult.png)
 
 #### Precise expected outputs on failure:
 If the RESULT is empty or the INDEX is negative integers
-* Error message shown to the user:
+* You should see this error message:
   ```
   Invalid command format! 
   riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
@@ -177,10 +192,10 @@ If the RESULT is empty or the INDEX is negative integers
   Parameters: INDEX (must be a positive integer) res/[RESULT]
   Example: riskprofile 1 res/a,e,b,d,c,a,d,e
   ```
-  ![invalid risk profile 1](images/invalidRiskProfile1.png)
+  ![invalid risk profile 1](images/questionnaire-UG/invalidRiskProfile1.png)
 
 If the RESULT is not separated by commas, with any whitespace or not in the range of 'a' - 'e'
-* Error message shown to the user:
+* You should see this error message:
   ```
   Result must have 8 comma-separated characters from 'a' to 'e'!
   riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
@@ -188,7 +203,7 @@ If the RESULT is not separated by commas, with any whitespace or not in the rang
   Parameters: INDEX (must be a positive integer) res/[RESULT]
   Example: riskprofile 1 res/a,e,b,d,c,a,d,e
   ```
-  ![invalid risk profile 2](images/invalidRiskProfile2.png)
+  ![invalid risk profile 2](images/questionnaire-UG/invalidRiskProfile2.png)
 
 
 ### Adding a person: `add`
@@ -215,10 +230,9 @@ Adds a new entry to their address book for financial advisors, including persona
 A person can have any number of tags (including 0)
 </div>
 
-![add format](images/addformat.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user:
+* You should see this message:
 
   ```
   New Person added: X
@@ -229,23 +243,23 @@ A person can have any number of tags (including 0)
 * For example, for Robert Johnson (the example command), it would be:<br> `New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: `<br> Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
 * The new entry is displayed in the address book GUI
 
-  ![add format](images/addresult.png)
+  ![add format](images/add-UG/add_success.png)
 
 #### Precise expected outputs on failure:
 
 If a required parameter is missing (e.g., NAME, EMAIL)
 
-* Error message shown to the user:
+* You should see this message:
 
   ```
   Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
   ```
 
-  ![add format](images/addmissingparam.png)
+  ![add format](images/add-UG/addmissingparam.png)
 
 If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Emails should be of the format local-part@domain and adhere to the following constraints:
@@ -257,22 +271,22 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
     - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
   ```
 
-  ![add format](images/addinvalidemail.png)
+  ![add format](images/add-UG/addinvalidemail.png)
 
 If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Multiple values specified for the following single-valued field(s): n/
   ```
 
-  ![add format](images/addduplicateparam.png)
+  ![add format](images/add-UG/addduplicateparam.png)
 
 
 ### Cloning a person : `clone`
 
-Clones a contact from FAPro at the specified index. Makes it easier for the user when adding a contact with very similar details (i.e from the same household)
+Clones a contact from FAPro at the specified index. Makes it easier for you to add a contact with very similar details (i.e from the same household)
 
 #### Format:
 * `clone INDEX`
@@ -288,16 +302,15 @@ After cloning, the clone is the exact same as the original, other than a suffix 
 * INDEX: Only accept **non-negative** int values that are less than the size of the address book. Must have at least one
 * PERSON: If the person being cloned has a suffix at the end, the suffix cannot be 0 or 2147483647 (MAX_INT)
 
-![clone format](images/cloneformat.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user:
+* You should see this message:
 
   ```
   Cloned Person: X
   ```
-
   where X are the details of the person the clone is based off
+
 
 * For example, if
 
@@ -311,39 +324,39 @@ After cloning, the clone is the exact same as the original, other than a suffix 
   Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: ; Tags:
   ```
 
-  ![clone format](images/cloneresult.png)
+  ![clone format](images/clone-UG/clone_success.png)
 
 #### Precise expected outputs on failure:
 
 If no index, 0 or a negative index is entered next to the clone command
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Invalid command format! clone: Clones the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer).
   ```
 
-  ![clone format](images/cloneinvalidindex.png)
+  ![clone format](images/clone-UG/cloneinvalidindex.png)
 
 If the index entered is greater than the current number of contacts in the address book
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   The person index provided is invalid.
   ```
 
-  ![clone format](images/clonelargeindex.png)
+  ![clone format](images/clone-UG/clonelargeindex.png)
 
 If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   The integer suffix of the person being cloned is out of range. Please note that the smallest possible suffix that a person can have is 1 and the largest possible suffix that a person can have is 2147483647. As such, if your suffix is 0 or 2147483647, please consider editing the names of your contacts first.
   ```
 
-  ![clone format](images/clonesuffixerror.png)
+  ![clone format](images/clone-UG/clonesuffixerror.png)
 
 
 ### Deleting a person : `delete`
@@ -367,22 +380,22 @@ Deletes a contact from FAPro at the specified indexes.
 
 #### Precise expected outputs on success:
 
-* Message shown to the user:
+* You should see this message:
 
   ```
   Deleted Person(s): X
   ```
 
   where X are the details of the deleted persons
-  * Size of address book is reduced by however many indexes were entered (i.e if you entered delete 1 2 3, as you entered 3 indexes, the size of the address book decreases by 3) 
-  * GUI reflects that deleted contacts are now no longer there
+* Size of address book is reduced by however many indexes were entered (i.e if you entered delete 1 2 3, as you entered 3 indexes, the size of the address book decreases by 3) 
+* GUI reflects that deleted contacts are now no longer there
 
   ![delete format](images/delete-UG/deleteafter.png)
 
 #### Precise expected outputs on failure:
 
 If any of the entered indexes are invalid:
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   The person index provided is invalid.
@@ -391,7 +404,7 @@ If any of the entered indexes are invalid:
   ![edit format](images/delete-UG/deletewrongindex.png)
 
 If no index is placed after the delete command:
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Invalid command format! 
@@ -411,14 +424,14 @@ Shows a list of all contacts.
 * `list`
 
 #### Precise expected outputs on success:
-* Message shown to the user:
+* You should see this message:
   ```
   Listed all persons
   ```
 
 * List all contacts with their details
 
-  ![list result](images/listResult.png)
+  ![list result](images/list-UG/listResult.png)
 
 ### Editing a person : `edit`
 
@@ -441,10 +454,10 @@ Edits an existing client's parameter in FAPro.
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags
 
-![edit format](images/edit-UG/editformat.png)
+  ![edit format](images/edit-UG/editformat.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user:
+* You should see this message:
   ```
   Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], Occupation:[OCCUPATION], Address:[ADDRESS]…
   ```
@@ -455,7 +468,7 @@ Edits an existing client's parameter in FAPro.
 #### Precise expected outputs on failure:
 
 If a required parameter is missing (e.g., name, email), an error message should specify which parameter is missing.
-* Message shown to the user:
+* You should see this error message:
   ```
   Invalid command format! 
   edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
@@ -478,6 +491,12 @@ Finds persons based on the given keywords.
 
 * `find appt/APPOINTMENT DATE`
 
+#### Acceptable values for each parameter:
+* NAME: Valid string name
+* ADDRESS: Valid string address
+* APPOINTMENT DATE: Valid dates (after current date), in the format of `yyyy-mm-dd`
+
+
 #### Example commands:
 * `find n/John Alice`, finds all contacts whose names include "John" and "Alice"
 * `find a/Tokyo Geylang`, finds all contacts whose address include "Tokyo" and "Geylang" , followed by `delete 2`, 
@@ -485,113 +504,115 @@ Finds persons based on the given keywords.
 * `find appt/2024-01-01`, finds all contacts whose appointment date matches "2024-01-01", followed by `edit 1`, will 
   edit the contact at index 1 after find
 
-#### Acceptable values for each parameter:
-* NAME: Valid string name
-* ADDRESS: Valid string address
-* APPOINTMENT DATE: Valid dates (after current date), in the format of `yyyy-mm-dd`
 
-#### _Name_
 
-![find_name format](images/find_n0.png)
+#### _Find by name:_
+
+![find_name format](images/find-UG/find_n0.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user: 
+* You should see this message: 
   ```
   X persons listed!
   ```
   where X is the number of contacts listed
 * The list of contacts whose names contain the input name is shown
 
-  ![find_name format](images/find_n1.png)
+  ![find_name format](images/find-UG/find_n1.png)
 
 #### Precise expected outputs on failure:
 If no name is input after the find command, an error message explaining the error will be shown, 
-reminding the user to follow the correct input format
+reminding you to follow the correct input format
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Invalid command format! find n/: Finds all persons whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
   ```
 
-  ![find_name format](images/find_n2.png)
+  ![find_name format](images/find-UG/find_n2.png)
 
-#### _Address_
 
-![find_add format](images/find_a0.png)
+#### _Find by address:_
+
+
+![find_add format](images/find-UG/find_a0.png)
 
 #### Precise expected outputs on success:
 
-* Message shown to the user:
+* You should see this message:
   ```
   X persons listed!
   ```
   where X is the number of contacts listed
 * The list of contacts whose address contain the input address is shown
 
-  ![find_add format](images/find_a1.png)
+  ![find_add format](images/find-UG/find_a1.png)
 
 #### Precise expected outputs on failure:
 If no address is input after the find command, an error message explaining the error will be shown,
-reminding the user to follow the correct input format
+reminding you to follow the correct input format
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Invalid command format! find a/: Finds all persons whose address contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
   ```
 
-  ![find_add format](images/find_a2.png)
+  ![find_add format](images/find-UG/find_a2.png)
 
-#### _Appointment Date_
 
-![find_appt format](images/find_appt0.png)
+#### _Find by appointment date:_
+
+
+![find_appt format](images/find-UG/find_appt0.png)
 
 #### Precise expected outputs on success:
-* Message shown to the user:
+* You should see this message:
   ```
   X persons listed!
   ```
   where X is the number of contacts listed
 * The list of contacts whose appointment date matches the input date is shown
 
-  ![find_appt format](images/find_appt1.png)
+  ![find_appt format](images/find-UG/find_appt1.png)
 
 #### Precise expected outputs on failure:
 If no date is input after the find command, an error message explaining the error will be shown,
-reminding the user to follow the correct input format
+reminding you to follow the correct input format
 
-* Error message shown to the user:
+* You should see this error message:
   ```
   Invalid command format! find_appt: Finds all persons whose appointment date matches the specified input date and displays them as a list with index numbers.
   ```
 
-  ![find_appt format](images/find_appt2.png)
+  ![find_appt format](images/find-UG/find_appt2.png)
 
 If an input date does not follow the accepted format, an error message explaining the error will be shown,
-reminding the user to follow the correct input format
+reminding you to follow the correct input format
 
-* Error message shown to the user:
+* You should see this error message:
   ```
   Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd].
   ```
 
-  ![find_appt format](images/find_appt3.png)
+  ![find_appt format](images/find-UG/find_appt3.png)
 
 If an input date is a past date (a date before the current date), an error message explaining the error will be shown, 
-reminding the user to input a valid date
+reminding you to input a valid date
 
-* Error message shown to the user:
+* You should see this error message:
   ```
   Appointment Date should be after the current date.
   ```
 
-  ![find_appt format](images/find_appt4.png)
+  ![find_appt format](images/find-UG/find_appt4.png)
 
 
 ### Undoing a command : `undo`
 
-Undoes the most recent undoable command. Undoable commands include: add, clone, delete, clear, edit.
+Undoes the most recent undoable command. Undoable commands include: add, clone, delete, clear, edit. It is also 
+possible to undo the most recent redo command.
 
 #### Format: 
 * `undo`
@@ -619,7 +640,7 @@ For undoing an add command:
   ![undo format](images/undo-UG/after_add.png)
 
 * Undo
-* Message shown to the user:
+* You should see this message:
 
   ```
   Undo Successful! Deleted Person: X
@@ -636,7 +657,7 @@ For undoing a clone command:
   ![undo format](images/undo-UG/after_clone_1.png)
 
 * Undo
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Undo Successful! Deleted Person: X
@@ -653,7 +674,7 @@ For undoing a delete command:
   ![undo format](images/undo-UG/after_delete_1.png)
 
 * Undo
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Undo Successful! Contact(s) added back: X
@@ -668,7 +689,7 @@ For undoing a delete command:
   ![undo format](images/undo-UG/after_delete_multiple.png)
 
 * Undo
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Undo Successful! Contact(s) added back: X
@@ -685,7 +706,7 @@ For undoing a clear command:
   ![undo format](images/undo-UG/after_clear.png)
 
 * Undo
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Undo Successful! All contacts have been added back!
@@ -702,7 +723,7 @@ For undoing an edit command:
   ![undo format](images/undo-UG/after_edit.png)
 
 * Undo
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Undo Successful! Reverted back to: X
@@ -717,7 +738,7 @@ For undoing a redo command:
 
 * Redo
 * Undo
-* Message shown to the user:
+* You should see this message:
 
 ```
 Undo Successful!
@@ -731,7 +752,7 @@ Undo Successful!
 
 When there is no command to undo, i.e. no previous `add`, `clone`, `delete`, `clear`, or `edit` command
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   There is no command to undo!
@@ -791,7 +812,7 @@ For example, `add` a contact, then `undo`, then `redo`
   ![redo_format](images/redo-UG/undo_success.png)
 
 * Redo
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Redo successful!
@@ -804,7 +825,7 @@ For example, `add` a contact, then `undo`, then `redo`
 
 
 * If wanted, undo again
-* Message shown to the user: 
+* You should see this message: 
 
   ```
   Undo successful!
@@ -818,7 +839,7 @@ For example, `add` a contact, then `undo`, then `redo`
 
 When there is no command to redo, i.e. no previous `undo` command
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Redo unsuccessful! There is nothing to redo!
@@ -844,7 +865,7 @@ Sort contact lists by prefix name or appointment date.
 ![sort format](images/sort-UG/sortformat.png)
 
 #### Precise expected output on success:
-* Message shown to the user:
+* You should see this message:
   ```
   'X person listed!'
   ```
@@ -856,7 +877,7 @@ Sort contact lists by prefix name or appointment date.
 #### Precise expected outputs on failure:
 If either a required parameter is missing or a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
 
-* Error message shown to the user:
+* You should see this error message:
 
   ```
   Invalid command format!
@@ -901,7 +922,7 @@ Example:
 
 Precise expected outputs on success:
 
-* Message shown to the user: 
+* You should see this message: 
   ```
   Address book has been cleared!
   ```
@@ -911,7 +932,7 @@ Precise expected outputs on success:
 
 Precise expected outputs on failure:
 
-* Error message shown to the user:
+* You should see this error message:
   ```
   Address book is empty. There is nothing to clear.
   ```
@@ -944,7 +965,9 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 --------------------------------------------------------------------------------------------------------------------
 
-## FAQ
+## Troubleshooting
+
+### FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAPro home folder.
@@ -954,7 +977,7 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Common Questions
+### Common Questions
 
 **Q**: Why can't I add clients with the same name? <br>
 **A**:
@@ -969,7 +992,7 @@ To circumvent this, you can add additional details to the name to differentiate 
 **A**: Yes! Our thinking is that if an FA wants to host a group session with several clients, FAPro allows them to schedule multiple clients for the same appointment date and time, making it convenient for FA to manage group meetings.
 --------------------------------------------------------------------------------------------------------------------
 
-## Known Issues
+### Known Issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **In calendar window**:
@@ -982,7 +1005,7 @@ To circumvent this, you can add additional details to the name to differentiate 
 4. It is possible to add phone numbers that have indefinite length for clients, so please be aware that there is no built-in checks for "valid" phone numbers when editing phone numbers
 5. Due to the versatility of the nature of addresses, it is unrealistic to check for whether an address input is "valid" or not. So please be careful when editing addresses for your clients
 6. When using the `find` command, 0 and 1 contact will still show "X persons listed!", where X can be 0 or 1. This issue is purely cosmetic and won't affect any functionality
-7. After using FAPro for a while, users might notice the application slowing down. To fix the issue, simply close and open the app again
+7. After using FAPro for a while, you might notice the application slowing down. To fix the issue, simply close and open the app again
 
 --------------------------------------------------------------------------------------------------------------------
 
