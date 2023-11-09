@@ -438,6 +438,10 @@ book before the `undo` is committed into the `redoableStateList`. Furthermore, `
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram4.png)
 ![AddressBookStateDiagram](images/AddressBookState2.png)
 
+The following sequence diagram shows how the `undo` operation works when undoing the `delete` command.
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram1.png)
+
 Step 2: The user now decides that undoing was a mistake, and decides to redo that action by executing the `redo` 
 command. The `redo` command will call `Model#addToUndoableStateList()`, adding the state of the address book before 
 the `redo` is committed into the `undoableStateList`. `Model#storePreviousUndoableCommand(String)` is also called, 
@@ -447,6 +451,10 @@ contacts).
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram5.png)
 ![AddressBookStateDiagram](images/AddressBookState1.png)
+
+The following sequence diagram shows how the `redo` operation works.
+
+![RedoSequenceDiagram](images/RedoSequenceDiagram.png)
 
 Step 3: The user now decides that redoing was a mistake, again! Hence, the user decides to undo that action once 
 again, by executing the `undo` command. The `undo` command will call `UndoCommand#executeUndoRedo`, which calls 
@@ -458,6 +466,10 @@ to the undone state (I.e. the address book before the deletion of the first 2 co
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram4.png)
 ![AddressBookStateDiagram](images/AddressBookState2.png)
 
+The following sequence diagram shows how the `undo` operation works when undoing the `redo` command.
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram2.png)
+
 :information_source: **Note:** From here on, it is possible to continuously redo and undo the same command indefinitely.
 
 Step 4: The user now decides to execute the command `clone 1`. `Model#resetRedoableStateList()` and 
@@ -466,9 +478,6 @@ Step 4: The user now decides to execute the command `clone 1`. `Model#resetRedoa
 `previousUndoableCommands`. However, in this case, there are no redo commands to remove.
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram6.png)
-
-The following sequence diagram shows how the `undo` operation works.
-
 
 
 #### Design considerations:
