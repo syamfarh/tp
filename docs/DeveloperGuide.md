@@ -272,8 +272,8 @@ _{more aspects and alternatives to be added}_
 
 #### Implementation
 
-The `undo` feature undoes the most recent undoable command. The only undoable commands available are: `add`, `clone`, `edit`,
-`delete`, & `clear`. Commands that do not modify the address book, such as `list`, `find`, `sort` etc. are not 
+The `undo` command undoes the most recent undoable command. The only undoable commands available are: `add`, `clone`, 
+`edit`, `delete`, & `clear`. Commands that do not modify the address book, such as `list`, `find`, `sort` etc. are not 
 undoable commands.
 
 The undo mechanism is facilitated by the use of `ArrayLists` in `ModelManager` to store deleted, added and edited 
@@ -295,7 +295,6 @@ are invoked, `ModelManager` will be called to store each command in `previousUnd
   `clear` will store 5 in `clearedNumberList` if there were 5 contacts in the address book.
 * For the `edit` command, a `pair` of the original `person` and the edited `person` will be stored in an 
 `ArrayList` named `editedPersons`. 
-
 
 Additionally, it implements a single `execute` command which determines which type of undo operation to do based on the 
 most recent previous undoable command. The other undo operations are:
@@ -352,6 +351,8 @@ The following sequence diagram shows how the `delete` operation works (only impo
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should 
 end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
+</div>
+
 :information_source: **Note:** If an undoable command fails its execution, it will not call 
 `Model#storePreviousUndoableCommand(String)` so nothing is stored in `previousUndoableCommands`, and `ModelManager` 
 is unchanged.
@@ -367,7 +368,7 @@ delete commands from `previousUndoableCommands` and deleted persons from `delete
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram1.png)
 
-The following sequence diagram shows how the `undo` operation and (mainly) `executeUndoAdd` operation works.
+The following sequence diagram shows how the `undo` operation works.
 
 ![ModelManagerStateDiagram](images/UndoSequenceDiagramForDelete.png)
 
@@ -388,6 +389,101 @@ unchanged.
     * Pros: Easy to implement.
     * Cons: May have performance issues in terms of memory usage.
 
+### Redo feature
+
+#### Implementation
+
+The `redo` command redoes the most recent `undo` command. It is closely linked with the `undo` command. 
+
+The `redo` mechanism is facilitated by the use of `ArrayLists` in `ModelManager` that stores the states that can be 
+redone and undone, namely `redoableStateList` and `undoableStateList`. The `redo` mechanism is used in conjunction with 
+the `undo` mechanism. For each `undo` command, 
+`Model#addToRedoableStateList` is called, saving the state of the address book before the undo is committed. 
+
+Additionally, it implements the following operations:
+* `Model#getRedoableStateListSize()`
+* `Model#restoreRedoableState()`
+* `Model#addToUndoableStateList()`
+
+For each `redo` command, `Model#addToUndoableStatelist` is called, saving the state of the address book before the 
+redo is committed.
+
+The following operations are implemented to `undo` a `redo` command:
+* `Model#addToRedoableStateList()`
+* `Model#restoreUndoableState()`
+* `Model#removePreviousUndoableState()`
+
+After any command that modifies the address book is executed (I.e. `add`, `clone`, `delete`, `clear`, `edit`), 
+`redoableStateList` and `undoableStatelist` are re-initialised as blank `ArrayList`s, and any redo commands left in 
+`previousUndoableCommands` are deleted. The following operations are implemented to facilitate this:
+* `Model#resetRedoableStateList()`
+* `Model#resetUndoableStateList()`
+* `Model#removeRedoCommands()`
+
+Given below is an example usage scenario and how the redo mechanism behaves at each step.
+
+Step 0: The user launches the application and deletes the first 2 contacts. (Refer to the usage scenario of the 
+undo mechanism for these steps) At the launch of the application, the `ArrayList`s `previousUndoableCommands`, 
+`redoableStatelist` and `undoableStateList` are initialized as a blank `ArrayList`. Then, 2 delete commands are 
+added into the `previousUndoableCommands` after the deletion of the first 2 contacts.
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram3.png)
+![AddressBookStateDiagram](images/AddressBookState1.png)
+
+Step 1: The user now decides that deleting the person was a mistake, and decides to undo that action by executing
+the `undo` command. The `undo` command will call `Model#addToRedoableStateList()`, adding the state of the address 
+book before the `undo` is committed into the `redoableStateList`. Furthermore, `Model#removePreviousUndoableCommand()
+` is called twice, removing the delete commands.
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram4.png)
+![AddressBookStateDiagram](images/AddressBookState2.png)
+
+Step 2: The user now decides that undoing was a mistake, and decides to redo that action by executing the `redo` 
+command. The `redo` command will call `Model#addToUndoableStateList()`, adding the state of the address book before 
+the `redo` is committed into the `undoableStateList`. `Model#storePreviousUndoableCommand(String)` is also called, 
+adding the command as a String into `previousUndoableCommands`, and finally `Model#restoreRedoableState` is called, 
+restoring the current address book to the redone state (I.e. the address book after the deletion of the first 2 
+contacts).
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram5.png)
+![AddressBookStateDiagram](images/AddressBookState1.png)
+
+Step 3: The user now decides that redoing was a mistake, again! Hence, the user decides to undo that action once 
+again, by executing the `undo` command. The `undo` command will call `UndoCommand#executeUndoRedo`, which calls 
+`Model#addToRedoableStateList()`, adding the state of the address book before the `undo` is committed into the 
+`redoableStateList`. `Model#removePreviousUndoableCommand()` is also called, removing the command from 
+`previousUndoableCommands`, and finally `Model#restoreUndoableState` is called, restoring the current address book 
+to the undone state (I.e. the address book before the deletion of the first 2 contacts).
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram4.png)
+![AddressBookStateDiagram](images/AddressBookState2.png)
+
+:information_source: **Note:** From here on, it is possible to continuously redo and undo the same command indefinitely.
+
+Step 4: The user now decides to execute the command `clone 1`. `Model#resetRedoableStateList()` and 
+`Model#resetUndoableStateList()` are called, re-initialising `redoableStateList` and `undoableStateList` to blank 
+`ArrayList`s. `Model#removeRedoCommands()` is also called, removing all redo commands from 
+`previousUndoableCommands`. However, in this case, there are no redo commands to remove.
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram6.png)
+
+The following sequence diagram shows how the `undo` operation works.
+
+
+
+#### Design considerations:
+
+**Aspect: How redo executes:**
+
+* **Alternative 1 (current choice):** Save the entire address book only for redoing an undo command and undoing a redo 
+  command.
+    * Pros: Easy to implement and reduces performance issues by not storing states for all undo commands.
+    * Cons: Every command that modifies the address book will have to re-initialise `redoableStateList` and 
+      `undoableStatelist` and remove `redo` commands from `previousUndoableCommands`, adding performance cost.
+  
+* **Alternative 2:** Save the entire address book for all undo and redo commands.
+    * Pros: Easy to implement
+    * Cons: May have performance issues in terms of memory usage.
 
 
 ### \[Proposed\] Data archiving
