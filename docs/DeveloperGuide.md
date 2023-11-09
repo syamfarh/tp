@@ -2,14 +2,34 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
 
+FAPro - Developer Guide
 --------------------------------------------------------------------------------------------------------------------
-
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+1. [Setting up](#setting-up-getting-started)
+2. [Design](#design)
+    * [Architecture](#architecture)
+    * [Ui component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+3. [Implementation](#implementation)
+    * [[Proposed]Undo/Redo feature](#proposed-undoredo-feature)
+    * [Clone feature](#clone-feature)
+    * [Undo feature](#undo-feature)
+    * [[Proposed]Dara archiving](#proposed-data-archiving)
+    * [Find feature](#find-by-address-feature)
+4. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+5. [Appendix A: Product Scope](#appendix-a-product-scope)
+6. [Appendix B: User Stories](#appendix-b-user-stories)
+7. [Appendix C: Use Cases](#appendix-c-use-cases)
+8. [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
+9. [Appendix E: Glossary](#appendix-e-glossary)
+10. [Appendix F: Instructions for manual testing](#appendix-f-instructions-for-manual-testing)
+11. [Appendix G: Future Implementations](#appendix-g-future-implementations)
+12. [Appendix H: Effort](#appendix-h-effort)
+13. [Appendix I: Planned Enhancements](#appendix-i-planned-enhancements)
+14. [Appendix J: Acknowledgement](#appendix-j-acknowledgement)
 
 --------------------------------------------------------------------------------------------------------------------
 
