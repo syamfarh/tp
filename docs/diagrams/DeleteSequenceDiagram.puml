@@ -62,6 +62,7 @@ activate CommandResult
 CommandResult --> DeleteCommand
 deactivate CommandResult
 
+
 DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
 

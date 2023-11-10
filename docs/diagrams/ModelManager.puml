@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/object-diagram
+
+object "<u>ModelManager:model</u>" as model {
+  deletedPersons = ArrayList<Person>
+  deletedNumberList = ArrayList<Integer>
+  previousUndoableCommands = ArrayList<String>
+}
+
+object "<u>deletedPersons:ArrayList</u>" as deletedPersons
+
+
+
+
+@enduml
