@@ -17,8 +17,10 @@ FAPro - Developer Guide
     * [[Proposed]Undo/Redo feature](#proposed-undoredo-feature)
     * [Clone feature](#clone-feature)
     * [Undo feature](#undo-feature)
-    * [[Proposed]Dara archiving](#proposed-data-archiving)
-    * [Find feature](#find-by-address-feature)
+    * [Find feature](#find-feature)
+    * [Questionnaire feature](#questionnaire-feature)
+    * [Risk profile feature](#risk-profile-feature)
+    * [Help feature](#help-feature)
 4. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 5. [Appendix A: Product Scope](#appendix-a-product-scope)
 6. [Appendix B: User Stories](#appendix-b-user-stories)
@@ -471,12 +473,6 @@ The following sequence diagram shows how the `undo` operation and (mainly) `exec
 Step 4. The user now decides to execute the command `list`. As this command is not an undoable command, 
 `Model#storePreviousUndoableCommand(String)` and other storing operations are not called, so `ModelManager` remains 
 unchanged.
-
-
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 ### Find feature
 
