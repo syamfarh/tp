@@ -295,8 +295,8 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
   The domain name must:
     - end with a domain label at least 2 characters long
     - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated
-      only by hyphens, if any.
+    - have each domain label consist of alphanumeric characters, 
+      separated only by hyphens, if any.
   ```
 
   ![add format](images/add-UG/addinvalidemail.png)
@@ -1105,3 +1105,10 @@ To circumvent this, you can add additional details to the name to differentiate 
 | **Positive Integer** | An integer that is positive (i.e greater than 0). Please note that we are excluding 0 as a positive integer.                    |
 | **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
 | **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
+
+## Members
+### 1. Bhanuka Bandara Ekanayake 
+### 2. Daphne Shaine Wilhelmina
+### 3. Glenn Ng Jun Jie
+### 4. Lim Zhen Wy
+### 5. Muhammad Syam Farhan bin Agus Rizal
