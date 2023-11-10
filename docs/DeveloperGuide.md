@@ -672,15 +672,15 @@ Given below is an example usage scenario and how the find feature works for ever
 
 _Name_
 
-Step 1. The financial adviser wants to find the details of "John" and "Alice" in his address book.
+Step 1. The financial advisor wants to find the details of "John" and "Alice" in his address book.
 
-Step 2. The financial adviser enters `find n/John Alice` into the command box and presses enter.
+Step 2. The financial advisor enters `find n/John Alice` into the command box and presses enter.
 
 Step 3. The input `find n/John Alice` is passed into `FindCommandParser#parse`, and the string is parsed into two portions:
 1. Prefix
 2. Argument
 
-Step 4. Since the prefix specified by the financial adviser is `n/`, the `FindCommandParser` knows that it should call
+Step 4. Since the prefix specified by the financial advisor is `n/`, the `FindCommandParser` knows that it should call
 `find_name`, and thus, the argument is passed into `FindNameCommandParser#parse` for execution.
 
 Step 5. `FindNameCommandParser#parse` parses the argument input, and separates `John` and `Alice`, and places both names into
@@ -694,16 +694,16 @@ Step 7. A list of all contacts who have `John` and `Alice` in their name is list
 
 _Address_
 
-Step 1. The financial adviser wants to find out all their clients living in Serangoon so that they can 
+Step 1. The financial advisor wants to find out all their clients living in Serangoon so that they can 
         line up client appointments efficiently.
 
-Step 2. The financial adviser enters `find a/Serangoon` into the command box and presses enter.
+Step 2. The financial advisor enters `find a/Serangoon` into the command box and presses enter.
 
 Step 3. The input `find a/Serangoon` is passed into `FindCommandParser#parse`, and the string is parsed into two portions:
 1. Prefix
 2. Argument
 
-Step 4. Since the prefix specified by the financial adviser is `a/`, the `FindCommandParser` knows that it should call
+Step 4. Since the prefix specified by the financial advisor is `a/`, the `FindCommandParser` knows that it should call
 `find_add`, and thus, the argument is passed into `FindAddCommandParser#parse` for execution.
 
 Step 5. `FindAddCommandParser#parse` parses the argument input, and separates extracts `Serangoon`, and places it into
@@ -717,15 +717,15 @@ Step 7. A list of all contacts who have `Serangoon` in their address is listed.
 
 _Appointment Date_
 
-Step 1. The financial adviser wants to check all the appointments he has that day (assuming the date is `2023-12-12`).
+Step 1. The financial advisor wants to check all the appointments he has that day (assuming the date is `2023-12-12`).
 
-Step 2. The financial adviser enters `find appt/2023-12-12` into the command box and presses enter.
+Step 2. The financial advisor enters `find appt/2023-12-12` into the command box and presses enter.
 
 Step 3. The input `find appt/2023-12-12` is passed into `FindCommandParser#parse`, and the string is parsed into two portions:
 1. Prefix
 2. Argument
 
-Step 4. Since the prefix specified by the financial adviser is `appt/`, the `FindCommandParser` knows that it should call
+Step 4. Since the prefix specified by the financial advisor is `appt/`, the `FindCommandParser` knows that it should call
 `find_appt`, and thus, the argument is passed into `FindApptCommandParser#parse` for execution.
 
 Step 5. `FindApptCommandParser#parse` parses the argument input, and extracts `2023-12-12`, and places it into
@@ -1416,7 +1416,7 @@ testers are expected to do more *exploratory* testing.
 ## **Appendix G: Future Implementations**
 
 * Contacts list are only allowed to be sorted in ascending order for NAME and APPOINTMENT_DATE prefix only. We plan to allow users to sort by descending order in the future as well.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. We plan to allow tags to be added of the existing tags or remove the tags individually.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative. We plan to allow tags to be added of the existing tags or remove the tags individually.
 
 ## **Appendix H: Effort**
 
@@ -1427,6 +1427,8 @@ testers are expected to do more *exploratory* testing.
 * The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
 * The application will start to experience lag after prolonged usage. This is most likely it is due to the extra storing of persons whenever a command modifies the address book. As extra memory are needed to be dedicated to such storage, this can be a reason for the lag after a large number (lets say 100) commands that modify the address book. In the future, we might plan to limit the amount of undoable commands that is allowed to reduce the storage load of the application.
 * {to be added}
+* Currently, no matter the number of contacts listed for `find` functions, the message shown to the user uses "persons". We plan to change the message shown to reflect the correct grammar depending on the number of contacts listed in the future.
+* We plan to enhance the error handling for addition of phone numbers such that there will be a hard limit of integers that users are able to input.
 
 ## **Appendix J: Acknowledgement**
 
