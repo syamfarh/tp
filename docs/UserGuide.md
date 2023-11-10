@@ -105,7 +105,7 @@ Throughout the guide, we'll provide tips and best practices to help you make the
 
 ### Viewing help: `help`
 
-Shows a message listing the basic commands and explaining how to access the user guide for other commands.
+Discover our basic commands right away. If you want to explore other commands, FaPro user guide link is provided for you. 
 
 #### Format: 
 * `help`
@@ -119,8 +119,7 @@ Shows a message listing the basic commands and explaining how to access the user
   
   ![help_format](images/help-UG/help_success.png)
 
-* A pop-up window lists all the main commands and displays a link to FAPro's user guide
-
+* You will see a pop-up window with basic commands and a link to FAPro's user guide for other commands
 
   ![help_window](images/help-UG/helpWindow.png)
 
@@ -128,7 +127,7 @@ Shows a message listing the basic commands and explaining how to access the user
 
 ### Viewing risk assessment questionnaire: `questionnaire`
 
-Displays questions that are used for generating client risk profile levels.
+Show you questions that are used for generating client risk profile levels.
 
 #### Format: 
 * `questionnaire`
@@ -140,7 +139,7 @@ Displays questions that are used for generating client risk profile levels.
    ```
   ![questionnaire format](images/questionnaire-UG/questionnaire_success.png)
 
-* A pop-up window shows the risk assessment multiple choice questions, including the grading and risk profile categories criteria
+* You will see a pop-up window with risk assessment multiple-choice questions, including the grading and risk profile categories criteria
 
   ![questionnaire window](images/questionnaire-UG/questionnaireWindow.png)
 
@@ -148,7 +147,8 @@ Displays questions that are used for generating client risk profile levels.
 
 ### Adds risk profile level to a contact: `riskprofile`
 
-Generates the client risk profile level based on their response of risk assessment questionnaire provided in Questionnaire tab and adds it to their contact
+Generates your client risk profile based on their response to questions provided in the risk assessment questionnaire window
+and adds it to their contact.
 
 #### Format:
 * `riskprofile INDEX res/RESULT`
@@ -158,21 +158,22 @@ Generates the client risk profile level based on their response of risk assessme
 
   ![riskprofile format](images/riskProfile-UG/riskProfileFormat.png)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+  <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-The risk profile label cannot be removed once is added, but this command can be used to update the client risk profile
-</div>
+  The risk profile label cannot be removed once you have created it, 
+  but you can use this command to update your client risk profile
+  </div>
 
-<div markdown="block" class="alert alert-info">
+  <div markdown="block" class="alert alert-info">
 
-**:information_source: Note**<br>
-When multiple prefixes <b>res/</b> are inputted along with the RESULT:
-* Previous <b>res/</b> entries with its RESULT will be <span style="color: red;">ignored</span>
-* The risk profile label displayed will be based on the <u>last one entered</u>
-</div>
+  **:information_source: Note**<br>
+  When you input multiple prefixes <b>res/</b> along with its RESULT:
+  * Previous <b>res/</b> entries with its RESULT will be <span style="color: red;">ignored</span>
+  * The risk profile label displayed will be based on the <u>last input you entered</u>
+  </div>
 
 #### Acceptable values for each parameter:
-* INDEX: Only accept positive integers less than the size of the contacts displayed
+* INDEX: Only accept positive integers less than the size of your contacts
 * RESULT: Valid result format, 8 comma-separated characters without whitespace from 'a' - 'e' (e,b,a,c,b,b,a,e)
 
 #### Precise expected outcome on success:
@@ -180,10 +181,10 @@ When multiple prefixes <b>res/</b> are inputted along with the RESULT:
   ```
   Added risk profile to Person: X
   ```
-  where X are the details of the person edited
-* A risk profile label with a specified color will be added to the contact which has 5 categories:
+  where X are the details of your client contact edited
+* A risk profile label with a specified color will be added to your client contact, which has five categories:
   <span style="background-color:#4CAF50; color:white;">**Low**</span>,
-  <span style="background-color:#2196F3; color:white;">**Moderately Low**</span>.
+  <span style="background-color:#2196F3; color:white;">**Moderately Low**</span>,
   <span style="background-color:#FFC107; color:white;">**Moderate**</span>,
   <span style="background-color:#FF6600; color:white;">**Moderately High**</span>,
   <span style="background-color:#F44336; color:white;">**High**</span>
@@ -201,7 +202,8 @@ If the RESULT is empty or the INDEX is negative integers
   Parameters: INDEX (must be a positive integer) res/[RESULT]
   Example: riskprofile 1 res/a,e,b,d,c,a,d,e
   ```
-  ![invalid risk profile 1](images/questionnaire-UG/invalidRiskProfile1.png)
+  ![invalid risk profile 1](images/riskProfile-UG/invalidRiskProfile1.png)
+  ![invalid risk profile 3](images/riskProfile-UG/invalidRiskProfile3.png)
 
 If the RESULT is not separated by commas, with any whitespace or not in the range of 'a' - 'e'
 * You should see this error message:
@@ -213,7 +215,7 @@ If the RESULT is not separated by commas, with any whitespace or not in the rang
   Parameters: INDEX (must be a positive integer) res/[RESULT]
   Example: riskprofile 1 res/a,e,b,d,c,a,d,e
   ```
-  ![invalid risk profile 2](images/questionnaire-UG/invalidRiskProfile2.png)
+  ![invalid risk profile 2](images/riskProfile-UG/invalidRiskProfile2.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -296,8 +298,8 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
     - have each domain label consist of alphanumeric characters, separated
       only by hyphens, if any.
   
-  ```
 
+  ```
 
   ![add format](images/add-UG/addinvalidemail.png)
 
@@ -468,7 +470,7 @@ If no index is placed after the delete command:
 
 ### List out all contacts : `list`
 
-Shows a list of all contacts.
+Show a list of all your contacts.
 
 #### Format: 
 * `list`
@@ -479,7 +481,7 @@ Shows a list of all contacts.
   Listed all persons
   ```
 
-* List all contacts with their details
+* You will see a list of all your contacts with their details
 
   ![list result](images/list-UG/listResult.png)
 
@@ -1012,13 +1014,13 @@ Precise expected outputs on failure:
 
 ### Exiting the program : `exit`
 
-Exits the application.
+Your FAPro application will be closed.
 
 #### Format: 
 * `exit`
 
 #### Precise expected outcome on success:
-* The FAPro application will be closed
+* You will be exited from the application
 
 ### Saving the data
 
@@ -1115,3 +1117,10 @@ _Known issues_ are some problems that are currently present in the program that 
 | **Positive Integer** | An integer that is positive (i.e greater than 0). Please note that we are excluding 0 as a positive integer.                    |
 | **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
 | **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
+
+## Members
+### 1. Bhanuka Bandara Ekanayake 
+### 2. Daphne Shaine Wilhelmina
+### 3. Glenn Ng Jun Jie
+### 4. Lim Zhen Wy
+### 5. Muhammad Syam Farhan bin Agus Rizal
