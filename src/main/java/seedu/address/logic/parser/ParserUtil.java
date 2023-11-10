@@ -172,7 +172,7 @@ public class ParserUtil {
      */
     public static AppointmentDate parseAppointmentDates(Collection<String> appt) throws ParseException {
         requireNonNull(appt);
-        final Set<Tag> tagSet = new HashSet<>();
+        final Set<AppointmentDate> appointmentDateSet = new HashSet<>();
         for (String tagName : appt) {
             return parseAppointmentDate(tagName);
         }
