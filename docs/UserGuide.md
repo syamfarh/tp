@@ -298,6 +298,7 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
   
   ```
 
+
   ![add format](images/add-UG/addinvalidemail.png)
 
 If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
