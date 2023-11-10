@@ -1,0 +1,69 @@
+@startuml
+!define LOGIC_COLOR_T1 #LightBlue
+!define MODEL_COLOR_T1 #LightGreen
+!define UI_COLOR_T1 #FFDDC1
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR_T1
+participant ":RiskProfileCommandParser" as RiskProfileCommandParser LOGIC_COLOR_T1
+participant ":RiskProfileCommand" as RiskProfileCommand LOGIC_COLOR_T1
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR_T1
+participant ":AddressBook" as AddressBook MODEL_COLOR_T1
+participant ":Person" as Person MODEL_COLOR_T1
+end box
+
+box UI UI_COLOR_T1
+participant ":PersonCard" as PersonCard UI_COLOR_T1
+end box
+
+User -> LogicManager: riskprofile 7 res/a,b,c,d,e,e,b,c
+activate LogicManager
+
+LogicManager -> RiskProfileCommandParser: parse(riskprofile 7 res/a,b,c,d,e,e,b,c)
+activate RiskProfileCommandParser
+
+create RiskProfileCommand
+RiskProfileCommandParser  -> RiskProfileCommand
+activate RiskProfileCommand
+
+RiskProfileCommand--> RiskProfileCommandParser
+deactivate RiskProfileCommand
+
+
+LogicManager -> RiskProfileCommand : execute()
+activate RiskProfileCommand
+
+RiskProfileCommand -> Model: retrieve person at index 7
+activate Model
+Model -> AddressBook: getPerson(7)
+activate AddressBook
+AddressBook --> Model: Person
+deactivate AddressBook
+Model --> RiskProfileCommand: Person
+deactivate Model
+
+RiskProfileCommand -> RiskProfileCommand: calculate risk level(res/a,b,c,d,e,e,b,c)
+RiskProfileCommand -> Model: set new risk profile
+activate Model
+Model -> AddressBook: updatePerson(7, newPerson)
+activate AddressBook
+AddressBook --> Model: updated AddressBook
+deactivate AddressBook
+Model --> RiskProfileCommand: updated Model
+deactivate Model
+
+RiskProfileCommand -> PersonCard: updateRiskProfileText(7, newRiskProfile)
+activate PersonCard
+PersonCard -> UI: Update UI to display new risk profile level
+deactivate PersonCard
+
+RiskProfileCommand --> LogicManager: CommandResult
+deactivate RiskProfileCommand
+RiskProfileCommandParser --> LogicManager: CommandResult
+deactivate RiskProfileCommandParser
+LogicManager --> User: CommandResult
+deactivate LogicManager
+@enduml
