@@ -235,7 +235,7 @@ The main method you will be using to add contacts in typical situations.
 * EMAIL ADDRESS: Accepts **all** types of characters.
 * OCCUPATION: Must be alphanumeric characters only
 * TAG: Must be alphanumeric characters only
-* APPOINTMENT DATE: Valid string appointment date format (yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm) (date and time must be after the current date and time) 
+* APPOINTMENT_DATE: Valid string appointment date format (yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm) (date and time must be after the current date and time) 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -521,7 +521,7 @@ If a required parameter is missing (e.g., name, email), an error message should 
   edit: Edits the details of the person identified by the index number used in the
   displayed person list. Existing values will be overwritten by the input values.
   Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL]
-  [o/OCCUPATION] [a/ADDRESS] [appt/APPOINTMENTDATE] [t/TAG]…
+  [o/OCCUPATION] [a/ADDRESS] [appt/APPOINTMENT_DATE] [t/TAG]…
   Example: edit 1 p/91234567 e/johndoe@example.com
   ```
 
