@@ -27,7 +27,7 @@ title: FAPro User Guide
    * [clear](#clearing-all-entries--clear)
    * [exit](#exiting-the-program--exit)
 4. [Troubleshooting](#troubleshooting)
-   * [FAQ](#faq)
+   * [Technical Questions](#technical-questions)
    * [Common Questions](#common-questions)
    * [Known issues](#known-issues)
 5. [Command summary](#command-summary)
@@ -51,11 +51,11 @@ Throughout the guide, we'll provide tips and best practices to help you make the
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `[CS2103T-W09-1][FAPro].jar` from [here](https://github.com/AY2324S1-CS2103T-W09-1/tp/releases).
+2. Download the latest `FAPro.jar` from [here](https://github.com/AY2324S1-CS2103T-W09-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for FAPro
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar [CS2103T-W09-1][FAPro].jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar FAPro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    ![Ui](images/Ui.png)
 
@@ -295,9 +295,13 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
   The domain name must:
     - end with a domain label at least 2 characters long
     - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, 
-      separated only by hyphens, if any.
+    - have each domain label consist of alphanumeric characters, separated
+      only by hyphens, if any.
+  
+
   ```
+  
+<br>
 
   ![add format](images/add-UG/addinvalidemail.png)
 
@@ -482,6 +486,8 @@ Show a list of all your contacts.
 * You will see a list of all your contacts with their details
 
   ![list result](images/list-UG/listResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit`
 
@@ -1039,9 +1045,14 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Troubleshooting
+<div style="page-break-after: always;"></div>
 
-### FAQ
+## Troubleshooting
+Troubleshooting is separated into three categories: [Technical Questions](#technical-questions), [Common Questions](#common-questions) and [Known Issues](#known-issues).
+
+### Technical Questions
+
+_Technical Questions_ are questions regarding the use of the program itself.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAPro home folder.
@@ -1052,6 +1063,8 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 --------------------------------------------------------------------------------------------------------------------
 
 ### Common Questions
+
+_Common Questions_ are questions that you might have about the reasons why we chose our methods of implementation for certain functions.
 
 **Q**: Why can't I add clients with the same name? <br>
 **A**:
@@ -1067,6 +1080,8 @@ To circumvent this, you can add additional details to the name to differentiate 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Known Issues
+
+_Known issues_ are some problems that are currently present in the program that we're aware of but are unable to fix right (for now). We intend to solve them in our next iteration.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **In calendar window**:
@@ -1113,9 +1128,11 @@ To circumvent this, you can add additional details to the name to differentiate 
 | **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
 | **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
 
-## Members
-### 1. Bhanuka Bandara Ekanayake 
-### 2. Daphne Shaine Wilhelmina
-### 3. Glenn Ng Jun Jie
-### 4. Lim Zhen Wy
-### 5. Muhammad Syam Farhan bin Agus Rizal
+<div style="page-break-after: always;"></div>
+
+### Contributing Members
+1. Bhanuka Bandara Ekanayake 
+2. Daphne Shaine Wilhelmina
+3. Glenn Ng Jun Jie
+4. Lim Zhen Wy
+5. Muhammad Syam Farhan bin Agus Rizal
