@@ -20,6 +20,7 @@ FAPro - Developer Guide
     * [Find feature](#find-feature)
     * [Questionnaire feature](#questionnaire-feature)
     * [Risk profile feature](#risk-profile-feature)
+    * [Calendar feature](#calendar-feature)
     * [Help feature](#help-feature)
 4. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 5. [Appendix A: Product Scope](#appendix-a-product-scope)
@@ -670,6 +671,37 @@ Concurrently, Diego's `PersonCard` will shows his risk profile level which is <s
     * Pros: More efficient if there are many questions
     * Cons: Will be difficult to keep track the total of each multiple choice options, defeating the purpose of this feature which is convenient
 
+### Calendar feature
+
+#### Implementation
+The `calendar` feature shows a pop-up window for calendar using CalendarFX library.
+
+The calendar feature implements the following operations:
+* `CalendarCommand#execute(Model)`
+* `MainWindow#handleCalendar()`
+
+Given below is an example usage scenario and how the `calendar` mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user wants to see clients' appointment date neatly shown in a calendar.
+
+Step 3. The user executes `calendar` to view calendar window.
+The command will invoke `CalendarCommand#execute(Model)`, indicating that the calendar window should be shown.
+
+Then it will trigger `MainWindow#handleCalendar()`. If the calendar window is not showing, it is displayed. If it's already showing, the existing window is focused.
+
+#### Design considerations:
+
+**Aspect: How `calendar` executes:**
+
+* **Alternative 1 (current choice):** Shows the contents in a new window
+    * Pros: Neat, easily implemented as developers do not need to readjust the main window.
+    * Cons: Will have two windows open side by side, main and calendar window.
+
+* **Alternative 2:** Shows the contents within the main application window
+    * Pros: Only need to open the main application window
+    * Cons: Slightly difficult to implement due to time constraint as the data display box will also need to be readjusted. Clients' data will also be harder to see.
 
 ### Help feature
 
