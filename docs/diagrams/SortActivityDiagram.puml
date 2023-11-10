@@ -1,0 +1,31 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User executes sort n/;
+:SortCommandParser;
+if () then ([args not empty])
+  if () then ([n/])
+  :Return new SortCommand with
+  NAMECOMPARATOR parameter;
+  else if () then ([appt/])
+  :Return new SortCommand with
+  APPTCOMPARATOR parameter;
+  else ([else])
+  : throw Invalid command format
+  + error message shown;
+  stop;
+  endif
+else ([else]);
+  : throw Invalid command format
+   + error message shown;
+   stop;
+endif
+:Call SortCommand#execute;
+:Call Model#updateSortComparator;
+stop
+
+@enduml

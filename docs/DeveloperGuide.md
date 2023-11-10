@@ -567,6 +567,55 @@ Step 7. A list of all contacts who have `2023-12-12` matching their appointment 
 
 ![FindApptActivityDiagram](images/FindApptActivityDiagram.png)
 
+### Sort feature
+
+#### Implementation
+The `sort` feature allows the user to sort the clients' data in the data display in ascending order based on the input prefix specified by user:
+
+1. n/ for sort by name
+2. appt/ for sort by appointment date
+
+The parser for the sort command will identify the prefix specified by the user and return a new sort command class with the parameter of comparator type stored in ComparatorUtil class. ComparatorUtil class currently have two static comparator:
+
+1. APPTCOMPARATOR: comparator that sort the contacts by appointment date
+2. NAMECOMPARATOR: comparator that sort the contacts by name
+
+The sort feature implements the following operations:
+
+* SortCommand#Execute
+* SortCommand#Equals
+* SortCommand#ToString
+
+These operations make use of other operations exposed in the `Model` interface, which are
+
+* Model#updateSortComparator(Comparator\<Person>)
+
+Given below is an example usage scenario and how the sort mechanism behaves at each step.
+
+Step 1: The user launches the application. The application always initializes Comparator\<Person> in the Model to sort by appointment date.
+
+Step 2: the user executes `list` to view the persons available in the address book.
+
+![Sort0](images/Delete0.png)
+
+In this example, we will take John to be at index 1, James to be at index 2, Peter to be at index 3, Luke to be at index
+4 and Simon to be at index 5.
+
+Step 3: The user executes `sort n/` to sort the contacts by name. The input is passed into `SortCommandParser#parse` to identify the prefix inputted by user.
+
+Step 4: Since the prefix is `n/`, `SortCommandParser#parse` will return a new `SortCommand` with the comparator parameter `NAMECOMPARATOR`.
+
+Step 5: Then, `SortCommand#execute` is called, which call `Model#updateSortComparator(Comparator)` to update the Comparator in the Model.
+
+Step 6: The list of contacts is updated in ascending order by name.
+
+![Sort1](images/Sort1.png)
+
+Now, James is at index 1, John is at index 2, Luke is at index 3, Peter is at index
+4 and Simon is at index 5.
+
+![Sort2](images/SortActivityDiagram.png)
+
 ### Questionnaire feature
 
 #### Implementation
