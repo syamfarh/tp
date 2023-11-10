@@ -27,7 +27,7 @@ title: FAPro User Guide
    * [clear](#clearing-all-entries--clear)
    * [exit](#exiting-the-program--exit)
 4. [Troubleshooting](#troubleshooting)
-   * [FAQ](#faq)
+   * [Technical Questions](#technical-questions)
    * [Common Questions](#common-questions)
    * [Known issues](#known-issues)
 5. [Command summary](#command-summary)
@@ -1038,7 +1038,7 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 ## Troubleshooting
 
-### FAQ
+### Technical Questions
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAPro home folder.
