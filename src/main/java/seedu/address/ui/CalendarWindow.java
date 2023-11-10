@@ -49,6 +49,12 @@ public class CalendarWindow extends UiPart<Stage> {
                 break;
             case ENTER:
                 calendarView.getMonthPage().goToday();
+                //fix ENTER keypress that repeat previous keypress event
+                event.consume();
+                break;
+            case SPACE:
+                //fix SPACE keypress that repeat previous keypress event
+                event.consume();
                 break;
             default:
                 break;

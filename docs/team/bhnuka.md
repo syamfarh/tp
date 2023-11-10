@@ -25,8 +25,9 @@ Given below are my contributions to the project.
   * To be added
 
 * **Enhancements to existing features**:
-  * Updated the GUI Colour Scheme and aesthetics (Pull request [\#65]())
-  * Updated Add Command to take in occupation as a parameter (Pull request [\#49]())
+  * Updated Add Command to take in occupation as a parameter (Pull request [\#49](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/49))
+  * Updated the GUI Colour Scheme and aesthetics (Pull request [\#65](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/65))
+  * Updated Delete Command to take in multiple indexes to delete (Pull request [\#105](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/105)))
 
 * **Documentation**:
   * User Guide:
@@ -35,6 +36,4 @@ Given below are my contributions to the project.
     * Did implementation of the 'clone' feature
 
 * **Community**:
-  * PRs reviewed (with non-trivial review comments): (Pull request [\#43](), Pull request [\#50](), Pull request [\#66](), )
-
-* **Tools**:
+  * PRs reviewed (with non-trivial review comments): (Pull request [\#43](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/43), Pull request [\#50](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/50), Pull request [\#66](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/66), Pull request [\#71](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/71), Pull request [\#110](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/110), Pull request [\#128](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/128))

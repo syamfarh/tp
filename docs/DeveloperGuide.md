@@ -2,14 +2,34 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
 
+FAPro - Developer Guide
 --------------------------------------------------------------------------------------------------------------------
-
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+1. [Setting up](#setting-up-getting-started)
+2. [Design](#design)
+    * [Architecture](#architecture)
+    * [Ui component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+3. [Implementation](#implementation)
+    * [[Proposed]Undo/Redo feature](#proposed-undoredo-feature)
+    * [Clone feature](#clone-feature)
+    * [Undo feature](#undo-feature)
+    * [[Proposed]Dara archiving](#proposed-data-archiving)
+    * [Find feature](#find-by-address-feature)
+4. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+5. [Appendix A: Product Scope](#appendix-a-product-scope)
+6. [Appendix B: User Stories](#appendix-b-user-stories)
+7. [Appendix C: Use Cases](#appendix-c-use-cases)
+8. [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
+9. [Appendix E: Glossary](#appendix-e-glossary)
+10. [Appendix F: Instructions for manual testing](#appendix-f-instructions-for-manual-testing)
+11. [Appendix G: Future Implementations](#appendix-g-future-implementations)
+12. [Appendix H: Effort](#appendix-h-effort)
+13. [Appendix I: Planned Enhancements](#appendix-i-planned-enhancements)
+14. [Appendix J: Acknowledgement](#appendix-j-acknowledgement)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -238,33 +258,85 @@ _{more aspects and alternatives to be added}_
 
 #### Implementation
 
-The clone feature creates a copy of a person in the addressbook while only adding a number at the end of the name and maintaining all other variables. 
+The `clone` feature creates a copy of a person in the address book while either adding a suffix at the end of the name 
+of the cloned contact or, if the contact name has a pre-existing suffix, it increments that suffix by one.
+
+The clone mechanism first checks to see if the index provided is valid. If a person exists at the index, it then checks
+the suffix of the person in question.
+
+Clone implements the following operations:
+* `CloneCommand#execute`
+* `CloneCommand#equals`
+* `CloneCommand#toString`
+* `CloneCommand#clonePerson`
+* `CloneCommand#splitStringAtLastSpace`
+
+These operations make use of other operations exposed in the `Model` interface, which are:
+* `Model#getFilteredPersonList()`
+* `Model#addPerson(Person)`
+* `Model#storePreviousUndoableCommand(String)`
+* `Model#resetRedoableStateList()`
+* `Model#resetUndoableStateList()`
+* `Model#removeRedoCommands()`
 
 Given below is an example usage scenario and how the clone mechanism behaves at each step.
 
-Step 1. The user executes "list" to see what Persons are available in the address book
+Step 1. The user launches the application for the first time. 
+
+Step 2. The user executes `list` to see what Persons are available in the address book. Initially, only John and
+James are in the address book.
 
 ![Clone0](images/Clone0.png)
 
-Step 2. The user executes "clone 1" to clone the person at index 1 of the addressbook, John
+Step 3. The user executes `clone 1` to clone the person at index 1 of the address book, John. The `clone` command first
+calls `CloneCommand#execute`, which in turn checks to see if the index provided is valid in CloneCommandParser by
+calling `ParserUtil#parseIndex`. If the index is valid, `Index#getZeroBased` is then called to ensure that it is
+smaller than the size of the list. In this case, the index 1 provided is valid.
+
+![CloneActivityDiagram0](images/CloneActivityDiagram0.png)
+
+After all the checks on the index have been done, `CloneCommand#execute` then calls `CloneCommand#clonePerson`, which separates
+the Person name (as a string) into two substrings using `CloneCommand#splitStringAtLastSpace`, the name and the possible
+suffix, respectively.
+
+After being separated into two substrings, `CloneCommand#clonePerson` then separates the person name into three cases:
+Firstly, if the name has no spaces and no suffix. Secondly, if the name has spaces but the suffix does not consist of
+only an integer. And lastly, if the name has spaces and the suffix consists of only an integer. As John has no spaces
+and no suffix, this would be the first case highlighted.
+
+Based on these three cases, either they have a suffix or they do not. If they do not have a suffix, such as in the first
+two cases, then they have a suffix of one added to the back of the person name. If their name already possesses a suffix,
+then this suffix is incremented. The newly cloned person with their new name is now returned to `CloneCommand#execute`.
+As John has no suffix, a suffix of "1" is added to the back of his name and "John 1" is returned. 
+
+![CloneActivityDiagram1](images/CloneActivityDiagram1.png)
+
+Once returned, the command then attempts to add the cloned person into the list through `Model#addPerson`. However, if
+it throws a duplicate exception (implying that a person with that name already exists in the contact book), then this
+cloned person is cloned yet again via `CloneCommand#clonePerson` until the suffix of the cloned person returned is
+unique. As the only other person in the list prior was James, John 1 is added to the list successfully on the first
+attempt to add him.
+
+![CloneActivityDiagram2](images/CloneActivityDiagram2.png)
 
 ![Clone1](images/Clone1.png)
 
-The following activity diagram summarizes what happens when a user executes a new command:
-
-![CloneActivityDiagram](images/CloneActivityDiagram.png)
+Should the person be added successfully to the address book, the clone success message will be returned to the user, as 
+depicted in the User Guide.
 
 #### Design considerations:
 
 **Aspect: How clone executes:**
 
-* **Alternative 1 (current choice):** Copies the person at the index provided and returns a person with a number next to their name
-  * Pros: Fast, prevents excessive copying of a person while ensuring that there are no struct duplicates
-  * Cons: Can be restrictive and time consuming, as you have to keep copying the clone if you wish to make a clone of a person
+* **Alternative 1 (current choice):** Copies the person at the index provided and returns a person with a number 
+    next to their name
+  * Pros: Fast,  while ensuring that there are no strict duplicates
+  * Cons: Can be restrictive as you might have contacts that are similar and have the same name
 
 * **Alternative 2:** Copies the person exactly as is while allowing for duplicates
   * Pros: Fast, allows for as many copies of a person as the user desires
-  * Cons: Will be difficult to keep track of contacts, defeating the purpose of FAPro as a comprehensive yet focused contact organiserr
+  * Cons: Will be difficult to keep track of contacts, defeating the purpose of FAPro as a comprehensive yet focused
+    contact organiser
 
 ### Delete feature
 
@@ -407,20 +479,97 @@ unchanged.
 
 _{Explain here how the data archiving feature will be implemented}_
 
-### Find by address feature
+### Find feature
 
 #### Implementation
 
-The find by address/find_add feature filters the list of contacts in the address book based on their address.
+The `find` feature allows the user to search for contacts in their address book. It allows users to find contacts based on
+name, address, and appointment date. The type of search is determined by the input prefix specified by the user:
+1. `n/` for find by name
+2. `a/` for find by address
+3. `appt/` for find by appointment date
 
-Given below is an example usage scenario and how the find_add feature works.
+The actual `find` operation acts as a "facilitator" for `find_name`, `find_add` and `find_appt`, all three of which 
+are abstracted out of the user's sight, i.e. they do not know that these operations exist, and they are not allowed to 
+directly call these functions. The parser for the `find` command will identify the prefix specified by the user and 
+pass on the operation to the relevant class for execution. As such, there is no meaningful methods implemented directly
+in the `find` class. The parser for the `find` class parse the (valid) user input, and call on one of the three operations:
+1. `FindNameCommandParser#parse(String)`
+2. `FindAddCommandParser#parse(String)`
+3. `FindApptCommandParser#parse(String)`
+
+From there on, the operation will be handled by the separate classes.
+
+Should the user input be invalid, an exception specific to the error type will be returned to the user.
+
+Given below is an example usage scenario and how the find feature works for every possible prefix.
+
+_Name_
+
+Step 1. The financial adviser wants to find the details of "John" and "Alice" in his address book.
+
+Step 2. The financial adviser enters `find n/John Alice` into the command box and presses enter.
+
+Step 3. The input `find n/John Alice` is passed into `FindCommandParser#parse`, and the string is parsed into two portions:
+1. Prefix
+2. Argument
+
+Step 4. Since the prefix specified by the financial adviser is `n/`, the `FindCommandParser` knows that it should call
+`find_name`, and thus, the argument is passed into `FindNameCommandParser#parse` for execution.
+
+Step 5. `FindNameCommandParser#parse` parses the argument input, and separates `John` and `Alice`, and places both names into
+a String array. Then, a new `FindNameCommand` is returned.
+
+Step 6. Then, `FindNameCommand#execute` is called, which uses the keywords in the String array to filter the address book.
+
+Step 7. A list of all contacts who have `John` and `Alice` in their name is listed.
+
+![FindNameActivityDiagram](images/FindNameActivityDiagram.png)
+
+_Address_
 
 Step 1. The financial adviser wants to find out all their clients living in Serangoon so that they can 
         line up client appointments efficiently.
 
-Step 2. The financial adviser enters `find_add Serangoon` into the command box and presses enter.
+Step 2. The financial adviser enters `find a/Serangoon` into the command box and presses enter.
 
-Step 3. A list of all contacts who have `Serangoon` in their address is listed.
+Step 3. The input `find a/Serangoon` is passed into `FindCommandParser#parse`, and the string is parsed into two portions:
+1. Prefix
+2. Argument
+
+Step 4. Since the prefix specified by the financial adviser is `a/`, the `FindCommandParser` knows that it should call
+`find_add`, and thus, the argument is passed into `FindAddCommandParser#parse` for execution.
+
+Step 5. `FindAddCommandParser#parse` parses the argument input, and separates extracts `Serangoon`, and places it into
+a String array. Then, a new `FindAddCommand` is returned.
+
+Step 6. Then, `FindAddCommand#execute` is called, which uses the keyword in the String array to filter the address book.
+
+Step 7. A list of all contacts who have `Serangoon` in their address is listed.
+
+![FindAddActivityDiagram](images/FindAddActivityDiagram.png)
+
+_Appointment Date_
+
+Step 1. The financial adviser wants to check all the appointments he has that day (assuming the date is `2023-12-12`).
+
+Step 2. The financial adviser enters `find appt/2023-12-12` into the command box and presses enter.
+
+Step 3. The input `find appt/2023-12-12` is passed into `FindCommandParser#parse`, and the string is parsed into two portions:
+1. Prefix
+2. Argument
+
+Step 4. Since the prefix specified by the financial adviser is `appt/`, the `FindCommandParser` knows that it should call
+`find_appt`, and thus, the argument is passed into `FindApptCommandParser#parse` for execution.
+
+Step 5. `FindApptCommandParser#parse` parses the argument input, and extracts `2023-12-12`, and places it into
+a String array. Then, a new `FindApptCommand` is returned.
+
+Step 6. Then, `FindApptCommand#execute` is called, which uses the keyword in the String array to filter the address book.
+
+Step 7. A list of all contacts who have `2023-12-12` matching their appointment date is listed.
+
+![FindApptActivityDiagram](images/FindApptActivityDiagram.png)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -434,9 +583,7 @@ Step 3. A list of all contacts who have `Serangoon` in their address is listed.
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
-
-### Product scope
+## **Appendix A: Product Scope**
 
 **Target user profile**:
 
@@ -454,7 +601,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 
 
-### User stories
+## **Appendix B: User stories**
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -474,7 +621,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+## **Appendix C: Use cases**
 
 (For all use cases below, the **System** is the `FAPro` and the **Actor** is the `Financial Advisor`, unless specified otherwise)
 
@@ -553,20 +700,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **Extensions**
 
-* 1a. The parameter is provided in an invalid format.
+* 3a. The parameter is provided in an invalid format.
 
-    * 1a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
+    * 3a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
       properly use the command.
 
-* 3a. The given index is invalid.
+      Use case resumes at step 2.
 
-    * 3a1. FAPro shows an error message:  “Sorry, that value is not accepted! Please specify the index of the person you would like to clone! It should be non-negative and within the address book!”
+* 3b. The given index is invalid (i.e Not a positive integer and part of the address book.)
 
-        Use case resumes at step 2.
-
-* 3b. The given person has already been cloned.
-
-    * 3b1. FAPro shows an error message:  “A clone of this person already exists. To clone again, please edit the previous clone first or alternatively, clone the previous clone."
+    * 3b1. FAPro shows an error message:  “The person index provided is invalid.”
 
         Use case resumes at step 2.
 
@@ -675,7 +818,7 @@ Preconditions:
 
       Use case resumes at step 2.
 
-### Non-Functional Requirements
+## **Appendix D: Non-Functional Requirements**
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -693,14 +836,14 @@ Preconditions:
 
 *{More to be added}*
 
-### Glossary
+## **Appendix E: Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix F: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -723,8 +866,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
-
-1. _{ more test cases …​ }_
 
 ### Deleting a person
 
@@ -759,36 +900,35 @@ testers are expected to do more *exploratory* testing.
    5. Test case: `delete 1 2 y`, (where y is anything that is not an integer) <br>
       Expected: No person is deleted. Error details shown in the status message.
 
-
 ### Cloning a person
 
-1. Cloning a person whohas not been cloned while all persons are being shown
+1. Cloning a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `clone 1`<br>
-      Expected: First contact is cloned from the list. Details of the cloned contact shown in the status message. Timestamp in the status bar is updated.
-
-   1. Test case: `clone 0`<br>
-      Expected: No person is cloned. Error details shown in the status message. Status bar remains the same.
-
-   1. Other incorrect clone commands to try: `clone`, `clone x`, `...` (where x is larger than the list size)<br>
+   2. Test case: `clone 1`<br>
+      Expected: First contact is cloned from the list. Details of the cloned contact shown in the status message.
+   3. Test case: `clone 0`<br>
+      Expected: No person is cloned. Error details shown in the status message.
+   4. Other incorrect clone commands to try: `clone`, `clone x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-2. Cloning a person who has already been cloned while all persons are being shown
+### Editing a person
 
-   2. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+1.  Edit a person while all persons are being shown
+    1. Prerequisites: Lists all persons using the `list` command. Multiple persons in the list.
+    2. Test case: `edit 1 n/ John Doe`<br>
+       Expected: The first contact name is changed to John Doe. Timestamp in the status bar is updated.
+    3. Test case: `edit 1`<br>
+       Expected: No person is edited. Error details shown in the status message. Status bar remains the same.
+    4. Other incorrect edit commands to try: `edit 1 n/`, `edit 0 n/ John Doe`, `edit 1 n/ John-Doe`
+       Expected: Similar to previous
 
-   2. Test case: `clone 1`<br>
-      Expected: First contact has already been cloned. Error message is returned.
+### Sorting contact list
 
-3. Cloning a clone while all persons are being shown
-
-   2. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   2. Test case: `clone 1`<br>
-      Expected: The clone is cloned from the list and the number next to its name it incremented. Details of the cloned contact shown in the status message. Timestamp in the status bar is updated.
-
+1. Sorting contact list by NAME or APPOINTMENT_DATE prefix in ascending order
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The default order of contact list is by APPOINTMENT_DATE prefix.
+   2. Test case: `sort n/` <br>
+      Expected: The contact list is ordered by alphabetical order of the NAME prefix. Details of the number of contacts listed is shown in the result box. 
 
 ### Saving data
 
@@ -797,3 +937,27 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix G: Future Implementations**
+
+* Contacts list are only allowed to be sorted in ascending order for NAME and APPOINTMENT_DATE prefix only. We plan to allow users to sort by descending order in the future as well.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. We plan to allow tags to be added of the existing tags or remove the tags individually.
+* 
+
+## **Appendix H: Effort**
+
+{to be added}
+
+## **Appendix I: Planned Enhancements**
+
+* The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
+* The application will start to experience lag after prolonged usage. This is most likely it is due to the extra storing of persons whenever a command modifies the address book. As extra memory are needed to be dedicated to such storage, this can be a reason for the lag after a large number (lets say 100) commands that modify the address book. In the future, we might plan to limit the amount of undoable commands that is allowed to reduce the storage load of the application.
+* {to be added}
+
+## **Appendix J: Acknowledgement**
+
+* The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)
+
+* {to be added}
+
+
