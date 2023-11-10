@@ -16,6 +16,7 @@ FAPro - Developer Guide
 3. [Implementation](#implementation)
     * [[Proposed]Undo/Redo feature](#proposed-undoredo-feature)
     * [Clone feature](#clone-feature)
+    * [Delete feature](#delete-feature)
     * [Undo feature](#undo-feature)
     * [Find feature](#find-feature)
     * [Questionnaire feature](#questionnaire-feature)
