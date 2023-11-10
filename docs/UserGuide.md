@@ -982,14 +982,21 @@ Open a new calendar window.
 
 Clears all contacts in the address book.
 
-Format: `clear`
-
-Example:
+#### Format:
 * `clear`
 
-Precise expected outputs on success:
+#### Example commands:
+* `clear`
 
-* You should see this message: 
+#### Precise expected outputs on success:
+
+* This is the initial address book as reflected in the GUI:
+
+  ![clear format](images/clear-UG/clear_before.png)
+
+* After executing the clear command:
+
+* You should see this message:
   ```
   Address book has been cleared!
   ```
@@ -997,7 +1004,7 @@ Precise expected outputs on success:
 
   ![clear format](images/clear-UG/clear_success.png)
 
-Precise expected outputs on failure:
+#### Precise expected outputs on failure:
 
 * You should see this error message:
   ```
