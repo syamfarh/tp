@@ -16,6 +16,8 @@ Class ParserUtil
 Class ArgumentMultimap
 Class ArgumentTokenizer
 Class Prefix
+Class DateParser
+Class DateTimeParser
 }
 
 Class HiddenOutside #FFFFFF
@@ -28,6 +30,8 @@ AddressBookParser ..> Command : returns >
 XYZCommandParser .up.|> Parser
 XYZCommandParser ..> ArgumentMultimap
 XYZCommandParser ..> ArgumentTokenizer
+XYZCommandParser ..> DateParser
+XYZCommandParser ..> DateTimeParser
 ArgumentTokenizer .left.> ArgumentMultimap
 XYZCommandParser ..> CliSyntax
 CliSyntax ..> Prefix
