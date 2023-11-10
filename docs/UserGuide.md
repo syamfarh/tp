@@ -27,7 +27,7 @@ title: FAPro User Guide
    * [clear](#clearing-all-entries--clear)
    * [exit](#exiting-the-program--exit)
 4. [Troubleshooting](#troubleshooting)
-   * [FAQ](#faq)
+   * [Technical Questions](#technical-questions)
    * [Common Questions](#common-questions)
    * [Known issues](#known-issues)
 5. [Command summary](#command-summary)
@@ -51,11 +51,11 @@ Throughout the guide, we'll provide tips and best practices to help you make the
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `[CS2103T-W09-1][FAPro].jar` from [here](https://github.com/AY2324S1-CS2103T-W09-1/tp/releases).
+2. Download the latest `FAPro.jar` from [here](https://github.com/AY2324S1-CS2103T-W09-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for FAPro
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar [CS2103T-W09-1][FAPro].jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar FAPro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    ![Ui](images/Ui.png)
 
@@ -105,7 +105,7 @@ Throughout the guide, we'll provide tips and best practices to help you make the
 
 ### Viewing help: `help`
 
-Shows a message listing the basic commands and explaining how to access the user guide for other commands.
+Discover our basic commands right away. If you want to explore other commands, FaPro user guide link is provided for you. 
 
 #### Format: 
 * `help`
@@ -119,8 +119,7 @@ Shows a message listing the basic commands and explaining how to access the user
   
   ![help_format](images/help-UG/help_success.png)
 
-* A pop-up window lists all the main commands and displays a link to FAPro's user guide
-
+* You will see a pop-up window with basic commands and a link to FAPro's user guide for other commands
 
   ![help_window](images/help-UG/helpWindow.png)
 
@@ -128,7 +127,7 @@ Shows a message listing the basic commands and explaining how to access the user
 
 ### Viewing risk assessment questionnaire: `questionnaire`
 
-Displays questions that are used for generating client risk profile levels.
+Show you questions that are used for generating client risk profile levels.
 
 #### Format: 
 * `questionnaire`
@@ -140,7 +139,7 @@ Displays questions that are used for generating client risk profile levels.
    ```
   ![questionnaire format](images/questionnaire-UG/questionnaire_success.png)
 
-* A pop-up window shows the risk assessment multiple choice questions, including the grading and risk profile categories criteria
+* You will see a pop-up window with risk assessment multiple-choice questions, including the grading and risk profile categories criteria
 
   ![questionnaire window](images/questionnaire-UG/questionnaireWindow.png)
 
@@ -148,7 +147,8 @@ Displays questions that are used for generating client risk profile levels.
 
 ### Adds risk profile level to a contact: `riskprofile`
 
-Generates the client risk profile level based on their response of risk assessment questionnaire provided in Questionnaire tab and adds it to their contact
+Generates your client risk profile based on their response to questions provided in the risk assessment questionnaire window
+and adds it to their contact.
 
 #### Format:
 * `riskprofile INDEX res/RESULT`
@@ -158,21 +158,22 @@ Generates the client risk profile level based on their response of risk assessme
 
   ![riskprofile format](images/riskProfile-UG/riskProfileFormat.png)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+  <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-The risk profile label cannot be removed once is added, but this command can be used to update the client risk profile
-</div>
+  The risk profile label cannot be removed once you have created it, 
+  but you can use this command to update your client risk profile
+  </div>
 
-<div markdown="block" class="alert alert-info">
+  <div markdown="block" class="alert alert-info">
 
-**:information_source: Note**<br>
-When multiple prefixes <b>res/</b> are inputted along with the RESULT:
-* Previous <b>res/</b> entries with its RESULT will be <span style="color: red;">ignored</span>
-* The risk profile label displayed will be based on the <u>last one entered</u>
-</div>
+  **:information_source: Note**<br>
+  When you input multiple prefixes <b>res/</b> along with its RESULT:
+  * Previous <b>res/</b> entries with its RESULT will be <span style="color: red;">ignored</span>
+  * The risk profile label displayed will be based on the <u>last input you entered</u>
+  </div>
 
 #### Acceptable values for each parameter:
-* INDEX: Only accept positive integers less than the size of the contacts displayed
+* INDEX: Only accept positive integers less than the size of your contacts
 * RESULT: Valid result format, 8 comma-separated characters without whitespace from 'a' - 'e' (e,b,a,c,b,b,a,e)
 
 #### Precise expected outcome on success:
@@ -180,10 +181,10 @@ When multiple prefixes <b>res/</b> are inputted along with the RESULT:
   ```
   Added risk profile to Person: X
   ```
-  where X are the details of the person edited
-* A risk profile label with a specified color will be added to the contact which has 5 categories:
+  where X are the details of your client contact edited
+* A risk profile label with a specified color will be added to your client contact, which has five categories:
   <span style="background-color:#4CAF50; color:white;">**Low**</span>,
-  <span style="background-color:#2196F3; color:white;">**Moderately Low**</span>.
+  <span style="background-color:#2196F3; color:white;">**Moderately Low**</span>,
   <span style="background-color:#FFC107; color:white;">**Moderate**</span>,
   <span style="background-color:#FF6600; color:white;">**Moderately High**</span>,
   <span style="background-color:#F44336; color:white;">**High**</span>
@@ -201,7 +202,8 @@ If the RESULT is empty or the INDEX is negative integers
   Parameters: INDEX (must be a positive integer) res/[RESULT]
   Example: riskprofile 1 res/a,e,b,d,c,a,d,e
   ```
-  ![invalid risk profile 1](images/questionnaire-UG/invalidRiskProfile1.png)
+  ![invalid risk profile 1](images/riskProfile-UG/invalidRiskProfile1.png)
+  ![invalid risk profile 3](images/riskProfile-UG/invalidRiskProfile3.png)
 
 If the RESULT is not separated by commas, with any whitespace or not in the range of 'a' - 'e'
 * You should see this error message:
@@ -213,7 +215,7 @@ If the RESULT is not separated by commas, with any whitespace or not in the rang
   Parameters: INDEX (must be a positive integer) res/[RESULT]
   Example: riskprofile 1 res/a,e,b,d,c,a,d,e
   ```
-  ![invalid risk profile 2](images/questionnaire-UG/invalidRiskProfile2.png)
+  ![invalid risk profile 2](images/riskProfile-UG/invalidRiskProfile2.png)
 
 <div style="page-break-after: always;"></div>
 
@@ -295,7 +297,11 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
     - have each domain label start and end with alphanumeric characters
     - have each domain label consist of alphanumeric characters, separated
       only by hyphens, if any.
+  
+
   ```
+  
+<br>
 
   ![add format](images/add-UG/addinvalidemail.png)
 
@@ -466,7 +472,7 @@ If no index is placed after the delete command:
 
 ### List out all contacts : `list`
 
-Shows a list of all contacts.
+Show a list of all your contacts.
 
 #### Format: 
 * `list`
@@ -477,9 +483,11 @@ Shows a list of all contacts.
   Listed all persons
   ```
 
-* List all contacts with their details
+* You will see a list of all your contacts with their details
 
   ![list result](images/list-UG/listResult.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Editing a person : `edit`
 
@@ -980,14 +988,21 @@ Open a new calendar window.
 
 Clears all contacts in the address book.
 
-Format: `clear`
-
-Example:
+#### Format:
 * `clear`
 
-Precise expected outputs on success:
+#### Example commands:
+* `clear`
 
-* You should see this message: 
+#### Precise expected outputs on success:
+
+* This is the initial address book as reflected in the GUI:
+
+  ![clear format](images/clear-UG/clear_before.png)
+
+* After executing the clear command:
+
+* You should see this message:
   ```
   Address book has been cleared!
   ```
@@ -995,7 +1010,7 @@ Precise expected outputs on success:
 
   ![clear format](images/clear-UG/clear_success.png)
 
-Precise expected outputs on failure:
+#### Precise expected outputs on failure:
 
 * You should see this error message:
   ```
@@ -1008,13 +1023,13 @@ Precise expected outputs on failure:
 
 ### Exiting the program : `exit`
 
-Exits the application.
+Your FAPro application will be closed.
 
 #### Format: 
 * `exit`
 
 #### Precise expected outcome on success:
-* The FAPro application will be closed
+* You will be exited from the application
 
 ### Saving the data
 
@@ -1030,9 +1045,14 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 --------------------------------------------------------------------------------------------------------------------
 
-## Troubleshooting
+<div style="page-break-after: always;"></div>
 
-### FAQ
+## Troubleshooting
+Troubleshooting is separated into three categories: [Technical Questions](#technical-questions), [Common Questions](#common-questions) and [Known Issues](#known-issues).
+
+### Technical Questions
+
+_Technical Questions_ are questions regarding the use of the program itself.
 
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAPro home folder.
@@ -1043,6 +1063,8 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 --------------------------------------------------------------------------------------------------------------------
 
 ### Common Questions
+
+_Common Questions_ are questions that you might have about the reasons why we chose our methods of implementation for certain functions.
 
 **Q**: Why can't I add clients with the same name? <br>
 **A**:
@@ -1058,6 +1080,8 @@ To circumvent this, you can add additional details to the name to differentiate 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Known Issues
+
+_Known issues_ are some problems that are currently present in the program that we're aware of but are unable to fix right (for now). We intend to solve them in our next iteration.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **In calendar window**:
@@ -1103,3 +1127,12 @@ To circumvent this, you can add additional details to the name to differentiate 
 | **Positive Integer** | An integer that is positive (i.e greater than 0). Please note that we are excluding 0 as a positive integer.                    |
 | **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
 | **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
+
+<div style="page-break-after: always;"></div>
+
+### Contributing Members
+1. Bhanuka Bandara Ekanayake 
+2. Daphne Shaine Wilhelmina
+3. Glenn Ng Jun Jie
+4. Lim Zhen Wy
+5. Muhammad Syam Farhan bin Agus Rizal
