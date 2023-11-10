@@ -560,11 +560,6 @@ Step 4: The user now decides to execute the command `clone 1`. `Model#resetRedoa
     * Pros: Easy to implement
     * Cons: May have performance issues in terms of memory usage.
 
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 ### Find feature
 
 #### Implementation
