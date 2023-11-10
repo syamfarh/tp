@@ -51,11 +51,11 @@ Throughout the guide, we'll provide tips and best practices to help you make the
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-2. Download the latest `[CS2103T-W09-1][FAPro].jar` from [here](https://github.com/AY2324S1-CS2103T-W09-1/tp/releases).
+2. Download the latest `FAPro.jar` from [here](https://github.com/AY2324S1-CS2103T-W09-1/tp/releases).
 
 3. Copy the file to the folder you want to use as the _home folder_ for FAPro
 
-4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar [CS2103T-W09-1][FAPro].jar` command to run the application.<br>
+4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar FAPro.jar` command to run the application.<br>
    A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    ![Ui](images/Ui.png)
 
@@ -1121,9 +1121,11 @@ _Known issues_ are some problems that are currently present in the program that 
 | **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
 | **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
 
-## Members
-### 1. Bhanuka Bandara Ekanayake 
-### 2. Daphne Shaine Wilhelmina
-### 3. Glenn Ng Jun Jie
-### 4. Lim Zhen Wy
-### 5. Muhammad Syam Farhan bin Agus Rizal
+<div style="page-break-after: always;"></div>
+
+### Contributing Members
+#### 1. Bhanuka Bandara Ekanayake 
+#### 2. Daphne Shaine Wilhelmina
+#### 3. Glenn Ng Jun Jie
+#### 4. Lim Zhen Wy
+#### 5. Muhammad Syam Farhan bin Agus Rizal
