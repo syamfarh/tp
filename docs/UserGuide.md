@@ -1040,6 +1040,8 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 ### Technical Questions
 
+_Technical Questions_ are questions regarding the use of the program itself.
+
 **Q**: How do I transfer my data to another Computer?<br>
 **A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous FAPro home folder.
 
@@ -1049,6 +1051,8 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 --------------------------------------------------------------------------------------------------------------------
 
 ### Common Questions
+
+_Common Questions_ are questions that you might have about the reasons why we chose our methods of implementation for certain functions.
 
 **Q**: Why can't I add clients with the same name? <br>
 **A**:
@@ -1064,6 +1068,8 @@ To circumvent this, you can add additional details to the name to differentiate 
 --------------------------------------------------------------------------------------------------------------------
 
 ### Known Issues
+
+_Known issues_ are some problems that are currently present in the program that we're aware of but are unable to fix right (for now). We intend to solve them in our next iteration.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 2. **In calendar window**:
