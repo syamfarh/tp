@@ -1,0 +1,16 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+package State as "Current Address Book State" {
+  class state1 as "<u>State: John and Greg deleted"
+}
+
+
+hide state1
+
+}
+
+@end
