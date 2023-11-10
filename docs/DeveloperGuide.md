@@ -2,14 +2,34 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
 
+FAPro - Developer Guide
 --------------------------------------------------------------------------------------------------------------------
-
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+1. [Setting up](#setting-up-getting-started)
+2. [Design](#design)
+    * [Architecture](#architecture)
+    * [Ui component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+3. [Implementation](#implementation)
+    * [[Proposed]Undo/Redo feature](#proposed-undoredo-feature)
+    * [Clone feature](#clone-feature)
+    * [Undo feature](#undo-feature)
+    * [[Proposed]Dara archiving](#proposed-data-archiving)
+    * [Find feature](#find-by-address-feature)
+4. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+5. [Appendix A: Product Scope](#appendix-a-product-scope)
+6. [Appendix B: User Stories](#appendix-b-user-stories)
+7. [Appendix C: Use Cases](#appendix-c-use-cases)
+8. [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
+9. [Appendix E: Glossary](#appendix-e-glossary)
+10. [Appendix F: Instructions for manual testing](#appendix-f-instructions-for-manual-testing)
+11. [Appendix G: Future Implementations](#appendix-g-future-implementations)
+12. [Appendix H: Effort](#appendix-h-effort)
+13. [Appendix I: Planned Enhancements](#appendix-i-planned-enhancements)
+14. [Appendix J: Acknowledgement](#appendix-j-acknowledgement)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -232,7 +252,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
 
 ### Clone feature
 
@@ -318,7 +337,71 @@ depicted in the User Guide.
   * Cons: Will be difficult to keep track of contacts, defeating the purpose of FAPro as a comprehensive yet focused
     contact organiser
 
-_{more aspects and alternatives to be added}_
+### Delete feature
+
+#### Implementation
+
+The `delete` feature allows users to remove one or more persons from the address book. Users can specify one or
+more indexes to identify the persons to be deleted. The `delete` command is implemented by the `DeleteCommand`
+class.
+
+Delete implements the following operations:
+* `DeleteCommand#execute`
+* `DeleteCommand#equals`
+* `DeleteCommand#toString`
+
+These operations make use of other operations exposed in the `Model` interface, which are:
+* `Model#getFilteredPersonList()`
+* `Model#deletePerson(Person)`
+* `Model#storePreviousUndoableCommand(String)`
+* `Model#storeDeletedNumberList(int)`
+* `Model#resetRedoableStateList()`
+* `Model#reserUndoableStateList()`
+* `Model#removeRedoCommands()`
+
+Given below is an example usage scenario and how the delete mechanism behaves at each step.
+
+Step 1: The user launches the application. The application initializes various lists and data structures,
+including `deletedPersons`.
+
+Step 2. The user executes `list` to view the persons available in the address book.
+
+![Delete0](images/Delete0.png)
+
+In this example, we will take John to be at index 1, James to be at index 2, Peter to be at index 3, Luke to be at index
+4 and Simon to be at index 5.
+
+Step 3. The user executes `delete 1 3 5` to delete the persons at indexes 1, 3, and 5 from the address book.
+The delete command first calls `DeleteCommandParser`, to ensure that there are no duplicate indexes, to
+perform regular index validation and to sort indexes ascendingly and return the indexes.
+
+`DeleteCommand#execute`, which checks the validity of the provided indexes. It ensures that the indexes are
+positive integers and within the range of the displayed list. 
+
+![DeleteActivityDiagram0](images/DeleteActivityDiagram0.png)
+
+After validating the indexes, the command iterates through the target indexes and deletes the corresponding
+persons from the address book using `Model#deletePerson`. The deleted persons are stored in `deletedPersons`,
+and the command records the execution for potential undo operations.
+
+![DeleteActivityDiagram1](images/DeleteActivityDiagram1.png)
+
+![Delete1](images/Delete1.png)
+
+Upon successfully deleting the persons, the delete success message is returned to the user, as depicted in the
+User Guide.
+
+#### Design considerations:
+
+**Aspect: How delete executes:**
+
+* **Alternative 1 (current choice):**  Deletes persons at the specified indexes and provides a feedback message.
+    * Pros: Ensures controlled deletion and provides feedback to the user.
+    * Cons: Can be tedious.
+
+* **Alternative 2:** Deletes persons at the specified indexes and allows for multiple deletions without feedback.
+    * Pros: Fast and straightforward for multiple deletions.
+    * Cons: Lacks feedback on deleted persons, which may be useful for confirmation.
 
 ### Undo feature
 
@@ -636,9 +719,7 @@ Then it will trigger `MainWindow#handleHelp()`. If the help window is not showin
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
-
-### Product scope
+## **Appendix A: Product Scope**
 
 **Target user profile**:
 
@@ -656,7 +737,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 
 
-### User stories
+## **Appendix B: User stories**
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -664,6 +745,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 |----------|----------------------------------|---------------------------------------------------------------------------|-----------------------------------------------------------------------------------------|
 | `* * *`  | user                             | add a new person                                                          | add entries that I need                                                                 |
 | `* * *`  | user                             | delete a person                                                           | remove entries that I no longer need                                                    |
+| `* * *`  | user                             | delete a few persons                                                      | remove multiple entries that I no longer need                                           |
 | `* * *`  | user                             | find a person by name                                                     | locate details of persons without having to go through the entire list                  |
 | `* * *`  | financial advisor                | find a person by address                                                  | line-up all my client meetings efficiently                                              |
 | `* * *`  | financial advisor                | find all contacts by appointment date                                     | see what appointments I have for that date                                              |
@@ -674,13 +756,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | financial advisor                | be able to sort clients contact list                                      | easier to find client contact that I am looking for                                     |
 | `* *`    | clumsy financial advisor         | be able to undo commands done previously such as delete, clear, edit, add | undo my mistakes made with a simple command, rather than having to do multiple commands | 
 
-*{More to be added}*
 
-### Use cases
+## **Appendix C: Use cases**
 
 (For all use cases below, the **System** is the `FAPro` and the **Actor** is the `Financial Advisor`, unless specified otherwise)
 
-**Use case: Add a person**
+**Use case: UC1 - Add a person**
 
 **MSS**
 
@@ -712,14 +793,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         Use case resumes at step 2.
 
     
-**Use case: Delete a person**
+**Use case: UC2 - Delete a person**
 
 **MSS**
 
 1.  Financial Advisor requests to list persons
 2.  FAPro shows a list of persons
-3.  Financial Advisor requests to delete a specific person in the list
-4.  FAPro deletes the person
+3.  Financial Advisor requests to delete at least one person
+4.  FAPro deletes the person(s)
 
     Use case ends.
 
@@ -729,14 +810,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-* 3a. The given index is invalid.
+* 3a. One of the indexes provided is a positive integer but out of the range of the address book
 
-    * 3a1. FAPro shows an error message:  “Sorry, that value is not accepted! Please specify the index of the person you would like to delete! It should be non-negative and within the address book!”
+    * 3a1. FAPro shows an error message:  “The person index provided is invalid.”
 
         Use case resumes at step 2.
 
+* 3b. One of the indexes provided does not adhere to the restrictions (must be positive integers, separated by spaces, no duplicates)
 
-**Use case: Clone a person**
+    * 3b1. FAPro shows and error message:  "Invalid command format!", along with instructions on how to
+      properly use the command.
+        
+        Use case resumes at step 2.
+
+**Use case: UC3 - Clone a person**
 
 **MSS**
 
@@ -763,7 +850,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         Use case resumes at step 2.
 
 
-**Use case: Find a person**
+**Use case: UC4 - Find a person**
 
 **MSS**
 
@@ -785,7 +872,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
   Use case ends.
 
-**Use case: Edit a person**
+**Use case: UC5 - Edit a person**
 
 **MSS**
 
@@ -821,7 +908,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         Use case resumes at step 2.
 
 
-**Use case: Viewing help**
+**Use case: UC6 - Viewing help**
 
 Preconditions:
 
@@ -838,7 +925,7 @@ Preconditions:
     Use case ends.
 
 
-**Use case: Sort contact list**
+**Use case: UC7 - Sort contact list**
 
 **MSS**
 
@@ -921,6 +1008,7 @@ Guarantees:
       properly use the command.
 
       Use case resumes at step 3.
+      
 
 **Use case: UC10 - List out all contacts**
 
@@ -950,7 +1038,7 @@ Preconditions:
     Use case ends.
   
 
-### Non-Functional Requirements
+## **Appendix D: Non-Functional Requirements**
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -966,16 +1054,16 @@ Preconditions:
 11. Testing should be implemented for easier maintenance.
 12. The app should be designed to handle unexpected input and edge cases gracefully, without crashing the system.
 
-*{More to be added}*
 
-### Glossary
+
+## **Appendix E: Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix F: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -999,38 +1087,49 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   2. Test case: `delete 1`<br>
+      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   3. Test case: `delete 0`<br>
+      Expected: No person is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
+2. Deleting a few persons while all persons are being shown
+
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+
+   2. Test case: `delete 1 2 3` <br>
+      Expected: Contacts at indexes 1, 2 and 3 are deleted from the list. Details of the deleted contact shown in the 
+      status message.
+   
+   3. Test case: `delete 3 2 1` <br>
+      Expected: Contacts at indexes 1, 2 and 3 are deleted from the list. Details of the deleted contact shown in the
+      status message.
+
+   4. Test case: `delete 1 2 x` (where x is larger than the list size) <br>
+      Expected: No person is deleted. Error details shown in the status message.
+
+   5. Test case: `delete 1 2 y`, (where y is anything that is not an integer) <br>
+      Expected: No person is deleted. Error details shown in the status message.
 
 ### Cloning a person
 
 1. Cloning a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `clone 1`<br>
+   2. Test case: `clone 1`<br>
       Expected: First contact is cloned from the list. Details of the cloned contact shown in the status message.
-
-   1. Test case: `clone 0`<br>
+   3. Test case: `clone 0`<br>
       Expected: No person is cloned. Error details shown in the status message.
-
-   1. Other incorrect clone commands to try: `clone`, `clone x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect clone commands to try: `clone`, `clone x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 ### Adding risk profile to a person
@@ -1052,6 +1151,23 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect `riskprofile` commands to try: `risk profile`, `riskprofile x res/a,a,a,a,a,a,b,b`, `...` (where x is larger than the list size or not a positive integers).<br>
        Expected: Similar to previous.
 
+### Editing a person
+
+1.  Edit a person while all persons are being shown
+    1. Prerequisites: Lists all persons using the `list` command. Multiple persons in the list.
+    2. Test case: `edit 1 n/ John Doe`<br>
+       Expected: The first contact name is changed to John Doe. Timestamp in the status bar is updated.
+    3. Test case: `edit 1`<br>
+       Expected: No person is edited. Error details shown in the status message. Status bar remains the same.
+    4. Other incorrect edit commands to try: `edit 1 n/`, `edit 0 n/ John Doe`, `edit 1 n/ John-Doe`
+       Expected: Similar to previous
+
+### Sorting contact list
+
+1. Sorting contact list by NAME or APPOINTMENT_DATE prefix in ascending order
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The default order of contact list is by APPOINTMENT_DATE prefix.
+   2. Test case: `sort n/` <br>
+      Expected: The contact list is ordered by alphabetical order of the NAME prefix. Details of the number of contacts listed is shown in the result box. 
        
 ### Saving data
 
@@ -1060,3 +1176,27 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix G: Future Implementations**
+
+* Contacts list are only allowed to be sorted in ascending order for NAME and APPOINTMENT_DATE prefix only. We plan to allow users to sort by descending order in the future as well.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. We plan to allow tags to be added of the existing tags or remove the tags individually.
+* 
+
+## **Appendix H: Effort**
+
+{to be added}
+
+## **Appendix I: Planned Enhancements**
+
+* The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
+* The application will start to experience lag after prolonged usage. This is most likely it is due to the extra storing of persons whenever a command modifies the address book. As extra memory are needed to be dedicated to such storage, this can be a reason for the lag after a large number (lets say 100) commands that modify the address book. In the future, we might plan to limit the amount of undoable commands that is allowed to reduce the storage load of the application.
+* {to be added}
+
+## **Appendix J: Acknowledgement**
+
+* The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)
+
+* {to be added}
+
+
