@@ -295,6 +295,7 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
     - have each domain label start and end with alphanumeric characters
     - have each domain label consist of alphanumeric characters, separated
       only by hyphens, if any.
+  
   ```
 
   ![add format](images/add-UG/addinvalidemail.png)
