@@ -1,0 +1,20 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+if () then ([Valid Indexes])
+  :Iterate through the target indexes;
+  :Delete corresponding persons from the address book using Model#deletePerson;
+  :Store deleted persons in deletedPersons;
+  :Record the execution for potential undo operations;
+  :Return delete success message;
+else ([Invalid Indexes])
+  :Display an error message;
+endif
+
+stop
+
+@enduml
