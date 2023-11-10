@@ -1,0 +1,34 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title ArrayLists in ModelManager
+
+package redoableStateList as "<u>redoableStateList" {
+  class redoableState1 as "<u>State1: AddressBook</u>"
+}
+
+hide redoableState1
+
+package previousUndoableCommands as "<u>previousUndoableCommands" {
+  class command1 as "<u>String1: clone 1</u>"
+  class command2 as "<u>String2: delete</u>"
+}
+
+command1 -[hidden]right-> command2
+hide command1
+hide command2
+previousUndoableCommands -[hidden]up-> redoableStateList
+
+
+package undoableStateList as "<u>undoableStatelist" {
+  class undoableState1 as "<u>State1: AddressBook</u>"
+}
+
+hide undoableState1
+
+undoableStateList -[hidden]down-> previousUndoableCommands
+
+@end

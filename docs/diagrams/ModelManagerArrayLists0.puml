@@ -1,0 +1,42 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title ArrayLists in ModelManager
+
+package deletedPersons as "<u>deletedPersons" {
+  class deleted1 as "<u>Person1: John</u>"
+  class deleted2 as "<u>Person2: Greg</u>"
+}
+
+deleted1 -[hidden]right-> deleted2
+hide deleted1
+hide deleted2
+
+
+package previousUndoableCommands as "<u>previousUndoableCommands" {
+  class command1 as "<u>String1: delete</u>"
+  class command2 as "<u>String2: delete</u>"
+}
+
+command1 -[hidden]right-> command2
+hide command1
+hide command2
+previousUndoableCommands -[hidden]up-> deletedPersons
+
+
+package deletedNumberList as "<u>deletedNumberList" {
+  class deletedNumber1 as "<u>Integer1: 2</u>"
+  class deletedNumber2 as "<u>Integer2: Number</u>"
+}
+
+hide deletedNumber1
+hide deletedNumber2
+deletedNumber1 -[hidden]right-> deletedNumber2
+deletedNumberList -[hidden]down-> previousUndoableCommands
+
+
+
+@end

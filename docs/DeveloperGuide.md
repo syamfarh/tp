@@ -78,7 +78,8 @@ The *Sequence Diagram* below shows how the components interact with each other f
 Each of the four main components (also shown in the diagram above),
 
 * defines its *API* in an `interface` with the same name as the Component.
-* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API `interface` mentioned in the previous point.
+* implements its functionality using a concrete `{Component Name}Manager` class (which follows the corresponding API 
+  `interface` mentioned in the previous point).
 
 For example, the `Logic` component defines its API in the `Logic.java` interface and implements its functionality using the `LogicManager.java` class which follows the `Logic` interface. Other components interact with a given component through its interface rather than the concrete class (reason: to prevent outside component's being coupled to the implementation of a component), as illustrated in the (partial) class diagram below.
 
@@ -121,9 +122,9 @@ The sequence diagram below illustrates the interactions within the `Logic` compo
 How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
-1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
+2. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
+3. The command can communicate with the `Model` when it is executed (e.g. to delete a person).
+4. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -257,6 +258,7 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 #### Implementation
 
+
 The `clone` feature creates a copy of a person in the address book while either adding a suffix at the end of the name 
 of the cloned contact or, if the contact name has a pre-existing suffix, it increments that suffix by one.
 
@@ -278,6 +280,7 @@ These operations make use of other operations exposed in the `Model` interface, 
 * `Model#resetUndoableStateList()`
 * `Model#removeRedoCommands()`
 
+
 Given below is an example usage scenario and how the clone mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. 
@@ -286,6 +289,7 @@ Step 2. The user executes `list` to see what Persons are available in the addres
 James are in the address book.
 
 ![Clone0](images/Clone0.png)
+
 
 Step 3. The user executes `clone 1` to clone the person at index 1 of the address book, John. The `clone` command first
 calls `CloneCommand#execute`, which in turn checks to see if the index provided is valid in CloneCommandParser by
@@ -327,10 +331,12 @@ depicted in the User Guide.
 
 **Aspect: How clone executes:**
 
+
 * **Alternative 1 (current choice):** Copies the person at the index provided and returns a person with a number 
     next to their name
   * Pros: Fast,  while ensuring that there are no strict duplicates
   * Cons: Can be restrictive as you might have contacts that are similar and have the same name
+
 
 * **Alternative 2:** Copies the person exactly as is while allowing for duplicates
   * Pros: Fast, allows for as many copies of a person as the user desires
@@ -407,20 +413,29 @@ User Guide.
 
 #### Implementation
 
-The `undo` feature undoes the most recent undoable command. The only undoable commands available are: `add`, `clone`, `edit`,
-`delete`, & `clear`. Commands that do not modify the address book, such as `list`, `find`, `sort` etc. are not 
+The `undo` command undoes the most recent undoable command. The only undoable commands available are: `add`, `clone`, 
+`edit`, `delete`, & `clear`. Commands that do not modify the address book, such as `list`, `find`, `sort` etc. are not 
 undoable commands.
 
-The undo mechanism is facilitated by the use of `ArrayLists` in `ModelManager` to store deleted persons, edited persons, 
-as well as the previous undoable commands. As such `ArrayLists` are instantiated every time the user starts the 
-program, undo does not store the commands from previous sessions and cannot undo changes made in previous sessions.
+The undo mechanism is facilitated by the use of `ArrayLists` in `ModelManager` to store deleted, added and edited 
+persons, as well as the previous undoable commands. The number of contacts deleted from a single delete command and 
+from a clear command are stored as well. As these `ArrayLists` are instantiated every time the user starts 
+the program, undo does not store the commands from previous sessions and cannot undo changes made in previous sessions.
 
-The undo mechanism also changes the implementation of all the undoable commands. For all undoable commands, when they 
-are invoked, `ModelManager` will be called to store each command in an `ArrayList` named `previousUndoableCommands`. 
-Furthermore, for the `delete` and `clear` commands, each deleted person will be stored in an `ArrayList` named 
-`deletedPersons`. For the `edit` command, a `pair` of the original `person` and the edited `person` will be stored in an 
+The below diagram shows the instantiation of such empty `ArrayLists` in `ModelManager`
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram0.png)
+
+The undo mechanism also uses implementation of all the undoable commands. For all undoable commands, when they 
+are invoked, `ModelManager` will be called to store each command in `previousUndoableCommands`. 
+* Furthermore, for the `delete` and `clear` commands, each deleted person will be stored in `deletedPersons`.
+  * For `delete`, the number of deleted persons from a singular `delete` 
+  command will be stored in `deletedNumberList`. I.e. `delete 1 2 3` deletes 3 persons, so 3 is stored in 
+  `deletedNumberList`, `delete 1` deletes 1 person, so 1 is stored.
+  * For `clear`, the number of deleted persons will be stored in `clearedNumberList`. I.e. 
+  `clear` will store 5 in `clearedNumberList` if there were 5 contacts in the address book.
+* For the `edit` command, a `pair` of the original `person` and the edited `person` will be stored in an 
 `ArrayList` named `editedPersons`. 
-
 
 Additionally, it implements a single `execute` command which determines which type of undo operation to do based on the 
 most recent previous undoable command. The other undo operations are:
@@ -430,29 +445,54 @@ most recent previous undoable command. The other undo operations are:
 * `UndoCommand#executeUndoEdit(Model)`
 
 These operations make use of other operations exposed in the `Model` interface, which are:
-* `Model#storeDeletedPerson(Person)`
-* `Model#getDeletedPerson()`
-* `Model#removeDeletedPerson()`
-* `Model#getDeletedPersonsSize()`
-* `Model#getPreviousUndoableCommandsSize()`
-* `Model#getNumberOfPreviousDeleteCommands()`
-* `Model#undoDelete()`
-* `Model#storePreviousUndoableCommand(String)`
-* `Model#getPreviousUndoableCommand()`
-* `Model#removePreviousUndoableCommand()`
-* `Model#getAddressBookSize()`
-* `Model#storeEditedPersonsPair(Person, Person)`
-* `Model#getEditedPersonsPair()`
-* `Model#removeEditedPersonsPair()`
+* For undoable commands:
+  * `Model#getPreviousUndoableCommandsSize()`
+  * `Model#getPreviousUndoableCommand()`
+  * `Model#removePreviousUndoableCommand()`
+* For undoing `delete` and `clear` commands:
+  * `Model#getDeletedPersons()`
+  * `Model#getDeletedPerson()`
+  * `Model#removeDeletedPerson()`
+  * `Model#getLastDeletedNumber()`
+  * `Model#getDeletedNumberList()`
+  * `Model#undoDelete()`
+  * `Model#getLastClearedNumber()`
+  * `Model#removeLastClearedNumber()`
+* For undoing `add` and `clone` commands:
+  * `Model#getAddedPerson()`
+  * `Model#undoAdd()`
+* For undoing `edit` commands
+  * `Model#getEditedPersonsPair()`
+  * `Model#removeEditedPersonsPair()`
+  * `Model#undoEdit()`
 
 Given below is an example usage scenario and how the undo mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time. The `ArrayList`s `previousUndoableCommands`, 
 `deletedPersons`, and `editedPersons` are initialized as a blank `ArrayList`.
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls 
-`Model#storePreviousUndoableCommand(String)`, adding the command as a String into `previousUndoableCommands`, and also 
-calls `Model#storeDeletedPerson(Person)`, adding the Person into `deletedPersons`.
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram1.png)
+
+Step 2. The user executes `delete 1 2` command to delete the 1st and 2nd person in the address book. The following 
+steps are repeated twice, since 2 persons are deleted.
+* The `delete` command calls `Model#storePreviousUndoableCommand(String)`, adding the command as a String into 
+`previousUndoableCommands`, and also calls `Model#storeDeletedPerson(Person)`, adding the Person into 
+`deletedPersons`.
+* Hence, there are 2 elements in `deletedPersons` and `previousUndoableCommands`.
+
+Then, the `delete` command also calls `Model#storeDeletedNumberList`, adding the number of persons deleted into 
+`deletedNumberList`.
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram2.png)
+
+The following sequence diagram shows how the `delete` operation works (only important parts related to undo).
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagramForUndo.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should 
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
+</div>
 
 :information_source: **Note:** If an undoable command fails its execution, it will not call 
 `Model#storePreviousUndoableCommand(String)` so nothing is stored in `previousUndoableCommands`, and `ModelManager` 
@@ -460,18 +500,140 @@ is unchanged.
 
 Step 3. The user now decides that deleting the person was a mistake, and decides to undo that action by executing 
 the `undo` command. The `undo` command will call `model#getPreviousUndoableCommand`, which gets the most recent 
-undoable command executed by the user. In this case, it is the `delete` command. Hence, `UndoCommand#executeUndoAdd
-(model)` is called, which adds back the deleted `Person` to the address book. 
+undoable command executed by the user. In this case, it is the `delete` command. Hence, `UndoCommand#UndoDelete
+(model)` is called, which adds back the deleted `Person`s to the address book. 
 
-In the process, `Model#removePreviousUndoableCommand` is called, removing the delete command (as a String) from the  
-`ArrayList` `previousUndoableCommands`.
+In the process, `Model#removePreviousUndoableCommand` and `Model#removeDeletedPerson()` is called twice, removing the 
+delete commands from `previousUndoableCommands` and deleted persons from `deletedPersons`. 
+`Model#removeLastDeletedNumber` is also called once, removing the deleted number from `deletedNumberList`.
 
-The following sequence diagram shows how the `undo` operation and (mainly) `executeUndoAdd` operation works.
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram1.png)
+
+The following sequence diagram shows how the `undo` operation works.
+
+![ModelManagerStateDiagram](images/UndoSequenceDiagramForDelete.png)
 
 Step 4. The user now decides to execute the command `list`. As this command is not an undoable command, 
 `Model#storePreviousUndoableCommand(String)` and other storing operations are not called, so `ModelManager` remains 
 unchanged.
 
+#### Design considerations:
+
+**Aspect: How undo executes:**
+
+* **Alternative 1 (current choice):** Individual command knows how to undo by
+  itself.
+    * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+    * Cons: We must ensure that the implementation of each individual command are correct.
+
+* **Alternative 2 :** Save the entire address book.
+    * Pros: Easy to implement.
+    * Cons: May have performance issues in terms of memory usage.
+
+### Redo feature
+
+#### Implementation
+
+The `redo` command redoes the most recent `undo` command. It is closely linked with the `undo` command. 
+
+The `redo` mechanism is facilitated by the use of `ArrayLists` in `ModelManager` that stores the states that can be 
+redone and undone, namely `redoableStateList` and `undoableStateList`. The `redo` mechanism is used in conjunction with 
+the `undo` mechanism. For each `undo` command, 
+`Model#addToRedoableStateList` is called, saving the state of the address book before the undo is committed. 
+
+Additionally, it implements the following operations:
+* `Model#getRedoableStateListSize()`
+* `Model#restoreRedoableState()`
+* `Model#addToUndoableStateList()`
+
+For each `redo` command, `Model#addToUndoableStatelist` is called, saving the state of the address book before the 
+redo is committed.
+
+The following operations are implemented to `undo` a `redo` command:
+* `Model#addToRedoableStateList()`
+* `Model#restoreUndoableState()`
+* `Model#removePreviousUndoableState()`
+
+After any command that modifies the address book is executed (I.e. `add`, `clone`, `delete`, `clear`, `edit`), 
+`redoableStateList` and `undoableStatelist` are re-initialised as blank `ArrayList`s, and any redo commands left in 
+`previousUndoableCommands` are deleted. The following operations are implemented to facilitate this:
+* `Model#resetRedoableStateList()`
+* `Model#resetUndoableStateList()`
+* `Model#removeRedoCommands()`
+
+Given below is an example usage scenario and how the redo mechanism behaves at each step.
+
+Step 0: The user launches the application and deletes the first 2 contacts. (Refer to the usage scenario of the 
+undo mechanism for these steps) At the launch of the application, the `ArrayList`s `previousUndoableCommands`, 
+`redoableStatelist` and `undoableStateList` are initialized as a blank `ArrayList`. Then, 2 delete commands are 
+added into the `previousUndoableCommands` after the deletion of the first 2 contacts.
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram3.png)
+![AddressBookStateDiagram](images/AddressBookState1.png)
+
+Step 1: The user now decides that deleting the person was a mistake, and decides to undo that action by executing
+the `undo` command. The `undo` command will call `Model#addToRedoableStateList()`, adding the state of the address 
+book before the `undo` is committed into the `redoableStateList`. Furthermore, `Model#removePreviousUndoableCommand()
+` is called twice, removing the delete commands.
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram4.png)
+![AddressBookStateDiagram](images/AddressBookState2.png)
+
+The following sequence diagram shows how the `undo` operation works when undoing the `delete` command.
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram1.png)
+
+Step 2: The user now decides that undoing was a mistake, and decides to redo that action by executing the `redo` 
+command. The `redo` command will call `Model#addToUndoableStateList()`, adding the state of the address book before 
+the `redo` is committed into the `undoableStateList`. `Model#storePreviousUndoableCommand(String)` is also called, 
+adding the command as a String into `previousUndoableCommands`, and finally `Model#restoreRedoableState` is called, 
+restoring the current address book to the redone state (I.e. the address book after the deletion of the first 2 
+contacts).
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram5.png)
+![AddressBookStateDiagram](images/AddressBookState1.png)
+
+The following sequence diagram shows how the `redo` operation works.
+
+![RedoSequenceDiagram](images/RedoSequenceDiagram.png)
+
+Step 3: The user now decides that redoing was a mistake, again! Hence, the user decides to undo that action once 
+again, by executing the `undo` command. The `undo` command will call `UndoCommand#executeUndoRedo`, which calls 
+`Model#addToRedoableStateList()`, adding the state of the address book before the `undo` is committed into the 
+`redoableStateList`. `Model#removePreviousUndoableCommand()` is also called, removing the command from 
+`previousUndoableCommands`, and finally `Model#restoreUndoableState` is called, restoring the current address book 
+to the undone state (I.e. the address book before the deletion of the first 2 contacts).
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram4.png)
+![AddressBookStateDiagram](images/AddressBookState2.png)
+
+The following sequence diagram shows how the `undo` operation works when undoing the `redo` command.
+
+![UndoSequenceDiagram](images/UndoSequenceDiagram2.png)
+
+:information_source: **Note:** From here on, it is possible to continuously redo and undo the same command indefinitely.
+
+Step 4: The user now decides to execute the command `clone 1`. `Model#resetRedoableStateList()` and 
+`Model#resetUndoableStateList()` are called, re-initialising `redoableStateList` and `undoableStateList` to blank 
+`ArrayList`s. `Model#removeRedoCommands()` is also called, removing all redo commands from 
+`previousUndoableCommands`. However, in this case, there are no redo commands to remove.
+
+![ModelManagerStateDiagram](images/ModelManagerStateDiagram6.png)
+
+
+#### Design considerations:
+
+**Aspect: How redo executes:**
+
+* **Alternative 1 (current choice):** Save the entire address book only for redoing an undo command and undoing a redo 
+  command.
+    * Pros: Easy to implement and reduces performance issues by not storing states for all undo commands.
+    * Cons: Every command that modifies the address book will have to re-initialise `redoableStateList` and 
+      `undoableStatelist` and remove `redo` commands from `previousUndoableCommands`, adding performance cost.
+  
+* **Alternative 2:** Save the entire address book for all undo and redo commands.
+    * Pros: Easy to implement
+    * Cons: May have performance issues in terms of memory usage.
 
 
 ### \[Proposed\] Data archiving
@@ -845,6 +1007,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. The given index is invalid (i.e Not a positive integer and part of the address book.)
 
+
     * 3b1. FAPro shows an error message:  “The person index provided is invalid.”
 
         Use case resumes at step 2.
@@ -1077,14 +1240,12 @@ testers are expected to do more *exploratory* testing.
 1. Initial launch
 
    1. Download the jar file and copy into an empty folder
+   2. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
-
-1. Saving window preferences
+2. Saving window preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
-
-   1. Re-launch the app by double-clicking the jar file.<br>
+   2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
 ### Deleting a person
@@ -1092,31 +1253,24 @@ testers are expected to do more *exploratory* testing.
 1. Deleting a person while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
    2. Test case: `delete 1`<br>
       Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message.
-
    3. Test case: `delete 0`<br>
       Expected: No person is deleted. Error details shown in the status message.
-
    4. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
 2. Deleting a few persons while all persons are being shown
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
    2. Test case: `delete 1 2 3` <br>
       Expected: Contacts at indexes 1, 2 and 3 are deleted from the list. Details of the deleted contact shown in the 
       status message.
-   
    3. Test case: `delete 3 2 1` <br>
       Expected: Contacts at indexes 1, 2 and 3 are deleted from the list. Details of the deleted contact shown in the
       status message.
-
    4. Test case: `delete 1 2 x` (where x is larger than the list size) <br>
       Expected: No person is deleted. Error details shown in the status message.
-
    5. Test case: `delete 1 2 y`, (where y is anything that is not an integer) <br>
       Expected: No person is deleted. Error details shown in the status message.
 
@@ -1172,16 +1326,12 @@ testers are expected to do more *exploratory* testing.
 ### Saving data
 
 1. Dealing with missing/corrupted data files
-
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
-
-1. _{ more test cases …​ }_
 
 ## **Appendix G: Future Implementations**
 
 * Contacts list are only allowed to be sorted in ascending order for NAME and APPOINTMENT_DATE prefix only. We plan to allow users to sort by descending order in the future as well.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. We plan to allow tags to be added of the existing tags or remove the tags individually.
-* 
 
 ## **Appendix H: Effort**
 
@@ -1198,5 +1348,3 @@ testers are expected to do more *exploratory* testing.
 * The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)
 
 * {to be added}
-
-
