@@ -1,0 +1,25 @@
+@startuml
+hide circle
+skinparam classAttributeIconSize 0
+
+Class "{abstract}\nCommand" as Command {
+  +execute(Model): CommandResult
+}
+Class RiskProfileCommand {
+  +COMMAND_WORD: String
+  +MESSAGE_ADD_RISKPROFILE_SUCCESS: String
+  +MESSAGE_INVALID_RESULT: String
+  +MESSAGE_USAGE: String
+  +execute(Model): CommandResult
+  +generateSuccessMessage(Person): String
+  +__calculateTotalScore(String): int
+  +__calculateRiskLevel(int): String
+  +isValidResult(String): Boolean
+  +equals(Object): Boolean
+}
+Class CommandException
+
+RiskProfileCommand -up-|> Command
+Command ..> CommandException: throws >
+RiskProfileCommand .right.> CommandException: throws >
+@enduml

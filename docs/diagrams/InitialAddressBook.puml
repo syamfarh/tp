@@ -1,0 +1,27 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Initial Address Book
+
+package AddressBook {
+    class State1 as "<u>Alex Yeoh:Person</u>"
+    class State2 as "<u>Bernice Yu:Person</u>"
+    class State3 as "<u>Charlotte Oliveiro:Person</u>"
+    class State4 as "<u>David Li:Person</u>"
+    class State5 as "<u>Irfan Ibrahim:Person</u>"
+    class State6 as "<u>Roy Balakrishnan:Person</u>"
+}
+State1 -[hidden]right-> State2
+hide State2
+State2 -[hidden]right-> State3
+hide State3
+State3 -[hidden]right-> State4
+hide State4
+State4 -[hidden]right-> State5
+hide State5
+State5 -[hidden]right-> State6
+hide State6
+@end
