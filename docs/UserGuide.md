@@ -1041,6 +1041,7 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 <div style="page-break-after: always;"></div>
 
 ## Troubleshooting
+Troubleshooting is separated into three categories: [Technical Questions](#technical-questions), [Common Questions](#common-questions) and [Known Issues](#known-issues).
 
 ### Technical Questions
 
