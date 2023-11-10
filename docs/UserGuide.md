@@ -481,6 +481,8 @@ Shows a list of all contacts.
 
   ![list result](images/list-UG/listResult.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Editing a person : `edit`
 
 Edits an existing client's parameter in FAPro.
