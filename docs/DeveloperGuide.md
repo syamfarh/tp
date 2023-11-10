@@ -2,14 +2,34 @@
 layout: page
 title: Developer Guide
 ---
-* Table of Contents
-{:toc}
 
+FAPro - Developer Guide
 --------------------------------------------------------------------------------------------------------------------
-
-## **Acknowledgements**
-
-* {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+1. [Setting up](#setting-up-getting-started)
+2. [Design](#design)
+    * [Architecture](#architecture)
+    * [Ui component](#ui-component)
+    * [Logic component](#logic-component)
+    * [Model component](#model-component)
+    * [Storage component](#storage-component)
+    * [Common classes](#common-classes)
+3. [Implementation](#implementation)
+    * [[Proposed]Undo/Redo feature](#proposed-undoredo-feature)
+    * [Clone feature](#clone-feature)
+    * [Undo feature](#undo-feature)
+    * [[Proposed]Dara archiving](#proposed-data-archiving)
+    * [Find feature](#find-by-address-feature)
+4. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+5. [Appendix A: Product Scope](#appendix-a-product-scope)
+6. [Appendix B: User Stories](#appendix-b-user-stories)
+7. [Appendix C: Use Cases](#appendix-c-use-cases)
+8. [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
+9. [Appendix E: Glossary](#appendix-e-glossary)
+10. [Appendix F: Instructions for manual testing](#appendix-f-instructions-for-manual-testing)
+11. [Appendix G: Future Implementations](#appendix-g-future-implementations)
+12. [Appendix H: Effort](#appendix-h-effort)
+13. [Appendix I: Planned Enhancements](#appendix-i-planned-enhancements)
+14. [Appendix J: Acknowledgement](#appendix-j-acknowledgement)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -499,9 +519,7 @@ Step 7. A list of all contacts who have `2023-12-12` matching their appointment 
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
-
-### Product scope
+## **Appendix A: Product Scope**
 
 **Target user profile**:
 
@@ -519,7 +537,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 
 
-### User stories
+## **Appendix B: User stories**
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -538,7 +556,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 *{More to be added}*
 
-### Use cases
+## **Appendix C: Use cases**
 
 (For all use cases below, the **System** is the `FAPro` and the **Actor** is the `Financial Advisor`, unless specified otherwise)
 
@@ -729,7 +747,7 @@ Preconditions:
 
       Use case resumes at step 2.
 
-### Non-Functional Requirements
+## **Appendix D: Non-Functional Requirements**
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
 2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
@@ -747,14 +765,14 @@ Preconditions:
 
 *{More to be added}*
 
-### Glossary
+## **Appendix E: Glossary**
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix F: Instructions for manual testing**
 
 Given below are instructions to test the app manually.
 
@@ -778,8 +796,6 @@ testers are expected to do more *exploratory* testing.
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a person
 
 1. Deleting a person while all persons are being shown
@@ -795,23 +811,35 @@ testers are expected to do more *exploratory* testing.
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Cloning a person
 
 1. Cloning a person while all persons are being shown.
 
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-   1. Test case: `clone 1`<br>
+   2. Test case: `clone 1`<br>
       Expected: First contact is cloned from the list. Details of the cloned contact shown in the status message.
-
-   1. Test case: `clone 0`<br>
+   3. Test case: `clone 0`<br>
       Expected: No person is cloned. Error details shown in the status message.
-
-   1. Other incorrect clone commands to try: `clone`, `clone x`, `...` (where x is larger than the list size)<br>
+   4. Other incorrect clone commands to try: `clone`, `clone x`, `...` (where x is larger than the list size)<br>
       Expected: Similar to previous.
 
+### Editing a person
+
+1.  Edit a person while all persons are being shown
+    1. Prerequisites: Lists all persons using the `list` command. Multiple persons in the list.
+    2. Test case: `edit 1 n/ John Doe`<br>
+       Expected: The first contact name is changed to John Doe. Timestamp in the status bar is updated.
+    3. Test case: `edit 1`<br>
+       Expected: No person is edited. Error details shown in the status message. Status bar remains the same.
+    4. Other incorrect edit commands to try: `edit 1 n/`, `edit 0 n/ John Doe`, `edit 1 n/ John-Doe`
+       Expected: Similar to previous
+
+### Sorting contact list
+
+1. Sorting contact list by NAME or APPOINTMENT_DATE prefix in ascending order
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The default order of contact list is by APPOINTMENT_DATE prefix.
+   2. Test case: `sort n/` <br>
+      Expected: The contact list is ordered by alphabetical order of the NAME prefix. Details of the number of contacts listed is shown in the result box. 
 
 ### Saving data
 
@@ -820,3 +848,27 @@ testers are expected to do more *exploratory* testing.
    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix G: Future Implementations**
+
+* Contacts list are only allowed to be sorted in ascending order for NAME and APPOINTMENT_DATE prefix only. We plan to allow users to sort by descending order in the future as well.
+* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. We plan to allow tags to be added of the existing tags or remove the tags individually.
+* 
+
+## **Appendix H: Effort**
+
+{to be added}
+
+## **Appendix I: Planned Enhancements**
+
+* The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
+* The application will start to experience lag after prolonged usage. This is most likely it is due to the extra storing of persons whenever a command modifies the address book. As extra memory are needed to be dedicated to such storage, this can be a reason for the lag after a large number (lets say 100) commands that modify the address book. In the future, we might plan to limit the amount of undoable commands that is allowed to reduce the storage load of the application.
+* {to be added}
+
+## **Appendix J: Acknowledgement**
+
+* The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)
+
+* {to be added}
+
+
