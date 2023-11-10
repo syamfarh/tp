@@ -1034,6 +1034,8 @@ If your changes to the data file makes its format invalid, FAPro will discard al
 
 --------------------------------------------------------------------------------------------------------------------
 
+<div style="page-break-after: always;"></div>
+
 ## Troubleshooting
 
 ### FAQ
