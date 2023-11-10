@@ -1,0 +1,15 @@
+@startuml
+!include style.puml
+skinparam ClassFontColor #000000
+skinparam ClassBorderColor #000000
+skinparam ClassBackgroundColor #FFFFAA
+
+title Final state
+
+package AddressBook {
+    class State2 as "<u>James:Person</u>"
+    class State4 as "<u>Luke:Person</u>"
+}
+
+
+@end

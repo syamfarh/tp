@@ -3,10 +3,11 @@ layout: page
 title: FAPro User Guide
 ---
 
+--------------------------------------------------------------------------------------------------------------------
+
 * Table of Contents
   {:toc}
 
---------------------------------------------------------------------------------------------------------------------
 1. [Product Overview](#product-overview)
 2. [Quick start](#quick-start)
 3. [Features](#features)
@@ -32,6 +33,8 @@ title: FAPro User Guide
 5. [Command summary](#command-summary)
 6. [Glossary](#glossary)
 
+<div style="page-break-after: always;"></div>
+
 ## Product Overview
 
 The FAPro User Guide is designed to assist financial advisors (FAs) in optimising their client management. It aims to improve the quality of life for FAs by providing a comprehensive, user-centric resource that enables them to efficiently track large numbers of contacts and manage their clients in one central platform.
@@ -53,7 +56,7 @@ Throughout the guide, we'll provide tips and best practices to help you make the
 3. Copy the file to the folder you want to use as the _home folder_ for FAPro
 
 4. Open a command terminal, `cd` into the folder you put the jar file in, and use the `java -jar [CS2103T-W09-1][FAPro].jar` command to run the application.<br>
-   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+   A GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.
    ![Ui](images/Ui.png)
 
 5. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -72,6 +75,7 @@ Throughout the guide, we'll provide tips and best practices to help you make the
 * Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
+<div style="page-break-after: always;"></div>
 
 ## Features
 
@@ -79,7 +83,7 @@ Throughout the guide, we'll provide tips and best practices to help you make the
 
 **:information_source: Notes about the command format:**<br>
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user<br>
+* Words in `UPPER_CASE` are the parameters you supplied<br>
   e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`
 
 * Items in square brackets are optional<br>
@@ -97,9 +101,11 @@ Throughout the guide, we'll provide tips and best practices to help you make the
 * If you are using a PDF version of this document, be careful when copying and pasting commands that span multiple lines as space characters surrounding line-breaks may be omitted when copied over to the application
 </div>
 
+<div style="page-break-after: always;"></div>
+
 ### Viewing help: `help`
 
-Shows a message listing the basic commands and explaining how to access the user guide for other commands.
+Discover our basic commands right away. If you want to explore other commands, FaPro user guide link is provided for you. 
 
 #### Format: 
 * `help`
@@ -113,15 +119,15 @@ Shows a message listing the basic commands and explaining how to access the user
   
   ![help_format](images/help-UG/help_success.png)
 
-* A pop-up window lists all the main commands and displays a link to FAPro's user guide
-
+* You will see a pop-up window with basic commands and a link to FAPro's user guide for other commands
 
   ![help_window](images/help-UG/helpWindow.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Viewing risk assessment questionnaire: `questionnaire`
 
-Displays questions that are used for generating client risk profile levels.
+Show you questions that are used for generating client risk profile levels.
 
 #### Format: 
 * `questionnaire`
@@ -133,14 +139,16 @@ Displays questions that are used for generating client risk profile levels.
    ```
   ![questionnaire format](images/questionnaire-UG/questionnaire_success.png)
 
-* A pop-up window shows the risk assessment multiple choice questions, including the grading and risk profile categories criteria
+* You will see a pop-up window with risk assessment multiple-choice questions, including the grading and risk profile categories criteria
 
   ![questionnaire window](images/questionnaire-UG/questionnaireWindow.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Adds risk profile level to a contact: `riskprofile`
 
-Generates the client risk profile level based on their response of risk assessment questionnaire provided in Questionnaire tab and adds it to their contact
+Generates your client risk profile based on their response to questions provided in the risk assessment questionnaire window
+and adds it to their contact.
 
 #### Format:
 * `riskprofile INDEX res/RESULT`
@@ -150,21 +158,22 @@ Generates the client risk profile level based on their response of risk assessme
 
   ![riskprofile format](images/riskProfile-UG/riskProfileFormat.png)
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
+  <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
-The risk profile label cannot be removed once is added, but this command can be used to update the client risk profile
-</div>
+  The risk profile label cannot be removed once you have created it, 
+  but you can use this command to update your client risk profile
+  </div>
 
-<div markdown="block" class="alert alert-info">
+  <div markdown="block" class="alert alert-info">
 
-**:information_source: Note**<br>
-When multiple prefixes <b>res/</b> are inputted along with the RESULT:
-* Previous <b>res/</b> entries with its RESULT will be <span style="color: red;">ignored</span>
-* The risk profile label displayed will be based on the <u>last one entered</u>
-</div>
+  **:information_source: Note**<br>
+  When you input multiple prefixes <b>res/</b> along with its RESULT:
+  * Previous <b>res/</b> entries with its RESULT will be <span style="color: red;">ignored</span>
+  * The risk profile label displayed will be based on the <u>last input you entered</u>
+  </div>
 
 #### Acceptable values for each parameter:
-* INDEX: Only accept positive integers less than the size of the contacts displayed
+* INDEX: Only accept positive integers less than the size of your contacts
 * RESULT: Valid result format, 8 comma-separated characters without whitespace from 'a' - 'e' (e,b,a,c,b,b,a,e)
 
 #### Precise expected outcome on success:
@@ -172,10 +181,10 @@ When multiple prefixes <b>res/</b> are inputted along with the RESULT:
   ```
   Added risk profile to Person: X
   ```
-  where X are the details of the person edited
-* A risk profile label with a specified color will be added to the contact which has 5 categories:
+  where X are the details of your client contact edited
+* A risk profile label with a specified color will be added to your client contact, which has five categories:
   <span style="background-color:#4CAF50; color:white;">**Low**</span>,
-  <span style="background-color:#2196F3; color:white;">**Moderately Low**</span>.
+  <span style="background-color:#2196F3; color:white;">**Moderately Low**</span>,
   <span style="background-color:#FFC107; color:white;">**Moderate**</span>,
   <span style="background-color:#FF6600; color:white;">**Moderately High**</span>,
   <span style="background-color:#F44336; color:white;">**High**</span>
@@ -187,28 +196,34 @@ If the RESULT is empty or the INDEX is negative integers
 * You should see this error message:
   ```
   Invalid command format! 
-  riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
+  riskprofile: Adds the risk profile of the person identified by the index number 
+  used in the last person listing.
   Existing risk profile will be overwritten by the input.
   Parameters: INDEX (must be a positive integer) res/[RESULT]
   Example: riskprofile 1 res/a,e,b,d,c,a,d,e
   ```
-  ![invalid risk profile 1](images/questionnaire-UG/invalidRiskProfile1.png)
+  ![invalid risk profile 1](images/riskProfile-UG/invalidRiskProfile1.png)
+  ![invalid risk profile 3](images/riskProfile-UG/invalidRiskProfile3.png)
 
 If the RESULT is not separated by commas, with any whitespace or not in the range of 'a' - 'e'
 * You should see this error message:
   ```
   Result must have 8 comma-separated characters from 'a' to 'e'!
-  riskprofile: Adds the risk profile of the person identified by the index number used in the last person listing. 
+  riskprofile: Adds the risk profile of the person identified by the index number 
+  used in the last person listing. 
   Existing risk profile will be overwritten by the input.
   Parameters: INDEX (must be a positive integer) res/[RESULT]
   Example: riskprofile 1 res/a,e,b,d,c,a,d,e
   ```
-  ![invalid risk profile 2](images/questionnaire-UG/invalidRiskProfile2.png)
+  ![invalid risk profile 2](images/riskProfile-UG/invalidRiskProfile2.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Adding a person: `add`
 
-Adds a new entry to their address book for financial advisors, including personal details such as name, address, occupation, phone number and email.
+Allows you to add a new entry to your address book, including personal details such as your clients name, address, occupation, phone number and email.
+
+The main method you will be using to add contacts in typical situations.
 
 #### Format:
 * `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]… [appt/APPOINTMENT_DATE]`
@@ -216,6 +231,7 @@ Adds a new entry to their address book for financial advisors, including persona
 #### Example commands:
 * `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01 appt/12-12-2023 08:30`
 * `add n/Betsy Crowe t/Friend e/betsycrowe@example.com o/Entrepreneur a/Newgate Prison p/1234567`
+* `add n/Robert Johnson p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`
 
 #### Acceptable values for each parameter:
 * NAME: Must be alphanumeric characters only. Name must be unique. (John Doe)
@@ -224,7 +240,7 @@ Adds a new entry to their address book for financial advisors, including persona
 * EMAIL ADDRESS: Accepts **all** types of characters.
 * OCCUPATION: Must be alphanumeric characters only
 * TAG: Must be alphanumeric characters only
-* APPOINTMENT DATE: Valid string appointment date format (yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm) (date and time must be after the current date and time) 
+* APPOINTMENT_DATE: Valid string appointment date format (yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm) (date and time must be after the current date and time) 
 
 <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 A person can have any number of tags (including 0)
@@ -241,6 +257,10 @@ A person can have any number of tags (including 0)
   where X are the details of the person added
 
 * For example, for Robert Johnson (the example command), it would be:<br> `New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: `<br> Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
+* This is the original empty address book
+
+  ![add format](images/add-UG/addbefore.png)
+  
 * The new entry is displayed in the address book GUI
 
   ![add format](images/add-UG/add_success.png)
@@ -252,7 +272,10 @@ If a required parameter is missing (e.g., NAME, EMAIL)
 * You should see this message:
 
   ```
-  Invalid command format! add: Adds a person to the address book. Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... Example: add n/John Doe p/98765432 e/johnd@example.com a/311, Clementi Ave 2, #02-25 t/friends t/owesMoney
+  Invalid command format! add: Adds a person to the address book.
+  Parameters: n/NAME p/PHONE e/EMAIL a/ADDRESS [t/TAG]... 
+  Example: add n/John Doe p/98765432 e/johnd@example.com a/311,
+  Clementi Ave 2, #02-25 t/friends t/owesMoney
   ```
 
   ![add format](images/add-UG/addmissingparam.png)
@@ -262,13 +285,18 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
 * You should see this error message:
 
   ```
-  Emails should be of the format local-part@domain and adhere to the following constraints:
-  1. The local-part should only contain alphanumeric characters and these special characters, excluding the parentheses, (+_.-). The local-part may not start or end with any special characters.
-  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels separated by periods.
+  Emails should be of the format local-part@domain and adhere to the 
+  following constraints:
+  1. The local-part should only contain alphanumeric characters and these special
+  characters, excluding the parentheses, (+_.-). The local-part may not start or end 
+  with any special characters.
+  2. This is followed by a '@' and then a domain name. The domain name is made
+  up of domain labels separated by periods.
   The domain name must:
     - end with a domain label at least 2 characters long
     - have each domain label start and end with alphanumeric characters
-    - have each domain label consist of alphanumeric characters, separated only by hyphens, if any.
+    - have each domain label consist of alphanumeric characters, 
+      separated only by hyphens, if any.
   ```
 
   ![add format](images/add-UG/addinvalidemail.png)
@@ -283,10 +311,13 @@ If a parameter is specified multiple times (e.g., --name John --name Doe), an er
 
   ![add format](images/add-UG/addduplicateparam.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Cloning a person : `clone`
 
-Clones a contact from FAPro at the specified index. Makes it easier for you to add a contact with very similar details (i.e from the same household)
+Clones a contact from the address book at the specified index.
+
+Makes it easier for you to add a contact with very similar details (i.e from the same household)
 
 #### Format:
 * `clone INDEX`
@@ -315,14 +346,23 @@ After cloning, the clone is the exact same as the original, other than a suffix 
 * For example, if
 
   ```
-  Name: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: ; Tags:
+  Name: John Doe; Phone: 98765432; Email: johnd@example.com; 
+  Occupation: Barber;
+  Address: Hougang Avenue 1; AppointmentDate: ; Tags:
   ```
 
   is the person being cloned, then the output is:
 
   ```
-  Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com; Occupation: Barber; Address: Hougang Avenue 1; AppointmentDate: ; Tags:
+  Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com;
+  Occupation: Barber;
+  Address: Hougang Avenue 1; AppointmentDate: ; Tags:
   ```
+* This is the original address book with just one contact (John)
+
+  ![add format](images/clone-UG/clonebefore.png)
+
+* The cloned entry is displayed in the address book GUI
 
   ![clone format](images/clone-UG/clone_success.png)
 
@@ -333,7 +373,9 @@ If no index, 0 or a negative index is entered next to the clone command
 * You should see this error message:
 
   ```
-  Invalid command format! clone: Clones the person identified by the index number used in the displayed person list. Parameters: INDEX (must be a positive integer).
+  Invalid command format! clone: Clones the person identified by the index
+  number used in the displayed person list. Parameters: INDEX (must be a
+  positive integer).
   ```
 
   ![clone format](images/clone-UG/cloneinvalidindex.png)
@@ -353,15 +395,21 @@ If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
 * You should see this error message:
 
   ```
-  The integer suffix of the person being cloned is out of range. Please note that the smallest possible suffix that a person can have is 1 and the largest possible suffix that a person can have is 2147483647. As such, if your suffix is 0 or 2147483647, please consider editing the names of your contacts first.
+  The integer suffix of the person being cloned is out of range. Please note that
+  the smallest possible suffix that a person can have is 1 and the largest possible
+  suffix that a person can have is 2147483647. As such, if your suffix is 0 or
+  2147483647, please consider editing the names of your contacts first.
   ```
 
   ![clone format](images/clone-UG/clonesuffixerror.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Deleting a person : `delete`
 
-Deletes a contact from FAPro at the specified indexes.
+Deletes a contact from your address book at the specified indexes.
+
+Useful in instances where you have no more need for a clients contact details.
 
 #### Format: 
 * `delete INDEX [MORE INDEXES]`
@@ -401,24 +449,26 @@ If any of the entered indexes are invalid:
   The person index provided is invalid.
   ```
 
-  ![edit format](images/delete-UG/deletewrongindex.png)
+  ![delete format](images/delete-UG/deletewrongindex.png)
 
 If no index is placed after the delete command:
 * You should see this error message:
 
   ```
   Invalid command format! 
-  delete: Deletes the person(s) identified by the index number used in the displayed person list. 
+  delete: Deletes the person(s) identified by the index number used in the
+  displayed person list. 
   Parameters: INDEXES (must be positive integers, separated by spaces)
   Example: delete 1 3 5"
   ```
 
   ![delete format](images/delete-UG/deletenoindex.png)
 
+<div style="page-break-after: always;"></div>
 
 ### List out all contacts : `list`
 
-Shows a list of all contacts.
+Show a list of all your contacts.
 
 #### Format: 
 * `list`
@@ -429,7 +479,7 @@ Shows a list of all contacts.
   Listed all persons
   ```
 
-* List all contacts with their details
+* You will see a list of all your contacts with their details
 
   ![list result](images/list-UG/listResult.png)
 
@@ -438,7 +488,7 @@ Shows a list of all contacts.
 Edits an existing client's parameter in FAPro.
 
 #### Format:
-* `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [appt/APPOINTMENTDATE] [a/ADDRESS] [t/TAG]…`
+* `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [appt/APPOINTMENT_DATE] [a/ADDRESS] [t/TAG]…`
 
 * Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index **must be a positive integer** 1, 2, 3, …
 * At least one of the optional fields must be provided
@@ -459,7 +509,9 @@ Edits an existing client's parameter in FAPro.
 #### Precise expected outputs on success:
 * You should see this message:
   ```
-  Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], Occupation:[OCCUPATION], Address:[ADDRESS]…
+  Edited Person:[NAME], Phone Number:[PHONE_NUMBER], Email:[EMAIL], 
+  Occupation:[OCCUPATION], Address:[ADDRESS], AppointmentDate:[APPOINTMENT_DATE],
+  Tags:[TAGS]…
   ```
 * The new entry is displayed in the address book GUI.
 
@@ -471,13 +523,16 @@ If a required parameter is missing (e.g., name, email), an error message should 
 * You should see this error message:
   ```
   Invalid command format! 
-  edit: Edits the details of the person identified by the index number used in the displayed person list. Existing values will be overwritten by the input values.
-  Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [appt/APPOINTMENTDATE] [t/TAG]...
+  edit: Edits the details of the person identified by the index number used in the
+  displayed person list. Existing values will be overwritten by the input values.
+  Parameters: INDEX (must be a positive integer) [n/NAME] [p/PHONE] [e/EMAIL]
+  [o/OCCUPATION] [a/ADDRESS] [appt/APPOINTMENT_DATE] [t/TAG]…
   Example: edit 1 p/91234567 e/johndoe@example.com
   ```
 
   ![edit format](images/edit-UG/editfailure.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Searching persons: `find`
 
@@ -489,12 +544,12 @@ Finds persons based on the given keywords.
 
 * `find a/ADDRESS [MORE ADDRESSES]` 
 
-* `find appt/APPOINTMENT DATE`
+* `find appt/APPOINTMENT_DATE`
 
 #### Acceptable values for each parameter:
 * NAME: Valid string name
 * ADDRESS: Valid string address
-* APPOINTMENT DATE: Valid dates (after current date), in the format of `yyyy-mm-dd`
+* APPOINTMENT_DATE: Valid dates (after current date), in the format of `yyyy-mm-dd`
 
 
 #### Example commands:
@@ -527,10 +582,12 @@ reminding you to follow the correct input format
 * You should see this error message:
 
   ```
-  Invalid command format! find n/: Finds all persons whose names contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+  Invalid command format! find n/: Finds all persons whose names contain any of
+  the specified keywords (case-insensitive) and displays them as a list with index
+  numbers.
   ```
 
-  ![find_name format](images/find-UG/find_n2.png)
+![find_name format](images/find-UG/find_n2.png)
 
 
 #### _Find by address:_
@@ -556,7 +613,9 @@ reminding you to follow the correct input format
 * You should see this error message:
 
   ```
-  Invalid command format! find a/: Finds all persons whose address contain any of the specified keywords (case-insensitive) and displays them as a list with index numbers.
+  Invalid command format! find a/: Finds all persons whose address contain any of
+  the specified keywords (case-insensitive) and displays them as a list with index
+  numbers.
   ```
 
   ![find_add format](images/find-UG/find_a2.png)
@@ -583,7 +642,8 @@ reminding you to follow the correct input format
 
 * You should see this error message:
   ```
-  Invalid command format! find_appt: Finds all persons whose appointment date matches the specified input date and displays them as a list with index numbers.
+  Invalid command format! find_appt: Finds all persons whose appointment date
+  matches the specified input date and displays them as a list with index numbers.
   ```
 
   ![find_appt format](images/find-UG/find_appt2.png)
@@ -593,7 +653,8 @@ reminding you to follow the correct input format
 
 * You should see this error message:
   ```
-  Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] or [yyyy-mm-dd].
+  Appointment Date should follow the format of [mm/dd/yyyy] or [dd-mm-yyyy] 
+  or [yyyy-mm-dd].
   ```
 
   ![find_appt format](images/find-UG/find_appt3.png)
@@ -608,6 +669,7 @@ reminding you to input a valid date
 
   ![find_appt format](images/find-UG/find_appt4.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Undoing a command : `undo`
 
@@ -760,6 +822,7 @@ When there is no command to undo, i.e. no previous `add`, `clone`, `delete`, `cl
 
   ![undo format](images/undo-UG/undo_fail.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Redoing an undo command : `redo`
 
@@ -846,6 +909,7 @@ When there is no command to redo, i.e. no previous `undo` command
   ```
   ![redo_format](images/redo-UG/redo_failure.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Sorting contacts : `sort`
 
@@ -867,7 +931,7 @@ Sort contact lists by prefix name or appointment date.
 #### Precise expected output on success:
 * You should see this message:
   ```
-  'X person listed!'
+  X persons listed!
   ```
   where X is the number of clients in the address book.
 * The sorted entry is displayed in the address book GUI.
@@ -888,6 +952,7 @@ If either a required parameter is missing or a parameter provided is invalid (e.
 
   ![sort format](images/sort-UG/sortfailuremissing.png)
 
+<div style="page-break-after: always;"></div>
 
 ### Opening calendar window : `calendar`
 
@@ -899,10 +964,10 @@ Open a new calendar window.
 #### Example commands:
 * `calendar`
 
-<div markdown="span" class="alert alert-primary">:bulb: **Tip:**
-
-* You can open calendar window by pressing F3 key
-* Arrow key navigate you to different months
+<div markdown="span" class="alert alert-primary">:bulb: 
+**Tip:** <br>
+* You can open calendar window by pressing F3 key <br>
+* Arrow key navigate you to different months <br>
 * Enter key navigate you back to the current month
 </div>
 
@@ -910,6 +975,8 @@ Open a new calendar window.
 * A pop-up of a new calendar window of the current month that indicate client's appointments in the date
 
   ![calendar format](images/calendar-UG/calendarWindow.png)
+
+<div style="page-break-after: always;"></div>
 
 ### Clearing all entries : `clear`
 
@@ -946,15 +1013,17 @@ Clears all contacts in the address book.
 
   ![clear format](images/clear-UG/clear_failure.png)
 
+<div style="page-break-after: always;"></div>
+
 ### Exiting the program : `exit`
 
-Exits the application.
+Your FAPro application will be closed.
 
 #### Format: 
 * `exit`
 
 #### Precise expected outcome on success:
-* The FAPro application will be closed
+* You will be exited from the application
 
 ### Saving the data
 
@@ -1039,7 +1108,14 @@ To circumvent this, you can add additional details to the name to differentiate 
 | Word                 | Meaning                                                                                                                         |
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | **FA**               | Short form for financial advisor                                                                                                |
-| **Parameter**        | Values inputted by the user.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                 |
+| **Parameter**        | Values inputted by the you.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                  |
 | **Positive Integer** | An integer that is positive (i.e greater than 0). Please note that we are excluding 0 as a positive integer.                    |
 | **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
 | **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
+
+## Members
+### 1. Bhanuka Bandara Ekanayake 
+### 2. Daphne Shaine Wilhelmina
+### 3. Glenn Ng Jun Jie
+### 4. Lim Zhen Wy
+### 5. Muhammad Syam Farhan bin Agus Rizal
