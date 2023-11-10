@@ -1124,8 +1124,8 @@ _Known issues_ are some problems that are currently present in the program that 
 <div style="page-break-after: always;"></div>
 
 ### Contributing Members
-#### 1. Bhanuka Bandara Ekanayake 
-#### 2. Daphne Shaine Wilhelmina
-#### 3. Glenn Ng Jun Jie
-#### 4. Lim Zhen Wy
-#### 5. Muhammad Syam Farhan bin Agus Rizal
+1. Bhanuka Bandara Ekanayake 
+2. Daphne Shaine Wilhelmina
+3. Glenn Ng Jun Jie
+4. Lim Zhen Wy
+5. Muhammad Syam Farhan bin Agus Rizal
