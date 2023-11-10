@@ -300,6 +300,8 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
   
 
   ```
+  
+<br>
 
   ![add format](images/add-UG/addinvalidemail.png)
 
