@@ -19,6 +19,7 @@ FAPro - Developer Guide
     * [Delete feature](#delete-feature)
     * [Undo feature](#undo-feature)
     * [Find feature](#find-feature)
+    * [Sort feature](#sort-feature)
     * [Questionnaire feature](#questionnaire-feature)
     * [Risk profile feature](#risk-profile-feature)
     * [Calendar feature](#calendar-feature)
