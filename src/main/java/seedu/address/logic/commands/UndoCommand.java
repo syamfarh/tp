@@ -87,6 +87,7 @@ public class UndoCommand extends Command {
 
         String deletedPersonsDetails = Messages.formatPersons(undoDeletedPersons);
 
+        //should never reach this!
         if (deletedPersons.isEmpty() || model.getDeletedNumberList().isEmpty()) {
             return new CommandResult(MESSAGE_UNDO_DELETE_FAILURE);
         }
