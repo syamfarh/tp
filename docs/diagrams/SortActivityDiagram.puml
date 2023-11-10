@@ -4,28 +4,29 @@ skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 
 start
-
 :User executes sort n/;
 :SortCommandParser;
 if () then ([args not empty])
   if () then ([n/])
   :Return new SortCommand with
   NAMECOMPARATOR parameter;
+  label aa
+  :Call SortCommand#execute;
+  :Call Model#updateSortComparator;
   else if () then ([appt/])
   :Return new SortCommand with
   APPTCOMPARATOR parameter;
+  goto aa
   else ([else])
-  : throw Invalid command format
+  label aa
+  :throw Invalid command format
   + error message shown;
-  stop;
+  label g
   endif
 else ([else]);
-  : throw Invalid command format
-   + error message shown;
-   stop;
+  label ace
+  goto aa
 endif
-:Call SortCommand#execute;
-:Call Model#updateSortComparator;
 stop
 
 @enduml
