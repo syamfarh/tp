@@ -244,9 +244,9 @@ The main method you will be using to add contacts in typical situations.
   2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels
   separated by periods
   The domain name must:
-  * end with a domain label at least 2 characters long
-  * have each domain label start and end with alphanumeric characters
-  * have each domain label consist of alphanumeric characters, separated only by hyphens, if any
+  * End with a domain label at least 2 characters long
+  * Have each domain label start and end with alphanumeric characters
+  * Have each domain label consist of alphanumeric characters, separated only by hyphens, if any
 * OCCUPATION: Must be alphanumeric characters only
 * TAG: Must be alphanumeric characters only
 * APPOINTMENT_DATE: Valid string appointment date format (yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm) (date and time must be after the current date and time) 
