@@ -15,7 +15,7 @@ FAPro - Developer Guide
     * [Common classes](#common-classes)
 3. [Implementation](#implementation)
     * [Add feature]()
-    * [Edit feature]()
+    * [Edit feature](#edit-feature)
     * [Clone feature](#clone-feature)
     * [Delete feature](#delete-feature)
     * [Undo feature](#undo-feature)
@@ -181,6 +181,39 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Edit feature
+
+#### Implementation
+
+The `edit` feature allows user to edit a person's data in the address book by providing the prefix and the changed value.
+
+Edit implements the following operations:
+* `EditCommand#execute`
+* `EditCommand#createEditedPerson`
+
+EditCommand also contains a static class `EditPersonDescriptor` that stores the details to edit the person with.
+
+Given below is an example usage scenario and how the clone mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `list` to see what Persons are available in the address book. Initially, only John and
+James are in the address book.
+
+![Edit0](images/Clone0.png)
+
+Step 3. The user executes `edit 1 n/ Greg` to edit the person's name at index 1 of the address book, John. 
+* The `EditCommandParser#parse` will create a new `EditPersonDescriptor` to store the edited value of a person.
+In this case, the new name of the person is stored in `EditPersonDescriptor`.
+<br>
+* `EditCommandParser#parse` will return a new `EditCommand` object with the parameter index, in this case 1, and the `EditPersonDescriptor` object.
+* `EditCommand#execute` will then compare if the `EditPersonDescriptor` name already exist in the contact list. If it already exist, it will throw an exception. In this case, it does not. <br>
+* `EditCommand#execute` will call `model#setPerson` to replace the current person with the newly edited person at the index number.
+
+![Edit0](images/Edit1.png)
+
+![Edit0](images/EditActivityDiagram.png)
 
 ### Clone feature
 
