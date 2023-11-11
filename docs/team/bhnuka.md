@@ -61,19 +61,19 @@ Given below are my contributions to the project.
     * Added implementation, use case and manual testing of the `delete` feature
       
   * Diagrams:
-    * ![Add0](images/add0.png)
-    * ![Add1](images/add1.png)
-    * ![AddActivityDiagram0](images/AddActivityDiagram0.png)
-    * ![AddActivityDiagram1](images/AddActivityDiagram1.png)
-    * ![Clone0](images/Clone0.png)
-    * ![Clone1](images/Clone1.png)
-    * ![CloneActivityDiagram0](images/CloneActivityDiagram0.png)
-    * ![CloneActivityDiagram1](images/CloneActivityDiagram1.png)
-    * ![CloneActivityDiagram2](images/CloneActivityDiagram2.png)
-    * ![Delete0](images/Delete0.png)
-    * ![Delete1](images/Delete1.png)
-    * ![DeleteActivityDiagram0](images/DeleteActivityDiagram0.png)
-    * ![DeleteActivityDiagram1](images/DeleteActivityDiagram1.png)
+    * ![Add0](../images/add0.png)
+    * ![Add1](../images/add1.png)
+    * ![AddActivityDiagram0](../images/AddActivityDiagram0.png)
+    * ![AddActivityDiagram1](../images/AddActivityDiagram1.png)
+    * ![Clone0](../images/Clone0.png)
+    * ![Clone1](../images/Clone1.png)
+    * ![CloneActivityDiagram0](../images/CloneActivityDiagram0.png)
+    * ![CloneActivityDiagram1](../images/CloneActivityDiagram1.png)
+    * ![CloneActivityDiagram2](../images/CloneActivityDiagram2.png)
+    * ![Delete0](../images/Delete0.png)
+    * ![Delete1](../images/Delete1.png)
+    * ![DeleteActivityDiagram0](../images/DeleteActivityDiagram0.png)
+    * ![DeleteActivityDiagram1](../images/DeleteActivityDiagram1.png)
     
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
