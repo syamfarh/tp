@@ -14,7 +14,7 @@ FAPro - Developer Guide
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 3. [Implementation](#implementation)
-    * [Add feature]()
+    * [Add feature](#add-feature)
     * [Edit feature]()
     * [Clone feature](#clone-feature)
     * [Delete feature](#delete-feature)
