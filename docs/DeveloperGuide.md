@@ -14,10 +14,12 @@ FAPro - Developer Guide
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 3. [Implementation](#implementation)
-    * [[Proposed]Undo/Redo feature](#proposed-undoredo-feature)
+    * [Add feature](#add-feature)
+    * [Edit feature]()
     * [Clone feature](#clone-feature)
     * [Delete feature](#delete-feature)
     * [Undo feature](#undo-feature)
+    * [Redo feature]()
     * [Find feature](#find-feature)
     * [Sort feature](#sort-feature)
     * [Questionnaire feature](#questionnaire-feature)
@@ -180,84 +182,76 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-### \[Proposed\] Undo/redo feature
+### Add feature
 
-#### Proposed Implementation
+#### Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The `add` feature allows users to add a `Person` to their address book. The `add` command is implemented by the `AddCommand`
+class.
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+Add implements the following operations:
+* `AddCommand#execute`
+* `AddCommand#equals`
+* `AddCommand#toString`
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations make use of other operations exposed in the `Model` interface, which are:
+* `Model#hasPerson(Person)`
+* `Model#addPerson(Person)`
+* `Model#storePreviousUndoableCommand(String)`
+* `Model#resetRedoableStateList()`
+* `Model#resetUndoableStateList()`
+* `Model#removeRedoCommands()`
 
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
+Given below is an example usage scenario and how the add mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1: The user launches the application. The application initializes various lists and data structures.
 
-![UndoRedoState0](images/UndoRedoState0.png)
+![Add0](images/Add0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+As seen in the object diagram, the address book is currently empty.
 
-![UndoRedoState1](images/UndoRedoState1.png)
+Step 2. The user executes `add n/Robert Johnson p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`
+to add their client, Robert Johnson, to their address book.
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+The add command first calls `AddCommand#execute`, which calls `AddCommandParser#parse(String)`, to ensure that all the
+mandatory prefixes are present, namely `Name`, `Phone`, `Email`, `Occupation` and `Address`.
 
-![UndoRedoState2](images/UndoRedoState2.png)
+`AddCommandParser#parse(String)` then verifies that among these mandatory fields, there are no duplicate prefixes
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+Once done, it then parses each prefix (both mandatory and optional) in their respective parser to ensure that they are
+valid. For example, `Name` is parsed by `ParserUtil#parseName`, which checks if the name is valid (Only consists of
+alphanumeric characters).
 
-</div>
+Once everything has been parsed and all prefixes are valid, `AddCommandParser#parse(String)` then returns a `Person`
+with all these details to `AddCommand#execute`.
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+![AddActivityDiagram0](images/AddActivityDiagram0.png)
 
-![UndoRedoState3](images/UndoRedoState3.png)
+Step 3. `AddCommand#execute` then checks to ensure that the returned `Person` does not already exist in the address
+book. If he does already exist in the address book, an exception is returned. On the other hand, if he does not, he is
+then added to the address book by `Model#addPerson`.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
-than attempting to perform the undo.
+![AddActivityDiagram0](images/AddActivityDiagram0.png)
 
-</div>
+![Add1](images/Add1.png)
 
-The following sequence diagram shows how the undo operation works:
-
-![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
-</div>
-
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-</div>
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-![UndoRedoState4](images/UndoRedoState4.png)
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
-
-![UndoRedoState5](images/UndoRedoState5.png)
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-<img src="images/CommitActivityDiagram.png" width="250" />
+Upon successfully adding the person, the add success message is returned to the user, as depicted in the
+User Guide.
 
 #### Design considerations:
 
-**Aspect: How undo & redo executes:**
+**Aspect: How add executes:**
 
-* **Alternative 1 (current choice):** Saves the entire address book.
-  * Pros: Easy to implement.
-  * Cons: May have performance issues in terms of memory usage.
+* **Alternative** (current choice): Adds persons to the address book, checking for duplicates, and provides feedback
+  messages.
+    * Pros: Ensures controlled addition with validation and provides feedback to the user.
+    * Cons: Can be meticulous.
 
-* **Alternative 2:** Individual command knows how to undo/redo by
-  itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
-  * Cons: We must ensure that the implementation of each individual command are correct.
-
+* **Alternative 2:** Adds persons to the address book without checking for duplicates and allows for multiple additions 
+  without feedback.
+    * Pros: Fast and straightforward for multiple deletions.
+    * Cons: Lacks feedback on whether the persons were added, which may be useful for confirmation and may result in
+      duplicate entries.
 
 ### Clone feature
 
@@ -367,7 +361,7 @@ These operations make use of other operations exposed in the `Model` interface, 
 * `Model#storePreviousUndoableCommand(String)`
 * `Model#storeDeletedNumberList(int)`
 * `Model#resetRedoableStateList()`
-* `Model#reserUndoableStateList()`
+* `Model#resetUndoableStateList()`
 * `Model#removeRedoCommands()`
 
 Given below is an example usage scenario and how the delete mechanism behaves at each step.
@@ -639,11 +633,6 @@ Step 4: The user now decides to execute the command `clone 1`. `Model#resetRedoa
 * **Alternative 2:** Save the entire address book for all undo and redo commands.
     * Pros: Easy to implement
     * Cons: May have performance issues in terms of memory usage.
-
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
 
 ### Find feature
 
@@ -1015,7 +1004,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Financial Advisor requests to list persons
 2.  FAPro shows a list of persons
 3.  Financial Advisor requests to add a new person
-4.  FAPro adds the person to the address book based on the specified parameter (name, address, phone number, email address, occupation, and tag)
+4.  FAPro adds the person to the address book based on the specified parameter (name, address, phone number, email address, occupation, tag and appointment date)
 
     Use case ends.
 
@@ -1023,13 +1012,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The parameter is provided in an invalid format.
 
-    * 3a1. FAPro shows an error message: "Invalid command format!"
+    * 3a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
+      properly use the command.
   
         Use case resumes at step 2.
 
 * 3b. The parameter is specified multiple times.
 
-    * 3b1. FAPro shows an error message: "The parameter can only be specified once!"
+    * 3b1. FAPro shows an error message: "Multiple values specified for the following single-valued field(s): x", where
+      x are the prefixes that have duplicates
   
         Use case resumes at step 2.
 
@@ -1091,7 +1082,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 3b. The given index is invalid (i.e Not a positive integer and part of the address book.)
-
 
     * 3b1. FAPro shows an error message:  “The person index provided is invalid.”
 
@@ -1308,7 +1298,11 @@ Preconditions:
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **FA**: Short form for financial advisor
+* **Parameter**: Values input by you. e.g. NAME, OCCUPATION, ADDRESS
+* **Positive Integer**: An integer that is positive (i.e. greater than 0). Please note that we are excluding 0 as a positive integer.
+* **Prefix**: Word that is added in front of parameter. e.g. n/, o/, a/
+* **Suffix**: Number that is at the end of a persons name e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix F: Instructions for manual testing**
@@ -1332,6 +1326,26 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+### Adding a person
+
+1. Adding a person
+
+    1. Prerequisites: None.
+    2. Test case: `add n/Robert Johnson p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+       Expected: Robert Johnson is added to the address book. Details of the added contact shown in the status message.
+    3. Test case: `add n/Robert-Johnson p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+       Expected: Similar to previous.
+    4. Test case: `add n/Robert Johnson p/555a2345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+       Expected: Similar to previous.
+    5. Test case: `add n/Robert Johnson p/55512345 e/robertj.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+       Expected: Similar to previous.
+   6. Test case: `add n/Robert Johnson p/55512345 e/robertj@email.com o/Hair-dresser a/789 Oak Street, Suite 10`<br>
+       Expected: Similar to previous.
+   7. Test case: `add n/Robert Johnson n/Robert p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+      Expected: Similar to previous.
+   8. Test case: `add n/Robert Johnson e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+      Expected: Similar to previous.
 
 ### Deleting a person
 
@@ -1357,7 +1371,7 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `delete 1 2 x` (where x is larger than the list size) <br>
       Expected: No person is deleted. Error details shown in the status message.
    5. Test case: `delete 1 2 y`, (where y is anything that is not an integer) <br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: Similar to previous.
 
 ### Cloning a person
 
@@ -1375,24 +1389,22 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a risk profile level to a person while all persons are being shown.
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-    1. Test case: `riskprofile 1 res/a,a,a,a,a,a,b,b`<br>
-       Expected: <span style="background-color:#2196F3; color:white;">**Moderately Low**</span> is added to first contact from the list. 
-       Details of the updated contact shown in the status message.
-
-    1. Test case: `riskprofile 1 res/a, a, a, a, a, a, b, b`<br>
-       Expected: Risk profile level is not added to a person. Error details shown in the status message.
-   
-    1. Test case: `riskprofile 1 res/aaaaaabb`<br>
-       Expected: Similar to previous.
-
-    1. Other incorrect `riskprofile` commands to try: `risk profile`, `riskprofile x res/a,a,a,a,a,a,b,b`, `...` (where x is larger than the list size or not a positive integers).<br>
-       Expected: Similar to previous.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `riskprofile 1 res/a,a,a,a,a,a,b,b`<br>
+      Expected: <span style="background-color:#2196F3; color:white;">**Moderately Low**</span> is added to first contact from the list. 
+      Details of the updated contact shown in the status message. 
+   3. Test case: `riskprofile 1 res/a, a, a, a, a, a, b, b`<br>
+      Expected: Risk profile level is not added to a person. Error details shown in the status message.
+   4. Test case: `riskprofile 1 res/aaaaaabb`<br>
+      Expected: Similar to previous. 
+   5. Other incorrect `riskprofile` commands to try: `risk profile`, `riskprofile x res/a,a,a,a,a,a,b,b`, `...`
+      (where x is larger than the list size or not a positive integers).<br>
+      Expected: Similar to previous.
 
 ### Editing a person
 
 1.  Edit a person while all persons are being shown
+
     1. Prerequisites: Lists all persons using the `list` command. Multiple persons in the list.
     2. Test case: `edit 1 n/ John Doe`<br>
        Expected: The first contact name is changed to John Doe. Timestamp in the status bar is updated.
@@ -1404,19 +1416,17 @@ testers are expected to do more *exploratory* testing.
 ### Sorting contact list
 
 1. Sorting contact list by NAME or APPOINTMENT_DATE prefix in ascending order
+
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The default order of contact list is by APPOINTMENT_DATE prefix.
    2. Test case: `sort n/` <br>
-      Expected: The contact list is ordered by alphabetical order of the NAME prefix. Details of the number of contacts listed is shown in the result box. 
-       
-### Saving data
-
-1. Dealing with missing/corrupted data files
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+      Expected: The contact list is ordered by alphabetical order of the NAME prefix. Details of the number of contacts listed is shown in the result box.
 
 ## **Appendix G: Future Implementations**
 
 * Contacts list are only allowed to be sorted in ascending order for NAME and APPOINTMENT_DATE prefix only. We plan to allow users to sort by descending order in the future as well.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative. We plan to allow tags to be added of the existing tags or remove the tags individually.
+* An additional function to archive contacts rather than delete them. Financial Advisors might want to hold on to contacts of old clients even after a termination of service as the clients may return or refer other clients.
+* Ability to store multiple appointment dates for individual clients and an additional window that displays the appointments of these clients.
 
 ## **Appendix H: Effort**
 
@@ -1426,12 +1436,9 @@ testers are expected to do more *exploratory* testing.
 
 * The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
 * The application will start to experience lag after prolonged usage. This is most likely it is due to the extra storing of persons whenever a command modifies the address book. As extra memory are needed to be dedicated to such storage, this can be a reason for the lag after a large number (lets say 100) commands that modify the address book. In the future, we might plan to limit the amount of undoable commands that is allowed to reduce the storage load of the application.
-* {to be added}
 * Currently, no matter the number of contacts listed for `find` functions, the message shown to the user uses "persons". We plan to change the message shown to reflect the correct grammar depending on the number of contacts listed in the future.
 * We plan to enhance the error handling for addition of phone numbers such that there will be a hard limit of integers that users are able to input.
 
 ## **Appendix J: Acknowledgement**
 
 * The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)
-
-* {to be added}
