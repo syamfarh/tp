@@ -14,7 +14,7 @@ FAPro - Developer Guide
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 3. [Implementation](#implementation)
-    * [Add feature]()
+    * [Add feature](#add-feature)
     * [Edit feature]()
     * [Clone feature](#clone-feature)
     * [Delete feature](#delete-feature)
@@ -182,6 +182,77 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+
+#### Implementation
+
+The `add` feature allows users to add a `Person` to their address book. The `add` command is implemented by the `AddCommand`
+class.
+
+Add implements the following operations:
+* `AddCommand#execute`
+* `AddCommand#equals`
+* `AddCommand#toString`
+
+These operations make use of other operations exposed in the `Model` interface, which are:
+* `Model#hasPerson(Person)`
+* `Model#addPerson(Person)`
+* `Model#storePreviousUndoableCommand(String)`
+* `Model#resetRedoableStateList()`
+* `Model#resetUndoableStateList()`
+* `Model#removeRedoCommands()`
+
+Given below is an example usage scenario and how the add mechanism behaves at each step.
+
+Step 1: The user launches the application. The application initializes various lists and data structures.
+
+![Add0](images/Add0.png)
+
+As seen in the object diagram, the address book is currently empty.
+
+Step 2. The user executes `add n/Robert Johnson p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`
+to add their client, Robert Johnson, to their address book.
+
+The add command first calls `AddCommand#execute`, which calls `AddCommandParser#parse(String)`, to ensure that all the
+mandatory prefixes are present, namely `Name`, `Phone`, `Email`, `Occupation` and `Address`.
+
+`AddCommandParser#parse(String)` then verifies that among these mandatory fields, there are no duplicate prefixes
+
+Once done, it then parses each prefix (both mandatory and optional) in their respective parser to ensure that they are
+valid. For example, `Name` is parsed by `ParserUtil#parseName`, which checks if the name is valid (Only consists of
+alphanumeric characters).
+
+Once everything has been parsed and all prefixes are valid, `AddCommandParser#parse(String)` then returns a `Person`
+with all these details to `AddCommand#execute`.
+
+![AddActivityDiagram0](images/AddActivityDiagram0.png)
+
+Step 3. `AddCommand#execute` then checks to ensure that the returned `Person` does not already exist in the address
+book. If he does already exist in the address book, an exception is returned. On the other hand, if he does not, he is
+then added to the address book by `Model#addPerson`.
+
+![AddActivityDiagram0](images/AddActivityDiagram0.png)
+
+![Add1](images/Add1.png)
+
+Upon successfully adding the person, the add success message is returned to the user, as depicted in the
+User Guide.
+
+#### Design considerations:
+
+**Aspect: How add executes:**
+
+* **Alternative** (current choice): Adds persons to the address book, checking for duplicates, and provides feedback
+  messages.
+    * Pros: Ensures controlled addition with validation and provides feedback to the user.
+    * Cons: Can be meticulous.
+
+* **Alternative 2:** Adds persons to the address book without checking for duplicates and allows for multiple additions 
+  without feedback.
+    * Pros: Fast and straightforward for multiple deletions.
+    * Cons: Lacks feedback on whether the persons were added, which may be useful for confirmation and may result in
+      duplicate entries.
+
 ### Clone feature
 
 #### Implementation
@@ -290,7 +361,7 @@ These operations make use of other operations exposed in the `Model` interface, 
 * `Model#storePreviousUndoableCommand(String)`
 * `Model#storeDeletedNumberList(int)`
 * `Model#resetRedoableStateList()`
-* `Model#reserUndoableStateList()`
+* `Model#resetUndoableStateList()`
 * `Model#removeRedoCommands()`
 
 Given below is an example usage scenario and how the delete mechanism behaves at each step.
