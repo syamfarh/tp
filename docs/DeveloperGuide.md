@@ -933,7 +933,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1.  Financial Advisor requests to list persons
 2.  FAPro shows a list of persons
 3.  Financial Advisor requests to add a new person
-4.  FAPro adds the person to the address book based on the specified parameter (name, address, phone number, email address, occupation, and tag)
+4.  FAPro adds the person to the address book based on the specified parameter (name, address, phone number, email address, occupation, tag and appointment date)
 
     Use case ends.
 
@@ -941,13 +941,15 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The parameter is provided in an invalid format.
 
-    * 3a1. FAPro shows an error message: "Invalid command format!"
+    * 3a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
+      properly use the command.
   
         Use case resumes at step 2.
 
 * 3b. The parameter is specified multiple times.
 
-    * 3b1. FAPro shows an error message: "The parameter can only be specified once!"
+    * 3b1. FAPro shows an error message: "Multiple values specified for the following single-valued field(s): x", where
+      x are the prefixes that have duplicates
   
         Use case resumes at step 2.
 
@@ -1009,7 +1011,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
       Use case resumes at step 2.
 
 * 3b. The given index is invalid (i.e Not a positive integer and part of the address book.)
-
 
     * 3b1. FAPro shows an error message:  “The person index provided is invalid.”
 
@@ -1226,7 +1227,11 @@ Preconditions:
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **FA**: Short form for financial advisor
+* **Parameter**: Values input by you. e.g. NAME, OCCUPATION, ADDRESS
+* **Positive Integer**: An integer that is positive (i.e. greater than 0). Please note that we are excluding 0 as a positive integer.
+* **Prefix**: Word that is added in front of parameter. e.g. n/, o/, a/
+* **Suffix**: Number that is at the end of a persons name e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix F: Instructions for manual testing**
@@ -1250,6 +1255,26 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+### Adding a person
+
+1. Adding a person
+
+    1. Prerequisites: None.
+    2. Test case: `add n/Robert Johnson p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+       Expected: Robert Johnson is added to the address book. Details of the added contact shown in the status message.
+    3. Test case: `add n/Robert-Johnson p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+       Expected: Similar to previous.
+    4. Test case: `add n/Robert Johnson p/555a2345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+       Expected: Similar to previous.
+    5. Test case: `add n/Robert Johnson p/55512345 e/robertj.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+       Expected: Similar to previous.
+   6. Test case: `add n/Robert Johnson p/55512345 e/robertj@email.com o/Hair-dresser a/789 Oak Street, Suite 10`<br>
+       Expected: Similar to previous.
+   7. Test case: `add n/Robert Johnson n/Robert p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+      Expected: Similar to previous.
+   8. Test case: `add n/Robert Johnson e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+      Expected: Similar to previous.
 
 ### Deleting a person
 
@@ -1275,7 +1300,7 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `delete 1 2 x` (where x is larger than the list size) <br>
       Expected: No person is deleted. Error details shown in the status message.
    5. Test case: `delete 1 2 y`, (where y is anything that is not an integer) <br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: Similar to previous.
 
 ### Cloning a person
 
@@ -1293,24 +1318,22 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a risk profile level to a person while all persons are being shown.
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-    1. Test case: `riskprofile 1 res/a,a,a,a,a,a,b,b`<br>
-       Expected: <span style="background-color:#2196F3; color:white;">**Moderately Low**</span> is added to first contact from the list. 
-       Details of the updated contact shown in the status message.
-
-    1. Test case: `riskprofile 1 res/a, a, a, a, a, a, b, b`<br>
-       Expected: Risk profile level is not added to a person. Error details shown in the status message.
-   
-    1. Test case: `riskprofile 1 res/aaaaaabb`<br>
-       Expected: Similar to previous.
-
-    1. Other incorrect `riskprofile` commands to try: `risk profile`, `riskprofile x res/a,a,a,a,a,a,b,b`, `...` (where x is larger than the list size or not a positive integers).<br>
-       Expected: Similar to previous.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `riskprofile 1 res/a,a,a,a,a,a,b,b`<br>
+      Expected: <span style="background-color:#2196F3; color:white;">**Moderately Low**</span> is added to first contact from the list. 
+      Details of the updated contact shown in the status message. 
+   3. Test case: `riskprofile 1 res/a, a, a, a, a, a, b, b`<br>
+      Expected: Risk profile level is not added to a person. Error details shown in the status message.
+   4. Test case: `riskprofile 1 res/aaaaaabb`<br>
+      Expected: Similar to previous. 
+   5. Other incorrect `riskprofile` commands to try: `risk profile`, `riskprofile x res/a,a,a,a,a,a,b,b`, `...`
+      (where x is larger than the list size or not a positive integers).<br>
+      Expected: Similar to previous.
 
 ### Editing a person
 
 1.  Edit a person while all persons are being shown
+
     1. Prerequisites: Lists all persons using the `list` command. Multiple persons in the list.
     2. Test case: `edit 1 n/ John Doe`<br>
        Expected: The first contact name is changed to John Doe. Timestamp in the status bar is updated.
@@ -1322,19 +1345,17 @@ testers are expected to do more *exploratory* testing.
 ### Sorting contact list
 
 1. Sorting contact list by NAME or APPOINTMENT_DATE prefix in ascending order
+
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The default order of contact list is by APPOINTMENT_DATE prefix.
    2. Test case: `sort n/` <br>
-      Expected: The contact list is ordered by alphabetical order of the NAME prefix. Details of the number of contacts listed is shown in the result box. 
-       
-### Saving data
-
-1. Dealing with missing/corrupted data files
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+      Expected: The contact list is ordered by alphabetical order of the NAME prefix. Details of the number of contacts listed is shown in the result box.
 
 ## **Appendix G: Future Implementations**
 
 * Contacts list are only allowed to be sorted in ascending order for NAME and APPOINTMENT_DATE prefix only. We plan to allow users to sort by descending order in the future as well.
 * When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative. We plan to allow tags to be added of the existing tags or remove the tags individually.
+* An additional function to archive contacts rather than delete them. Financial Advisors might want to hold on to contacts of old clients even after a termination of service as the clients may return or refer other clients.
+* Ability to store multiple appointment dates for individual clients and an additional window that displays the appointments of these clients.
 
 ## **Appendix H: Effort**
 
@@ -1344,12 +1365,9 @@ testers are expected to do more *exploratory* testing.
 
 * The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
 * The application will start to experience lag after prolonged usage. This is most likely it is due to the extra storing of persons whenever a command modifies the address book. As extra memory are needed to be dedicated to such storage, this can be a reason for the lag after a large number (lets say 100) commands that modify the address book. In the future, we might plan to limit the amount of undoable commands that is allowed to reduce the storage load of the application.
-* {to be added}
 * Currently, no matter the number of contacts listed for `find` functions, the message shown to the user uses "persons". We plan to change the message shown to reflect the correct grammar depending on the number of contacts listed in the future.
 * We plan to enhance the error handling for addition of phone numbers such that there will be a hard limit of integers that users are able to input.
 
 ## **Appendix J: Acknowledgement**
 
 * The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)
-
-* {to be added}

@@ -1123,8 +1123,8 @@ _Known issues_ are some problems that are currently present in the program that 
 | Word                 | Meaning                                                                                                                         |
 |----------------------|---------------------------------------------------------------------------------------------------------------------------------|
 | **FA**               | Short form for financial advisor                                                                                                |
-| **Parameter**        | Values inputted by the you.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                  |
-| **Positive Integer** | An integer that is positive (i.e greater than 0). Please note that we are excluding 0 as a positive integer.                    |
+| **Parameter**        | Values input by you.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                         |
+| **Positive Integer** | An integer that is positive (i.e. greater than 0). Please note that we are excluding 0 as a positive integer.                   |
 | **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
 | **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
 
