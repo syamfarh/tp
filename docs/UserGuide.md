@@ -280,7 +280,7 @@ If a required parameter is missing (e.g., NAME, EMAIL)
 
   ![add format](images/add-UG/addmissingparam.png)
 
-If a parameter you provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
+If a parameter you provided is in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 
 * You should see this error message:
 
@@ -355,7 +355,7 @@ After cloning, the clone is the exact same as the original, other than a suffix 
   Address: Hougang Avenue 1; AppointmentDate: ; Tags:
   ```
 
-  is the person being cloned, then the output is:
+  is the person you cloned, then the output you will see is:
 
   ```
   Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com;
@@ -366,7 +366,7 @@ After cloning, the clone is the exact same as the original, other than a suffix 
 
   ![add format](images/clone-UG/clonebefore.png)
 
-* The cloned entry is displayed in the address book GUI
+* The cloned entry is displayed in your address book GUI
 
   ![clone format](images/clone-UG/clone_success.png)
 
@@ -384,7 +384,7 @@ If no index, 0 or a negative index is entered next to the clone command
 
   ![clone format](images/clone-UG/cloneinvalidindex.png)
 
-If the index entered is greater than the current number of contacts in the address book
+If the index you enter is greater than the current number of contacts in the address book
 
 * You should see this error message:
 
@@ -394,7 +394,7 @@ If the index entered is greater than the current number of contacts in the addre
 
   ![clone format](images/clone-UG/clonelargeindex.png)
 
-If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
+If the suffix of the person you cloned is either 0 or 2147483647 (MAX_INT)
 
 * You should see this error message:
 
