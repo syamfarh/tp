@@ -105,7 +105,7 @@ Throughout the guide, we'll provide tips and best practices to help you make the
 
 ### Viewing help: `help`
 
-Discover our basic commands right away. If you want to explore other commands, FaPro user guide link is provided for you. 
+Discover our basic commands right away. If you want to explore other commands, FAPro user guide link is provided for you. 
 
 #### Format: 
 * `help`
@@ -192,7 +192,7 @@ and adds it to their contact.
   ![riskprofile result](images/riskProfile-UG/riskProfileResult.png)
 
 #### Precise expected outputs on failure:
-If the RESULT is empty or the INDEX is negative integers
+If your RESULT is empty or INDEX is negative integers
 * You should see this error message:
   ```
   Invalid command format! 
@@ -205,7 +205,7 @@ If the RESULT is empty or the INDEX is negative integers
   ![invalid risk profile 1](images/riskProfile-UG/invalidRiskProfile1.png)
   ![invalid risk profile 3](images/riskProfile-UG/invalidRiskProfile3.png)
 
-If the RESULT is not separated by commas, with any whitespace or not in the range of 'a' - 'e'
+If your RESULT is not separated by commas, with any whitespace or not in the range of 'a' - 'e'
 * You should see this error message:
   ```
   Result must have 8 comma-separated characters from 'a' to 'e'!
@@ -254,14 +254,14 @@ A person can have any number of tags (including 0)
   New Person added: X
   ```
 
-  where X are the details of the person added
+  where X are the details of the person you added
 
 * For example, for Robert Johnson (the example command), it would be:<br> `New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: `<br> Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
 * This is the original empty address book
 
   ![add format](images/add-UG/addbefore.png)
   
-* The new entry is displayed in the address book GUI
+* The new entry is displayed in your address book GUI
 
   ![add format](images/add-UG/add_success.png)
 
@@ -280,7 +280,7 @@ If a required parameter is missing (e.g., NAME, EMAIL)
 
   ![add format](images/add-UG/addmissingparam.png)
 
-If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
+If a parameter you provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 
 * You should see this error message:
 
@@ -305,7 +305,7 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
 
   ![add format](images/add-UG/addinvalidemail.png)
 
-If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+If a parameter you enter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
 
 * You should see this error message:
 
@@ -319,14 +319,14 @@ If a parameter is specified multiple times (e.g., --name John --name Doe), an er
 
 ### Cloning a person : `clone`
 
-Clones a contact from the address book at the specified index.
+Clones a contact from your address book at the specified index.
 
 Makes it easier for you to add a contact with very similar details (i.e from the same household)
 
 #### Format:
 * `clone INDEX`
 * Clones the person at the specified `INDEX`
-* The index refers to the index number shown in the displayed person list
+* The index refers to the index number shown in your displayed person list
 
 #### Example commands:
 After cloning, the clone is the exact same as the original, other than a suffix either being attached at the end of their name or, if a suffix is already present, the suffix at the end of their name is incremented
@@ -978,7 +978,7 @@ Open a new calendar window.
 </div>
 
 #### Precise expected outputs on success:
-* A pop-up of a new calendar window of the current month that indicate client's appointments in the date
+* You will see a pop-up of a new calendar window of the current month that indicate client's appointments in the date
 
   ![calendar format](images/calendar-UG/calendarWindow.png)
 
@@ -986,7 +986,7 @@ Open a new calendar window.
 
 ### Clearing all entries : `clear`
 
-Clears all contacts in the address book.
+Clears all of your contacts in the address book.
 
 #### Format:
 * `clear`
@@ -1006,7 +1006,7 @@ Clears all contacts in the address book.
   ```
   Address book has been cleared!
   ```
-* GUI reflects that there are 0 contacts left
+* Your GUI will reflect that there are 0 contacts left
 
   ![clear format](images/clear-UG/clear_success.png)
 
