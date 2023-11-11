@@ -1,0 +1,21 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User executes 'add n/Robert Johnson p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10';
+:Call AddCommand#execute;
+:Call AddCommandParser#parse(String);
+  if () then ([Mandatory Prefixes Present])
+    :Check if any duplicate prefixes;
+    if () then ([No duplicate mandatory prefixes])
+      :Check if mandatory parameters are valid;
+      if () then ([Mandatory Parameter valid])
+        :Check if other prefixes are valid (if present);
+        if () then ([Other prefixes valid])
+          :Return Person with relevant details;
+          stop
+@enduml
+
