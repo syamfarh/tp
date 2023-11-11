@@ -27,7 +27,11 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=syamfarh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
-    * To be added soon
+  * Set up GitHub team organisation and repository.
+  * Set up GitHub workflows and CI.
+  * Set up deploy as a Jekyll site.
+  * Set up Codecov.
+  * Added Codecov and CI status indicators to repository.
 
 * **Enhancements to existing features**:
   * Fix edit function to work with Occupation parameter
