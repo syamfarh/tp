@@ -11,9 +11,11 @@ import java.time.format.DateTimeFormatterBuilder;
  */
 public class DateTimeParser {
 
+    /** formatter to convert String to DateTime */
     public static final DateTimeFormatterBuilder STRINGTODATETIME = new DateTimeFormatterBuilder()
             .append(DateTimeFormatter.ofPattern("[MM/dd/yyyy HH:mm]" + "[dd-MM-yyyy HH:mm]" + "[yyyy-MM-dd HH:mm]"));
 
+    /** formatter to convert DateTime to String */
     public static final DateTimeFormatterBuilder DATETIMETOSTRING = new DateTimeFormatterBuilder()
             .append(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
