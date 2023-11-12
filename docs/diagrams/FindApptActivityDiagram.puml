@@ -16,9 +16,11 @@ start
     :Success message + contacts listed;
   else ([else])
     if() then ([Date format is invalid])
-    :Invalid command format + invalid date format error message shown;
+    :Invalid command format +
+    invalid date format error message shown;
     else ([Invalid input date])
-    :Invalid command format + invalid input date error message shown;
+    :Invalid command format +
+    invalid input date error message shown;
     endif
   endif
 
