@@ -8,7 +8,7 @@ FAPro - Developer Guide
 1. [Setting up](#setting-up-getting-started)
 2. [Design](#design)
     * [Architecture](#architecture)
-    * [Ui component](#ui-component)
+    * [UI component](#ui-component)
     * [Logic component](#logic-component)
     * [Model component](#model-component)
     * [Storage component](#storage-component)
