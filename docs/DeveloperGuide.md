@@ -545,6 +545,9 @@ The following sequence diagram shows how the `undo` operation works.
 
 ![ModelManagerStateDiagram](images/UndoSequenceDiagramForDelete.png)
 
+**Note:** The lifeline for `UndoCommand` should
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 Step 4. The user now decides to execute the command `list`. As this command is not an undoable command, 
 `Model#storePreviousUndoableCommand(String)` and other storing operations are not called, so `ModelManager` remains 
 unchanged.
