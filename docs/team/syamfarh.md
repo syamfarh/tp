@@ -38,8 +38,18 @@ Given below are my contributions to the project.
         * Added glossary section
         * Added known issues for calendar window
         * Added common questions for calendar window issues
+        * Added page break for every features 
     * Developer Guide:
         * Added use case for `sort`
+        * Added implementation for `calendar`
+        * Added implementation for `sort`
+        * Added implementation for `edit`
+        * Added instructions for manual testing for `sort`
+        * Added 2 points for future implementation
+        * Added 1 point for planned enhancement
+        * Added acknowledgement for CalendarFX
+        * Added user story for `sort` feature
+        * 
 
 * **Community**:
     * PRs reviewed (with non-trivial review comments): [\#11](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/11), [\#15](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/15), [\#65](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/65), [\#78](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/78), [\#86](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/86), [\#87](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/87), [\#88](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/88), [\#90](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/90), [\#99](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/99), [\#100](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/100), [\#105](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/105), [\#116](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/116), [\#127] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/127), [\#153] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/153), [\#204] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/204), [\#205] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/205), [\#206] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/206), [\#221] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/221), [`#222] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/222),  
