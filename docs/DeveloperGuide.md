@@ -14,8 +14,8 @@ FAPro - Developer Guide
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 3. [Implementation](#implementation)
-    * [Add feature]()
     * [Edit feature](#edit-feature)
+    * [Add feature](#add-feature)
     * [Clone feature](#clone-feature)
     * [Delete feature](#delete-feature)
     * [Undo feature](#undo-feature)
@@ -182,6 +182,77 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+
+#### Implementation
+
+The `add` feature allows users to add a `Person` to their address book. The `add` command is implemented by the `AddCommand`
+class.
+
+Add implements the following operations:
+* `AddCommand#execute`
+* `AddCommand#equals`
+* `AddCommand#toString`
+
+These operations make use of other operations exposed in the `Model` interface, which are:
+* `Model#hasPerson(Person)`
+* `Model#addPerson(Person)`
+* `Model#storePreviousUndoableCommand(String)`
+* `Model#resetRedoableStateList()`
+* `Model#resetUndoableStateList()`
+* `Model#removeRedoCommands()`
+
+Given below is an example usage scenario and how the add mechanism behaves at each step.
+
+Step 1: The user launches the application. The application initializes various lists and data structures.
+
+![Add0](images/Add0.png)
+
+As seen in the object diagram, the address book is currently empty.
+
+Step 2. The user executes `add n/Robert Johnson p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`
+to add their client, Robert Johnson, to their address book.
+
+The add command first calls `AddCommand#execute`, which calls `AddCommandParser#parse(String)`, to ensure that all the
+mandatory prefixes are present, namely `Name`, `Phone`, `Email`, `Occupation` and `Address`.
+
+`AddCommandParser#parse(String)` then verifies that among these mandatory fields, there are no duplicate prefixes
+
+Once done, it then parses each prefix (both mandatory and optional) in their respective parser to ensure that they are
+valid. For example, `Name` is parsed by `ParserUtil#parseName`, which checks if the name is valid (Only consists of
+alphanumeric characters).
+
+Once everything has been parsed and all prefixes are valid, `AddCommandParser#parse(String)` then returns a `Person`
+with all these details to `AddCommand#execute`.
+
+![AddActivityDiagram0](images/AddActivityDiagram0.png)
+
+Step 3. `AddCommand#execute` then checks to ensure that the returned `Person` does not already exist in the address
+book. If he does already exist in the address book, an exception is returned. On the other hand, if he does not, he is
+then added to the address book by `Model#addPerson`.
+
+![AddActivityDiagram0](images/AddActivityDiagram0.png)
+
+![Add1](images/Add1.png)
+
+Upon successfully adding the person, the add success message is returned to the user, as depicted in the
+User Guide.
+
+#### Design considerations:
+
+**Aspect: How add executes:**
+
+* **Alternative** (current choice): Adds persons to the address book, checking for duplicates, and provides feedback
+  messages.
+    * Pros: Ensures controlled addition with validation and provides feedback to the user.
+    * Cons: Can be meticulous.
+
+* **Alternative 2:** Adds persons to the address book without checking for duplicates and allows for multiple additions 
+  without feedback.
+    * Pros: Fast and straightforward for multiple deletions.
+    * Cons: Lacks feedback on whether the persons were added, which may be useful for confirmation and may result in
+      duplicate entries.
+
 ### Edit feature
 
 #### Implementation
@@ -323,7 +394,7 @@ These operations make use of other operations exposed in the `Model` interface, 
 * `Model#storePreviousUndoableCommand(String)`
 * `Model#storeDeletedNumberList(int)`
 * `Model#resetRedoableStateList()`
-* `Model#reserUndoableStateList()`
+* `Model#resetUndoableStateList()`
 * `Model#removeRedoCommands()`
 
 Given below is an example usage scenario and how the delete mechanism behaves at each step.
@@ -434,8 +505,8 @@ Step 1. The user launches the application for the first time. The `ArrayList`s `
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram1.png)
 
-Step 2. The user executes `delete 1 2` command to delete the 1st and 2nd person in the address book. The following 
-steps are repeated twice, since 2 persons are deleted.
+Step 2. The user executes `delete 1 2` command to delete the 1st and 2nd person (John and Greg) in the address book. 
+The following steps are repeated twice, since 2 persons are deleted.
 * The `delete` command calls `Model#storePreviousUndoableCommand(String)`, adding the command as a String into 
 `previousUndoableCommands`, and also calls `Model#storeDeletedPerson(Person)`, adding the Person into 
 `deletedPersons`.
@@ -524,12 +595,15 @@ After any command that modifies the address book is executed (I.e. `add`, `clone
 
 Given below is an example usage scenario and how the redo mechanism behaves at each step.
 
-Step 0: The user launches the application and deletes the first 2 contacts. (Refer to the usage scenario of the 
-undo mechanism for these steps) At the launch of the application, the `ArrayList`s `previousUndoableCommands`, 
+Step 0: The user launches the application and deletes the first 2 contacts, with names John and Greg. (Refer to the 
+usage scenario of the undo mechanism for these steps) At the launch of the application, the `ArrayList`s `previousUndoableCommands`, 
 `redoableStatelist` and `undoableStateList` are initialized as a blank `ArrayList`. Then, 2 delete commands are 
 added into the `previousUndoableCommands` after the deletion of the first 2 contacts.
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram3.png)
+
+Now, John and Greg are deleted.
+
 ![AddressBookStateDiagram](images/AddressBookState1.png)
 
 Step 1: The user now decides that deleting the person was a mistake, and decides to undo that action by executing
@@ -538,6 +612,9 @@ book before the `undo` is committed into the `redoableStateList`. Furthermore, `
 ` is called twice, removing the delete commands.
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram4.png)
+
+Now, John and Greg are back in the address book.
+
 ![AddressBookStateDiagram](images/AddressBookState2.png)
 
 The following sequence diagram shows how the `undo` operation works when undoing the `delete` command.
@@ -552,6 +629,9 @@ restoring the current address book to the redone state (I.e. the address book af
 contacts).
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram5.png)
+
+Now, John and Greg are deleted.
+
 ![AddressBookStateDiagram](images/AddressBookState1.png)
 
 The following sequence diagram shows how the `redo` operation works.
@@ -566,6 +646,9 @@ again, by executing the `undo` command. The `undo` command will call `UndoComman
 to the undone state (I.e. the address book before the deletion of the first 2 contacts).
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram4.png)
+
+Now, John and Greg are back in the address book.
+
 ![AddressBookStateDiagram](images/AddressBookState2.png)
 
 The following sequence diagram shows how the `undo` operation works when undoing the `redo` command.
@@ -623,15 +706,15 @@ Given below is an example usage scenario and how the find feature works for ever
 
 _Name_
 
-Step 1. The financial adviser wants to find the details of "John" and "Alice" in his address book.
+Step 1. The financial advisor wants to find the details of "John" and "Alice" in his address book.
 
-Step 2. The financial adviser enters `find n/John Alice` into the command box and presses enter.
+Step 2. The financial advisor enters `find n/John Alice` into the command box and presses enter.
 
 Step 3. The input `find n/John Alice` is passed into `FindCommandParser#parse`, and the string is parsed into two portions:
 1. Prefix
 2. Argument
 
-Step 4. Since the prefix specified by the financial adviser is `n/`, the `FindCommandParser` knows that it should call
+Step 4. Since the prefix specified by the financial advisor is `n/`, the `FindCommandParser` knows that it should call
 `find_name`, and thus, the argument is passed into `FindNameCommandParser#parse` for execution.
 
 Step 5. `FindNameCommandParser#parse` parses the argument input, and separates `John` and `Alice`, and places both names into
@@ -645,16 +728,16 @@ Step 7. A list of all contacts who have `John` and `Alice` in their name is list
 
 _Address_
 
-Step 1. The financial adviser wants to find out all their clients living in Serangoon so that they can 
+Step 1. The financial advisor wants to find out all their clients living in Serangoon so that they can 
         line up client appointments efficiently.
 
-Step 2. The financial adviser enters `find a/Serangoon` into the command box and presses enter.
+Step 2. The financial advisor enters `find a/Serangoon` into the command box and presses enter.
 
 Step 3. The input `find a/Serangoon` is passed into `FindCommandParser#parse`, and the string is parsed into two portions:
 1. Prefix
 2. Argument
 
-Step 4. Since the prefix specified by the financial adviser is `a/`, the `FindCommandParser` knows that it should call
+Step 4. Since the prefix specified by the financial advisor is `a/`, the `FindCommandParser` knows that it should call
 `find_add`, and thus, the argument is passed into `FindAddCommandParser#parse` for execution.
 
 Step 5. `FindAddCommandParser#parse` parses the argument input, and separates extracts `Serangoon`, and places it into
@@ -668,15 +751,15 @@ Step 7. A list of all contacts who have `Serangoon` in their address is listed.
 
 _Appointment Date_
 
-Step 1. The financial adviser wants to check all the appointments he has that day (assuming the date is `2023-12-12`).
+Step 1. The financial advisor wants to check all the appointments he has that day (assuming the date is `2023-12-12`).
 
-Step 2. The financial adviser enters `find appt/2023-12-12` into the command box and presses enter.
+Step 2. The financial advisor enters `find appt/2023-12-12` into the command box and presses enter.
 
 Step 3. The input `find appt/2023-12-12` is passed into `FindCommandParser#parse`, and the string is parsed into two portions:
 1. Prefix
 2. Argument
 
-Step 4. Since the prefix specified by the financial adviser is `appt/`, the `FindCommandParser` knows that it should call
+Step 4. Since the prefix specified by the financial advisor is `appt/`, the `FindCommandParser` knows that it should call
 `find_appt`, and thus, the argument is passed into `FindApptCommandParser#parse` for execution.
 
 Step 5. `FindApptCommandParser#parse` parses the argument input, and extracts `2023-12-12`, and places it into
@@ -793,11 +876,13 @@ It also makes use of other operations exposed in the `Model` interface, which ar
 Given below is an example usage scenario and how the `riskprofile` mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time.
+
 ![Initial AddressBook](images/InitialAddressBook.png)
 
 Step 2. The user executes `add n/Diego ...` to add a new person.
 The `add` command will modified the initial address book causing the added person
 to be saved.
+
 ![Final AddressBook](images/FinalAddressBook.png)
 
 Step 3. The user executes `riskprofile 7 res/a,b,c,d,e,e,b,c` to add risk profile level for 
@@ -806,6 +891,7 @@ person at index 7 of the address book, Diego based on his response to the questi
 Step 4. The `riskprofile` command will trigger the `RiskProfileCommandParser#parse(String)` 
 to extract the index and result according to user input at **Step 3**.
 If the given index or result, it will throw an `ParseException`.
+
 ![RiskProfileCommandParser Class](images/RiskProfileCommandParserClass.png)
 
 Step 5. The extracted index and result are passed to the `RiskProfileCommand` constructor.
@@ -817,6 +903,7 @@ However, if the index is valid, then `Person` object at the specified index is r
 After that, A new `Person` object is created with the same attributes as the retrieved one
 with the risk profile field replace by a new risk profile provided from `RiskProfileCommand#calculateRiskLevel(int)`
 that the value is obtained from `RiskProfileCommand#calculateTotalScore(String result)`.
+
 ![RiskProfileCommand Class](images/RiskProfileCommandClass.png)
 
 Step 6. `Model#setPerson()` is used to update the person with the new risk profile level, replacing the original person in the model 
@@ -826,6 +913,8 @@ Step 7. The `CommandResult` is returned with success message generated by the `R
 Concurrently, Diego's `PersonCard` will shows his risk profile level which is <span style="background-color:#FF6600; color:white;">**Moderately High**</span>.
 
 ![RiskProfile Sequence Diagram](images/RiskProfileSequenceDiagram.png)
+
+![RiskProfile Activity Diagram](images/RiskProfileActivityDiagram.png)
 
 #### Design considerations:
 
@@ -892,6 +981,8 @@ Step 3. The user executes `help` to view the basic commands or FAPro’s user gu
 The command will invoke `HelpCommand#execute(Model)`, indicating that the help window should be shown.
 
 Then it will trigger `MainWindow#handleHelp()`. If the help window is not showing, it is displayed. If it's already showing, the existing window is focused.
+
+![Help Activity Diagram](images/HelpActivityDiagram.png)
 
 #### Design considerations:
 
@@ -963,98 +1054,96 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Financial Advisor requests to list persons
-2.  FAPro shows a list of persons
-3.  Financial Advisor requests to add a new person
-4.  FAPro adds the person to the address book based on the specified parameter (name, address, phone number, email address, occupation, and tag)
+1.  FAPro <u>lists out all contacts (UC10)</u>.
+2.  Financial Advisor requests to add a new person.
+3.  FAPro adds the person to the address book based on the specified parameter (name, address, phone number, email address, occupation, tag and appointment date).
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The parameter is provided in an invalid format.
+* 2a. The parameter is provided in an invalid format.
 
-    * 3a1. FAPro shows an error message: "Invalid command format!"
+    * 2a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
+      properly use the command.
   
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
-* 3b. The parameter is specified multiple times.
+* 2b. The parameter is specified multiple times.
 
-    * 3b1. FAPro shows an error message: "The parameter can only be specified once!"
+    * 2b1. FAPro shows an error message: "Multiple values specified for the following single-valued field(s): x", where
+      x are the prefixes that have duplicates.
   
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
-* 3c. The person's name is the same as the existing name in the address book.
+* 2c. The person's name is the same as the existing name in the address book.
 
-    * 3c1. FAPro shows an error message: "This person already exists in the address book"
+    * 2c1. FAPro shows an error message: "This person already exists in the address book."
 
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
     
 **Use case: UC2 - Delete a person**
 
 **MSS**
 
-1.  Financial Advisor requests to list persons
-2.  FAPro shows a list of persons
-3.  Financial Advisor requests to delete at least one person
-4.  FAPro deletes the person(s)
+1.  FAPro <u>lists out all contacts (UC10)</u>.
+2.  Financial Advisor requests to delete at least one person.
+3.  FAPro deletes the person(s).
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
     Use case ends.
 
-* 3a. One of the indexes provided is a positive integer but out of the range of the address book
+* 2a. One of the indexes provided is a positive integer but out of the range of the address book.
 
-    * 3a1. FAPro shows an error message:  “The person index provided is invalid.”
+    * 2a1. FAPro shows an error message:  “The person index provided is invalid.”
 
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
-* 3b. One of the indexes provided does not adhere to the restrictions (must be positive integers, separated by spaces, no duplicates)
+* 2b. One of the indexes provided does not adhere to the restrictions (must be positive integers, separated by spaces, no duplicates).
 
-    * 3b1. FAPro shows and error message:  "Invalid command format!", along with instructions on how to
+    * 2b1. FAPro shows and error message:  "Invalid command format!", along with instructions on how to
       properly use the command.
         
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
 **Use case: UC3 - Clone a person**
 
 **MSS**
 
-1.  Financial Advisor requests to list persons
-2.  FAPro shows a list of persons
-3.  Financial Advisor requests to clone a specific person in the list
-4.  FAPro clones the person
+1.  FAPro <u>lists out all contacts (UC10)</u>.
+2.  Financial Advisor requests to clone a specific person in the list.
+3.  FAPro clones the person.
 
     Use case ends.
 
 **Extensions**
 
-* 3a. The parameter is provided in an invalid format.
+* 2a. The parameter is provided in an invalid format.
 
-    * 3a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
+    * 2a1. FAPro shows an error message: "Invalid command format!", along with instructions on how to
       properly use the command.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 3b. The given index is invalid (i.e Not a positive integer and part of the address book.)
+* 2b. The given index is invalid (i.e. Not a positive integer and part of the address book).
 
+    * 2b1. FAPro shows an error message:  “The person index provided is invalid.”
 
-    * 3b1. FAPro shows an error message:  “The person index provided is invalid.”
-
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
 
 **Use case: UC4 - Find a person**
 
 **MSS**
 
-1.  Financial Advisor requests to find person(s) using a specific input
-2.  FAPro shows a list of person(s) who fits the search input
+1.  Financial Advisor requests to find person(s) using a specific input.
+2.  FAPro shows a list of person(s) who fits the search input.
 
     Use case ends.
 
@@ -1075,36 +1164,35 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1.  Financial Advisor requests to list persons
-2.  FAPro shows a list of persons
-3.  Financial Advisor requests to edit specified parameter of a specific person in the list
-4.  FAPro edits the specified parameter (name, address, phone number, email address, occupation, and tag) of a person
+1.  FAPro <u>lists out all contacts (UC10)</u>.
+2.  Financial Advisor requests to edit specified parameter of a specific person in the list.
+3.  FAPro edits the specified parameter (name, address, phone number, email address, occupation, and tag) of a person.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
     Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given index is invalid.
 
-    * 3a1. FAPro shows an error message: "Invalid command format!"
+    * 2a1. FAPro shows an error message: "Invalid command format!"
 
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
-* 3b. The parameter is provided in an invalid format.
+* 2b. The parameter is provided in an invalid format.
 
-    * 3b1. FAPro shows an error message: "Invalid command format!"
+    * 2b1. FAPro shows an error message: "Invalid command format!"
 
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
-* 3c. The parameter is specified multiple times.
+* 2c. The parameter is specified multiple times.
 
-    * 3c1. FAPro shows an error message: "The parameter can only be specified once."
+    * 2c1. FAPro shows an error message: "The parameter can only be specified once."
 
-        Use case resumes at step 2.
+        Use case resumes at step 1.
 
 
 **Use case: UC6 - Viewing help**
@@ -1128,30 +1216,29 @@ Preconditions:
 
 **MSS**
 
-1.  Financial Advisor requests to list persons
-2.  FAPro shows a list of persons 
-3.  Financial Advisor requests to sort contacts by a parameter
-4.  FAPro shows a sorted list
+1.  FAPro <u>lists out all contacts (UC10)</u>.
+2.  Financial Advisor requests to sort contacts by a parameter.
+3.  FAPro shows a sorted list.
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The list is empty.
 
   Use case ends.
 
-* 3a. The parameter provided is invalid.
+* 2a. The parameter provided is invalid.
 
-    * 3b1. FAPro shows an error message: "Invalid command format!"
+    * 2a1. FAPro shows an error message: "Invalid command format!"
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
-* 3b. The parameter is specified multiple times.
+* 2b. The parameter is specified multiple times.
 
-    * 3c1. FAPro shows an error message: "The parameter can only be specified once."
+    * 2b1. FAPro shows an error message: "The parameter can only be specified once."
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
 
 
 **Use case: UC8 - Viewing risk assessment questionnaire**
@@ -1185,28 +1272,31 @@ Guarantees:
 **MSS**
 
 1.  Financial Advisor <u>views the risk assessment questionnaire (UC8)</u>. 
-2.  Financial Advisor requests list persons.
-3.  FAPro shows a list of persons.
-4.  Financial Advisor requests to add risk profile level for a specific person in the list.
-5.  FAPro adds the risk profile level to the person.
+2.  FAPro <u>lists out all contacts (UC10)</u>.
+3.  Financial Advisor requests to add risk profile level for a specific person in the list.
+4.  FAPro adds the risk profile level to the person.
 
     Use case ends.
 
 **Extensions**
 
-* 4a. The given result is in an invalid format.
+* 2a. The list is empty.
 
-    * 4a1. FAPro shows an error message: "Result must have 8 comma-separated characters from 'a' to 'e'!", along with instructions on how to
+  Use case ends.
+
+* 3a. The given result is in an invalid format.
+
+    * 3a1. FAPro shows an error message: "Result must have 8 comma-separated characters from 'a' to 'e'!", along with instructions on how to
       properly use the command.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
 
-* 4b. The given index is invalid (e.g. Not a positive integer and part of the address book.)
+* 3b. The given index is invalid (e.g. Not a positive integer and part of the address book).
 
-    * 4b1. FAPro shows an error message: “Invalid command format!”, along with instructions on how to
+    * 3b1. FAPro shows an error message: “Invalid command format!”, along with instructions on how to
       properly use the command.
 
-      Use case resumes at step 3.
+      Use case resumes at step 2.
       
 
 **Use case: UC10 - List out all contacts**
@@ -1259,7 +1349,11 @@ Preconditions:
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
 * **Private contact detail**: A contact detail that is not meant to be shared with others
-
+* **FA**: Short form for financial advisor
+* **Parameter**: Values input by you. e.g. NAME, OCCUPATION, ADDRESS
+* **Positive Integer**: An integer that is positive (i.e. greater than 0). Please note that we are excluding 0 as a positive integer.
+* **Prefix**: Word that is added in front of parameter. e.g. n/, o/, a/
+* **Suffix**: Number that is at the end of a persons name e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Appendix F: Instructions for manual testing**
@@ -1283,6 +1377,26 @@ testers are expected to do more *exploratory* testing.
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
    2. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
+
+### Adding a person
+
+1. Adding a person
+
+    1. Prerequisites: None.
+    2. Test case: `add n/Robert Johnson p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+       Expected: Robert Johnson is added to the address book. Details of the added contact shown in the status message.
+    3. Test case: `add n/Robert-Johnson p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+       Expected: Similar to previous.
+    4. Test case: `add n/Robert Johnson p/555a2345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+       Expected: Similar to previous.
+    5. Test case: `add n/Robert Johnson p/55512345 e/robertj.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+       Expected: Similar to previous.
+   6. Test case: `add n/Robert Johnson p/55512345 e/robertj@email.com o/Hair-dresser a/789 Oak Street, Suite 10`<br>
+       Expected: Similar to previous.
+   7. Test case: `add n/Robert Johnson n/Robert p/55512345 e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+      Expected: Similar to previous.
+   8. Test case: `add n/Robert Johnson e/robertj@email.com o/Hairdresser a/789 Oak Street, Suite 10`<br>
+      Expected: Similar to previous.
 
 ### Deleting a person
 
@@ -1308,7 +1422,7 @@ testers are expected to do more *exploratory* testing.
    4. Test case: `delete 1 2 x` (where x is larger than the list size) <br>
       Expected: No person is deleted. Error details shown in the status message.
    5. Test case: `delete 1 2 y`, (where y is anything that is not an integer) <br>
-      Expected: No person is deleted. Error details shown in the status message.
+      Expected: Similar to previous.
 
 ### Cloning a person
 
@@ -1326,24 +1440,22 @@ testers are expected to do more *exploratory* testing.
 
 1. Adding a risk profile level to a person while all persons are being shown.
 
-    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
-
-    1. Test case: `riskprofile 1 res/a,a,a,a,a,a,b,b`<br>
-       Expected: <span style="background-color:#2196F3; color:white;">**Moderately Low**</span> is added to first contact from the list. 
-       Details of the updated contact shown in the status message.
-
-    1. Test case: `riskprofile 1 res/a, a, a, a, a, a, b, b`<br>
-       Expected: Risk profile level is not added to a person. Error details shown in the status message.
-   
-    1. Test case: `riskprofile 1 res/aaaaaabb`<br>
-       Expected: Similar to previous.
-
-    1. Other incorrect `riskprofile` commands to try: `risk profile`, `riskprofile x res/a,a,a,a,a,a,b,b`, `...` (where x is larger than the list size or not a positive integers).<br>
-       Expected: Similar to previous.
+   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   2. Test case: `riskprofile 1 res/a,a,a,a,a,a,b,b`<br>
+      Expected: <span style="background-color:#2196F3; color:white;">**Moderately Low**</span> is added to first contact from the list. 
+      Details of the updated contact shown in the status message. 
+   3. Test case: `riskprofile 1 res/a, a, a, a, a, a, b, b`<br>
+      Expected: Risk profile level is not added to a person. Error details shown in the status message.
+   4. Test case: `riskprofile 1 res/aaaaaabb`<br>
+      Expected: Similar to previous. 
+   5. Other incorrect `riskprofile` commands to try: `risk profile`, `riskprofile x res/a,a,a,a,a,a,b,b`, `...`
+      (where x is larger than the list size or not a positive integers).<br>
+      Expected: Similar to previous.
 
 ### Editing a person
 
 1.  Edit a person while all persons are being shown
+
     1. Prerequisites: Lists all persons using the `list` command. Multiple persons in the list.
     2. Test case: `edit 1 n/ John Doe`<br>
        Expected: The first contact name is changed to John Doe. Timestamp in the status bar is updated.
@@ -1355,19 +1467,47 @@ testers are expected to do more *exploratory* testing.
 ### Sorting contact list
 
 1. Sorting contact list by NAME or APPOINTMENT_DATE prefix in ascending order
+
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The default order of contact list is by APPOINTMENT_DATE prefix.
    2. Test case: `sort n/` <br>
-      Expected: The contact list is ordered by alphabetical order of the NAME prefix. Details of the number of contacts listed is shown in the result box. 
-       
-### Saving data
+      Expected: The contact list is ordered by alphabetical order of the NAME prefix. Details of the number of contacts listed is shown in the result box.
 
-1. Dealing with missing/corrupted data files
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+### Undo and redo
+
+1. Undo changes to address book done in the current session
+
+   1. Prerequisites: Launch the app for the first time, `add` a contact, `clone` another contact, `clear` the address 
+      book
+   2. Test case: `undo` <br>
+      Expected: All contacts are added back, including the cloned and added contact
+   3. Test case: `undo` again <br>
+      Expected: Cloned contact is deleted
+   4. Test case: `undo` again <br>
+      Expected: Added contact is deleted and address book is back to the initial state
+   5. Test case: `undo` again <br>
+      Expected: Address book is unchanged and error details are shown in the status message
+
+2. Redo an undo command, and undo again
+
+   1. Prerequisites: Launch the app for the first time, `add` a contact, `undo` 
+   2. Test case: `redo` <br>
+      Expected: Added contact is back in the address book
+   3. Test case: `redo` again <br>
+      Expected: Address book is unchanged and error details are shown in the status message
+   4. Test case: `undo` <br>
+      Expected: Added contact is deleted and not in the address book
+   5. Test case: `undo` <br>
+      Expected: Address book is unchanged and error details are shown in the status message
+
+
 
 ## **Appendix G: Future Implementations**
 
 * Contacts list are only allowed to be sorted in ascending order for NAME and APPOINTMENT_DATE prefix only. We plan to allow users to sort by descending order in the future as well.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative. We plan to allow tags to be added of the existing tags or remove the tags individually.
+* When editing tags, the existing tags of the person will be removed i.e. adding of tags is not cumulative. We plan to allow tags to be added of the existing tags or remove the tags individually.
+* An additional function to archive contacts rather than delete them. Financial Advisors might want to hold on to contacts of old clients even after a termination of service as the clients may return or refer other clients.
+* Ability to store multiple appointment dates for individual clients and an additional window that displays the appointments of these clients.
+* Provide financial advisors with the ability to dynamically customize the set of risk assessment questions and their corresponding grading criteria.
 
 ## **Appendix H: Effort**
 
@@ -1377,8 +1517,15 @@ testers are expected to do more *exploratory* testing.
 
 * The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
 * The application will start to experience lag after prolonged usage. This is most likely it is due to the extra storing of persons whenever a command modifies the address book. As extra memory are needed to be dedicated to such storage, this can be a reason for the lag after a large number (lets say 100) commands that modify the address book. In the future, we might plan to limit the amount of undoable commands that is allowed to reduce the storage load of the application.
+* 
+* Currently, no matter the number of contacts listed for `find` functions, the message shown to the user uses "persons". We plan to change the message shown to reflect the correct grammar depending on the number of contacts listed in the future.
+* We plan to enhance the error handling for addition of phone numbers such that there will be a hard limit of integers that users are able to input.
+* We plan to restrict the user input for `riskprofile` command to only accept one **res/** prefix along its result.
+* We plan to enhance the error handling related to invalid index for `riskprofile` command to give more specific error message to the user.
+* The current redo feature does not allow the undoing of a previous redo command after a command that modifies the 
+  address book is executed. Such commands are `add`, `clone`, `edit`, `delete` and `clear`. We plan to lift this restriction 
+  in the future.
 
 ## **Appendix J: Acknowledgement**
 
 * The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)
-

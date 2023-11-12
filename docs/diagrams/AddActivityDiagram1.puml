@@ -1,0 +1,18 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:Call Model#hasPerson(Person);
+if () then ([Person Already Exists])
+  :Return Exception;
+else ([else])
+  :Call Model#addPerson;
+  :Person added to the address book;
+endif
+
+stop
+@enduml
+

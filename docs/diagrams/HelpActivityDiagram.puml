@@ -1,0 +1,19 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User executes 'help';
+  if () then ([FA needs to access
+  the user guide])
+    :    Visit the FAPro user
+    guide by copying the URL;
+  else ([else])
+    :     View the basic
+    commands provided;
+  endif
+
+stop
+@enduml
