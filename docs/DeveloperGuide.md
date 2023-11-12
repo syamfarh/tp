@@ -19,7 +19,7 @@ FAPro - Developer Guide
     * [Clone feature](#clone-feature)
     * [Delete feature](#delete-feature)
     * [Undo feature](#undo-feature)
-    * [Redo feature]()
+    * [Redo feature](#redo-feature)
     * [Find feature](#find-feature)
     * [Sort feature](#sort-feature)
     * [Questionnaire feature](#questionnaire-feature)
@@ -206,7 +206,7 @@ Given below is an example usage scenario and how the add mechanism behaves at ea
 
 Step 1: The user launches the application. The application initializes various lists and data structures.
 
-![Add0](images/Add0.png)
+![Add0](images/add0.png)
 
 As seen in the object diagram, the address book is currently empty.
 
@@ -233,7 +233,7 @@ then added to the address book by `Model#addPerson`.
 
 ![AddActivityDiagram0](images/AddActivityDiagram0.png)
 
-![Add1](images/Add1.png)
+![Add1](images/add1.png)
 
 Upon successfully adding the person, the add success message is returned to the user, as depicted in the
 User Guide.

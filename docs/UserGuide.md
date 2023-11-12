@@ -9,7 +9,7 @@ title: FAPro User Guide
   {:toc}
 
 1. [Product Overview](#product-overview)
-2. [Quick start](#quick-start)
+2. [Quick Start](#quick-start)
 3. [Features](#features)
    * [help](#viewing-help-help)
    * [questionnaire](#viewing-risk-assessment-questionnaire-questionnaire)
@@ -29,7 +29,7 @@ title: FAPro User Guide
 4. [Troubleshooting](#troubleshooting)
    * [Technical Questions](#technical-questions)
    * [Common Questions](#common-questions)
-   * [Known issues](#known-issues)
+   * [Known Issues](#known-issues)
 5. [Command summary](#command-summary)
 6. [Glossary](#glossary)
 
@@ -47,7 +47,7 @@ This guide is organised into sections for easy reference. Use the table of conte
 
 Throughout the guide, we'll provide tips and best practices to help you make the most of FAPro's features and optimise your workflow. A glossary of key terms is included to ensure you understand the technical jargon used in FAPro.
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -592,7 +592,7 @@ Finds persons based on the given keywords.
 
 #### Precise expected outputs on failure:
 If no name is input after the find command, an error message explaining the error will be shown, 
-reminding you to follow the correct input format
+reminding you to follow the correct input format.
 
 * You should see this error message:
 
@@ -623,7 +623,7 @@ reminding you to follow the correct input format
 
 #### Precise expected outputs on failure:
 If no address is input after the find command, an error message explaining the error will be shown,
-reminding you to follow the correct input format
+reminding you to follow the correct input format.
 
 * You should see this error message:
 
@@ -653,7 +653,7 @@ reminding you to follow the correct input format
 
 #### Precise expected outputs on failure:
 If no date is input after the find command, an error message explaining the error will be shown,
-reminding you to follow the correct input format
+reminding you to follow the correct input format.
 
 * You should see this error message:
   ```
@@ -664,7 +664,7 @@ reminding you to follow the correct input format
   ![find_appt format](images/find-UG/find_appt2.png)
 
 If an input date does not follow the accepted format, an error message explaining the error will be shown,
-reminding you to follow the correct input format
+reminding you to follow the correct input format.
 
 * You should see this error message:
   ```
@@ -675,7 +675,7 @@ reminding you to follow the correct input format
   ![find_appt format](images/find-UG/find_appt3.png)
 
 If an input date is a past date (a date before the current date), an error message explaining the error will be shown, 
-reminding you to input a valid date
+reminding you to input a valid date.
 
 * You should see this error message:
   ```
