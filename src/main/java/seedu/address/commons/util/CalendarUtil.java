@@ -8,7 +8,7 @@ import com.calendarfx.model.Interval;
 import seedu.address.model.person.Person;
 
 /**
- * Helper function for handling calendar entry.
+ * Helper function for converting Person's AppointmentDate to calendar Entry.
  */
 public class CalendarUtil {
 
