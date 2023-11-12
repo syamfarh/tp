@@ -695,12 +695,17 @@ possible to undo the most recent redo command.
 * `undo`
 
 #### Example commands:
-* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` followed by `undo` will
-  delete the added contact
-* `clone 1`, assuming there is a contact to clone, followed by `undo` will delete the cloned contact
-* `delete 1`, assuming there is a contact to delete, followed by `undo` will add the contact back
-* `clear`, assuming there is at least one contact to clear, followed by `undo` will add all cleared contacts back
-* `edit 1 p/91234567`, assuming there is a contact to edit, followed by `undo` will revert the edit of the contact
+* In general, `undo` is used when you have accidentally made a mistake, reverting the change
+* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` followed by `undo` (if
+  you think adding the person was a mistake), will delete the added contact
+* `clone 1`, assuming there is a contact to clone, followed by `undo` (if you think cloning the person was a mistake),
+  will delete the cloned contact
+* `delete 1`, assuming there is a contact to delete, followed by `undo` (if you think deleting the person was a
+  mistake), will add the contact back
+* `clear`, assuming there is at least one contact to clear, followed by `undo` (if you think clearing all persons was
+  a mistake), will add all cleared contacts back
+* `edit 1 p/91234567`, assuming there is a contact to edit, followed by `undo` (if you think editing all persons was
+  a mistake), will revert the edit of the contact
 * Assuming there are 3 contacts, `delete 1`, which deletes the first contact, followed by `clear`, which clears the
   remaining 2 contacts, followed by `undo` will only add the 2 cleared contacts back. A subsequent `undo` will add
   the contact deleted at the beginning back
@@ -857,25 +862,41 @@ Redoes the most recent undo command.
   `redo` will then reapply the `delete 1` command
 
 
-* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` will add this contact in 
+* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` will add this contact in
   the address book
+
+  ![add_format](images/redo-UG/redo-example/EmptyBeforeAddingJohn.png)
+  ![add_format](images/redo-UG/redo-example/AfterAddingJohn.png)
 
   `undo` will then reverse the `add` command (i.e. John Doe is no longer in the address book)
 
+  ![undo_format](images/redo-UG/redo-example/AfterUndoingAddJohn.png)
+
   `redo` will then reapply the `add` command (i.e. John Doe is back in the address book)
+
+  ![redo_format](images/redo-UG/redo-example/AfterRedoingUndoJohnIsBack.png)
 
   `undo` will then reverse the `redo` command (i.e. John Doe is no longer in the address book)
 
+  ![undo_format](images/redo-UG/redo-example/AfterUndoingRedoJohnIsGone.png)
+
   #### Note: while it is possible to `undo` `redo` commands, this is only possible before any other `add`, `clone`, `edit`, `delete`, `clear` command is executed.
 
-  Now, `redo` will reapply the `add` command (i.e John Doe is back in the address book) 
+  Now, `redo` will reapply the `add` command (i.e John Doe is back in the address book)
+
+  ![redo_format](images/redo-UG/redo-example/AfterRedoingUndoJohnIsBack.png)
 
   `delete 1` will delete the first contact in the address book
 
+  ![delete_format](images/redo-UG/redo-example/AfterDeleteJohn.png)
+
   `undo` will reverse the `delete 1` command
+
+  ![undo_format](images/redo-UG/redo-example/AfterUndoingDeleteJohn.png)
 
   `undo` once again will not reverse the `redo` command
 
+  ![undo_format](images/redo-UG/redo-example/NothingToUndo.png)
 
 #### Precise expected outputs on success:
 
