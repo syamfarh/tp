@@ -1431,6 +1431,38 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect edit commands to try: `edit 1 n/`, `edit 0 n/ John Doe`, `edit 1 n/ John-Doe`
        Expected: Similar to previous
 
+### Finding a person
+
+1. Find a person by name
+
+   1. Prerequisites: Delete `addressbook.json` file in `data` subfolder.
+   2. Test case: `find n/charlotte roy`<br>
+      Expected: "Charlotte Oliveiro" and "Roy Balakrishnan" contacts are shown.
+   3. Test case: `find n/`<br>
+      Expected: No change in contacts shown. Error details of invalid command format shown in the status message. 
+
+2. Find a person by address
+
+   1. Prerequisites: Same as "Find person by name" portion above.
+   2. Test case: `find a/geylang tampines`<br>
+      Expected: "Alex Yeoh" and "Irfan Ibrahim" contacts are shown.
+   3. Test case: `find a/`<br>
+      Expected: No change in contacts shown. Error details of invalid command format shown in the status message.
+
+3. Find a person by appointment date
+
+   1. Prerequisites: Same as "Find person by name" portion above. Then, use `list` command to list out
+      all the contacts. Then, enter `edit 1 appt/2024-01-01 10:00`, `edit 3 appt/2024-01-01 13:00` and 
+      `edit 5 appt/2024-01-01 16:00`.
+   2. Test case: `find appt/2024-01-01`<br>
+      Expected: "Alex Yeoh", "Charlotte Oliveiro" and "Irfan Ibrahim" contacts are shown.
+   3. Test case: `find appt/`<br>
+      Expected: No change in contacts shown. Error details of invalid command format shown in the status message.
+   4. Test case: `find appt/1999-01-01`<br>
+      Expected: No change in contacts shown. Error details of invalid date input is shown in the status message.
+   5. Test case: `find appt/hello`<br>
+      Expected: No change in contacts shown. Error details of invalid date format is shown in the status message.
+
 ### Sorting contact list
 
 1. Sorting contact list by NAME or APPOINTMENT_DATE prefix in ascending order
