@@ -23,16 +23,16 @@ FAPro - Developer Guide
     * [Find feature](#find-feature)
     * [Sort feature](#sort-feature)
     * [Questionnaire feature](#questionnaire-feature)
-    * [Risk profile feature](#risk-profile-feature)
+    * [Risk Profile feature](#risk-profile-feature)
     * [Calendar feature](#calendar-feature)
     * [Help feature](#help-feature)
-4. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+4. [Documentation, Logging, Testing, Configuration, Dev-ops](#documentation-logging-testing-configuration-dev-ops)
 5. [Appendix A: Product Scope](#appendix-a-product-scope)
 6. [Appendix B: User Stories](#appendix-b-user-stories)
 7. [Appendix C: Use Cases](#appendix-c-use-cases)
 8. [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
 9. [Appendix E: Glossary](#appendix-e-glossary)
-10. [Appendix F: Instructions for manual testing](#appendix-f-instructions-for-manual-testing)
+10. [Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)
 11. [Appendix G: Future Implementations](#appendix-g-future-implementations)
 12. [Appendix H: Effort](#appendix-h-effort)
 13. [Appendix I: Planned Enhancements](#appendix-i-planned-enhancements)
@@ -998,7 +998,7 @@ Then it will trigger `MainWindow#handleHelp()`. If the help window is not showin
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, Dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -1026,7 +1026,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 
 
-## **Appendix B: User stories**
+## **Appendix B: User Stories**
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -1046,7 +1046,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | clumsy financial advisor         | be able to undo commands done previously such as delete, clear, edit, add | undo my mistakes made with a simple command, rather than having to do multiple commands | 
 
 
-## **Appendix C: Use cases**
+## **Appendix C: Use Cases**
 
 (For all use cases below, the **System** is the `FAPro` and the **Actor** is the `Financial Advisor`, unless specified otherwise)
 
@@ -1355,7 +1355,7 @@ Preconditions:
 * **Suffix**: Number that is at the end of a persons name e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix F: Instructions for manual testing**
+## **Appendix F: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -1364,7 +1364,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
 
