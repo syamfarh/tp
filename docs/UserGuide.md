@@ -105,7 +105,7 @@ Throughout the guide, we'll provide tips and best practices to help you make the
 
 ### Viewing help: `help`
 
-Discover our basic commands right away. If you want to explore other commands, FaPro user guide link is provided for you. 
+Discover our basic commands right away. If you want to explore other commands, FAPro user guide link is provided for you. 
 
 #### Format: 
 * `help`
@@ -192,7 +192,7 @@ and adds it to their contact.
   ![riskprofile result](images/riskProfile-UG/riskProfileResult.png)
 
 #### Precise expected outputs on failure:
-If the RESULT is empty or the INDEX is negative integers
+If your RESULT is empty or INDEX is negative integers
 * You should see this error message:
   ```
   Invalid command format! 
@@ -205,7 +205,7 @@ If the RESULT is empty or the INDEX is negative integers
   ![invalid risk profile 1](images/riskProfile-UG/invalidRiskProfile1.png)
   ![invalid risk profile 3](images/riskProfile-UG/invalidRiskProfile3.png)
 
-If the RESULT is not separated by commas, with any whitespace or not in the range of 'a' - 'e'
+If your RESULT is not separated by commas, with any whitespace or not in the range of 'a' - 'e'
 * You should see this error message:
   ```
   Result must have 8 comma-separated characters from 'a' to 'e'!
@@ -237,7 +237,16 @@ The main method you will be using to add contacts in typical situations.
 * NAME: Must be alphanumeric characters only. Name must be unique. (John Doe)
 * ADDRESS: Can take any values except blank (8 College Ave West)
 * PHONE NUMBER: Numbers only. Must be at least 3 digits long. (81234567)
-* EMAIL ADDRESS: Accepts **all** types of characters.
+* EMAIL ADDRESS: Accepts **all** types of characters but must adhere to basic email formatting as follows: <br>
+  Emails should be of the format local-part@domain and adhere to the following constraints:
+  1. The local-part should only contain alphanumeric characters and these special characters, +_.-. The local-part may
+  not start or end with any special characters
+  2. This is followed by a '@' and then a domain name. The domain name is made up of domain labels
+  separated by periods
+  The domain name must:
+  * End with a domain label at least 2 characters long
+  * Have each domain label start and end with alphanumeric characters
+  * Have each domain label consist of alphanumeric characters, separated only by hyphens, if any
 * OCCUPATION: Must be alphanumeric characters only
 * TAG: Must be alphanumeric characters only
 * APPOINTMENT_DATE: Valid string appointment date format (yyyy-mm-dd HH:mm, mm/dd/yyyy HH:mm or dd-mm-yyyy HH:mm) (date and time must be after the current date and time) 
@@ -254,14 +263,14 @@ A person can have any number of tags (including 0)
   New Person added: X
   ```
 
-  where X are the details of the person added
+  where X are the details of the person you added
 
 * For example, for Robert Johnson (the example command), it would be:<br> `New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: `<br> Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
 * This is the original empty address book
 
   ![add format](images/add-UG/addbefore.png)
   
-* The new entry is displayed in the address book GUI
+* The new entry is displayed in your address book GUI
 
   ![add format](images/add-UG/add_success.png)
 
@@ -280,7 +289,7 @@ If a required parameter is missing (e.g., NAME, EMAIL)
 
   ![add format](images/add-UG/addmissingparam.png)
 
-If a parameter is provided in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
+If a parameter you provided is in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 
 * You should see this error message:
 
@@ -305,7 +314,7 @@ If a parameter is provided in an invalid format (e.g., an invalid email address)
 
   ![add format](images/add-UG/addinvalidemail.png)
 
-If a parameter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
+If a parameter you enter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
 
 * You should see this error message:
 
@@ -319,14 +328,14 @@ If a parameter is specified multiple times (e.g., --name John --name Doe), an er
 
 ### Cloning a person : `clone`
 
-Clones a contact from the address book at the specified index.
+Clones a contact from your address book at the specified index.
 
 Makes it easier for you to add a contact with very similar details (i.e from the same household)
 
 #### Format:
 * `clone INDEX`
 * Clones the person at the specified `INDEX`
-* The index refers to the index number shown in the displayed person list
+* The index refers to the index number shown in your displayed person list
 
 #### Example commands:
 After cloning, the clone is the exact same as the original, other than a suffix either being attached at the end of their name or, if a suffix is already present, the suffix at the end of their name is incremented
@@ -355,7 +364,7 @@ After cloning, the clone is the exact same as the original, other than a suffix 
   Address: Hougang Avenue 1; AppointmentDate: ; Tags:
   ```
 
-  is the person being cloned, then the output is:
+  is the person you cloned, then the output you will see is:
 
   ```
   Cloned Person: John Doe; Phone: 98765432; Email: johnd@example.com;
@@ -366,7 +375,7 @@ After cloning, the clone is the exact same as the original, other than a suffix 
 
   ![add format](images/clone-UG/clonebefore.png)
 
-* The cloned entry is displayed in the address book GUI
+* The cloned entry is displayed in your address book GUI
 
   ![clone format](images/clone-UG/clone_success.png)
 
@@ -384,7 +393,7 @@ If no index, 0 or a negative index is entered next to the clone command
 
   ![clone format](images/clone-UG/cloneinvalidindex.png)
 
-If the index entered is greater than the current number of contacts in the address book
+If the index you enter is greater than the current number of contacts in the address book
 
 * You should see this error message:
 
@@ -394,7 +403,7 @@ If the index entered is greater than the current number of contacts in the addre
 
   ![clone format](images/clone-UG/clonelargeindex.png)
 
-If the suffix of the person being cloned is either 0 or 2147483647 (MAX_INT)
+If the suffix of the person you cloned is either 0 or 2147483647 (MAX_INT)
 
 * You should see this error message:
 
@@ -686,12 +695,17 @@ possible to undo the most recent redo command.
 * `undo`
 
 #### Example commands:
-* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` followed by `undo` will
-  delete the added contact
-* `clone 1`, assuming there is a contact to clone, followed by `undo` will delete the cloned contact
-* `delete 1`, assuming there is a contact to delete, followed by `undo` will add the contact back
-* `clear`, assuming there is at least one contact to clear, followed by `undo` will add all cleared contacts back
-* `edit 1 p/91234567`, assuming there is a contact to edit, followed by `undo` will revert the edit of the contact
+* In general, `undo` is used when you have accidentally made a mistake, reverting the change
+* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` followed by `undo` (if
+  you think adding the person was a mistake), will delete the added contact
+* `clone 1`, assuming there is a contact to clone, followed by `undo` (if you think cloning the person was a mistake),
+  will delete the cloned contact
+* `delete 1`, assuming there is a contact to delete, followed by `undo` (if you think deleting the person was a
+  mistake), will add the contact back
+* `clear`, assuming there is at least one contact to clear, followed by `undo` (if you think clearing all persons was
+  a mistake), will add all cleared contacts back
+* `edit 1 p/91234567`, assuming there is a contact to edit, followed by `undo` (if you think editing all persons was
+  a mistake), will revert the edit of the contact
 * Assuming there are 3 contacts, `delete 1`, which deletes the first contact, followed by `clear`, which clears the
   remaining 2 contacts, followed by `undo` will only add the 2 cleared contacts back. A subsequent `undo` will add
   the contact deleted at the beginning back
@@ -848,25 +862,41 @@ Redoes the most recent undo command.
   `redo` will then reapply the `delete 1` command
 
 
-* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` will add this contact in 
+* `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` will add this contact in
   the address book
+
+  ![add_format](images/redo-UG/redo-example/EmptyBeforeAddingJohn.png)
+  ![add_format](images/redo-UG/redo-example/AfterAddingJohn.png)
 
   `undo` will then reverse the `add` command (i.e. John Doe is no longer in the address book)
 
+  ![undo_format](images/redo-UG/redo-example/AfterUndoingAddJohn.png)
+
   `redo` will then reapply the `add` command (i.e. John Doe is back in the address book)
+
+  ![redo_format](images/redo-UG/redo-example/AfterRedoingUndoJohnIsBack.png)
 
   `undo` will then reverse the `redo` command (i.e. John Doe is no longer in the address book)
 
+  ![undo_format](images/redo-UG/redo-example/AfterUndoingRedoJohnIsGone.png)
+
   #### Note: while it is possible to `undo` `redo` commands, this is only possible before any other `add`, `clone`, `edit`, `delete`, `clear` command is executed.
 
-  Now, `redo` will reapply the `add` command (i.e John Doe is back in the address book) 
+  Now, `redo` will reapply the `add` command (i.e John Doe is back in the address book)
+
+  ![redo_format](images/redo-UG/redo-example/AfterRedoingUndoJohnIsBack.png)
 
   `delete 1` will delete the first contact in the address book
 
+  ![delete_format](images/redo-UG/redo-example/AfterDeleteJohn.png)
+
   `undo` will reverse the `delete 1` command
+
+  ![undo_format](images/redo-UG/redo-example/AfterUndoingDeleteJohn.png)
 
   `undo` once again will not reverse the `redo` command
 
+  ![undo_format](images/redo-UG/redo-example/NothingToUndo.png)
 
 #### Precise expected outputs on success:
 
@@ -978,7 +1008,7 @@ Open a new calendar window.
 </div>
 
 #### Precise expected outputs on success:
-* A pop-up of a new calendar window of the current month that indicate client's appointments in the date
+* You will see a pop-up of a new calendar window of the current month that indicate client's appointments in the date
 
   ![calendar format](images/calendar-UG/calendarWindow.png)
 
@@ -986,7 +1016,7 @@ Open a new calendar window.
 
 ### Clearing all entries : `clear`
 
-Clears all contacts in the address book.
+Clears all of your contacts in the address book.
 
 #### Format:
 * `clear`
@@ -1006,7 +1036,7 @@ Clears all contacts in the address book.
   ```
   Address book has been cleared!
   ```
-* GUI reflects that there are 0 contacts left
+* Your GUI will reflect that there are 0 contacts left
 
   ![clear format](images/clear-UG/clear_success.png)
 
@@ -1120,13 +1150,13 @@ _Known issues_ are some problems that are currently present in the program that 
 
 ## Glossary
 
-| Word                 | Meaning                                                                                                                         |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| **FA**               | Short form for financial advisor                                                                                                |
-| **Parameter**        | Values inputted by the you.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                  |
-| **Positive Integer** | An integer that is positive (i.e greater than 0). Please note that we are excluding 0 as a positive integer.                    |
-| **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
-| **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
+| Word                 | Meaning                                                                                                                                                                                                                                                                                     |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **FA**               | Short form for financial advisor                                                                                                                                                                                                                                                            |
+| **Parameter**        | Values input by you.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                                                                                                                                                                                     |
+| **Positive Integer** | An integer that is positive (i.e. greater than 0). Please note that we are excluding 0 as a positive integer.                                                                                                                                                                               |
+| **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                                                                                                                                                                               |
+| **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present. <br/> Please note that for contacts where the whole name is an integer (i.e 123 instead on John), there is no suffix as 123 will be treated as their name. |
 
 <div style="page-break-after: always;"></div>
 

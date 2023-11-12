@@ -37,6 +37,9 @@ public class CalendarWindow extends UiPart<Stage> {
 
     private CalendarView calendarView;
 
+    /**
+     * EventHandler variable that handle input from user keyboard for calendar month page navigation.
+     */
     private EventHandler<KeyEvent> keyNavigator = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
@@ -49,11 +52,11 @@ public class CalendarWindow extends UiPart<Stage> {
                 break;
             case ENTER:
                 calendarView.getMonthPage().goToday();
-                //fix ENTER keypress that repeat previous keypress event
+                //fix bug where ENTER keypress repeat previous keypress event
                 event.consume();
                 break;
             case SPACE:
-                //fix SPACE keypress that repeat previous keypress event
+                //fix bug where SPACE keypress repeat previous keypress event
                 event.consume();
                 break;
             default:
@@ -69,7 +72,9 @@ public class CalendarWindow extends UiPart<Stage> {
      */
     public CalendarWindow(Stage root) {
         super(FXML, root);
-        //configure calendar view
+
+        //reuse from Quick start https://dlsc-software-consulting-gmbh.github.io/CalendarFX/
+        //with minor modification
         calendarView = new CalendarView();
         clients = new Calendar("Clients");
         CalendarSource myCalendarSource = new CalendarSource("My Calendars");
@@ -77,7 +82,7 @@ public class CalendarWindow extends UiPart<Stage> {
         calendarView.getCalendarSources().addAll(myCalendarSource);
         clients.setStyle(Calendar.Style.STYLE1);
         calendarView.setRequestedTime(LocalTime.now());
-        //prevent adding events directly to calendar window
+        //prevent user from adding events directly to calendar window
         calendarView.getMonthPage().getMonthView().setDisable(true);
         updateTimeThread = new Thread("Calendar: Update Time Thread") {
             @Override
@@ -102,7 +107,6 @@ public class CalendarWindow extends UiPart<Stage> {
         updateTimeThread.setPriority(Thread.MIN_PRIORITY);
         updateTimeThread.setDaemon(true);
         updateTimeThread.start();
-        //set calendar view in scene
         Scene scene = new Scene(calendarView.getMonthPage());
         //add eventHandler for navigating calendar window to different month page
         scene.addEventFilter(KeyEvent.KEY_PRESSED, keyNavigator);
@@ -148,21 +152,21 @@ public class CalendarWindow extends UiPart<Stage> {
     }
 
     /**
-     * Returns true if the questionnaire window is currently being shown.
+     * Returns true if the calendar window is currently being shown.
      */
     public boolean isShowing() {
         return getRoot().isShowing();
     }
 
     /**
-     * Hides the questionnaire window.
+     * Hides the calendar window.
      */
     public void hide() {
         getRoot().hide();
     }
 
     /**
-     * Focuses on the questionnaire window.
+     * Focuses on the calendar window.
      */
     public void focus() {
         getRoot().requestFocus();
