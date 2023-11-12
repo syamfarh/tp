@@ -1517,7 +1517,6 @@ testers are expected to do more *exploratory* testing.
 
 * The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
 * The application will start to experience lag after prolonged usage. This is most likely it is due to the extra storing of persons whenever a command modifies the address book. As extra memory are needed to be dedicated to such storage, this can be a reason for the lag after a large number (lets say 100) commands that modify the address book. In the future, we might plan to limit the amount of undoable commands that is allowed to reduce the storage load of the application.
-* 
 * Currently, no matter the number of contacts listed for `find` functions, the message shown to the user uses "persons". We plan to change the message shown to reflect the correct grammar depending on the number of contacts listed in the future.
 * We plan to enhance the error handling for addition of phone numbers such that there will be a hard limit of integers that users are able to input.
 * We plan to restrict the user input for `riskprofile` command to only accept one **res/** prefix along its result.
