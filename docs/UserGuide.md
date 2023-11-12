@@ -1129,13 +1129,13 @@ _Known issues_ are some problems that are currently present in the program that 
 
 ## Glossary
 
-| Word                 | Meaning                                                                                                                         |
-|----------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| **FA**               | Short form for financial advisor                                                                                                |
-| **Parameter**        | Values input by you.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                         |
-| **Positive Integer** | An integer that is positive (i.e. greater than 0). Please note that we are excluding 0 as a positive integer.                   |
-| **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                   |
-| **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
+| Word                 | Meaning                                                                                                                                                                                                                                                                                     |
+|----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **FA**               | Short form for financial advisor                                                                                                                                                                                                                                                            |
+| **Parameter**        | Values input by you.<br/>e.g. NAME, OCCUPATION, ADDRESS                                                                                                                                                                                                                                     |
+| **Positive Integer** | An integer that is positive (i.e. greater than 0). Please note that we are excluding 0 as a positive integer.                                                                                                                                                                               |
+| **Prefix**           | Word that is added in front of parameter.<br/>e.g. n/, o/, a/                                                                                                                                                                                                                               |
+| **Suffix**           | Number that is at the end of a persons name <br/>e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present. <br/> Please note that for contacts where the whole name is an integer (i.e 123 instead on John), there is no suffix as 123 will be treated as their name. |
 
 <div style="page-break-after: always;"></div>
 
