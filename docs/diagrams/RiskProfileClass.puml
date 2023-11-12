@@ -12,8 +12,8 @@ Class RiskProfileCommand {
   +MESSAGE_USAGE: String
   +execute(Model): CommandResult
   +generateSuccessMessage(Person): String
-  +__calculateTotalScore(String): int
-  +__calculateRiskLevel(int): String
+  +<u>calculateTotalScore(String): int</u>
+  +<u>calculateRiskLevel(int): String</u>
   +isValidResult(String): Boolean
   +equals(Object): Boolean
 }
