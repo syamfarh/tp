@@ -1,0 +1,18 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+
+start
+
+:User executes 'questionnaire';
+fork
+  :      User views the Risk
+  Assessment Questionnaire;
+forkagain
+  :User goes to the main application window;
+  :User inputs 'riskprofile 7 res/a,b,c,d,e,e,b,c';
+endfork
+  :FAPro updates the AddressBook and reflects the GUI change;
+stop
+@enduml
