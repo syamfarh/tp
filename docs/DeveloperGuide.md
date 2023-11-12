@@ -19,7 +19,7 @@ FAPro - Developer Guide
     * [Clone feature](#clone-feature)
     * [Delete feature](#delete-feature)
     * [Undo feature](#undo-feature)
-    * [Redo feature]()
+    * [Redo feature](#redo-feature)
     * [Find feature](#find-feature)
     * [Sort feature](#sort-feature)
     * [Questionnaire feature](#questionnaire-feature)
