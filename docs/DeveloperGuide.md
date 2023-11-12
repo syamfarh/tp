@@ -34,9 +34,8 @@ FAPro - Developer Guide
 9. [Appendix E: Glossary](#appendix-e-glossary)
 10. [Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)
 11. [Appendix G: Future Implementations](#appendix-g-future-implementations)
-12. [Appendix H: Effort](#appendix-h-effort)
-13. [Appendix I: Planned Enhancements](#appendix-i-planned-enhancements)
-14. [Appendix J: Acknowledgement](#appendix-j-acknowledgement)
+13. [Appendix H: Planned Enhancements](#appendix-i-planned-enhancements)
+14. [Appendix I: Acknowledgement](#appendix-j-acknowledgement)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -1552,11 +1551,7 @@ testers are expected to do more *exploratory* testing.
 * Ability to store multiple appointment dates for individual clients and an additional window that displays the appointments of these clients.
 * Provide financial advisors with the ability to dynamically customize the set of risk assessment questions and their corresponding grading criteria.
 
-## **Appendix H: Effort**
-
-{to be added}
-
-## **Appendix I: Planned Enhancements**
+## **Appendix H: Planned Enhancements**
 
 * The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
 * The application will start to experience lag after prolonged usage. This is most likely it is due to the extra storing of persons whenever a command modifies the address book. As extra memory are needed to be dedicated to such storage, this can be a reason for the lag after a large number (lets say 100) commands that modify the address book. In the future, we might plan to limit the amount of undoable commands that is allowed to reduce the storage load of the application.
@@ -1568,6 +1563,6 @@ testers are expected to do more *exploratory* testing.
   address book is executed. Such commands are `add`, `clone`, `edit`, `delete` and `clear`. We plan to lift this restriction 
   in the future.
 
-## **Appendix J: Acknowledgement**
+## **Appendix I: Acknowledgement**
 
 * The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)
