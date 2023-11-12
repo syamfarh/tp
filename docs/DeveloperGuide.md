@@ -265,7 +265,7 @@ Edit implements the following operations:
 
 EditCommand also contains a static class `EditPersonDescriptor` that stores the details to edit the person with.
 
-Given below is an example usage scenario and how the clone mechanism behaves at each step.
+Given below is an example usage scenario and how the edit mechanism behaves at each step.
 
 Step 1. The user launches the application for the first time.
 
