@@ -8,14 +8,14 @@ FAPro - Developer Guide
 1. [Setting up](#setting-up-getting-started)
 2. [Design](#design)
     * [Architecture](#architecture)
-    * [Ui component](#ui-component)
+    * [UI component](#ui-component)
     * [Logic component](#logic-component)
     * [Model component](#model-component)
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 3. [Implementation](#implementation)
+    * [Edit feature](#edit-feature)
     * [Add feature](#add-feature)
-    * [Edit feature]()
     * [Clone feature](#clone-feature)
     * [Delete feature](#delete-feature)
     * [Undo feature](#undo-feature)
@@ -252,6 +252,39 @@ User Guide.
     * Pros: Fast and straightforward for multiple deletions.
     * Cons: Lacks feedback on whether the persons were added, which may be useful for confirmation and may result in
       duplicate entries.
+
+### Edit feature
+
+#### Implementation
+
+The `edit` feature allows user to edit a person's data in the address book by providing the prefix and the changed value.
+
+Edit implements the following operations:
+* `EditCommand#execute`
+* `EditCommand#createEditedPerson`
+
+EditCommand also contains a static class `EditPersonDescriptor` that stores the details to edit the person with.
+
+Given below is an example usage scenario and how the edit mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `list` to see what Persons are available in the address book. Initially, only John and
+James are in the address book.
+
+![Edit0](images/Clone0.png)
+
+Step 3. The user executes `edit 1 n/ Greg` to edit the person's name at index 1 of the address book, John. 
+* The `EditCommandParser#parse` will create a new `EditPersonDescriptor` to store the edited value of a person.
+In this case, the new name of the person is stored in `EditPersonDescriptor`.
+<br>
+* `EditCommandParser#parse` will return a new `EditCommand` object with the parameter index, in this case 1, and the `EditPersonDescriptor` object.
+* `EditCommand#execute` will then compare if the `EditPersonDescriptor` name already exist in the contact list. If it already exist, it will throw an exception. In this case, it does not. <br>
+* `EditCommand#execute` will call `model#setPerson` to replace the current person with the newly edited person at the index number.
+
+![Edit0](images/Edit1.png)
+
+![Edit0](images/EditActivityDiagram.png)
 
 ### Clone feature
 
@@ -1297,18 +1330,17 @@ Preconditions:
 ## **Appendix D: Non-Functional Requirements**
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 100 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The app should be responsive, with a maximum response time of 2 seconds for common user actions like searching for contacts or adding new ones.
 5. The user interface should be intuitive enough for users who are not IT-savvy.
 6. There should be user authentication and authorization mechanisms to ensure only authorized users can access and 
     modify data.
 7. The app should not be required to handle the direct contacting of persons.
-8. Should have regular backups of user data and a reliable mechanism for data recovery.
-9. Should have easy-to-read and detailed User & Developer Guides.
-10. Codebase should be structured using singular coding standard and style.
-11. Testing should be implemented for easier maintenance.
-12. The app should be designed to handle unexpected input and edge cases gracefully, without crashing the system.
+8. Should have easy-to-read and detailed User & Developer Guides.
+9. Codebase should be structured using singular coding standard and style.
+10. Testing should be implemented for easier maintenance.
+11. The app should be designed to handle unexpected input and edge cases gracefully, without crashing the system.
 
 
 
@@ -1430,6 +1462,38 @@ testers are expected to do more *exploratory* testing.
        Expected: No person is edited. Error details shown in the status message. Status bar remains the same.
     4. Other incorrect edit commands to try: `edit 1 n/`, `edit 0 n/ John Doe`, `edit 1 n/ John-Doe`
        Expected: Similar to previous
+
+### Finding a person
+
+1. Find a person by name
+
+   1. Prerequisites: Delete `addressbook.json` file in `data` subfolder.
+   2. Test case: `find n/charlotte roy`<br>
+      Expected: "Charlotte Oliveiro" and "Roy Balakrishnan" contacts are shown.
+   3. Test case: `find n/`<br>
+      Expected: No change in contacts shown. Error details of invalid command format shown in the status message. 
+
+2. Find a person by address
+
+   1. Prerequisites: Same as "Find person by name" portion above.
+   2. Test case: `find a/geylang tampines`<br>
+      Expected: "Alex Yeoh" and "Irfan Ibrahim" contacts are shown.
+   3. Test case: `find a/`<br>
+      Expected: No change in contacts shown. Error details of invalid command format shown in the status message.
+
+3. Find a person by appointment date
+
+   1. Prerequisites: Same as "Find person by name" portion above. Then, use `list` command to list out
+      all the contacts. Then, enter `edit 1 appt/2024-01-01 10:00`, `edit 3 appt/2024-01-01 13:00` and 
+      `edit 5 appt/2024-01-01 16:00`.
+   2. Test case: `find appt/2024-01-01`<br>
+      Expected: "Alex Yeoh", "Charlotte Oliveiro" and "Irfan Ibrahim" contacts are shown.
+   3. Test case: `find appt/`<br>
+      Expected: No change in contacts shown. Error details of invalid command format shown in the status message.
+   4. Test case: `find appt/1999-01-01`<br>
+      Expected: No change in contacts shown. Error details of invalid date input is shown in the status message.
+   5. Test case: `find appt/hello`<br>
+      Expected: No change in contacts shown. Error details of invalid date format is shown in the status message.
 
 ### Sorting contact list
 
