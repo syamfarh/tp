@@ -472,8 +472,8 @@ Step 1. The user launches the application for the first time. The `ArrayList`s `
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram1.png)
 
-Step 2. The user executes `delete 1 2` command to delete the 1st and 2nd person in the address book. The following 
-steps are repeated twice, since 2 persons are deleted.
+Step 2. The user executes `delete 1 2` command to delete the 1st and 2nd person (John and Greg) in the address book. 
+The following steps are repeated twice, since 2 persons are deleted.
 * The `delete` command calls `Model#storePreviousUndoableCommand(String)`, adding the command as a String into 
 `previousUndoableCommands`, and also calls `Model#storeDeletedPerson(Person)`, adding the Person into 
 `deletedPersons`.
@@ -562,12 +562,15 @@ After any command that modifies the address book is executed (I.e. `add`, `clone
 
 Given below is an example usage scenario and how the redo mechanism behaves at each step.
 
-Step 0: The user launches the application and deletes the first 2 contacts. (Refer to the usage scenario of the 
-undo mechanism for these steps) At the launch of the application, the `ArrayList`s `previousUndoableCommands`, 
+Step 0: The user launches the application and deletes the first 2 contacts, with names John and Greg. (Refer to the 
+usage scenario of the undo mechanism for these steps) At the launch of the application, the `ArrayList`s `previousUndoableCommands`, 
 `redoableStatelist` and `undoableStateList` are initialized as a blank `ArrayList`. Then, 2 delete commands are 
 added into the `previousUndoableCommands` after the deletion of the first 2 contacts.
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram3.png)
+
+Now, John and Greg are deleted.
+
 ![AddressBookStateDiagram](images/AddressBookState1.png)
 
 Step 1: The user now decides that deleting the person was a mistake, and decides to undo that action by executing
@@ -576,6 +579,9 @@ book before the `undo` is committed into the `redoableStateList`. Furthermore, `
 ` is called twice, removing the delete commands.
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram4.png)
+
+Now, John and Greg are back in the address book.
+
 ![AddressBookStateDiagram](images/AddressBookState2.png)
 
 The following sequence diagram shows how the `undo` operation works when undoing the `delete` command.
@@ -590,6 +596,9 @@ restoring the current address book to the redone state (I.e. the address book af
 contacts).
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram5.png)
+
+Now, John and Greg are deleted.
+
 ![AddressBookStateDiagram](images/AddressBookState1.png)
 
 The following sequence diagram shows how the `redo` operation works.
@@ -604,6 +613,9 @@ again, by executing the `undo` command. The `undo` command will call `UndoComman
 to the undone state (I.e. the address book before the deletion of the first 2 contacts).
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram4.png)
+
+Now, John and Greg are back in the address book.
+
 ![AddressBookStateDiagram](images/AddressBookState2.png)
 
 The following sequence diagram shows how the `undo` operation works when undoing the `redo` command.
@@ -1427,6 +1439,35 @@ testers are expected to do more *exploratory* testing.
    2. Test case: `sort n/` <br>
       Expected: The contact list is ordered by alphabetical order of the NAME prefix. Details of the number of contacts listed is shown in the result box.
 
+### Undo and redo
+
+1. Undo changes to address book done in the current session
+
+   1. Prerequisites: Launch the app for the first time, `add` a contact, `clone` another contact, `clear` the address 
+      book
+   2. Test case: `undo` <br>
+      Expected: All contacts are added back, including the cloned and added contact
+   3. Test case: `undo` again <br>
+      Expected: Cloned contact is deleted
+   4. Test case: `undo` again <br>
+      Expected: Added contact is deleted and address book is back to the initial state
+   5. Test case: `undo` again <br>
+      Expected: Address book is unchanged and error details are shown in the status message
+
+2. Redo an undo command, and undo again
+
+   1. Prerequisites: Launch the app for the first time, `add` a contact, `undo` 
+   2. Test case: `redo` <br>
+      Expected: Added contact is back in the address book
+   3. Test case: `redo` again <br>
+      Expected: Address book is unchanged and error details are shown in the status message
+   4. Test case: `undo` <br>
+      Expected: Added contact is deleted and not in the address book
+   5. Test case: `undo` <br>
+      Expected: Address book is unchanged and error details are shown in the status message
+
+
+
 ## **Appendix G: Future Implementations**
 
 * Contacts list are only allowed to be sorted in ascending order for NAME and APPOINTMENT_DATE prefix only. We plan to allow users to sort by descending order in the future as well.
@@ -1447,6 +1488,9 @@ testers are expected to do more *exploratory* testing.
 * We plan to enhance the error handling for addition of phone numbers such that there will be a hard limit of integers that users are able to input.
 * We plan to restrict the user input for `riskprofile` command to only accept one **res/** prefix along its result.
 * We plan to enhance the error handling related to invalid index for `riskprofile` command to give more specific error message to the user.
+* The current redo feature does not allow the undoing of a previous redo command after a command that modifies the 
+  address book is executed. Such commands are `add`, `clone`, `edit`, `delete` and `clear`. We plan to lift this restriction 
+  in the future.
 
 ## **Appendix J: Acknowledgement**
 
