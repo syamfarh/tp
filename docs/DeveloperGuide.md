@@ -624,6 +624,9 @@ The following sequence diagram shows how the `undo` operation works when undoing
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram1.png)
 
+**Note:** The lifeline for `RedoCommand` should
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 Step 2: The user now decides that undoing was a mistake, and decides to redo that action by executing the `redo` 
 command. The `redo` command will call `Model#addToUndoableStateList()`, adding the state of the address book before 
 the `redo` is committed into the `undoableStateList`. `Model#storePreviousUndoableCommand(String)` is also called, 
@@ -641,6 +644,9 @@ The following sequence diagram shows how the `redo` operation works.
 
 ![RedoSequenceDiagram](images/RedoSequenceDiagram.png)
 
+**Note:** The lifeline for `RedoCommand` should
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 Step 3: The user now decides that redoing was a mistake, again! Hence, the user decides to undo that action once 
 again, by executing the `undo` command. The `undo` command will call `UndoCommand#executeUndoRedo`, which calls 
 `Model#addToRedoableStateList()`, adding the state of the address book before the `undo` is committed into the 
@@ -657,6 +663,9 @@ Now, John and Greg are back in the address book.
 The following sequence diagram shows how the `undo` operation works when undoing the `redo` command.
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram2.png)
+
+**Note:** The lifeline for `UndoCommand` should
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 :information_source: **Note:** From here on, it is possible to continuously redo and undo the same command indefinitely.
 
