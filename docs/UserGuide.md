@@ -9,7 +9,7 @@ title: FAPro User Guide
   {:toc}
 
 1. [Product Overview](#product-overview)
-2. [Quick start](#quick-start)
+2. [Quick Start](#quick-start)
 3. [Features](#features)
    * [help](#viewing-help-help)
    * [questionnaire](#viewing-risk-assessment-questionnaire-questionnaire)
@@ -29,7 +29,7 @@ title: FAPro User Guide
 4. [Troubleshooting](#troubleshooting)
    * [Technical Questions](#technical-questions)
    * [Common Questions](#common-questions)
-   * [Known issues](#known-issues)
+   * [Known Issues](#known-issues)
 5. [Command summary](#command-summary)
 6. [Glossary](#glossary)
 
@@ -47,7 +47,7 @@ This guide is organised into sections for easy reference. Use the table of conte
 
 Throughout the guide, we'll provide tips and best practices to help you make the most of FAPro's features and optimise your workflow. A glossary of key terms is included to ensure you understand the technical jargon used in FAPro.
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
