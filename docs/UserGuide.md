@@ -592,7 +592,7 @@ Finds persons based on the given keywords.
 
 #### Precise expected outputs on failure:
 If no name is input after the find command, an error message explaining the error will be shown, 
-reminding you to follow the correct input format
+reminding you to follow the correct input format.
 
 * You should see this error message:
 
@@ -623,7 +623,7 @@ reminding you to follow the correct input format
 
 #### Precise expected outputs on failure:
 If no address is input after the find command, an error message explaining the error will be shown,
-reminding you to follow the correct input format
+reminding you to follow the correct input format.
 
 * You should see this error message:
 
@@ -653,7 +653,7 @@ reminding you to follow the correct input format
 
 #### Precise expected outputs on failure:
 If no date is input after the find command, an error message explaining the error will be shown,
-reminding you to follow the correct input format
+reminding you to follow the correct input format.
 
 * You should see this error message:
   ```
@@ -664,7 +664,7 @@ reminding you to follow the correct input format
   ![find_appt format](images/find-UG/find_appt2.png)
 
 If an input date does not follow the accepted format, an error message explaining the error will be shown,
-reminding you to follow the correct input format
+reminding you to follow the correct input format.
 
 * You should see this error message:
   ```
@@ -675,7 +675,7 @@ reminding you to follow the correct input format
   ![find_appt format](images/find-UG/find_appt3.png)
 
 If an input date is a past date (a date before the current date), an error message explaining the error will be shown, 
-reminding you to input a valid date
+reminding you to input a valid date.
 
 * You should see this error message:
   ```
