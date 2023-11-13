@@ -522,12 +522,12 @@ The following sequence diagram shows how the `delete` operation works (only impo
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should 
 end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
 </div>
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** If an undoable command fails its execution, it will not call 
 `Model#storePreviousUndoableCommand(String)` so nothing is stored in `previousUndoableCommands`, and `ModelManager` 
 is unchanged.
+</div>
 
 Step 3. The user now decides that deleting the person was a mistake, and decides to undo that action by executing 
 the `undo` command. The `undo` command will call `model#getPreviousUndoableCommand`, which gets the most recent 
@@ -546,6 +546,7 @@ The following sequence diagram shows how the `undo` operation works.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should
 end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 Step 4. The user now decides to execute the command `list`. As this command is not an undoable command, 
 `Model#storePreviousUndoableCommand(String)` and other storing operations are not called, so `ModelManager` remains 
@@ -625,6 +626,7 @@ The following sequence diagram shows how the `undo` operation works when undoing
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RedoCommand` should
 end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 Step 2: The user now decides that undoing was a mistake, and decides to redo that action by executing the `redo` 
 command. The `redo` command will call `Model#addToUndoableStateList()`, adding the state of the address book before 
@@ -645,6 +647,7 @@ The following sequence diagram shows how the `redo` operation works.
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RedoCommand` should
 end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 Step 3: The user now decides that redoing was a mistake, again! Hence, the user decides to undo that action once 
 again, by executing the `undo` command. The `undo` command will call `UndoCommand#executeUndoRedo`, which calls 
@@ -665,8 +668,10 @@ The following sequence diagram shows how the `undo` operation works when undoing
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should
 end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
-:information_source: **Note:** From here on, it is possible to continuously redo and undo the same command indefinitely.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** From here on, it is possible to continuously redo and undo the same command indefinitely.
+</div>
 
 Step 4: The user now decides to execute the command `clone 1`. `Model#resetRedoableStateList()` and 
 `Model#resetUndoableStateList()` are called, re-initialising `redoableStateList` and `undoableStateList` to blank 
