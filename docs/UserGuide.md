@@ -141,11 +141,11 @@ Show you questions that are used for generating client risk profile levels.
    Opened questionnaire window.
    ```
 
-  <img src="images/questionnaire-UG/questionnaire_success.png" alt="image" width="500" height="auto">
+  <img src="images/questionnaire-UG/questionnaire_success.png" alt="image" width="700" height="auto">
 
 * You will see a pop-up window with risk assessment multiple-choice questions, including the grading and risk profile categories criteria
 
-<img src="images/questionnaire-UG/questionnaireWindow.png" alt="image" width="500" height="auto">
+<img src="images/questionnaire-UG/questionnaireWindow.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -160,7 +160,7 @@ and adds it to their contact.
 #### Example commands:
 * `riskprofile 3 res/a,b,c,d,e,e,b,c`
 
-  ![riskprofile format](images/riskProfile-UG/riskProfileFormat.png)
+  <img src="images/riskProfile-UG/riskProfileFormat.png" alt="image" width="700" height="auto">
 
   <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
@@ -193,7 +193,8 @@ and adds it to their contact.
   <span style="background-color:#FF6600; color:white;">**Moderately High**</span>,
   <span style="background-color:#F44336; color:white;">**High**</span>
 
-  ![riskprofile result](images/riskProfile-UG/riskProfileResult.png)
+
+  <img src="images/riskProfile-UG/riskProfileResult.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 If your RESULT is empty or INDEX is negative integers
@@ -206,8 +207,10 @@ If your RESULT is empty or INDEX is negative integers
   Parameters: INDEX (must be a positive integer) res/[RESULT]
   Example: riskprofile 1 res/a,e,b,d,c,a,d,e
   ```
-  ![invalid risk profile 1](images/riskProfile-UG/invalidRiskProfile1.png)
-  ![invalid risk profile 3](images/riskProfile-UG/invalidRiskProfile3.png)
+
+  <img src="images/riskProfile-UG/invalidRiskProfile1.png" alt="image" width="700" height="auto">  
+
+  <img src="images/riskProfile-UG/invalidRiskProfile3.png" alt="image" width="700" height="auto">  
 
 If your RESULT is not separated by commas, with any whitespace or not in the range of 'a' - 'e'
 * You should see this error message:
@@ -219,7 +222,8 @@ If your RESULT is not separated by commas, with any whitespace or not in the ran
   Parameters: INDEX (must be a positive integer) res/[RESULT]
   Example: riskprofile 1 res/a,e,b,d,c,a,d,e
   ```
-  ![invalid risk profile 2](images/riskProfile-UG/invalidRiskProfile2.png)
+
+  <img src="images/riskProfile-UG/invalidRiskProfile2.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -272,11 +276,12 @@ A person can have any number of tags (including 0)
 * For example, for Robert Johnson (the example command), it would be:<br> `New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: `<br> Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
 * This is the original empty address book
 
-  ![add format](images/add-UG/addbefore.png)
+  <img src="images/add-UG/addbefore.png" alt="image" width="700" height="auto">
   
 * The new entry is displayed in your address book GUI
 
-  ![add format](images/add-UG/add_success.png)
+
+  <img src="images/add-UG/add_success.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
@@ -291,7 +296,7 @@ If a required parameter is missing (e.g., NAME, EMAIL)
   Clementi Ave 2, #02-25 t/friends t/owesMoney
   ```
 
-  ![add format](images/add-UG/addmissingparam.png)
+  <img src="images/add-UG/addmissingparam.png" alt="image" width="700" height="auto">
 
 If a parameter you provided is in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 
@@ -316,7 +321,7 @@ If a parameter you provided is in an invalid format (e.g., an invalid email addr
   
 <br>
 
-  ![add format](images/add-UG/addinvalidemail.png)
+  <img src="images/add-UG/addinvalidemail.png" alt="image" width="700" height="auto">
 
 If a parameter you enter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
 
@@ -326,7 +331,7 @@ If a parameter you enter is specified multiple times (e.g., --name John --name D
   Multiple values specified for the following single-valued field(s): n/
   ```
 
-  ![add format](images/add-UG/addduplicateparam.png)
+  <img src="images/add-UG/addduplicateparam.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -377,11 +382,11 @@ After cloning, the clone is the exact same as the original, other than a suffix 
   ```
 * This is the original address book with just one contact (John)
 
-  ![add format](images/clone-UG/clonebefore.png)
+  <img src="images/clone-UG/clonebefore.png" alt="image" width="700" height="auto">
 
 * The cloned entry is displayed in your address book GUI
 
-  ![clone format](images/clone-UG/clone_success.png)
+  <img src="images/clone-UG/clone_success.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
@@ -395,7 +400,7 @@ If no index, 0 or a negative index is entered next to the clone command
   positive integer).
   ```
 
-  ![clone format](images/clone-UG/cloneinvalidindex.png)
+  <img src="images/clone-UG/cloneinvalidindex.png" alt="image" width="700" height="auto">
 
 If the index you enter is greater than the current number of contacts in the address book
 
@@ -405,7 +410,7 @@ If the index you enter is greater than the current number of contacts in the add
   The person index provided is invalid.
   ```
 
-  ![clone format](images/clone-UG/clonelargeindex.png)
+  <img src="images/clone-UG/clonelargeindex.png" alt="image" width="700" height="auto">
 
 If the suffix of the person you cloned is either 0 or 2147483647 (MAX_INT)
 
@@ -418,7 +423,7 @@ If the suffix of the person you cloned is either 0 or 2147483647 (MAX_INT)
   2147483647, please consider editing the names of your contacts first.
   ```
 
-  ![clone format](images/clone-UG/clonesuffixerror.png)
+  <img src="images/clone-UG/clonesuffixerror.png" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -441,7 +446,7 @@ Useful in instances where you have no more need for a clients contact details.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command
 * `list` followed by `delete 2 5` deletes the 2nd and 5th person in the address book
 
-![delete format](images/delete-UG/deleteformat.png)
+  <img src="images/delete-UG/deleteformat.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 
@@ -455,7 +460,7 @@ Useful in instances where you have no more need for a clients contact details.
 * Size of address book is reduced by however many indexes were entered (i.e if you entered delete 1 2 3, as you entered 3 indexes, the size of the address book decreases by 3) 
 * GUI reflects that deleted contacts are now no longer there
 
-  ![delete format](images/delete-UG/deleteafter.png)
+  <img src="images/delete-UG/deleteafter.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
