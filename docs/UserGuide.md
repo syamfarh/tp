@@ -3,11 +3,8 @@ layout: page
 title: FAPro User Guide
 ---
 
+Table of contents
 --------------------------------------------------------------------------------------------------------------------
-
-* Table of Contents
-  {:toc}
-
 1. [Product Overview](#product-overview)
 2. [Quick Start](#quick-start)
 3. [Features](#features)
@@ -37,15 +34,21 @@ title: FAPro User Guide
 
 ## Product Overview
 
-The FAPro User Guide is designed to assist financial advisors (FAs) in optimising their client management. It aims to improve the quality of life for FAs by providing a comprehensive, user-centric resource that enables them to efficiently track large numbers of contacts and manage their clients in one central platform.
+The FAPro User Guide is designed to assist financial advisors (FAs) in optimising their client management. It aims to
+improve the quality of life for FAs by providing a comprehensive, user-centric resource that enables them to efficiently
+ track large numbers of contacts and manage their clients in one central platform.
 
-This guide is intended to empower FAs, with the knowledge and skills needed to make the most out of FAPro, ultimately enhancing their ability to provide financial services effectively.
+This guide is intended to empower FAs (who posses basic knowledge on Microsoft Excel, with the knowledge and skills
+needed to make the most out of FAPro, ultimately enhancing their ability to provide financial services effectively.
 
-FAPro allows FAs to effortlessly organise and maintain a large database of contacts. Keep detailed client profiles, track interactions, and categorise contacts for targeted engagement.
+FAPro allows FAs to effortlessly organise and maintain a large database of contacts. Keep detailed client profiles,
+track interactions, and categorise contacts for targeted engagement.
 
-This guide is organised into sections for easy reference. Use the table of contents to jump to specific topics, and utilise hyperlinks for quick access to related content.
+This guide is organised into sections for easy reference. Use the table of contents to jump to specific topics, and
+utilise hyperlinks for quick access to related content.
 
-Throughout the guide, we'll provide tips and best practices to help you make the most of FAPro's features and optimise your workflow. A glossary of key terms is included to ensure you understand the technical jargon used in FAPro.
+Throughout the guide, we'll provide tips and best practices to help you make the most of FAPro's features and optimise
+your workflow. A glossary of key terms is included to ensure you understand the technical jargon used in FAPro.
 
 ## Quick Start
 
@@ -473,7 +476,7 @@ If no index is placed after the delete command:
   delete: Deletes the person(s) identified by the index number used in the
   displayed person list. 
   Parameters: INDEXES (must be positive integers, separated by spaces)
-  Example: delete 1 3 5"
+  Example: delete 1 3 5
   ```
 
   ![delete format](images/delete-UG/deletenoindex.png)
@@ -1131,23 +1134,23 @@ _Known issues_ are some problems that are currently present in the program that 
 
 ## Command Summary
                                                                                                                                          
-| Action              | Format, Examples                                                                                                                                                                                                                      |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]… [appt/APPOINTMENT_DATE]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague appt/12-12-2023 08:30` |
-| **Calendar**        | `calendar`                                                                                                                                                                                                                            |
-| **Clone**           | `clone INDEX`<br> e.g. `clone 3`                                                                                                                                                                                                      |
-| **Clear**           | `clear`                                                                                                                                                                                                                               |
-| **Delete**          | `delete INDEXES`<br> e.g., `delete 1 2 3`                                                                                                                                                                                             |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]… [appt/APPOINTMENT_DATE]`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                      |
-| **Undo**            | `undo`                                                                                                                                                                                                                                |
-| **Redo**            | `redo`                                                                                                                                                                                                                                |
-| **Find**            | `find PREFIX KEYWORD` <br> e.g. `find n/ James Jake`, `find a/Tokyo Geylang`, `find appt/2040-01-01`                                                                                                                                  |
-| **List**            | `list`                                                                                                                                                                                                                                |
-| **Help**            | `help`                                                                                                                                                                                                                                |
-| **Questionnaire**   | `questionnaire`                                                                                                                                                                                                                       |
-| **Sort**            | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                                                                        |
-| **Risk Profile**    | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                                                                   |
-| **Exit**            | `exit`                                                                                                                                                                                                                                |
+| Action              | Format, Examples                                                                                                                                                                                                                    |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]… [appt/APPOINTMENT_DATE]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com o/SWE a/123 Clementi Rd, 1234665 t/friend t/colleague appt/12-12-2023 08:30` |
+| **Calendar**        | `calendar`                                                                                                                                                                                                                          |
+| **Clone**           | `clone INDEX`<br> e.g. `clone 3`                                                                                                                                                                                                    |
+| **Clear**           | `clear`                                                                                                                                                                                                                             |
+| **Delete**          | `delete INDEXES`<br> e.g., `delete 1 2 3`                                                                                                                                                                                           |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]… [appt/APPOINTMENT_DATE]`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                    |
+| **Undo**            | `undo`                                                                                                                                                                                                                              |
+| **Redo**            | `redo`                                                                                                                                                                                                                              |
+| **Find**            | `find PREFIX KEYWORD` <br> e.g. `find n/ James Jake`, `find a/Tokyo Geylang`, `find appt/2040-01-01`                                                                                                                                |
+| **List**            | `list`                                                                                                                                                                                                                              |
+| **Help**            | `help`                                                                                                                                                                                                                              |
+| **Questionnaire**   | `questionnaire`                                                                                                                                                                                                                     |
+| **Sort**            | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                                                                      |
+| **Risk Profile**    | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                                                                 |
+| **Exit**            | `exit`                                                                                                                                                                                                                              |
 
 ## Glossary
 
