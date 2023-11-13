@@ -27,7 +27,11 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=syamfarh&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**:
-    * To be added soon
+  * Set up GitHub team organisation and repository.
+  * Set up GitHub workflows and CI.
+  * Set up deploy as a Jekyll site.
+  * Set up Codecov.
+  * Added Codecov and CI status indicators to repository.
 
 * **Enhancements to existing features**:
   * Fix edit function to work with Occupation parameter
@@ -52,5 +56,5 @@ Given below are my contributions to the project.
         * 
 
 * **Community**:
-    * PRs reviewed (with non-trivial review comments): [\#11](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/11), [\#15](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/15), [\#65](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/65), [\#78](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/78), [\#86](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/86), [\#87](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/87), [\#88](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/88), [\#90](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/90), [\#99](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/99), [\#100](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/100), [\#105](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/105), [\#116](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/116), [\#127] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/127), [\#153] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/153), [\#204] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/204), [\#205] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/205), [\#206] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/206), [\#221] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/221), [`#222] (https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/222),  
+    * PRs reviewed (with non-trivial review comments): [\#11](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/11), [\#15](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/15), [\#65](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/65), [\#78](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/78), [\#86](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/86), [\#87](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/87), [\#88](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/88), [\#90](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/90), [\#99](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/99), [\#100](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/100), [\#105](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/105), [\#116](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/116), [\#127](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/127), [\#153](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/153), [\#204](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/204), [\#205](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/205), [\#206](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/206), [\#221](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/221), [`#222](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/222),  
 
