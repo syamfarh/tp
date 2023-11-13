@@ -1350,13 +1350,11 @@ Preconditions:
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The app should be responsive, with a maximum response time of 2 seconds for common user actions like searching for contacts or adding new ones.
 5. The user interface should be intuitive enough for users who are not IT-savvy.
-6. There should be user authentication and authorization mechanisms to ensure only authorized users can access and 
-    modify data.
-7. The app should not be required to handle the direct contacting of persons.
-8. Should have easy-to-read and detailed User & Developer Guides.
-9. Codebase should be structured using singular coding standard and style.
-10. Testing should be implemented for easier maintenance.
-11. The app should be designed to handle unexpected input and edge cases gracefully, without crashing the system.
+6. The app should not be required to handle the direct contacting of persons.
+7. Should have easy-to-read and detailed User & Developer Guides.
+8. Codebase should be structured using singular coding standard and style.
+9. Testing should be implemented for easier maintenance.
+10. The app should be designed to handle unexpected input and edge cases gracefully, without crashing the system.
 
 
 
