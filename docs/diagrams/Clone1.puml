@@ -4,7 +4,7 @@ skinparam ClassFontColor #000000
 skinparam ClassBorderColor #000000
 skinparam ClassBackgroundColor #FFFFAA
 
-title After command "clone 1"
+title Final state
 
 package AddressBook {
     class State1 as "<u>John:Person</u>"
