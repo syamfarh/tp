@@ -3,40 +3,39 @@ layout: page
 title: Developer Guide
 ---
 
-FAPro - Developer Guide
+Table of contents
 --------------------------------------------------------------------------------------------------------------------
 1. [Setting up](#setting-up-getting-started)
 2. [Design](#design)
     * [Architecture](#architecture)
-    * [Ui component](#ui-component)
+    * [UI component](#ui-component)
     * [Logic component](#logic-component)
     * [Model component](#model-component)
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 3. [Implementation](#implementation)
     * [Add feature](#add-feature)
-    * [Edit feature]()
+    * [Edit feature](#edit-feature)
     * [Clone feature](#clone-feature)
     * [Delete feature](#delete-feature)
     * [Undo feature](#undo-feature)
-    * [Redo feature]()
+    * [Redo feature](#redo-feature)
     * [Find feature](#find-feature)
     * [Sort feature](#sort-feature)
     * [Questionnaire feature](#questionnaire-feature)
-    * [Risk profile feature](#risk-profile-feature)
+    * [Risk Profile feature](#risk-profile-feature)
     * [Calendar feature](#calendar-feature)
     * [Help feature](#help-feature)
-4. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+4. [Documentation, Logging, Testing, Configuration, Dev-ops](#documentation-logging-testing-configuration-dev-ops)
 5. [Appendix A: Product Scope](#appendix-a-product-scope)
 6. [Appendix B: User Stories](#appendix-b-user-stories)
 7. [Appendix C: Use Cases](#appendix-c-use-cases)
 8. [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
 9. [Appendix E: Glossary](#appendix-e-glossary)
-10. [Appendix F: Instructions for manual testing](#appendix-f-instructions-for-manual-testing)
+10. [Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)
 11. [Appendix G: Future Implementations](#appendix-g-future-implementations)
-12. [Appendix H: Effort](#appendix-h-effort)
-13. [Appendix I: Planned Enhancements](#appendix-i-planned-enhancements)
-14. [Appendix J: Acknowledgement](#appendix-j-acknowledgement)
+13. [Appendix H: Planned Enhancements](#appendix-i-planned-enhancements)
+14. [Appendix I: Acknowledgement](#appendix-j-acknowledgement)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -206,7 +205,7 @@ Given below is an example usage scenario and how the add mechanism behaves at ea
 
 Step 1: The user launches the application. The application initializes various lists and data structures.
 
-![Add0](images/Add0.png)
+![Add0](images/add0.png)
 
 As seen in the object diagram, the address book is currently empty.
 
@@ -231,9 +230,9 @@ Step 3. `AddCommand#execute` then checks to ensure that the returned `Person` do
 book. If he does already exist in the address book, an exception is returned. On the other hand, if he does not, he is
 then added to the address book by `Model#addPerson`.
 
-![AddActivityDiagram0](images/AddActivityDiagram0.png)
+![AddActivityDiagram0](images/AddActivityDiagram1.png)
 
-![Add1](images/Add1.png)
+![Add1](images/add1.png)
 
 Upon successfully adding the person, the add success message is returned to the user, as depicted in the
 User Guide.
@@ -252,6 +251,39 @@ User Guide.
     * Pros: Fast and straightforward for multiple deletions.
     * Cons: Lacks feedback on whether the persons were added, which may be useful for confirmation and may result in
       duplicate entries.
+
+### Edit feature
+
+#### Implementation
+
+The `edit` feature allows user to edit a person's data in the address book by providing the prefix and the changed value.
+
+Edit implements the following operations:
+* `EditCommand#execute`
+* `EditCommand#createEditedPerson`
+
+EditCommand also contains a static class `EditPersonDescriptor` that stores the details to edit the person with.
+
+Given below is an example usage scenario and how the edit mechanism behaves at each step.
+
+Step 1. The user launches the application for the first time.
+
+Step 2. The user executes `list` to see what Persons are available in the address book. Initially, only John and
+James are in the address book.
+
+![Edit0](images/Clone0.png)
+
+Step 3. The user executes `edit 1 n/ Greg` to edit the person's name at index 1 of the address book, John. 
+* The `EditCommandParser#parse` will create a new `EditPersonDescriptor` to store the edited value of a person.
+In this case, the new name of the person is stored in `EditPersonDescriptor`.
+<br>
+* `EditCommandParser#parse` will return a new `EditCommand` object with the parameter index, in this case 1, and the `EditPersonDescriptor` object.
+* `EditCommand#execute` will then compare if the `EditPersonDescriptor` name already exist in the contact list. If it already exist, it will throw an exception. In this case, it does not. <br>
+* `EditCommand#execute` will call `model#setPerson` to replace the current person with the newly edited person at the index number.
+
+![Edit0](images/Edit1.png)
+
+![Edit0](images/EditActivityDiagram.png)
 
 ### Clone feature
 
@@ -472,8 +504,8 @@ Step 1. The user launches the application for the first time. The `ArrayList`s `
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram1.png)
 
-Step 2. The user executes `delete 1 2` command to delete the 1st and 2nd person in the address book. The following 
-steps are repeated twice, since 2 persons are deleted.
+Step 2. The user executes `delete 1 2` command to delete the 1st and 2nd person (John and Greg) in the address book. 
+The following steps are repeated twice, since 2 persons are deleted.
 * The `delete` command calls `Model#storePreviousUndoableCommand(String)`, adding the command as a String into 
 `previousUndoableCommands`, and also calls `Model#storeDeletedPerson(Person)`, adding the Person into 
 `deletedPersons`.
@@ -490,12 +522,12 @@ The following sequence diagram shows how the `delete` operation works (only impo
 
 <div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should 
 end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
-
 </div>
 
-:information_source: **Note:** If an undoable command fails its execution, it will not call 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If an undoable command fails its execution, it will not call 
 `Model#storePreviousUndoableCommand(String)` so nothing is stored in `previousUndoableCommands`, and `ModelManager` 
 is unchanged.
+</div>
 
 Step 3. The user now decides that deleting the person was a mistake, and decides to undo that action by executing 
 the `undo` command. The `undo` command will call `model#getPreviousUndoableCommand`, which gets the most recent 
@@ -510,7 +542,11 @@ delete commands from `previousUndoableCommands` and deleted persons from `delete
 
 The following sequence diagram shows how the `undo` operation works.
 
-![ModelManagerStateDiagram](images/UndoSequenceDiagramForDelete.png)
+![UndoSequenceDiagram](images/UndoSequenceDiagramForDelete.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 Step 4. The user now decides to execute the command `list`. As this command is not an undoable command, 
 `Model#storePreviousUndoableCommand(String)` and other storing operations are not called, so `ModelManager` remains 
@@ -562,12 +598,15 @@ After any command that modifies the address book is executed (I.e. `add`, `clone
 
 Given below is an example usage scenario and how the redo mechanism behaves at each step.
 
-Step 0: The user launches the application and deletes the first 2 contacts. (Refer to the usage scenario of the 
-undo mechanism for these steps) At the launch of the application, the `ArrayList`s `previousUndoableCommands`, 
+Step 0: The user launches the application and deletes the first 2 contacts, with names John and Greg. (Refer to the 
+usage scenario of the undo mechanism for these steps) At the launch of the application, the `ArrayList`s `previousUndoableCommands`, 
 `redoableStatelist` and `undoableStateList` are initialized as a blank `ArrayList`. Then, 2 delete commands are 
 added into the `previousUndoableCommands` after the deletion of the first 2 contacts.
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram3.png)
+
+Now, John and Greg are deleted.
+
 ![AddressBookStateDiagram](images/AddressBookState1.png)
 
 Step 1: The user now decides that deleting the person was a mistake, and decides to undo that action by executing
@@ -576,11 +615,18 @@ book before the `undo` is committed into the `redoableStateList`. Furthermore, `
 ` is called twice, removing the delete commands.
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram4.png)
+
+Now, John and Greg are back in the address book.
+
 ![AddressBookStateDiagram](images/AddressBookState2.png)
 
 The following sequence diagram shows how the `undo` operation works when undoing the `delete` command.
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram1.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RedoCommand` should
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 Step 2: The user now decides that undoing was a mistake, and decides to redo that action by executing the `redo` 
 command. The `redo` command will call `Model#addToUndoableStateList()`, adding the state of the address book before 
@@ -590,11 +636,18 @@ restoring the current address book to the redone state (I.e. the address book af
 contacts).
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram5.png)
+
+Now, John and Greg are deleted.
+
 ![AddressBookStateDiagram](images/AddressBookState1.png)
 
 The following sequence diagram shows how the `redo` operation works.
 
 ![RedoSequenceDiagram](images/RedoSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RedoCommand` should
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
 
 Step 3: The user now decides that redoing was a mistake, again! Hence, the user decides to undo that action once 
 again, by executing the `undo` command. The `undo` command will call `UndoCommand#executeUndoRedo`, which calls 
@@ -604,13 +657,21 @@ again, by executing the `undo` command. The `undo` command will call `UndoComman
 to the undone state (I.e. the address book before the deletion of the first 2 contacts).
 
 ![ModelManagerStateDiagram](images/ModelManagerStateDiagram4.png)
+
+Now, John and Greg are back in the address book.
+
 ![AddressBookStateDiagram](images/AddressBookState2.png)
 
 The following sequence diagram shows how the `undo` operation works when undoing the `redo` command.
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram2.png)
 
-:information_source: **Note:** From here on, it is possible to continuously redo and undo the same command indefinitely.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+</div>
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** From here on, it is possible to continuously redo and undo the same command indefinitely.
+</div>
 
 Step 4: The user now decides to execute the command `clone 1`. `Model#resetRedoableStateList()` and 
 `Model#resetUndoableStateList()` are called, re-initialising `redoableStateList` and `undoableStateList` to blank 
@@ -953,7 +1014,7 @@ Then it will trigger `MainWindow#handleHelp()`. If the help window is not showin
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, Dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -981,7 +1042,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 
 
-## **Appendix B: User stories**
+## **Appendix B: User Stories**
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -1001,7 +1062,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | clumsy financial advisor         | be able to undo commands done previously such as delete, clear, edit, add | undo my mistakes made with a simple command, rather than having to do multiple commands | 
 
 
-## **Appendix C: Use cases**
+## **Appendix C: Use Cases**
 
 (For all use cases below, the **System** is the `FAPro` and the **Actor** is the `Financial Advisor`, unless specified otherwise)
 
@@ -1285,18 +1346,17 @@ Preconditions:
 ## **Appendix D: Non-Functional Requirements**
 
 1. Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2. Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
+2. Should be able to hold up to 100 persons without a noticeable sluggishness in performance for typical usage.
 3. A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
 4. The app should be responsive, with a maximum response time of 2 seconds for common user actions like searching for contacts or adding new ones.
 5. The user interface should be intuitive enough for users who are not IT-savvy.
 6. There should be user authentication and authorization mechanisms to ensure only authorized users can access and 
     modify data.
 7. The app should not be required to handle the direct contacting of persons.
-8. Should have regular backups of user data and a reliable mechanism for data recovery.
-9. Should have easy-to-read and detailed User & Developer Guides.
-10. Codebase should be structured using singular coding standard and style.
-11. Testing should be implemented for easier maintenance.
-12. The app should be designed to handle unexpected input and edge cases gracefully, without crashing the system.
+8. Should have easy-to-read and detailed User & Developer Guides.
+9. Codebase should be structured using singular coding standard and style.
+10. Testing should be implemented for easier maintenance.
+11. The app should be designed to handle unexpected input and edge cases gracefully, without crashing the system.
 
 
 
@@ -1308,10 +1368,11 @@ Preconditions:
 * **Parameter**: Values input by you. e.g. NAME, OCCUPATION, ADDRESS
 * **Positive Integer**: An integer that is positive (i.e. greater than 0). Please note that we are excluding 0 as a positive integer.
 * **Prefix**: Word that is added in front of parameter. e.g. n/, o/, a/
-* **Suffix**: Number that is at the end of a persons name e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present |
+* **Suffix**: Number that is at the end of a persons name <br/> e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present. <br/> Please note that for contacts where the whole name is an integer (i.e 123 instead on John), there is no suffix as 123 will be treated as their name.
+
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix F: Instructions for manual testing**
+## **Appendix F: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -1320,7 +1381,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
 
@@ -1419,6 +1480,38 @@ testers are expected to do more *exploratory* testing.
     4. Other incorrect edit commands to try: `edit 1 n/`, `edit 0 n/ John Doe`, `edit 1 n/ John-Doe`
        Expected: Similar to previous
 
+### Finding a person
+
+1. Find a person by name
+
+   1. Prerequisites: Delete `addressbook.json` file in `data` subfolder.
+   2. Test case: `find n/charlotte roy`<br>
+      Expected: "Charlotte Oliveiro" and "Roy Balakrishnan" contacts are shown.
+   3. Test case: `find n/`<br>
+      Expected: No change in contacts shown. Error details of invalid command format shown in the status message. 
+
+2. Find a person by address
+
+   1. Prerequisites: Same as "Find person by name" portion above.
+   2. Test case: `find a/geylang tampines`<br>
+      Expected: "Alex Yeoh" and "Irfan Ibrahim" contacts are shown.
+   3. Test case: `find a/`<br>
+      Expected: No change in contacts shown. Error details of invalid command format shown in the status message.
+
+3. Find a person by appointment date
+
+   1. Prerequisites: Same as "Find person by name" portion above. Then, use `list` command to list out
+      all the contacts. Then, enter `edit 1 appt/2024-01-01 10:00`, `edit 3 appt/2024-01-01 13:00` and 
+      `edit 5 appt/2024-01-01 16:00`.
+   2. Test case: `find appt/2024-01-01`<br>
+      Expected: "Alex Yeoh", "Charlotte Oliveiro" and "Irfan Ibrahim" contacts are shown.
+   3. Test case: `find appt/`<br>
+      Expected: No change in contacts shown. Error details of invalid command format shown in the status message.
+   4. Test case: `find appt/1999-01-01`<br>
+      Expected: No change in contacts shown. Error details of invalid date input is shown in the status message.
+   5. Test case: `find appt/hello`<br>
+      Expected: No change in contacts shown. Error details of invalid date format is shown in the status message.
+
 ### Sorting contact list
 
 1. Sorting contact list by NAME or APPOINTMENT_DATE prefix in ascending order
@@ -1426,6 +1519,35 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: List all persons using the `list` command. Multiple persons in the list. The default order of contact list is by APPOINTMENT_DATE prefix.
    2. Test case: `sort n/` <br>
       Expected: The contact list is ordered by alphabetical order of the NAME prefix. Details of the number of contacts listed is shown in the result box.
+
+### Undo and redo
+
+1. Undo changes to address book done in the current session
+
+   1. Prerequisites: Launch the app for the first time, `add` a contact, `clone` another contact, `clear` the address 
+      book
+   2. Test case: `undo` <br>
+      Expected: All contacts are added back, including the cloned and added contact
+   3. Test case: `undo` again <br>
+      Expected: Cloned contact is deleted
+   4. Test case: `undo` again <br>
+      Expected: Added contact is deleted and address book is back to the initial state
+   5. Test case: `undo` again <br>
+      Expected: Address book is unchanged and error details are shown in the status message
+
+2. Redo an undo command, and undo again
+
+   1. Prerequisites: Launch the app for the first time, `add` a contact, `undo` 
+   2. Test case: `redo` <br>
+      Expected: Added contact is back in the address book
+   3. Test case: `redo` again <br>
+      Expected: Address book is unchanged and error details are shown in the status message
+   4. Test case: `undo` <br>
+      Expected: Added contact is deleted and not in the address book
+   5. Test case: `undo` <br>
+      Expected: Address book is unchanged and error details are shown in the status message
+
+
 
 ## **Appendix G: Future Implementations**
 
@@ -1435,11 +1557,7 @@ testers are expected to do more *exploratory* testing.
 * Ability to store multiple appointment dates for individual clients and an additional window that displays the appointments of these clients.
 * Provide financial advisors with the ability to dynamically customize the set of risk assessment questions and their corresponding grading criteria.
 
-## **Appendix H: Effort**
-
-{to be added}
-
-## **Appendix I: Planned Enhancements**
+## **Appendix H: Planned Enhancements**
 
 * The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
 * The application will start to experience lag after prolonged usage. This is most likely it is due to the extra storing of persons whenever a command modifies the address book. As extra memory are needed to be dedicated to such storage, this can be a reason for the lag after a large number (lets say 100) commands that modify the address book. In the future, we might plan to limit the amount of undoable commands that is allowed to reduce the storage load of the application.
@@ -1447,7 +1565,10 @@ testers are expected to do more *exploratory* testing.
 * We plan to enhance the error handling for addition of phone numbers such that there will be a hard limit of integers that users are able to input.
 * We plan to restrict the user input for `riskprofile` command to only accept one **res/** prefix along its result.
 * We plan to enhance the error handling related to invalid index for `riskprofile` command to give more specific error message to the user.
+* The current redo feature does not allow the undoing of a previous redo command after a command that modifies the 
+  address book is executed. Such commands are `add`, `clone`, `edit`, `delete` and `clear`. We plan to lift this restriction 
+  in the future.
 
-## **Appendix J: Acknowledgement**
+## **Appendix I: Acknowledgement**
 
 * The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)

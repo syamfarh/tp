@@ -40,7 +40,12 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=glenngnng&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
 * **Project management**:
-  * (fill in later)
+  * Set up milestones
+  * Assigned milestones and labels to pull requests 
+  * Reviewed & merged pull requests
+  * Updated issue tracker & fixed issues relating to PE-D
+  * Weekly calls (1-4x a week, 2+ hours each)
+  * Followed forking work flow
 
 
 * **Enhancements to existing features**:
@@ -60,6 +65,16 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added implementation of the `undo` feature.
     * Added implementation of the `redo` feature.
+    * Added instructions for manual testing of `undo` and `redo` feature.
+    * Added planned enhancement for `undo` and `redo` feature.
+  * Significant Diagrams:
+    * ![DeleteSequenceDiagram](../images/DeleteSequenceDiagramForUndo.png)
+    * ![UndoSequenceDiagram](../images/UndoSequenceDiagramForDelete.png)
+    * ![UndoSequenceDiagram](../images/UndoSequenceDiagram1.png)
+    * ![RedoSequenceDiagram](../images/RedoSequenceDiagram.png)
+    * ![UndoSequenceDiagram](../images/UndoSequenceDiagram2.png)
+
+
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments):
@@ -68,8 +83,23 @@ Given below are my contributions to the project.
     * Pull Request [\#111](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/111)
     * Pull Request [\#89](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/89)
     * Pull Request [\#73](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/73)
-    * Pull request [\#67](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/67)
-    * Pull request [\#51](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/54)
+    * Pull Request [\#67](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/67)
+    * Pull Request [\#51](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/54)
+  * Contributed to forum discussion:
+    * Pull Request [\#354](https://github.com/nus-cs2103-AY2324S1/forum/issues/354)
+    * Pull Request [\#439](https://github.com/nus-cs2103-AY2324S1/forum/issues/439)
+  * Bugs reported:
+    * Issue [\#190](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/190)
+    * Issue [\#186](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/186)
+    * Issue [\#180](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/180)
+    * Issue [\#177](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/177)
+    * Issue [\#172](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/172)
+    * Issue [\#171](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/171)
+    * Issue [\#166](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/166)
+    * Issue [\#161](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/161)
+    * Issue [\#160](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/160)
+    * Issue [\#158](https://github.com/AY2324S1-CS2103T-F12-1/tp/issues/158)
+
 
 
 

@@ -3,13 +3,10 @@ layout: page
 title: FAPro User Guide
 ---
 
+Table of contents
 --------------------------------------------------------------------------------------------------------------------
-
-* Table of Contents
-  {:toc}
-
 1. [Product Overview](#product-overview)
-2. [Quick start](#quick-start)
+2. [Quick Start](#quick-start)
 3. [Features](#features)
    * [help](#viewing-help-help)
    * [questionnaire](#viewing-risk-assessment-questionnaire-questionnaire)
@@ -29,7 +26,7 @@ title: FAPro User Guide
 4. [Troubleshooting](#troubleshooting)
    * [Technical Questions](#technical-questions)
    * [Common Questions](#common-questions)
-   * [Known issues](#known-issues)
+   * [Known Issues](#known-issues)
 5. [Command summary](#command-summary)
 6. [Glossary](#glossary)
 
@@ -37,17 +34,23 @@ title: FAPro User Guide
 
 ## Product Overview
 
-The FAPro User Guide is designed to assist financial advisors (FAs) in optimising their client management. It aims to improve the quality of life for FAs by providing a comprehensive, user-centric resource that enables them to efficiently track large numbers of contacts and manage their clients in one central platform.
+The FAPro User Guide is designed to assist financial advisors (FAs) in optimising their client management. It aims to
+improve the quality of life for FAs by providing a comprehensive, user-centric resource that enables them to efficiently
+ track large numbers of contacts and manage their clients in one central platform.
 
-This guide is intended to empower FAs, with the knowledge and skills needed to make the most out of FAPro, ultimately enhancing their ability to provide financial services effectively.
+This guide is intended to empower FAs (who posses basic knowledge on Microsoft Excel, with the knowledge and skills
+needed to make the most out of FAPro, ultimately enhancing their ability to provide financial services effectively.
 
-FAPro allows FAs to effortlessly organise and maintain a large database of contacts. Keep detailed client profiles, track interactions, and categorise contacts for targeted engagement.
+FAPro allows FAs to effortlessly organise and maintain a large database of contacts. Keep detailed client profiles,
+track interactions, and categorise contacts for targeted engagement.
 
-This guide is organised into sections for easy reference. Use the table of contents to jump to specific topics, and utilise hyperlinks for quick access to related content.
+This guide is organised into sections for easy reference. Use the table of contents to jump to specific topics, and
+utilise hyperlinks for quick access to related content.
 
-Throughout the guide, we'll provide tips and best practices to help you make the most of FAPro's features and optimise your workflow. A glossary of key terms is included to ensure you understand the technical jargon used in FAPro.
+Throughout the guide, we'll provide tips and best practices to help you make the most of FAPro's features and optimise
+your workflow. A glossary of key terms is included to ensure you understand the technical jargon used in FAPro.
 
-## Quick start
+## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
@@ -116,12 +119,12 @@ Discover our basic commands right away. If you want to explore other commands, F
   ```
   Opened help window.
   ```
-  
-  ![help_format](images/help-UG/help_success.png)
+
+  <img src="images/help-UG/help_success.png" alt="image" width="500" height="auto">
 
 * You will see a pop-up window with basic commands and a link to FAPro's user guide for other commands
 
-  ![help_window](images/help-UG/helpWindow.png)
+  <img src="images/help-UG/helpWindow.png" alt="image" width="500" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -137,11 +140,12 @@ Show you questions that are used for generating client risk profile levels.
    ```
    Opened questionnaire window.
    ```
-  ![questionnaire format](images/questionnaire-UG/questionnaire_success.png)
+
+  <img src="images/questionnaire-UG/questionnaire_success.png" alt="image" width="700" height="auto">
 
 * You will see a pop-up window with risk assessment multiple-choice questions, including the grading and risk profile categories criteria
 
-  ![questionnaire window](images/questionnaire-UG/questionnaireWindow.png)
+  <img src="images/questionnaire-UG/questionnaireWindow.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -156,7 +160,7 @@ and adds it to their contact.
 #### Example commands:
 * `riskprofile 3 res/a,b,c,d,e,e,b,c`
 
-  ![riskprofile format](images/riskProfile-UG/riskProfileFormat.png)
+  <img src="images/riskProfile-UG/riskProfileFormat.png" alt="image" width="700" height="auto">
 
   <div markdown="span" class="alert alert-primary">:bulb: **Tip:**
 
@@ -189,7 +193,8 @@ and adds it to their contact.
   <span style="background-color:#FF6600; color:white;">**Moderately High**</span>,
   <span style="background-color:#F44336; color:white;">**High**</span>
 
-  ![riskprofile result](images/riskProfile-UG/riskProfileResult.png)
+
+  <img src="images/riskProfile-UG/riskProfileResult.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 If your RESULT is empty or INDEX is negative integers
@@ -202,8 +207,10 @@ If your RESULT is empty or INDEX is negative integers
   Parameters: INDEX (must be a positive integer) res/[RESULT]
   Example: riskprofile 1 res/a,e,b,d,c,a,d,e
   ```
-  ![invalid risk profile 1](images/riskProfile-UG/invalidRiskProfile1.png)
-  ![invalid risk profile 3](images/riskProfile-UG/invalidRiskProfile3.png)
+
+  <img src="images/riskProfile-UG/invalidRiskProfile1.png" alt="image" width="700" height="auto">  
+
+  <img src="images/riskProfile-UG/invalidRiskProfile3.png" alt="image" width="700" height="auto">  
 
 If your RESULT is not separated by commas, with any whitespace or not in the range of 'a' - 'e'
 * You should see this error message:
@@ -215,7 +222,8 @@ If your RESULT is not separated by commas, with any whitespace or not in the ran
   Parameters: INDEX (must be a positive integer) res/[RESULT]
   Example: riskprofile 1 res/a,e,b,d,c,a,d,e
   ```
-  ![invalid risk profile 2](images/riskProfile-UG/invalidRiskProfile2.png)
+
+  <img src="images/riskProfile-UG/invalidRiskProfile2.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -268,11 +276,12 @@ A person can have any number of tags (including 0)
 * For example, for Robert Johnson (the example command), it would be:<br> `New person added: Robert Johnson; Phone: 55512345; Email: robertj@email.com; Occupation: Hairdresser; Address: 789 Oak Street, Suite 10; AppointmentDate: ; Tags: `<br> Please note that both Appointment Date and Tags are empty as they are not necessary for adding a person
 * This is the original empty address book
 
-  ![add format](images/add-UG/addbefore.png)
+  <img src="images/add-UG/addbefore.png" alt="image" width="700" height="auto">
   
 * The new entry is displayed in your address book GUI
 
-  ![add format](images/add-UG/add_success.png)
+
+  <img src="images/add-UG/add_success.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
@@ -287,7 +296,7 @@ If a required parameter is missing (e.g., NAME, EMAIL)
   Clementi Ave 2, #02-25 t/friends t/owesMoney
   ```
 
-  ![add format](images/add-UG/addmissingparam.png)
+  <img src="images/add-UG/addmissingparam.png" alt="image" width="700" height="auto">
 
 If a parameter you provided is in an invalid format (e.g., an invalid email address), an error message should indicate the invalid format.
 
@@ -312,7 +321,7 @@ If a parameter you provided is in an invalid format (e.g., an invalid email addr
   
 <br>
 
-  ![add format](images/add-UG/addinvalidemail.png)
+  <img src="images/add-UG/addinvalidemail.png" alt="image" width="700" height="auto">
 
 If a parameter you enter is specified multiple times (e.g., --name John --name Doe), an error should indicate that the parameter can only be specified once.
 
@@ -322,7 +331,7 @@ If a parameter you enter is specified multiple times (e.g., --name John --name D
   Multiple values specified for the following single-valued field(s): n/
   ```
 
-  ![add format](images/add-UG/addduplicateparam.png)
+  <img src="images/add-UG/addduplicateparam.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -373,11 +382,11 @@ After cloning, the clone is the exact same as the original, other than a suffix 
   ```
 * This is the original address book with just one contact (John)
 
-  ![add format](images/clone-UG/clonebefore.png)
+  <img src="images/clone-UG/clonebefore.png" alt="image" width="700" height="auto">
 
 * The cloned entry is displayed in your address book GUI
 
-  ![clone format](images/clone-UG/clone_success.png)
+  <img src="images/clone-UG/clone_success.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
@@ -391,7 +400,7 @@ If no index, 0 or a negative index is entered next to the clone command
   positive integer).
   ```
 
-  ![clone format](images/clone-UG/cloneinvalidindex.png)
+  <img src="images/clone-UG/cloneinvalidindex.png" alt="image" width="700" height="auto">
 
 If the index you enter is greater than the current number of contacts in the address book
 
@@ -401,7 +410,7 @@ If the index you enter is greater than the current number of contacts in the add
   The person index provided is invalid.
   ```
 
-  ![clone format](images/clone-UG/clonelargeindex.png)
+  <img src="images/clone-UG/clonelargeindex.png" alt="image" width="700" height="auto">
 
 If the suffix of the person you cloned is either 0 or 2147483647 (MAX_INT)
 
@@ -414,7 +423,7 @@ If the suffix of the person you cloned is either 0 or 2147483647 (MAX_INT)
   2147483647, please consider editing the names of your contacts first.
   ```
 
-  ![clone format](images/clone-UG/clonesuffixerror.png)
+  <img src="images/clone-UG/clonesuffixerror.png" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -437,7 +446,7 @@ Useful in instances where you have no more need for a clients contact details.
 * `find Betsy` followed by `delete 1` deletes the 1st person in the results of the `find` command
 * `list` followed by `delete 2 5` deletes the 2nd and 5th person in the address book
 
-![delete format](images/delete-UG/deleteformat.png)
+  <img src="images/delete-UG/deleteformat.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 
@@ -451,7 +460,7 @@ Useful in instances where you have no more need for a clients contact details.
 * Size of address book is reduced by however many indexes were entered (i.e if you entered delete 1 2 3, as you entered 3 indexes, the size of the address book decreases by 3) 
 * GUI reflects that deleted contacts are now no longer there
 
-  ![delete format](images/delete-UG/deleteafter.png)
+  <img src="images/delete-UG/deleteafter.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
@@ -462,7 +471,7 @@ If any of the entered indexes are invalid:
   The person index provided is invalid.
   ```
 
-  ![delete format](images/delete-UG/deletewrongindex.png)
+  <img src="images/delete-UG/deletewrongindex.png" alt="image" width="700" height="auto">
 
 If no index is placed after the delete command:
 * You should see this error message:
@@ -472,10 +481,10 @@ If no index is placed after the delete command:
   delete: Deletes the person(s) identified by the index number used in the
   displayed person list. 
   Parameters: INDEXES (must be positive integers, separated by spaces)
-  Example: delete 1 3 5"
+  Example: delete 1 3 5
   ```
 
-  ![delete format](images/delete-UG/deletenoindex.png)
+  <img src="images/delete-UG/deletenoindex.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -494,7 +503,7 @@ Show a list of all your contacts.
 
 * You will see a list of all your contacts with their details
 
-  ![list result](images/list-UG/listResult.png)
+  <img src="images/list-UG/listResult.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -518,8 +527,10 @@ Edits an existing client's parameter in FAPro.
 #### Example commands:
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags
+*  `edit 2 n/ Jamus Lee e/jamusless@example.com` Edits the name of the 2nd person to be `Jamus Lee` and email 
+   address of the 2nd person to be `jamusless@example.com`
 
-  ![edit format](images/edit-UG/editformat.png)
+  <img src="images/edit-UG/editformat.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 * You should see this message:
@@ -530,7 +541,7 @@ Edits an existing client's parameter in FAPro.
   ```
 * The new entry is displayed in the address book GUI.
 
-  ![edit format](images/edit-UG/editresult.png)
+  <img src="images/edit-UG/editresult.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
@@ -545,7 +556,7 @@ If a required parameter is missing (e.g., name, email), an error message should 
   Example: edit 1 p/91234567 e/johndoe@example.com
   ```
 
-  ![edit format](images/edit-UG/editfailure.png)
+  <img src="images/edit-UG/editfailure.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -578,7 +589,7 @@ Finds persons based on the given keywords.
 
 #### _Find by name:_
 
-![find_name format](images/find-UG/find_n0.png)
+  <img src="images/find-UG/find_n0.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 * You should see this message: 
@@ -588,11 +599,11 @@ Finds persons based on the given keywords.
   where X is the number of contacts listed
 * The list of contacts whose names contain the input name is shown
 
-  ![find_name format](images/find-UG/find_n1.png)
+  <img src="images/find-UG/find_n1.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 If no name is input after the find command, an error message explaining the error will be shown, 
-reminding you to follow the correct input format
+reminding you to follow the correct input format.
 
 * You should see this error message:
 
@@ -602,13 +613,12 @@ reminding you to follow the correct input format
   numbers.
   ```
 
-![find_name format](images/find-UG/find_n2.png)
-
+  <img src="images/find-UG/find_n2.png" alt="image" width="700" height="auto">
 
 #### _Find by address:_
 
 
-![find_add format](images/find-UG/find_a0.png)
+  <img src="images/find-UG/find_a0.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 
@@ -619,11 +629,11 @@ reminding you to follow the correct input format
   where X is the number of contacts listed
 * The list of contacts whose address contain the input address is shown
 
-  ![find_add format](images/find-UG/find_a1.png)
+  <img src="images/find-UG/find_a1.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 If no address is input after the find command, an error message explaining the error will be shown,
-reminding you to follow the correct input format
+reminding you to follow the correct input format.
 
 * You should see this error message:
 
@@ -633,13 +643,13 @@ reminding you to follow the correct input format
   numbers.
   ```
 
-  ![find_add format](images/find-UG/find_a2.png)
+  <img src="images/find-UG/find_a2.png" alt="image" width="700" height="auto">
 
 
 #### _Find by appointment date:_
 
 
-![find_appt format](images/find-UG/find_appt0.png)
+  <img src="images/find-UG/find_appt0.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 * You should see this message:
@@ -649,11 +659,11 @@ reminding you to follow the correct input format
   where X is the number of contacts listed
 * The list of contacts whose appointment date matches the input date is shown
 
-  ![find_appt format](images/find-UG/find_appt1.png)
+  <img src="images/find-UG/find_appt1.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 If no date is input after the find command, an error message explaining the error will be shown,
-reminding you to follow the correct input format
+reminding you to follow the correct input format.
 
 * You should see this error message:
   ```
@@ -661,10 +671,10 @@ reminding you to follow the correct input format
   matches the specified input date and displays them as a list with index numbers.
   ```
 
-  ![find_appt format](images/find-UG/find_appt2.png)
+  <img src="images/find-UG/find_appt2.png" alt="image" width="700" height="auto">
 
 If an input date does not follow the accepted format, an error message explaining the error will be shown,
-reminding you to follow the correct input format
+reminding you to follow the correct input format.
 
 * You should see this error message:
   ```
@@ -672,17 +682,17 @@ reminding you to follow the correct input format
   or [yyyy-mm-dd].
   ```
 
-  ![find_appt format](images/find-UG/find_appt3.png)
+  <img src="images/find-UG/find_appt3.png" alt="image" width="700" height="auto">
 
 If an input date is a past date (a date before the current date), an error message explaining the error will be shown, 
-reminding you to input a valid date
+reminding you to input a valid date.
 
 * You should see this error message:
   ```
   Appointment Date should be after the current date.
   ```
 
-  ![find_appt format](images/find-UG/find_appt4.png)
+  <img src="images/find-UG/find_appt4.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -719,7 +729,7 @@ For undoing an add command:
 
 * Add a contact
 
-  ![undo format](images/undo-UG/after_add.png)
+  <img src="images/undo-UG/after_add.png" alt="image" width="700" height="auto">
 
 * Undo
 * You should see this message:
@@ -730,13 +740,13 @@ For undoing an add command:
   where X are the details of the person who was just added, and now deleted
 * GUI reflects that the most recently added contact is deleted
 
-  ![undo format](images/undo-UG/after_add_undo.png)
+  <img src="images/undo-UG/after_add_undo.png" alt="image" width="700" height="auto">
 
 For undoing a clone command:
 
 * Clone a contact
 
-  ![undo format](images/undo-UG/after_clone_1.png)
+  <img src="images/undo-UG/after_clone_1.png" alt="image" width="700" height="auto">
 
 * Undo
 * You should see this message: 
@@ -747,13 +757,13 @@ For undoing a clone command:
   where X are the details of the person who was just cloned, and now deleted
 * GUI reflects that the most recently cloned contact is deleted
 
-  ![undo format](images/undo-UG/after_clone_undo.png)
+  <img src="images/undo-UG/after_clone_undo.png" alt="image" width="700" height="auto">
 
 For undoing a delete command:
 
 * Delete a contact
 
-  ![undo format](images/undo-UG/after_delete_1.png)
+  <img src="images/undo-UG/after_delete_1.png" alt="image" width="700" height="auto">
 
 * Undo
 * You should see this message: 
@@ -764,11 +774,11 @@ For undoing a delete command:
   where X are the details of the person who was just deleted, and now added back
 * GUI reflects that the most recently deleted contact is added back
 
-  ![undo format](images/undo-UG/after_delete_undo.png)
+  <img src="images/undo-UG/after_delete_undo.png" alt="image" width="700" height="auto">
 
 * Delete multiple contacts (In this case, 2 contacts)
 
-  ![undo format](images/undo-UG/after_delete_multiple.png)
+  <img src="images/undo-UG/after_delete_multiple.png" alt="image" width="700" height="auto">
 
 * Undo
 * You should see this message: 
@@ -779,13 +789,13 @@ For undoing a delete command:
   where X are the details of the persons who were just deleted, and now added back
 * GUI reflects that the most recently deleted contacts are added back
 
-  ![undo_format](images/undo-UG/after_delete_multiple_undo.png)
+  <img src="images/undo-UG/after_delete_multiple_undo.png" alt="image" width="700" height="auto">
 
 For undoing a clear command:
 
 * Clear all contacts
 
-  ![undo format](images/undo-UG/after_clear.png)
+  <img src="images/undo-UG/after_clear.png" alt="image" width="700" height="auto">
 
 * Undo
 * You should see this message: 
@@ -796,13 +806,13 @@ For undoing a clear command:
 
 * GUI reflects that all cleared contacts are added back
 
-  ![undo format](images/undo-UG/after_clear_undo.png)
+  <img src="images/undo-UG/after_clear_undo.png" alt="image" width="700" height="auto">
 
 For undoing an edit command:
 
 * Edit a contact
 
-  ![undo format](images/undo-UG/after_edit.png)
+  <img src="images/undo-UG/after_edit.png" alt="image" width="700" height="auto">
 
 * Undo
 * You should see this message: 
@@ -814,7 +824,7 @@ For undoing an edit command:
   where X are the details of the person before the edit
 * GUI reflects that the edited contact has been reverted
 
-  ![undo format](images/undo-UG/after_edit_undo.png)
+  <img src="images/undo-UG/after_edit_undo.png" alt="image" width="700" height="auto">
 
 For undoing a redo command:
 
@@ -828,7 +838,7 @@ Undo Successful!
 
 * Note that the message shown is generic and is the same regardless of what command was undone.
 
-![undo_format](images/undo-UG/undo_redo_successful.png)
+  <img src="images/undo-UG/undo_redo_successful.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
@@ -840,7 +850,7 @@ When there is no command to undo, i.e. no previous `add`, `clone`, `delete`, `cl
   There is no command to undo!
   ```
 
-  ![undo format](images/undo-UG/undo_fail.png)
+  <img src="images/undo-UG/undo_fail.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -865,38 +875,40 @@ Redoes the most recent undo command.
 * `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` will add this contact in
   the address book
 
-  ![add_format](images/redo-UG/redo-example/EmptyBeforeAddingJohn.png)
-  ![add_format](images/redo-UG/redo-example/AfterAddingJohn.png)
+  <img src="images/redo-UG/redo-example/EmptyBeforeAddingJohn.png" alt="image" width="700" height="auto">
+
+  <img src="images/redo-UG/redo-example/AfterAddingJohn.png" alt="image" width="700" height="auto">
 
   `undo` will then reverse the `add` command (i.e. John Doe is no longer in the address book)
 
-  ![undo_format](images/redo-UG/redo-example/AfterUndoingAddJohn.png)
+  <img src="images/redo-UG/redo-example/AfterUndoingAddJohn.png" alt="image" width="700" height="auto">
 
   `redo` will then reapply the `add` command (i.e. John Doe is back in the address book)
 
-  ![redo_format](images/redo-UG/redo-example/AfterRedoingUndoJohnIsBack.png)
+  <img src="images/redo-UG/redo-example/AfterRedoingUndoJohnIsBack.png" alt="image" width="700" height="auto">
+
 
   `undo` will then reverse the `redo` command (i.e. John Doe is no longer in the address book)
 
-  ![undo_format](images/redo-UG/redo-example/AfterUndoingRedoJohnIsGone.png)
+  <img src="images/redo-UG/redo-example/AfterUndoingRedoJohnIsGone.png" alt="image" width="700" height="auto">
 
   #### Note: while it is possible to `undo` `redo` commands, this is only possible before any other `add`, `clone`, `edit`, `delete`, `clear` command is executed.
 
   Now, `redo` will reapply the `add` command (i.e John Doe is back in the address book)
 
-  ![redo_format](images/redo-UG/redo-example/AfterRedoingUndoJohnIsBack.png)
+  <img src="images/redo-UG/redo-example/AfterRedoingUndoJohnIsBack.png" alt="image" width="700" height="auto">
 
   `delete 1` will delete the first contact in the address book
 
-  ![delete_format](images/redo-UG/redo-example/AfterDeleteJohn.png)
+  <img src="images/redo-UG/redo-example/AfterDeleteJohn.png" alt="image" width="700" height="auto">
 
   `undo` will reverse the `delete 1` command
 
-  ![undo_format](images/redo-UG/redo-example/AfterUndoingDeleteJohn.png)
+  <img src="images/redo-UG/redo-example/AfterUndoingDeleteJohn.png" alt="image" width="700" height="auto">
 
   `undo` once again will not reverse the `redo` command
 
-  ![undo_format](images/redo-UG/redo-example/NothingToUndo.png)
+  <img src="images/redo-UG/redo-example/NothingToUndo.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 
@@ -904,11 +916,11 @@ For example, `add` a contact, then `undo`, then `redo`
 
 * Add a contact
 
-  ![redo_format](images/redo-UG/add_person.png)
+  <img src="images/redo-UG/add_person.png" alt="image" width="700" height="auto">
 
 * Undo 
 
-  ![redo_format](images/redo-UG/undo_success.png)
+  <img src="images/redo-UG/undo_success.png" alt="image" width="700" height="auto">
 
 * Redo
 * You should see this message: 
@@ -918,7 +930,7 @@ For example, `add` a contact, then `undo`, then `redo`
   ```
 
 
-  ![redo_format](images/redo-UG/redo_success.png)
+  <img src="images/redo-UG/redo_success.png" alt="image" width="700" height="auto">
   
   * Note that the message shown is generic and is the same regardless of what command was redone.
 
@@ -930,7 +942,7 @@ For example, `add` a contact, then `undo`, then `redo`
   Undo successful!
   ```
 
-  ![redo_format](images/redo-UG/undo_after_redo.png)
+  <img src="images/redo-UG/undo_after_redo.png" alt="image" width="700" height="auto">
   
   * Note that the message shown is generic and is the same regardless of what command was redone.
 
@@ -943,7 +955,7 @@ When there is no command to redo, i.e. no previous `undo` command
   ```
   Redo unsuccessful! There is nothing to redo!
   ```
-  ![redo_format](images/redo-UG/redo_failure.png)
+  <img src="images/redo-UG/redo_failure.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -962,7 +974,7 @@ Sort contact lists by prefix name or appointment date.
 * `n/` sort by Name prefix
 * `appt/` sort by Appointment Date prefix
 
-![sort format](images/sort-UG/sortformat.png)
+  <img src="images/sort-UG/sortformat.png" alt="image" width="700" height="auto">
 
 #### Precise expected output on success:
 * You should see this message:
@@ -972,7 +984,7 @@ Sort contact lists by prefix name or appointment date.
   where X is the number of clients in the address book.
 * The sorted entry is displayed in the address book GUI.
 
-  ![sort format](images/sort-UG/sortresult.png)
+  <img src="images/sort-UG/sortresult.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 If either a required parameter is missing or a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
@@ -986,7 +998,7 @@ If either a required parameter is missing or a parameter provided is invalid (e.
   Example: sort n/
   ```
 
-  ![sort format](images/sort-UG/sortfailuremissing.png)
+  <img src="images/sort-UG/sortfailuremissing.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -1010,7 +1022,7 @@ Open a new calendar window.
 #### Precise expected outputs on success:
 * You will see a pop-up of a new calendar window of the current month that indicate client's appointments in the date
 
-  ![calendar format](images/calendar-UG/calendarWindow.png)
+  <img src="images/calendar-UG/calendarWindow.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -1028,7 +1040,7 @@ Clears all of your contacts in the address book.
 
 * This is the initial address book as reflected in the GUI:
 
-  ![clear format](images/clear-UG/clear_before.png)
+  <img src="images/clear-UG/clear_before.png" alt="image" width="700" height="auto">
 
 * After executing the clear command:
 
@@ -1038,7 +1050,7 @@ Clears all of your contacts in the address book.
   ```
 * Your GUI will reflect that there are 0 contacts left
 
-  ![clear format](images/clear-UG/clear_success.png)
+  <img src="images/clear-UG/clear_success.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
@@ -1047,7 +1059,7 @@ Clears all of your contacts in the address book.
   Address book is empty. There is nothing to clear.
   ```
 
-  ![clear format](images/clear-UG/clear_failure.png)
+  <img src="images/clear-UG/clear_failure.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -1130,23 +1142,23 @@ _Known issues_ are some problems that are currently present in the program that 
 
 ## Command Summary
                                                                                                                                          
-| Action              | Format, Examples                                                                                                                                                                                                                      |
-|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]… [appt/APPOINTMENT_DATE]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com o/SWE, a/123, Clementi Rd, 1234665 t/friend t/colleague appt/12-12-2023 08:30` |
-| **Calendar**        | `calendar`                                                                                                                                                                                                                            |
-| **Clone**           | `clone INDEX`<br> e.g. `clone 3`                                                                                                                                                                                                      |
-| **Clear**           | `clear`                                                                                                                                                                                                                               |
-| **Delete**          | `delete INDEXES`<br> e.g., `delete 1 2 3`                                                                                                                                                                                             |
-| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]… [appt/APPOINTMENT_DATE]`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                      |
-| **Undo**            | `undo`                                                                                                                                                                                                                                |
-| **Redo**            | `redo`                                                                                                                                                                                                                                |
-| **Find**            | `find PREFIX KEYWORD` <br> e.g. `find n/ James Jake`, `find a/Tokyo Geylang`, `find appt/2040-01-01`                                                                                                                                  |
-| **List**            | `list`                                                                                                                                                                                                                                |
-| **Help**            | `help`                                                                                                                                                                                                                                |
-| **Questionnaire**   | `questionnaire`                                                                                                                                                                                                                       |
-| **Sort**            | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                                                                        |
-| **Risk Profile**    | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                                                                   |
-| **Exit**            | `exit`                                                                                                                                                                                                                                |
+| Action              | Format, Examples                                                                                                                                                                                                                    |
+|---------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**             | `add n/NAME p/PHONE_NUMBER e/EMAIL o/OCCUPATION a/ADDRESS [t/TAG]… [appt/APPOINTMENT_DATE]` <br> e.g. `add n/James Ho p/22224444 e/jamesho@example.com o/SWE a/123 Clementi Rd, 1234665 t/friend t/colleague appt/12-12-2023 08:30` |
+| **Calendar**        | `calendar`                                                                                                                                                                                                                          |
+| **Clone**           | `clone INDEX`<br> e.g. `clone 3`                                                                                                                                                                                                    |
+| **Clear**           | `clear`                                                                                                                                                                                                                             |
+| **Delete**          | `delete INDEXES`<br> e.g., `delete 1 2 3`                                                                                                                                                                                           |
+| **Edit**            | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [o/OCCUPATION] [a/ADDRESS] [t/TAG]… [appt/APPOINTMENT_DATE]`<br> e.g.`edit 2 n/James Lee e/jameslee@example.com`                                                                    |
+| **Undo**            | `undo`                                                                                                                                                                                                                              |
+| **Redo**            | `redo`                                                                                                                                                                                                                              |
+| **Find**            | `find PREFIX KEYWORD` <br> e.g. `find n/ James Jake`, `find a/Tokyo Geylang`, `find appt/2040-01-01`                                                                                                                                |
+| **List**            | `list`                                                                                                                                                                                                                              |
+| **Help**            | `help`                                                                                                                                                                                                                              |
+| **Questionnaire**   | `questionnaire`                                                                                                                                                                                                                     |
+| **Sort**            | `sort PREFIX` <br> e.g. `sort appt/` `sort n/`                                                                                                                                                                                      |
+| **Risk Profile**    | `riskprofile 3 res/a,b,c,d,e,e,b,c`                                                                                                                                                                                                 |
+| **Exit**            | `exit`                                                                                                                                                                                                                              |
 
 ## Glossary
 
