@@ -116,12 +116,12 @@ Discover our basic commands right away. If you want to explore other commands, F
   ```
   Opened help window.
   ```
-  
-  ![help_format](images/help-UG/help_success.png)
+
+  <img src="images/help-UG/help_success.png" alt="image" width="500" height="auto">
 
 * You will see a pop-up window with basic commands and a link to FAPro's user guide for other commands
 
-  ![help_window](images/help-UG/helpWindow.png)
+  <img src="images/help-UG/helpWindow.png" alt="image" width="500" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -137,11 +137,12 @@ Show you questions that are used for generating client risk profile levels.
    ```
    Opened questionnaire window.
    ```
-  ![questionnaire format](images/questionnaire-UG/questionnaire_success.png)
+
+  <img src="images/questionnaire-UG/questionnaire_success.png" alt="image" width="500" height="auto">
 
 * You will see a pop-up window with risk assessment multiple-choice questions, including the grading and risk profile categories criteria
 
-  ![questionnaire window](images/questionnaire-UG/questionnaireWindow.png)
+<img src="images/questionnaire-UG/questionnaireWindow.png" alt="image" width="500" height="auto">
 
 <div style="page-break-after: always;"></div>
 
