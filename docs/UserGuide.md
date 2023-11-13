@@ -902,11 +902,11 @@ Redoes the most recent undo command.
 
   `undo` will reverse the `delete 1` command
 
-  ![undo_format](images/redo-UG/redo-example/AfterUndoingDeleteJohn.png)
+  <img src="images/redo-UG/redo-example/AfterUndoingDeleteJohn.png" alt="image" width="700" height="auto">
 
   `undo` once again will not reverse the `redo` command
 
-  ![undo_format](images/redo-UG/redo-example/NothingToUndo.png)
+  <img src="images/redo-UG/redo-example/NothingToUndo.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 
@@ -914,11 +914,11 @@ For example, `add` a contact, then `undo`, then `redo`
 
 * Add a contact
 
-  ![redo_format](images/redo-UG/add_person.png)
+  <img src="images/redo-UG/add_person.png" alt="image" width="700" height="auto">
 
 * Undo 
 
-  ![redo_format](images/redo-UG/undo_success.png)
+  <img src="images/redo-UG/undo_success.png" alt="image" width="700" height="auto">
 
 * Redo
 * You should see this message: 
@@ -928,7 +928,7 @@ For example, `add` a contact, then `undo`, then `redo`
   ```
 
 
-  ![redo_format](images/redo-UG/redo_success.png)
+  <img src="images/redo-UG/redo_success.png" alt="image" width="700" height="auto">
   
   * Note that the message shown is generic and is the same regardless of what command was redone.
 
@@ -940,7 +940,7 @@ For example, `add` a contact, then `undo`, then `redo`
   Undo successful!
   ```
 
-  ![redo_format](images/redo-UG/undo_after_redo.png)
+  <img src="images/redo-UG/undo_after_redo.png" alt="image" width="700" height="auto">
   
   * Note that the message shown is generic and is the same regardless of what command was redone.
 
@@ -953,7 +953,7 @@ When there is no command to redo, i.e. no previous `undo` command
   ```
   Redo unsuccessful! There is nothing to redo!
   ```
-  ![redo_format](images/redo-UG/redo_failure.png)
+  <img src="images/redo-UG/redo_failure.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -972,7 +972,7 @@ Sort contact lists by prefix name or appointment date.
 * `n/` sort by Name prefix
 * `appt/` sort by Appointment Date prefix
 
-![sort format](images/sort-UG/sortformat.png)
+<img src="images/sort-UG/sortformat.png" alt="image" width="700" height="auto">
 
 #### Precise expected output on success:
 * You should see this message:
@@ -982,7 +982,7 @@ Sort contact lists by prefix name or appointment date.
   where X is the number of clients in the address book.
 * The sorted entry is displayed in the address book GUI.
 
-  ![sort format](images/sort-UG/sortresult.png)
+  <img src="images/sort-UG/sortresult.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 If either a required parameter is missing or a parameter provided is invalid (e.g., e/), an error message should indicate the invalid format.
@@ -996,7 +996,7 @@ If either a required parameter is missing or a parameter provided is invalid (e.
   Example: sort n/
   ```
 
-  ![sort format](images/sort-UG/sortfailuremissing.png)
+  <img src="images/sort-UG/sortfailuremissing.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -1020,7 +1020,7 @@ Open a new calendar window.
 #### Precise expected outputs on success:
 * You will see a pop-up of a new calendar window of the current month that indicate client's appointments in the date
 
-  ![calendar format](images/calendar-UG/calendarWindow.png)
+  <img src="images/calendar-UG/calendarWindow.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -1038,7 +1038,7 @@ Clears all of your contacts in the address book.
 
 * This is the initial address book as reflected in the GUI:
 
-  ![clear format](images/clear-UG/clear_before.png)
+  <img src="images/clear-UG/clear_before.png" alt="image" width="700" height="auto">
 
 * After executing the clear command:
 
@@ -1048,7 +1048,7 @@ Clears all of your contacts in the address book.
   ```
 * Your GUI will reflect that there are 0 contacts left
 
-  ![clear format](images/clear-UG/clear_success.png)
+  <img src="images/clear-UG/clear_success.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
@@ -1057,7 +1057,7 @@ Clears all of your contacts in the address book.
   Address book is empty. There is nothing to clear.
   ```
 
-  ![clear format](images/clear-UG/clear_failure.png)
+  <img src="images/clear-UG/clear_failure.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
