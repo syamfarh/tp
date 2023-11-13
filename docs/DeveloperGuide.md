@@ -3,7 +3,7 @@ layout: page
 title: Developer Guide
 ---
 
-FAPro - Developer Guide
+Table of contents
 --------------------------------------------------------------------------------------------------------------------
 1. [Setting up](#setting-up-getting-started)
 2. [Design](#design)
