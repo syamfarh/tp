@@ -120,11 +120,11 @@ Discover our basic commands right away. If you want to explore other commands, F
   Opened help window.
   ```
 
-  <img src="images/help-UG/help_success.png" alt="image" width="500" height="auto">
+  <img src="images/help-UG/help_success.png" alt="image" width="700" height="auto">
 
 * You will see a pop-up window with basic commands and a link to FAPro's user guide for other commands
 
-  <img src="images/help-UG/helpWindow.png" alt="image" width="500" height="auto">
+  <img src="images/help-UG/helpWindow.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
