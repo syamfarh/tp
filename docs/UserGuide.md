@@ -471,7 +471,7 @@ If any of the entered indexes are invalid:
   The person index provided is invalid.
   ```
 
-  ![delete format](images/delete-UG/deletewrongindex.png)
+  <img src="images/delete-UG/deletewrongindex.png" alt="image" width="700" height="auto">
 
 If no index is placed after the delete command:
 * You should see this error message:
@@ -484,7 +484,7 @@ If no index is placed after the delete command:
   Example: delete 1 3 5
   ```
 
-  ![delete format](images/delete-UG/deletenoindex.png)
+  <img src="images/delete-UG/deletenoindex.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -503,7 +503,7 @@ Show a list of all your contacts.
 
 * You will see a list of all your contacts with their details
 
-  ![list result](images/list-UG/listResult.png)
+  <img src="images/list-UG/listResult.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -528,7 +528,7 @@ Edits an existing client's parameter in FAPro.
 *  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags
 
-  ![edit format](images/edit-UG/editformat.png)
+  <img src="images/edit-UG/editformat.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 * You should see this message:
@@ -539,7 +539,7 @@ Edits an existing client's parameter in FAPro.
   ```
 * The new entry is displayed in the address book GUI.
 
-  ![edit format](images/edit-UG/editresult.png)
+  <img src="images/edit-UG/editresult.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
@@ -554,7 +554,7 @@ If a required parameter is missing (e.g., name, email), an error message should 
   Example: edit 1 p/91234567 e/johndoe@example.com
   ```
 
-  ![edit format](images/edit-UG/editfailure.png)
+  <img src="images/edit-UG/editfailure.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
