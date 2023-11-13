@@ -145,7 +145,7 @@ Show you questions that are used for generating client risk profile levels.
 
 * You will see a pop-up window with risk assessment multiple-choice questions, including the grading and risk profile categories criteria
 
-  <img src="images/questionnaire-UG/questionnaireWindow.png" alt="image" width="700" height="auto">
+  <img src="images/questionnaire-UG/questionnaireResult.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
