@@ -230,7 +230,7 @@ Step 3. `AddCommand#execute` then checks to ensure that the returned `Person` do
 book. If he does already exist in the address book, an exception is returned. On the other hand, if he does not, he is
 then added to the address book by `Model#addPerson`.
 
-![AddActivityDiagram0](images/AddActivityDiagram0.png)
+![AddActivityDiagram0](images/AddActivityDiagram1.png)
 
 ![Add1](images/add1.png)
 
