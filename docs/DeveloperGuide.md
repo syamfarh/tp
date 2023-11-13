@@ -510,7 +510,7 @@ delete commands from `previousUndoableCommands` and deleted persons from `delete
 
 The following sequence diagram shows how the `undo` operation works.
 
-![ModelManagerStateDiagram](images/UndoSequenceDiagramForDelete.png)
+![UndoSequenceDiagram](images/UndoSequenceDiagramForDelete.png)
 
 Step 4. The user now decides to execute the command `list`. As this command is not an undoable command, 
 `Model#storePreviousUndoableCommand(String)` and other storing operations are not called, so `ModelManager` remains 
