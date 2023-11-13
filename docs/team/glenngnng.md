@@ -40,7 +40,12 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=glenngnng&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos)
 
 * **Project management**:
-  * (fill in later)
+  * Set up milestones
+  * Assigned milestones and labels to pull requests 
+  * Reviewed & merged pull requests
+  * Updated issue tracker & fixed issues relating to PE-D
+  * Weekly calls (1-4x a week, 2+ hours each)
+  * Followed forking work flow
 
 
 * **Enhancements to existing features**:
