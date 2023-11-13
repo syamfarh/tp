@@ -42,7 +42,12 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link] (https://nus-cs2103-ay2324s1.github.io/tp-dashboard/#/widget/?search=bhnuka&breakdown=false&sort=groupTitle%20dsc&sortWithin=title&since=2023-09-22&timeframe=commit&mergegroup=&groupSelect=groupByRepos&chartGroupIndex=0&chartIndex=0" frameBorder="0" width="800px" height="142px")
 
 * **Project management**:
-  * To be added
+  * Set up milestones
+  * Assigned milestones and labels to pull requests
+  * Reviewed & merged pull requests
+  * Updated issue tracker & fixed issues relating to PE-D
+  * Weekly calls (1-4x a week, 2+ hours each)
+  * Followed forking work flow
 
 * **Enhancements to existing features**:
   * Updated Add Command to take in occupation as a parameter (Pull request [\#49](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/49))
@@ -51,14 +56,14 @@ Given below are my contributions to the project.
 
 * **Documentation**:
   * User Guide:
-    * Added documentation for the `add` feature
-    * Added documentation for the `clone` feature
-    * Added documentation for the `delete` feature
+    * Added implementation and manual testing and updated use case and user stories of the `add` feature.
+    * Added implementation, use case, user stories and manual testing of the `clone` feature
+    * Added implementation and manual testing and updated use case and user stories of the `delete` feature
       
   * Developer Guide:
-    * Added implementation, use case and manual testing of the `add` feature
-    * Added implementation, use case and manual testing of the `clone` feature
-    * Added implementation, use case and manual testing of the `delete` feature
+    * Added implementation and manual testing and updated use case and user stories of the `add` feature.
+    * Added implementation, use case, user stories and manual testing of the `clone` feature
+    * Added implementation and manual testing and updated use case and user stories of the `delete` feature
       
   * Significant Diagrams:
     * ![AddActivityDiagram0](../images/AddActivityDiagram0.png)

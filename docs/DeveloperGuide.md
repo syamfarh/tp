@@ -14,8 +14,8 @@ FAPro - Developer Guide
     * [Storage component](#storage-component)
     * [Common classes](#common-classes)
 3. [Implementation](#implementation)
-    * [Edit feature](#edit-feature)
     * [Add feature](#add-feature)
+    * [Edit feature](#edit-feature)
     * [Clone feature](#clone-feature)
     * [Delete feature](#delete-feature)
     * [Undo feature](#undo-feature)
@@ -23,20 +23,19 @@ FAPro - Developer Guide
     * [Find feature](#find-feature)
     * [Sort feature](#sort-feature)
     * [Questionnaire feature](#questionnaire-feature)
-    * [Risk profile feature](#risk-profile-feature)
+    * [Risk Profile feature](#risk-profile-feature)
     * [Calendar feature](#calendar-feature)
     * [Help feature](#help-feature)
-4. [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
+4. [Documentation, Logging, Testing, Configuration, Dev-ops](#documentation-logging-testing-configuration-dev-ops)
 5. [Appendix A: Product Scope](#appendix-a-product-scope)
 6. [Appendix B: User Stories](#appendix-b-user-stories)
 7. [Appendix C: Use Cases](#appendix-c-use-cases)
 8. [Appendix D: Non-Functional Requirements](#appendix-d-non-functional-requirements)
 9. [Appendix E: Glossary](#appendix-e-glossary)
-10. [Appendix F: Instructions for manual testing](#appendix-f-instructions-for-manual-testing)
+10. [Appendix F: Instructions for Manual Testing](#appendix-f-instructions-for-manual-testing)
 11. [Appendix G: Future Implementations](#appendix-g-future-implementations)
-12. [Appendix H: Effort](#appendix-h-effort)
-13. [Appendix I: Planned Enhancements](#appendix-i-planned-enhancements)
-14. [Appendix J: Acknowledgement](#appendix-j-acknowledgement)
+13. [Appendix H: Planned Enhancements](#appendix-i-planned-enhancements)
+14. [Appendix I: Acknowledgement](#appendix-j-acknowledgement)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -231,7 +230,7 @@ Step 3. `AddCommand#execute` then checks to ensure that the returned `Person` do
 book. If he does already exist in the address book, an exception is returned. On the other hand, if he does not, he is
 then added to the address book by `Model#addPerson`.
 
-![AddActivityDiagram0](images/AddActivityDiagram0.png)
+![AddActivityDiagram0](images/AddActivityDiagram1.png)
 
 ![Add1](images/add1.png)
 
@@ -526,7 +525,7 @@ end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline 
 
 </div>
 
-:information_source: **Note:** If an undoable command fails its execution, it will not call 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If an undoable command fails its execution, it will not call 
 `Model#storePreviousUndoableCommand(String)` so nothing is stored in `previousUndoableCommands`, and `ModelManager` 
 is unchanged.
 
@@ -544,6 +543,9 @@ delete commands from `previousUndoableCommands` and deleted persons from `delete
 The following sequence diagram shows how the `undo` operation works.
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagramForDelete.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 Step 4. The user now decides to execute the command `list`. As this command is not an undoable command, 
 `Model#storePreviousUndoableCommand(String)` and other storing operations are not called, so `ModelManager` remains 
@@ -621,6 +623,9 @@ The following sequence diagram shows how the `undo` operation works when undoing
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram1.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RedoCommand` should
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 Step 2: The user now decides that undoing was a mistake, and decides to redo that action by executing the `redo` 
 command. The `redo` command will call `Model#addToUndoableStateList()`, adding the state of the address book before 
 the `redo` is committed into the `undoableStateList`. `Model#storePreviousUndoableCommand(String)` is also called, 
@@ -638,6 +643,9 @@ The following sequence diagram shows how the `redo` operation works.
 
 ![RedoSequenceDiagram](images/RedoSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `RedoCommand` should
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+
 Step 3: The user now decides that redoing was a mistake, again! Hence, the user decides to undo that action once 
 again, by executing the `undo` command. The `undo` command will call `UndoCommand#executeUndoRedo`, which calls 
 `Model#addToRedoableStateList()`, adding the state of the address book before the `undo` is committed into the 
@@ -654,6 +662,9 @@ Now, John and Greg are back in the address book.
 The following sequence diagram shows how the `undo` operation works when undoing the `redo` command.
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram2.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 :information_source: **Note:** From here on, it is possible to continuously redo and undo the same command indefinitely.
 
@@ -998,7 +1009,7 @@ Then it will trigger `MainWindow#handleHelp()`. If the help window is not showin
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Documentation, logging, testing, configuration, dev-ops**
+## **Documentation, Logging, Testing, Configuration, Dev-ops**
 
 * [Documentation guide](Documentation.md)
 * [Testing guide](Testing.md)
@@ -1026,7 +1037,7 @@ FApro seeks to improve the quality of life of financial advisors (FAs). It allow
 
 
 
-## **Appendix B: User stories**
+## **Appendix B: User Stories**
 
 Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
@@ -1046,7 +1057,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | clumsy financial advisor         | be able to undo commands done previously such as delete, clear, edit, add | undo my mistakes made with a simple command, rather than having to do multiple commands | 
 
 
-## **Appendix C: Use cases**
+## **Appendix C: Use Cases**
 
 (For all use cases below, the **System** is the `FAPro` and the **Actor** is the `Financial Advisor`, unless specified otherwise)
 
@@ -1353,9 +1364,10 @@ Preconditions:
 * **Positive Integer**: An integer that is positive (i.e. greater than 0). Please note that we are excluding 0 as a positive integer.
 * **Prefix**: Word that is added in front of parameter. e.g. n/, o/, a/
 * **Suffix**: Number that is at the end of a persons name <br/> e.g. for John Doe 1, the suffix would be 1. For John Doe, no suffix is present. <br/> Please note that for contacts where the whole name is an integer (i.e 123 instead on John), there is no suffix as 123 will be treated as their name.
+
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix F: Instructions for manual testing**
+## **Appendix F: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -1364,7 +1376,7 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch and Shutdown
 
 1. Initial launch
 
@@ -1540,11 +1552,7 @@ testers are expected to do more *exploratory* testing.
 * Ability to store multiple appointment dates for individual clients and an additional window that displays the appointments of these clients.
 * Provide financial advisors with the ability to dynamically customize the set of risk assessment questions and their corresponding grading criteria.
 
-## **Appendix H: Effort**
-
-{to be added}
-
-## **Appendix I: Planned Enhancements**
+## **Appendix H: Planned Enhancements**
 
 * The current calendar window is not dynamically updated when user change client's contact information. User would have to close and reopen the calendar window to show the updated information. We plan to allow calendar window to always listen to any changes that occur to the database and automatically update the information shown in the calendar window. 
 * The application will start to experience lag after prolonged usage. This is most likely it is due to the extra storing of persons whenever a command modifies the address book. As extra memory are needed to be dedicated to such storage, this can be a reason for the lag after a large number (lets say 100) commands that modify the address book. In the future, we might plan to limit the amount of undoable commands that is allowed to reduce the storage load of the application.
@@ -1556,6 +1564,6 @@ testers are expected to do more *exploratory* testing.
   address book is executed. Such commands are `add`, `clone`, `edit`, `delete` and `clear`. We plan to lift this restriction 
   in the future.
 
-## **Appendix J: Acknowledgement**
+## **Appendix I: Acknowledgement**
 
 * The feature Calendar reused codes with minimal changes from quick start guide from [CalendarFX developer guide](https://dlsc-software-consulting-gmbh.github.io/CalendarFX/)
