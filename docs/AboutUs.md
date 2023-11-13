@@ -22,7 +22,7 @@ You can reach us at the email `syamfarh@comp.nus.edu.sg`
 <img src="images/bhnuka.png" width="200px">
 
 [[github](http://github.com/bhnuka)]
-![[portfolio](team/bhnuka.md)]
+[[portfolio](team/bhnuka.md)]
 
 * Role: Team Lead
 * Responsibilities: UI
@@ -32,7 +32,7 @@ You can reach us at the email `syamfarh@comp.nus.edu.sg`
 <img src="images/daphne789.png" width="200px">
 
 [[github](http://github.com/Daphne789)]
-![[portfolio](team/daphne789.md)]
+[[portfolio](team/daphne789.md)]
 
 * Role: Developer
 * Responsibilities: Data
@@ -42,7 +42,7 @@ You can reach us at the email `syamfarh@comp.nus.edu.sg`
 <img src="images/glenngnng.png" width="200px">
 
 [[github](http://github.com/glenngnng)]
-![[portfolio](team/glenngnng.md)]
+[[portfolio](team/glenngnng.md)]
 
 * Role: Developer
 * Responsibilities: Dev Ops + Threading
@@ -52,7 +52,7 @@ You can reach us at the email `syamfarh@comp.nus.edu.sg`
 <img src="images/limzhenwy.png" width="200px">
 
 [[github](http://github.com/limzhenwy)]
-![[portfolio](team/limzhenwy.md)]
+[[portfolio](team/limzhenwy.md)]
 
 * Role: Developer
 * Responsibilities: UI
@@ -61,8 +61,7 @@ You can reach us at the email `syamfarh@comp.nus.edu.sg`
 
 <img src="images/syamfarh.png" width="200px">
 
-[[github](http://github.com/syamfarh)]
-![[portfolio](team/syamfarh.md)]
+[[github](http://github.com/syamfarh)] [[portfolio](team/syamfarh.md)]
 
 * Role: Developer
 * Responsibilities: UI
