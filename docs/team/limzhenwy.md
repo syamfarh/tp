@@ -29,7 +29,12 @@ Given below are my contributions to the project.
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2324s1.github.io/tp-dashboard/?search=limzhenwy&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code&since=2023-09-22)
 
 * **Project management**: 
-  * To be added soon.
+  * Set up milestones
+  * Assigned milestones and labels to pull requests
+  * Reviewed & merged pull requests
+  * Updated issue tracker & fixed issues relating to PE-D
+  * Weekly calls (1-4x a week, 2+ hours each)
+  * Followed forking work flow
 
 * **Enhancements to existing features**:
   * Modified existing `find` function to replace previous `ufind` command (Pull request [\#115](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/115))
@@ -45,16 +50,12 @@ Given below are my contributions to the project.
     * ~~Added portions relevant to `cal`~~
     * ~~Added portions relevant to `ufind`~~
     * Altered and added portions relevant to `find`
+    * Added points for planned enhancements
 
 * **Community**:
   * PRs reviewed (with non-trivial review comments): Pull request [\#63](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/63),
   Pull request [\#101](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/101),
   Pull request [\#142](https://github.com/AY2324S1-CS2103T-W09-1/tp/pull/142)
-  * Contributed to forum discussions: To be added soon.
   * Reported bugs and suggestions for other teams in the class: Pull request [\#176](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/176), 
   Pull request [\#170](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/170), 
   Pull request [\#153](https://github.com/AY2324S1-CS2103T-T10-4/tp/issues/153)
-  * Some parts of the history feature I added was adopted by several other class mates: To be added soon.
-
-* **Tools**:
-  * To be added soon.
