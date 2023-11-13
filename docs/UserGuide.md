@@ -587,7 +587,7 @@ Finds persons based on the given keywords.
 
 #### _Find by name:_
 
-![find_name format](images/find-UG/find_n0.png)
+<img src="images/find-UG/find_n0.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 * You should see this message: 
@@ -597,7 +597,7 @@ Finds persons based on the given keywords.
   where X is the number of contacts listed
 * The list of contacts whose names contain the input name is shown
 
-  ![find_name format](images/find-UG/find_n1.png)
+  <img src="images/find-UG/find_n1.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 If no name is input after the find command, an error message explaining the error will be shown, 
@@ -611,13 +611,12 @@ reminding you to follow the correct input format.
   numbers.
   ```
 
-![find_name format](images/find-UG/find_n2.png)
-
+<img src="images/find-UG/find_n2.png" alt="image" width="700" height="auto">
 
 #### _Find by address:_
 
 
-![find_add format](images/find-UG/find_a0.png)
+<img src="images/find-UG/find_a0.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 
@@ -628,7 +627,7 @@ reminding you to follow the correct input format.
   where X is the number of contacts listed
 * The list of contacts whose address contain the input address is shown
 
-  ![find_add format](images/find-UG/find_a1.png)
+  <img src="images/find-UG/find_a1.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 If no address is input after the find command, an error message explaining the error will be shown,
@@ -642,13 +641,13 @@ reminding you to follow the correct input format.
   numbers.
   ```
 
-  ![find_add format](images/find-UG/find_a2.png)
+  <img src="images/find-UG/find_a2.png" alt="image" width="700" height="auto">
 
 
 #### _Find by appointment date:_
 
 
-![find_appt format](images/find-UG/find_appt0.png)
+<img src="images/find-UG/find_appt0.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 * You should see this message:
@@ -658,7 +657,7 @@ reminding you to follow the correct input format.
   where X is the number of contacts listed
 * The list of contacts whose appointment date matches the input date is shown
 
-  ![find_appt format](images/find-UG/find_appt1.png)
+<img src="images/find-UG/find_appt1.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 If no date is input after the find command, an error message explaining the error will be shown,
@@ -670,7 +669,7 @@ reminding you to follow the correct input format.
   matches the specified input date and displays them as a list with index numbers.
   ```
 
-  ![find_appt format](images/find-UG/find_appt2.png)
+  <img src="images/find-UG/find_appt2.png" alt="image" width="700" height="auto">
 
 If an input date does not follow the accepted format, an error message explaining the error will be shown,
 reminding you to follow the correct input format.
@@ -681,7 +680,7 @@ reminding you to follow the correct input format.
   or [yyyy-mm-dd].
   ```
 
-  ![find_appt format](images/find-UG/find_appt3.png)
+  <img src="images/find-UG/find_appt3.png" alt="image" width="700" height="auto">
 
 If an input date is a past date (a date before the current date), an error message explaining the error will be shown, 
 reminding you to input a valid date.
@@ -691,7 +690,7 @@ reminding you to input a valid date.
   Appointment Date should be after the current date.
   ```
 
-  ![find_appt format](images/find-UG/find_appt4.png)
+  <img src="images/find-UG/find_appt4.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -728,7 +727,7 @@ For undoing an add command:
 
 * Add a contact
 
-  ![undo format](images/undo-UG/after_add.png)
+  <img src="images/undo-UG/after_add.png" alt="image" width="700" height="auto">
 
 * Undo
 * You should see this message:
@@ -739,13 +738,13 @@ For undoing an add command:
   where X are the details of the person who was just added, and now deleted
 * GUI reflects that the most recently added contact is deleted
 
-  ![undo format](images/undo-UG/after_add_undo.png)
+  <img src="images/undo-UG/after_add_undo.png" alt="image" width="700" height="auto">
 
 For undoing a clone command:
 
 * Clone a contact
 
-  ![undo format](images/undo-UG/after_clone_1.png)
+  <img src="images/undo-UG/after_clone_1.png" alt="image" width="700" height="auto">
 
 * Undo
 * You should see this message: 
@@ -756,13 +755,13 @@ For undoing a clone command:
   where X are the details of the person who was just cloned, and now deleted
 * GUI reflects that the most recently cloned contact is deleted
 
-  ![undo format](images/undo-UG/after_clone_undo.png)
+  <img src="images/undo-UG/after_clone_undo.png" alt="image" width="700" height="auto">
 
 For undoing a delete command:
 
 * Delete a contact
 
-  ![undo format](images/undo-UG/after_delete_1.png)
+  <img src="images/undo-UG/after_delete_1.png" alt="image" width="700" height="auto">
 
 * Undo
 * You should see this message: 
@@ -773,11 +772,11 @@ For undoing a delete command:
   where X are the details of the person who was just deleted, and now added back
 * GUI reflects that the most recently deleted contact is added back
 
-  ![undo format](images/undo-UG/after_delete_undo.png)
+  <img src="images/undo-UG/after_delete_undo.png" alt="image" width="700" height="auto">
 
 * Delete multiple contacts (In this case, 2 contacts)
 
-  ![undo format](images/undo-UG/after_delete_multiple.png)
+  <img src="images/undo-UG/after_delete_multiple.png" alt="image" width="700" height="auto">
 
 * Undo
 * You should see this message: 
@@ -788,13 +787,13 @@ For undoing a delete command:
   where X are the details of the persons who were just deleted, and now added back
 * GUI reflects that the most recently deleted contacts are added back
 
-  ![undo_format](images/undo-UG/after_delete_multiple_undo.png)
+  <img src="images/undo-UG/after_delete_multiple_undo.png" alt="image" width="700" height="auto">
 
 For undoing a clear command:
 
 * Clear all contacts
 
-  ![undo format](images/undo-UG/after_clear.png)
+  <img src="images/undo-UG/after_clear.png" alt="image" width="700" height="auto">
 
 * Undo
 * You should see this message: 
@@ -805,13 +804,13 @@ For undoing a clear command:
 
 * GUI reflects that all cleared contacts are added back
 
-  ![undo format](images/undo-UG/after_clear_undo.png)
+  <img src="images/undo-UG/after_clear_undo.png" alt="image" width="700" height="auto">
 
 For undoing an edit command:
 
 * Edit a contact
 
-  ![undo format](images/undo-UG/after_edit.png)
+  <img src="images/undo-UG/after_edit.png" alt="image" width="700" height="auto">
 
 * Undo
 * You should see this message: 
@@ -823,7 +822,7 @@ For undoing an edit command:
   where X are the details of the person before the edit
 * GUI reflects that the edited contact has been reverted
 
-  ![undo format](images/undo-UG/after_edit_undo.png)
+  <img src="images/undo-UG/after_edit_undo.png" alt="image" width="700" height="auto">
 
 For undoing a redo command:
 
@@ -837,7 +836,7 @@ Undo Successful!
 
 * Note that the message shown is generic and is the same regardless of what command was undone.
 
-![undo_format](images/undo-UG/undo_redo_successful.png)
+<img src="images/undo-UG/undo_redo_successful.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
@@ -849,7 +848,7 @@ When there is no command to undo, i.e. no previous `add`, `clone`, `delete`, `cl
   There is no command to undo!
   ```
 
-  ![undo format](images/undo-UG/undo_fail.png)
+  <img src="images/undo-UG/undo_fail.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -874,30 +873,32 @@ Redoes the most recent undo command.
 * `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` will add this contact in
   the address book
 
-  ![add_format](images/redo-UG/redo-example/EmptyBeforeAddingJohn.png)
-  ![add_format](images/redo-UG/redo-example/AfterAddingJohn.png)
+<img src="images/redo-UG/redo-example/EmptyBeforeAddingJohn.png" alt="image" width="700" height="auto">
+
+<img src="images/redo-UG/redo-example/AfterAddingJohn.png" alt="image" width="700" height="auto">
 
   `undo` will then reverse the `add` command (i.e. John Doe is no longer in the address book)
 
-  ![undo_format](images/redo-UG/redo-example/AfterUndoingAddJohn.png)
+  <img src="images/redo-UG/redo-example/AfterUndoingAddJohn.png" alt="image" width="700" height="auto">
 
   `redo` will then reapply the `add` command (i.e. John Doe is back in the address book)
 
-  ![redo_format](images/redo-UG/redo-example/AfterRedoingUndoJohnIsBack.png)
+  <img src="images/redo-UG/redo-example/AfterRedoingUndoJohnIsBack.png" alt="image" width="700" height="auto">
+
 
   `undo` will then reverse the `redo` command (i.e. John Doe is no longer in the address book)
 
-  ![undo_format](images/redo-UG/redo-example/AfterUndoingRedoJohnIsGone.png)
+  <img src="images/redo-UG/redo-example/AfterUndoingRedoJohnIsGone.png" alt="image" width="700" height="auto">
 
   #### Note: while it is possible to `undo` `redo` commands, this is only possible before any other `add`, `clone`, `edit`, `delete`, `clear` command is executed.
 
   Now, `redo` will reapply the `add` command (i.e John Doe is back in the address book)
 
-  ![redo_format](images/redo-UG/redo-example/AfterRedoingUndoJohnIsBack.png)
+  <img src="images/redo-UG/redo-example/AfterRedoingUndoJohnIsBack.png" alt="image" width="700" height="auto">
 
   `delete 1` will delete the first contact in the address book
 
-  ![delete_format](images/redo-UG/redo-example/AfterDeleteJohn.png)
+  <img src="images/redo-UG/redo-example/AfterDeleteJohn.png" alt="image" width="700" height="auto">
 
   `undo` will reverse the `delete 1` command
 
