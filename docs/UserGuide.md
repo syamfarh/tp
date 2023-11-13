@@ -145,7 +145,7 @@ Show you questions that are used for generating client risk profile levels.
 
 * You will see a pop-up window with risk assessment multiple-choice questions, including the grading and risk profile categories criteria
 
-<img src="images/questionnaire-UG/questionnaireWindow.png" alt="image" width="700" height="auto">
+  <img src="images/questionnaire-UG/questionnaireWindow.png" alt="image" width="700" height="auto">
 
 <div style="page-break-after: always;"></div>
 
@@ -587,7 +587,7 @@ Finds persons based on the given keywords.
 
 #### _Find by name:_
 
-<img src="images/find-UG/find_n0.png" alt="image" width="700" height="auto">
+  <img src="images/find-UG/find_n0.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 * You should see this message: 
@@ -611,12 +611,12 @@ reminding you to follow the correct input format.
   numbers.
   ```
 
-<img src="images/find-UG/find_n2.png" alt="image" width="700" height="auto">
+  <img src="images/find-UG/find_n2.png" alt="image" width="700" height="auto">
 
 #### _Find by address:_
 
 
-<img src="images/find-UG/find_a0.png" alt="image" width="700" height="auto">
+  <img src="images/find-UG/find_a0.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 
@@ -647,7 +647,7 @@ reminding you to follow the correct input format.
 #### _Find by appointment date:_
 
 
-<img src="images/find-UG/find_appt0.png" alt="image" width="700" height="auto">
+  <img src="images/find-UG/find_appt0.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on success:
 * You should see this message:
@@ -657,7 +657,7 @@ reminding you to follow the correct input format.
   where X is the number of contacts listed
 * The list of contacts whose appointment date matches the input date is shown
 
-<img src="images/find-UG/find_appt1.png" alt="image" width="700" height="auto">
+  <img src="images/find-UG/find_appt1.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 If no date is input after the find command, an error message explaining the error will be shown,
@@ -836,7 +836,7 @@ Undo Successful!
 
 * Note that the message shown is generic and is the same regardless of what command was undone.
 
-<img src="images/undo-UG/undo_redo_successful.png" alt="image" width="700" height="auto">
+  <img src="images/undo-UG/undo_redo_successful.png" alt="image" width="700" height="auto">
 
 #### Precise expected outputs on failure:
 
@@ -873,9 +873,9 @@ Redoes the most recent undo command.
 * `add n/John Doe p/98765432 e/johnd@example.com o/Barber a/John Street, Block 123, #01-01` will add this contact in
   the address book
 
-<img src="images/redo-UG/redo-example/EmptyBeforeAddingJohn.png" alt="image" width="700" height="auto">
+  <img src="images/redo-UG/redo-example/EmptyBeforeAddingJohn.png" alt="image" width="700" height="auto">
 
-<img src="images/redo-UG/redo-example/AfterAddingJohn.png" alt="image" width="700" height="auto">
+  <img src="images/redo-UG/redo-example/AfterAddingJohn.png" alt="image" width="700" height="auto">
 
   `undo` will then reverse the `add` command (i.e. John Doe is no longer in the address book)
 
@@ -972,7 +972,7 @@ Sort contact lists by prefix name or appointment date.
 * `n/` sort by Name prefix
 * `appt/` sort by Appointment Date prefix
 
-<img src="images/sort-UG/sortformat.png" alt="image" width="700" height="auto">
+  <img src="images/sort-UG/sortformat.png" alt="image" width="700" height="auto">
 
 #### Precise expected output on success:
 * You should see this message:
